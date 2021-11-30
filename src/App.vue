@@ -10,14 +10,17 @@
     </div>
     <router-view/>
   </div>
+  <app-side-bar />
 </section>
 </template>
 
 <script>
 import appHeader from './components/app-header.cmp.vue'
+import appSideBar from './components/side-bar.cmp.vue'
 export default {
   components: {
-    appHeader
+    appHeader,
+    appSideBar
   }
 }
 </script>
