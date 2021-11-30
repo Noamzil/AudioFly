@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "font-awesome": "^4.7.0",
     "register-service-worker": "^1.7.1",
     "sass": "^1.44.0",
     "spotify-web-api-node": "^5.0.2",
