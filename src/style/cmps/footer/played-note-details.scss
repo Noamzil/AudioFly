@@ -1,0 +1,29 @@
+.footer .playedNowDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 180px;
+  width: 30%;
+}
+
+.footer .LikeBtn {
+  background: transparent;
+  border: none;
+  & svg {
+    stroke: #b3b3b3;
+    stroke-width: 6%;
+  }
+}
+.footer .artistImg img {
+  height: 56px;
+}
+
+.footer .songDescription {
+  color: white;
+}
+
+.footer svg {
+  width: 16px;
+  height: 16px;
+}
