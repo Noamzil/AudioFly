@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <section class="main-app-container">
     <app-header></app-header>
-    <div id="app">
+    <div id="app" hidden>
       <div id="nav">
         <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link>

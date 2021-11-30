@@ -1,8 +1,14 @@
 body {
-color: $clrTxt;
+  color: $clrTxt;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-  }
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.main-app-container {
+  display: grid;
+  grid-template-columns: 260px 1fr 160px;
+  grid-template-rows: 75px 1fr;
+}
