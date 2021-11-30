@@ -9,6 +9,26 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0 16px;
+  & svg {
+    height: 16px;
+    width: 16px;
+    color: #b3b3b3;
+    &:hover{
+      color: white;
+    }
+  }
+  & button {
+    background-color: transparent;
+    border: none;
+    color: #b3b3b3;
+    height: 32px;
+    width: 32px;
+    &:hover{
+      color: white;
+    }
+  }
 }
+
 @import './footer/played-note-details.scss';
 @import './footer/song-progress.scss';
+@import './footer/device-control.scss';

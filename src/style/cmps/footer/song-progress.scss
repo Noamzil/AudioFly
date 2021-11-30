@@ -3,6 +3,8 @@
   width: 40%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .player-control-btns {
@@ -11,12 +13,46 @@
   gap: 8px;
   margin-bottom: 12px;
   width: 100%;
+  justify-content: center;
 }
 
-.playback-bar{
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
+.playback-bar {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+
+.progress-bar-input {
+  width: 100%;
+}
+.progress-time-start {
+  text-align: right;
+}
+
+.progress-time-end {
+  text-align: left;
+}
+
+.player-control-btns .play-btn {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  & svg {
+    color: #000;
+  }
+}
+
+.player-control-btns .controllers-right,
+.controlls-left {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+}
+.player-control-btns .controlls-left {
+  justify-content: flex-end;
 }
