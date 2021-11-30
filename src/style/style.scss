@@ -11,4 +11,6 @@
 
 // COMPONENTS
 @import './components/app-header.cmp.scss';
-
+@import 'cmps/side-bar';
+@import './setup/functions/';
+@import './footer.scss';
