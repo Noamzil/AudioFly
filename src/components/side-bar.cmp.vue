@@ -44,7 +44,7 @@
             <path d="M14 7H9V2H7v5H2v2h5v5h2V9h5z"></path>
           </svg>
         </div>
-        <h1>Add Playlist</h1>
+        <h1 class="action-txt">Add Playlist</h1>
       </div>
       <div class="side-bar-icons-container">
         <div class="liked-songs-icon square-icon">
@@ -54,14 +54,12 @@
             ></path>
           </svg>
         </div>
-        <h1>Liked Songs</h1>
+        <h1 class="action-txt">Liked Songs</h1>
       </div>
     </div>
 
     <hr />
-
-    <h1>Playlist 1</h1>
-    <h1>Playlist 2</h1>
+    <sidebarPlaylist/>
   </section>
 </template>
 
@@ -69,6 +67,20 @@
 
 
 <script>
-export default {};
+import sidebarPlaylist from './sidebar-playlist.cmp.vue'
+
+export default {
+  name:'sidebar',
+  data() {
+    return {
+
+    }
+  },
+  components: {
+    sidebarPlaylist
+  }
+
+
+};
 </script>
 

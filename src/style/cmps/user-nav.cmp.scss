@@ -1,8 +1,13 @@
 .user-nav {
     display: flex;
     align-items: center;
-    background-color: $clrBgc;
+    justify-content: space-between;
+    background-color: black;
+    &.clicked {background-color: #282828;}
     border-radius: 30px;
+    min-height: 35px;
+    min-width: 150px;
+    padding: 2px;
 
     path {
         stroke: white;
@@ -10,7 +15,8 @@
     }
 
     &:hover {
-        background-color: rgb(112, 103, 103);
+        cursor: pointer;
+        background-color: #282828;
     }
 
     * {
@@ -18,17 +24,30 @@
     }
 }
 
-nav.user-nav-modal {
+.user-nav-modal {
     position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
     margin: 5px;
-    background-color: rgb(104, 104, 104);
-    height: 100px;
-    width: 120px;
+    background-color: #282828;
+    height: 130px;
+    right: 0;
+    width: 200px;
     border-radius: 3px;
-    padding: 5px;
+    padding: 10px;
+    box-shadow: 2px 2px 4px darkgray;
+
+    & :first-child {
+        display: flex;
+        justify-content: space-between;
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
 
     a {
         text-decoration: none;

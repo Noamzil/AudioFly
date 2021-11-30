@@ -1,13 +1,11 @@
 <template>
   <section class="main-app-container">
-    <app-header></app-header>
-    <div id="app" hidden>
-      <div id="nav">
-      </div>
+    <app-header/>
+    <div id="app">
       <router-view />
     </div>
     <app-side-bar/>
-    <app-footer></app-footer>
+    <app-footer/>
   </section>
 </template>
 
