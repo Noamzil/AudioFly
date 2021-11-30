@@ -1,8 +1,14 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 body {
-    background-color: black;
-    color: #191414;
+  color: #191414;
 }
 header {
-    
-    background-color: #1db954;
+  background-color: #1db954;
 }
+
+@import './setup/functions/';
+@import './footer.scss';
