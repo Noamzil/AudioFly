@@ -1,0 +1,37 @@
+.user-nav {
+    display: flex;
+    align-items: center;
+    background-color: $clrBgc;
+    border-radius: 30px;
+
+    path {
+        stroke: white;
+        fill: white
+    }
+
+    &:hover {
+        background-color: rgb(112, 103, 103);
+    }
+
+    * {
+        margin-left: 5px;
+    }
+}
+
+nav.user-nav-modal {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 5px;
+    background-color: rgb(104, 104, 104);
+    height: 100px;
+    width: 120px;
+    border-radius: 3px;
+    padding: 5px;
+
+    a {
+        text-decoration: none;
+        color: $clrTxt;
+    }
+}
