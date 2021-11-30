@@ -1,18 +1,68 @@
+.side-bar-container {
+    background-color: #121212;
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    font-family: CircularSpotify;
+    font-size: 14px;
+    grid-row: 1/-1;
+    height: 100vh;
+}
+
+.spotify-logo--text {
+    height: 40px;
+    width: 140px;
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
+
 svg {
     height: 24px;
     width: 24px;
-    color: white;
+    stroke-width: 0.01px;
+    fill: currentColor;
 }
 
 .side-bar-icon {
     display: flex;
     align-items: center;
+    stroke: #b3b3b3;
+    color: #b3b3b3;
+    font-family: CircularSpotify;
+    padding: 10px;
 }
 
-// background: linear-gradient(135deg,#450af5,#c4efd9);
+.action-btns-container {
+    margin-top: 25px;
+}
 
+.square-icon {
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .create-playlist-icon {
-    background-color:#b3b3b3;
-    height: 12px;
-    width: 12px;
+    background-color: #b3b3b3;
+}
+
+.liked-songs-icon {
+    background: linear-gradient(135deg, #450af5, #c4efd9);
+}
+.liked-songs-icon svg {
+    stroke: white;
+    fill: white;
+}
+.side-bar-icons-container {
+    display: flex;
+    padding: 10px;
+}
+
+.side-bar-container hr {
+    background-color: #282828;
+    border: none;
+    width: 90%;
+    margin: 20px auto;
+    height: 1px;
 }
