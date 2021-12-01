@@ -1,7 +1,9 @@
+import { userService } from '../services/user.service.js'
+
 export const userStore = {
     state: {
         users: [],
-        currUser: {},
+        currUser: userService.getSessionUser() || null,
     },
     getters: {
 
@@ -16,7 +18,7 @@ export const userStore = {
         signUp(state, { user }) {
             state.users.push(user)
         },
-        addSong(state, { song }) {
+        likeSong(state, { song }) {
             state.currUser.liked.push(song)
         },
         addFriend(state, { user }) {
@@ -29,6 +31,7 @@ export const userStore = {
     },
     actions: {
         logIn({ commit }, { user }) {
+
         },
         logOut({ commit }) {
         },
