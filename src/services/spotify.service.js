@@ -7,13 +7,13 @@ spotifyApi.setAccessToken(
   'BQD0B1PR-TpA5MqnFWz9Pt1vQU_6ty15AFJo7zXH6NUYrWr43y1tq0HvB1nt4lHUbrHBntToTIuScu5kFwpOvAakC633szwhmU6qf24sp70A3Lymzh6noE-6PVweYcyYOL0ySeLwC4G3MGMC8FN5_SRRSGX8Nz8rpj4'
 );
 
-module.exports = {
+export const spotifyService = {
   getSpotify,
 };
 
 function getSpotify() {
   console.log(`in`);
   spotifyApi
-    .getAlbum('3arNdjotCvtiiLFfjKngMc')
+    .getAlbum('1mB3W1RMqjFGLSvJNOfGPI')
     .then((res) => console.log(res.body));
 }

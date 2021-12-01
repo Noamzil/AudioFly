@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import {spotifyService} from './services/spotify.service.js'
 import appHeader from './components/app-header.cmp.vue';
 import appSideBar from './components/side-bar.cmp.vue'
 import appFooter from './components/app-footer.cmp.vue';
@@ -20,5 +21,8 @@ export default {
     appFooter,
     appSideBar
   },
+  created() {
+    spotifyService.getSpotify()
+  }
 };
 </script>
