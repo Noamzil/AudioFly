@@ -1,3 +1,4 @@
+import { storageService } from '../services/async-storage.service.js'
 import { userService } from '../services/user.service.js'
 
 export const userStore = {
@@ -6,14 +7,15 @@ export const userStore = {
         currUser: userService.getSessionUser() || null,
     },
     getters: {
-
+        users({ users }) { return users },
+        user({ currUser }) { return currUser }
     },
     mutations: {
-        logIn(state, { user }) {
-            state.user = user
+        setCurrUser(state, { user }) {
+            state.currUser = user
         },
         logOut(state) {
-            state.user = null
+            state.currUser = null
         },
         signUp(state, { user }) {
             state.users.push(user)
@@ -30,21 +32,64 @@ export const userStore = {
         }
     },
     actions: {
-        logIn({ commit }, { user }) {
-
+        // async loadUsers({ commit }) {
+        // },
+        async logIn({ commit }, { user }) {
+            try {
+                const loggedUser = await userService.logIn(user)
+                commit({ type: 'setCurrUser', loggedUser })
+            } catch (err) {
+                console.log('Could not logIn user in userStore', err);
+            }
         },
-        logOut({ commit }) {
+        async logOut({ commit }) {
+            try {
+                await userService.logOut()
+                commit({ type: 'logOut' })
+            } catch {
+                console.log('Could not logOut user in userStore', err);
+            }
         },
-        signUp({ commit }, { user }) {
-            commit.signUp(user)
-            commit.logIn(user)
+        async signUp({ commit }, { user }) {
+            try {
+                const signedUser = await userService.post(user)
+                commit({ type: 'signUp', signedUser })
+                commit({ type: 'setCurrUser', signedUser })
+            } catch (err) {
+                console.log('Could not signUp user in userStore', err);
+            }
         },
-        likeSong({ commit }, { song }) {
-            song.type = 'song'
+        async addLike({ commit }, { entity }) {
+            try {
+                const updatedUser = await storageService.addLike(entity)
+                commit({ type: 'setCurrUser', updatedUser })
+            } catch (err) {
+                console.log('Could not add like in userStore', err);
+            }
         },
-        addFriend({ commit }, { user }) {
+        async removeLike({ commit }, { entity }) {
+            try {
+                const updatedUser = await storageService.removeLike(entity)
+                commit({ type: 'setCurrUser', updatedUser })
+            } catch (err) {
+                console.log('Could not add like in userStore', err);
+            }
         },
-        removeFriend({ commit }, { userId }) {
-        }
+        async addFollow({ commit }, { newFollow }) {
+            try {
+                const updatedUser = await storageService.addFollow(newFollow)
+                commit({ type: 'setCurrUser', updatedUser })
+            } catch (err) {
+                console.log('Could not add follow in userStore', err);
+            }
+        },
+        async removeFollow({ commit }, { follow }) {
+            try {
+                const updatedUser = await storageService.removeFollow(newFollow)
+                commit({ type: 'setCurrUser', updatedUser })
+            } catch (err) {
+                console.log('Could not add follow in userStore', err);
+            }
+        },
     },
 }
