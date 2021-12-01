@@ -5,13 +5,28 @@
       <div
         v-for="genre in genres"
         :key="genre"
-        class="genre-container"
+        class="top-genre"
         :class="genre"
       >
         <h3>{{ genre }}</h3>
         <img
-          :src="require('../assets/img/genres-img/' + genre + '.jpeg')"
+          :src="require('../assets/img/genres-img/' + genre + '.jpg')"
           class="top-genre-img"
+        />
+      </div>
+    </div>
+    <h1 class="browse-txt">Browse all</h1>
+    <div class="all-genres">
+      <div
+        v-for="genre in browseGenres"
+        :key="genre"
+        class="browse-genre-container"
+        :class="genre"
+      >
+        <h3>{{ genre }}</h3>
+        <img
+          :src="require('../assets/img/genres-img/' + genre + '.jpg')"
+          class="browse-genre-img"
         />
       </div>
     </div>
@@ -20,12 +35,42 @@
 
 <script>
 export default {
-  name: 'search-page',
+  name: "search-page",
   data() {
     return {
-      imgUrl: '../assets/img/genres-img/Rock.jpeg',
-      genres: ['Pop', 'Rock', 'Indie', 'Hip-Hop'],
+      imgUrl: "../assets/img/genres-img/Rock.jpeg",
+      genres: [
+        "Pop",
+        "Rock",
+        "Indie",
+        "Hip-Hop",
+        "Podcasts",
+        "Charts",
+        "Made For You",
+        // "New Releases",
+        "Discover",
+        "Concerts",
+        "Mood",
+        "Chill",
+        "Party",
+        "Focus",
+        "Alternative",
+        "EQUAL",
+        "DanceElectronic",
+        "Wellness",
+        "Sleep",
+        "Tastemakers",
+        "Decades",
+      ],
     };
+  },
+  computed: {
+    topGenres() {
+      return this.genres.splice(0, 3);
+    },
+    browseGenres() {
+      return this.genres.splice(4);
+    },
   },
 };
 </script>
