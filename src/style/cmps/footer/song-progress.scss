@@ -42,8 +42,13 @@
   border-radius: 50%;
   display: flex;
   justify-content: center;
+  
   & svg {
     color: #000;
+  }
+
+  &:hover {
+    transform: scale(1.06);
   }
 }
 
