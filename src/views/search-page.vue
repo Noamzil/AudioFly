@@ -9,8 +9,10 @@
         :class="genre"
       >
         <h3>{{ genre }}</h3>
-        <!-- <img :src="imgUrl" class="top-genre-img"/> -->
-        <img src="../assets/img/genres-img/Pop.jpeg" class="top-genre-img"/>
+        <img
+          :src="require('../assets/img/genres-img/' + genre + '.jpeg')"
+          class="top-genre-img"
+        />
       </div>
     </div>
   </section>
@@ -18,11 +20,11 @@
 
 <script>
 export default {
-  name: "search-page",
+  name: 'search-page',
   data() {
     return {
-      imgUrl : '../assets/img/genres-img/Rock.jpeg',
-      genres: ["Pop", "Rock", "Indie", "Hip-Hop"],
+      imgUrl: '../assets/img/genres-img/Rock.jpeg',
+      genres: ['Pop', 'Rock', 'Indie', 'Hip-Hop'],
     };
   },
 };
