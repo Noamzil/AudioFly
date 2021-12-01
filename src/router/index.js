@@ -7,17 +7,17 @@ const routes = [
   {
     path: '/',
     name: 'homePage',
-    component: () => import('../views/home-page.vue'),
+    component: () => import('../pages/home-page.vue'),
   },
   {
     path: '/search',
     name: 'search',
-    component: () => import('../views/search-page.vue'),
+    component: () => import('../pages/search-page.vue'),
   },
   {
     path: '/playlist/:playlistId',
     name: 'playlist',
-    component: () => import('../views/playlist-page.vue'),
+    component: () => import('../pages/playlist-page.vue'),
   },
 
 ];

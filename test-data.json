@@ -1,5 +1,7 @@
-[{ // song Data
+[
+    { // song Data
     "_id": "s101",
+    "type": "song",
     "songName": "There's No Way Out of Here",
     "artist": "David Gilmour",
     "time":  3230000,
@@ -14,27 +16,29 @@
     "fullName": "Orly Amdadi",
     "userEmail": "orly@amdadi.com",
     "password": "0123",
-    "liked": [{
-        "type": "song",
-        "name": "All of Me",
-        "_id": "s102"
-    },
-    {
-        "type": "artist",
-        "name": "John Legend",
-        "_id": "ar102"
-    },
-    {
-        "type": "album",
-        "name": "John Legend's album",
-        "_id": "al102"
-    },
-    {
-        "type": "playList",
-        "name": "Friend PlayList",
-        "_id": "pl101"
-    }],
-    "friends" : [
+    "liked": {
+        "song": [
+        {
+            "name": "All of Me",
+            "_id": "s102"
+        },
+        {
+            "name": "Another Song",
+            "_id": "s104"
+        }
+        ],
+        "playlist" :[
+            {
+                "name": "My Playlist",
+                "_id": "pl101"
+            },
+            {
+                "name": "Another Playlist",
+                "_id": "pl102"
+            }
+        ]
+},
+    "follows" : [
         {
             "userName": "Maia Choan",
             "_id": "u102"
@@ -54,6 +58,7 @@
  },
  { // playList Data
      "_id": "pl101",
+     "type": "playlist",
      "playlistImg": "img",
      "createdBy": "Orly Amdadi",
      "createdAt": 150245112,
@@ -75,6 +80,7 @@
  },
  { //station Data
      "_id": "st101",
+     "type": "station",
      "playlistImg": "img",
      "createdAt": 150245112,
      "likes": 50,
@@ -95,6 +101,7 @@
  },
  { //album Data
      "_id": "al101",
+     "type": "album",
      "albumImg": "img",
      "artists": [
         {
