@@ -23,7 +23,6 @@ export default {
   name: 'search-page',
   data() {
     return {
-      imgUrl: '../assets/img/genres-img/Rock.jpeg',
       genres: ['Pop', 'Rock', 'Indie', 'Hip-Hop'],
     };
   },
