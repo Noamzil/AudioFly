@@ -2,5 +2,29 @@
   width: 100%;
 }
 .playlist-page .playlist-description {
-  background-color: rgb(216, 24, 40);
+  height: 30vh;
+  max-height: 270px;
+  padding: 0 32px 24px;
+  display: flex;
+
+  & img {
+    height: 232px;
+    width: 232px;
+    margin-inline-end: 24px;
+  }
+}
+
+.description-txt {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+  & h1 {
+    font-size: rem(96px);
+    line-height: rem(96px);
+    padding: 0.08em 0;
+  }
+  & h2 {
+    font-size: rem(12px);
+  }
 }

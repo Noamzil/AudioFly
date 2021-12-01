@@ -14,3 +14,10 @@ body {
   grid-template-columns: 260px 1fr 160px;
   grid-template-rows: 75px 1fr;
 }
+
+svg {
+  cursor: pointer;
+}
+button {
+  cursor: pointer;
+}

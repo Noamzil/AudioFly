@@ -2,7 +2,19 @@
   <section class="playlist-page">
     <div class="playlist-description">
       <img :src="require('../' + playlist.playlistImg + '.jpeg')" />
-      <h1>Your playlist</h1>
+      <div class="description-txt">
+        <h2>Playlist</h2>
+        <h1>{{ playlist.name }}</h1>
+        <p>{{ playlist.discription }}</p>
+        <p>Artists names in the album...</p>
+        <div class="playlist-songs-details">
+          <a>Spotify </a>
+          <span
+            >{{ playlist.songs.length }} songs ,00:00 (cpmputed album
+            time)</span
+          >
+        </div>
+      </div>
     </div>
   </section>
 </template>
