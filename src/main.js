@@ -4,6 +4,9 @@ import './registerServiceWorker';
 import router from './router';
 // import store from './store';
 import './style/style.scss';
+import Element from 'element-ui'
+
+Vue.use(Element)
 
 Vue.config.productionTip = false;
 
