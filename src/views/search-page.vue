@@ -2,12 +2,15 @@
   <section class="search-page">
     <h1>Your top genres</h1>
     <div class="top-genres-container">
-      <div v-for="genre in genres" :key="genre" class="genre-container" :class="genre">
+      <div
+        v-for="genre in genres"
+        :key="genre"
+        class="genre-container"
+        :class="genre"
+      >
         <h3>{{ genre }}</h3>
-        <img
-          src="https://t.scdn.co/images/0a74d96e091a495bb09c0d83210910c3"
-          class="top-genre-img"
-        />
+        <!-- <img :src="imgUrl" class="top-genre-img"/> -->
+        <img src="../assets/img/genres-img/Pop.jpeg" class="top-genre-img"/>
       </div>
     </div>
   </section>
@@ -18,6 +21,7 @@ export default {
   name: "search-page",
   data() {
     return {
+      imgUrl : '../assets/img/genres-img/Rock.jpeg',
       genres: ["Pop", "Rock", "Indie", "Hip-Hop"],
     };
   },
