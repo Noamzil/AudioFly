@@ -15,6 +15,9 @@
         margin: 20px auto;
         height: 1px;
     }
+    a {
+        text-decoration: none;
+    }
 }
 
 .spotify-logo--text {
@@ -46,7 +49,6 @@ svg {
 .side-bar-icon:hover {
     color: white;
 }
-
 
 .action-btns-container {
     margin-top: 25px;

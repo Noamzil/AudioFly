@@ -1,0 +1,34 @@
+.search-page {
+    .top-genre-img {
+        height: 128px;
+        width: 128px;
+        transform: rotate(25deg) translate(18%,-2%);
+    }
+    .top-genres-container {
+        display: flex;
+        gap: 20px;
+    }
+    .genre-container {
+        border: none;
+        border-radius: 8px;
+        height: 220px;
+        overflow: hidden;
+        width: 430px;
+    }
+}
+
+.Pop {
+    background-color: rgb(141, 103, 171);
+}
+
+.Rock {
+    background-color: rgb(230, 30, 50);
+}
+
+.Indie {
+    background-color: rgb(96, 129, 8);
+}
+
+.Hip-Hop {
+    background-color: rgb(186, 93, 7);
+}

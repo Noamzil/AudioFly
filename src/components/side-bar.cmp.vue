@@ -11,22 +11,23 @@
     </div>
 
     <div class="pages-btns-container">
-      <a class="side-bar-icon">
+      <router-link to="/" class="side-bar-icon">
         <svg role="img" class="home-icon" viewBox="0 0 24 24">
           <path
             d="M9 14h6v7h5V7.8l-8-4.6-8 4.6V21h5v-7zm1 8H3V7.2L12 2l9 5.2V22h-7v-7h-4v7z"
           ></path>
         </svg>
         <h3>Home</h3>
-      </a>
-      <a class="side-bar-icon">
+      </router-link>
+      <router-link to="/search" class="side-bar-icon">
         <svg role="img" class="search-icon" viewBox="0 0 24 24">
           <path
             d="M16.736 16.262A8.457 8.457 0 0019 10.5a8.5 8.5 0 10-3.779 7.067l4.424 5.18 1.521-1.299-4.43-5.186zM10.5 17C6.916 17 4 14.084 4 10.5S6.916 4 10.5 4 17 6.916 17 10.5 14.084 17 10.5 17z"
           ></path>
         </svg>
         <h3>Search</h3>
-      </a>
+      </router-link>
+
       <a class="side-bar-icon">
         <svg role="img" class="collection-icon" viewBox="0 0 24 24">
           <path
@@ -59,7 +60,7 @@
     </div>
 
     <hr />
-    <sidebarPlaylist/>
+    <sidebarPlaylist />
   </section>
 </template>
 
@@ -67,20 +68,16 @@
 
 
 <script>
-import sidebarPlaylist from './sidebar-playlist.cmp.vue'
+import sidebarPlaylist from "./sidebar-playlist.cmp.vue";
 
 export default {
-  name:'sidebar',
+  name: "sidebar",
   data() {
-    return {
-
-    }
+    return {};
   },
   components: {
-    sidebarPlaylist
-  }
-
-
+    sidebarPlaylist,
+  },
 };
 </script>
 
