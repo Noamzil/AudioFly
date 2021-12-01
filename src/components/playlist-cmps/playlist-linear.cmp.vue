@@ -3,7 +3,7 @@
     <section>
       <div class="btns-container">
         <button class="play-btn">
-          <svg role="img" aria-hidden="true">
+          <svg role="img" viewBox="0 0 24 24" aria-hidden="true">
             <polygon
               points="21.57 12 5.98 3 5.98 21 21.57 12"
               fill="currentColor"
