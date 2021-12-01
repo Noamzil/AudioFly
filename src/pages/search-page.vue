@@ -66,10 +66,10 @@ export default {
   },
   computed: {
     topGenres() {
-      return this.genres.splice(0, 3);
+      return this.genres.splice(0, 2);
     },
     browseGenres() {
-      return this.genres.splice(4);
+      return this.genres.splice(3);
     },
   },
 };
