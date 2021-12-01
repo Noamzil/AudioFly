@@ -1,0 +1,121 @@
+[{ // song Data
+    "_id": "s101",
+    "songName": "There's No Way Out of Here",
+    "artist": "David Gilmour",
+    "time":  3230000,
+    "tags": ["rock", "oldschool", "progressive", "psychedelic"],
+    "album": "David Gilmour",
+    "trackNum": 2,
+    "url": "usrl",
+    "imgUrl": "img"
+},
+{ //user Data
+    "_id": "u101",
+    "fullName": "Orly Amdadi",
+    "userEmail": "orly@amdadi.com",
+    "password": "0123",
+    "liked": [{
+        "type": "song",
+        "name": "All of Me",
+        "_id": "s102"
+    },
+    {
+        "type": "artist",
+        "name": "John Legend",
+        "_id": "ar102"
+    },
+    {
+        "type": "album",
+        "name": "John Legend's album",
+        "_id": "al102"
+    },
+    {
+        "type": "playList",
+        "name": "Friend PlayList",
+        "_id": "pl101"
+    }],
+    "friends" : [
+        {
+            "userName": "Maia Choan",
+            "_id": "u102"
+        },
+        {
+            "userName": "Amir Dagan",
+            "_id": "u103"
+        }
+    ],
+    "playlists" : [
+        {
+            "playlistName": "My Playlist",
+            "_id": "pl101"
+        }
+    ],
+    "imgUrl": "http://some-img"
+ },
+ { // playList Data
+     "_id": "pl101",
+     "playlistImg": "img",
+     "createdBy": "Orly Amdadi",
+     "createdAt": 150245112,
+     "likes": 50,
+     "tags": ["rock", "pop"],
+     "name" : "My PlayList",
+     "discription": "loem empsum",
+     "time": 12252545448,
+     "songs": [
+        {
+             "_id": "s101",
+             "name" : "All of Me"
+        },
+        {
+             "_id": "s102",
+             "name" : "There's No Way Out of Here"
+        }
+     ]
+ },
+ { //station Data
+     "_id": "st101",
+     "playlistImg": "img",
+     "createdAt": 150245112,
+     "likes": 50,
+     "tags": ["rock", "pop"],
+     "name" : "Rock Station",
+     "discription": "loem empsum",
+     "time": 12252545448,
+     "songs": [
+        {
+             "_id": "s101",
+             "name" : "All of Me"
+        },
+        {
+             "_id": "s102",
+             "name" : "There's No Way Out of Here"
+        }
+     ]
+ },
+ { //album Data
+     "_id": "al101",
+     "albumImg": "img",
+     "artists": [
+        {
+         "name": "John Legend",
+        "_id": "ar102"
+        }
+    ],
+     "releasedAt": 15488962,
+     "likes": 50,
+     "tags": ["rock", "pop"],
+     "name" : "John Legend's album",
+     "time": 12252545448,
+     "songs": [
+        {
+             "_id": "s101",
+             "name" : "All of Me"
+        },
+        {
+             "_id": "s102",
+             "name" : "All of You"
+        }
+     ]
+ }
+]
