@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       ImgUrl: `https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228`,
-      artists: `Artists Song name Song name Song name Song name Song name Song name`,
+      artists: `Artists Song name Song `,
       songName: `Song name Song name Song name`,
     };
   },
