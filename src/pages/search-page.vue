@@ -80,6 +80,7 @@ export default {
     browseGenres() {
       return this.genres.splice(3);
     },
+
   },
 };
 </script>
