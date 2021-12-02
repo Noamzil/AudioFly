@@ -30,6 +30,11 @@
         />
       </div>
     </div>
+    <div class="youtube-video">
+      <iframe width="420" height="315" allow="autoplay"
+        src="https://www.youtube.com/embed/XXYlFuWEuKI?autoplay=1&mute=1">
+      </iframe> 
+    </div>
   </section>
 </template>
 
@@ -62,6 +67,10 @@ export default {
         "Tastemakers",
         "Decades",
       ],
+      YOUTUBEAPIKEY: "AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg",
+      serachFor: `the weekend`,
+      ResultNum: 1,
+      getVideo: `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${this.YOUTUBEAPIKEY}&q=${this.serachFor}`,
     };
   },
   computed: {
