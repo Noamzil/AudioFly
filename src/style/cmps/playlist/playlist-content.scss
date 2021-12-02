@@ -1,0 +1,29 @@
+.playlist-content {
+  padding: 0 40px;
+  grid-gap: 16px;
+  display: grid;
+  padding: 0 16px;
+
+  & .song-container {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 32px 6fr 4fr 3fr minmax(120px, 1fr);
+    border-radius: 5px;
+    height: 56px;
+
+    & .song-details {
+      display: flex;
+      align-items: center;
+    }
+
+    & .song-img {
+      height: 40px;
+      width: 40px;
+      margin-inline-end: 16px;
+    }
+
+    & .index {
+      padding: 5px;
+    }
+  }
+}
