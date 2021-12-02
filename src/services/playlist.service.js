@@ -135,7 +135,7 @@ function _createSong(name) {
         artist: 'aminem',
         time: utilService.makeLength(),
         album: 'aminem ' + name,
-        imgUrl: `../assets/img/test-data/eminem${name}.jpg`,
+        youTubeUrl: `../assets/img/test-data/eminem${name}.jpg`,
         url: null,
     }
     return song

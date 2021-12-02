@@ -1,6 +1,7 @@
 <template>
   <section class="search-page">
     <h1>Your top genres</h1>
+    <h1 v-if="songIdToPlay">{{songIdToPlay}}</h1>
     <div class="top-genres-container">
       <div
         v-for="genre in genres"
@@ -31,8 +32,8 @@
       </div>
     </div>
     <div class="youtube-video">
-      <iframe width="420" height="315" allow="autoplay"
-        src="https://www.youtube.com/embed/XXYlFuWEuKI?autoplay=1&mute=1">
+      <iframe width="420" height="315" allow="autoplay" v-if="songIdToPlay"
+        :src="`https://www.youtube.com/embed/${songIdToPlay}?autoplay=1&mute=1`">
       </iframe> 
     </div>
   </section>
@@ -67,9 +68,9 @@ export default {
         "Tastemakers",
         "Decades",
       ],
-      YOUTUBEAPIKEY: "AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg",
       serachFor: `the weekend`,
       ResultNum: 1,
+      YOUTUBEAPIKEY: "AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg",
       getVideo: `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${this.YOUTUBEAPIKEY}&q=${this.serachFor}`,
     };
   },
@@ -80,7 +81,9 @@ export default {
     browseGenres() {
       return this.genres.splice(3);
     },
-
+    songIdToPlay() {
+      return this.$store.getters.songIdToPlay
+    }
   },
 };
 </script>

@@ -7,9 +7,9 @@ export const playlistStore = {
         albums: [],
         likedSongs: [],
     },
-    getters: {
+    // getters: {
 
-    },
+    // },
     mutations: {
         loadPlaylists(state, { playlists }) {
             state.playlists = playlists
