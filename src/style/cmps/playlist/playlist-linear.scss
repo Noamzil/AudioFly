@@ -61,12 +61,19 @@
 
 .linear-container .content-header {
   display: flex;
-  padding: 32px 24px 0;
+  display: grid;
+  grid-template-columns: 32px 6fr 4fr 3fr minmax(120px, 1fr);
+  // padding: 32px 24px 0;
+  padding-top: 32px;
+  padding-bottom: 10px;
   text-transform: uppercase;
-  justify-content: space-between;
-  text-align: center;
+  // justify-content: space-between;
   & svg {
     height: 16px;
     width: 16px;
+  }
+  .time {
+    justify-self: end;
+    margin-right: 15px;
   }
 }

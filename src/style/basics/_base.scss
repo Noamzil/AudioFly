@@ -21,3 +21,7 @@ svg {
 button {
   cursor: pointer;
 }
+
+#app {
+  grid-column: 2/-1;
+}

@@ -22,10 +22,11 @@
         </svg>
       </div>
       <div class="content-header">
-        <small>Title</small>
-        <small>Album</small>
-        <small>Date added</small>
-        <svg role="img" viewBox="0 0 16 16">
+        <small class="hashtag">#</small>
+        <small class="title">Title</small>
+        <small class="album">Album</small>
+        <small class="date">Date added</small>
+        <svg role="img" viewBox="0 0 16 16" class="time">
           <path
             d="M7.999 3h-1v5h3V7h-2V3zM7.5 0a7.5 7.5 0 100 15 7.5 7.5 0 000-15zm0 14C3.916 14 1 11.084 1 7.5S3.916 1 7.5 1 14 3.916 14 7.5 11.084 14 7.5 14z"
           ></path>

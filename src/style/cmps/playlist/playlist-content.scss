@@ -1,8 +1,7 @@
 .playlist-content {
-  padding: 0 40px;
+  padding: 0 32px;
   grid-gap: 16px;
   display: grid;
-  padding: 0 16px;
 
   & .song-container {
     align-items: center;
@@ -26,4 +25,9 @@
       padding: 5px;
     }
   }
+}
+
+.song-container a {
+  text-decoration: none;
+  color: $clrTxt;
 }
