@@ -12,9 +12,10 @@
         </svg>
       </button>
     </div>
-    <form role="search">
-      <input type="search" />
+    <form role="search" @submit.prevent="search">
+      <input type="search" v-model="searchTxt" />
     </form>
+    
     <user-nav></user-nav>
   </header>
 </template>
@@ -27,6 +28,7 @@ export default {
     return {
       isNext: false,
       isPrev: false,
+      searchTxt: '',
     };
   },
   methods: {
@@ -38,6 +40,10 @@ export default {
       this.isPrev = !this.isPrev;
       console.log("Going to the previous page on your history");
     },
+    search() {
+      const key = this.searchTxt
+      this.$store.dispatch({type: 'search', key})
+    }
   },
   components: {
     userNav,

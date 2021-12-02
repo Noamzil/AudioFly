@@ -6,10 +6,10 @@ export const userStore = {
         users: [],
         currUser: userService.getSessionUser() || null,
     },
-    getters: {
-        users({ users }) { return users },
-        user({ currUser }) { return currUser }
-    },
+    // getters: {
+    //     users({ users }) { return users },
+    //     user({ currUser }) { return currUser }
+    // },
     mutations: {
         setCurrUser(state, { user }) {
             state.currUser = user
