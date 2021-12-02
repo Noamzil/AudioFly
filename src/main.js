@@ -4,9 +4,9 @@ import './registerServiceWorker';
 import router from './router';
 import store from './stores/index.js';
 import './style/style.scss';
-import Element from 'element-ui'
+import Element from 'element-ui';
 
-Vue.use(Element)
+Vue.use(Element);
 
 Vue.config.productionTip = false;
 
@@ -26,4 +26,3 @@ new Vue({
 //       console.log(data);
 //     });
 // };
-

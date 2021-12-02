@@ -13,12 +13,14 @@ header.main-header {
     width: 40px;
     border: none;
     background-color: rgba(0, 0, 0, 0.397);
-    &.active {background-color:rgba(0, 0, 0, 0.602)};
+    &.active {
+      background-color: rgba(0, 0, 0, 0.602);
+    }
     margin-right: 10px;
 
     polyline {
       stroke: white;
       stroke-width: 1px;
-        }
     }
+  }
 }

@@ -39,13 +39,23 @@
       <div class="progress-time-start">
         <p>{{ progressTimeStart }}</p>
       </div>
-      <input
+      <!-- <input
         class="progress-bar-input"
         type="range"
         :min="progressTimeStart"
         :max="progressTimeEnd"
         step="0.01"
-      />
+      /> -->
+      <div class="slider-container">
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="1"
+          id="myRange"
+          class="slider"
+        />
+      </div>
       <div class="progress-time-end">
         <p>{{ progressTimeEnd }}</p>
       </div>

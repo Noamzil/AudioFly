@@ -8,7 +8,16 @@
           ></path>
         </svg>
       </button>
-      <input type="range" min="0" max="100" step="any" />
+      <div class="slider-container">
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="1"
+          id="myRange"
+          class="slider"
+        />
+      </div>
     </div>
     <button>
       <svg role="img" viewBox="0 0 16 16">
