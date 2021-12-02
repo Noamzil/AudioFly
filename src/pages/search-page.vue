@@ -1,7 +1,7 @@
 <template>
   <section class="search-page">
+    <serach-res/>
     <h1>Your top genres</h1>
-    <h1 v-if="songIdToPlay">{{songIdToPlay}}</h1>
     <div class="top-genres-container">
       <div
         v-for="genre in genres"
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import serachRes from '../components/search-res.cmp.vue'
 export default {
   name: "search-page",
   data() {
@@ -85,5 +86,8 @@ export default {
       return this.$store.getters.songIdToPlay
     }
   },
+  components: {
+    serachRes
+  }
 };
 </script>
