@@ -20,11 +20,11 @@ async function getVideoId(key) {
             return {
                 id: song.id.videoId,
                 title: song.snippet.title,
-                img: song.snippet.thumbnail,
+                img: song.snippet.thumbnails.default.url,
 
             }
         })
-        // console.log(res.data);
+        console.log(res.data);
         return songs
     } catch (err) {
         console.log('Error geting song from youTube');

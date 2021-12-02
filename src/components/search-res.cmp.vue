@@ -4,15 +4,15 @@
     <!-- <h1>Songs</h1> -->
     <div class="top-res">
       <img
-        src="https://i.scdn.co/image/ab67616d0000485102d82cf34fefe6736718acd1"
+        :src=topSong[0].img
       />
       <h1>{{topSong[0].title}}</h1>
-      <a>btn</a>
+      <!-- <a>btn</a> -->
     </div>
     <div class="songs-res">
       <div v-for="song in songsRes" :key="song.id" class="song-res">
-        <img src="https://i.scdn.co/image/ab67616d0000485102d82cf34fefe6736718acd1"/>
-        <h3>song title</h3>
+        <img :src=song.img />
+        <h3>{{song.title}}</h3>
         <small>heart</small>
         <small>time</small>
       </div>
@@ -25,9 +25,6 @@
 <script>
 export default {
   name: "search-res",
-  created() {
-      if (this.$store.getters.songsRes) this.songs = this.$store.getters.songsRes
-  },
   computed: {
     songsRes() {
       return this.$store.getters.songsRes;
