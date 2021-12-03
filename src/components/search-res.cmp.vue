@@ -14,7 +14,7 @@
         </svg>
       </button>
     </div>
-    <div class="songs-res">
+    <div class="songs-res" v-if="this.$store.getters.songsRes">
       <div v-for="(song, index) in songsRes" :key="song.id" class="song-res">
         <img :src="song.img" @click="playSong(song)" />
         <h3>{{ song.title }}</h3>
@@ -68,9 +68,9 @@ export default {
   },
   methods: {
     playSong(song) {
-      console.log(song);
+      this.$store.commit({ type: 'unMute' });
+      this.$store.commit({type: 'toggleAutoplay'})
       this.$store.commit({ type: 'playSong', song });
-      this.$store.commit({ type: 'toggleMute' });
     },
     getTimeStr(time) {
       var sec_num = parseInt(time, 10); 
