@@ -13,12 +13,37 @@ header.main-header {
     width: 40px;
     border: none;
     background-color: rgba(0, 0, 0, 0.397);
-    &.active {background-color:rgba(0, 0, 0, 0.602)};
+    &.active {
+      background-color: rgba(0, 0, 0, 0.602);
+    }
     margin-right: 10px;
 
     polyline {
       stroke: white;
       stroke-width: 1px;
-        }
     }
+  }
+}
+.left-side-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.input-container {
+  display: flex;
+  background-color: white;
+  border-radius: 32px;
+  height: 40px;
+  align-items: center;
+  gap: 5px;
+  width: 350px;
+  padding: 0 10px;
+  svg {
+    color: #b3b3b3;
+    transform: scaleX(-1);
+  }
+  input {
+    border: none;
+    width: 70%;
+  }
 }

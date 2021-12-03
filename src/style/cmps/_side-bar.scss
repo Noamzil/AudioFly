@@ -5,7 +5,6 @@
   width: 260px;
   font-family: CircularSpotify;
   grid-row: 1/-1;
-  height: 100vh;
   padding: 5px;
 
   hr {
@@ -85,6 +84,10 @@ svg {
   opacity: 0.7;
   &:hover {
     opacity: 1;
+  }
+  & svg {
+    height: 12px;
+    width: 12px;
   }
 }
 .action-txt {

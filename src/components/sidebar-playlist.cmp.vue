@@ -2,7 +2,6 @@
   <section class="sidebarPlaylist">
     <div class="playlist" v-for="playlist in playlists" :key="playlist._id">
       <router-link :to="'/playlist/' + playlist._id"> 
-      <!-- pass playlist as prps -->
         <h1>{{ playlist.name }}</h1>
       </router-link>
     </div>

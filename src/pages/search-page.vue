@@ -1,7 +1,7 @@
 <template>
   <section class="search-page">
+    <serach-res />
     <h1>Your top genres</h1>
-    <h1 v-if="songIdToPlay">{{songIdToPlay}}</h1>
     <div class="top-genres-container">
       <div v-for="genre in genres" :key="genre" class="top-genre" :class="genre">
         <h3>{{ genre }}</h3>
@@ -16,15 +16,11 @@
         />
       </div>
     </div>
-    <div class="youtube-video">
-      <iframe width="420" height="315" allow="autoplay" v-if="songIdToPlay"
-        :src="`https://www.youtube.com/embed/${songIdToPlay}?autoplay=1&mute=1`">
-      </iframe> 
-    </div>
   </section>
 </template>
 
 <script>
+import serachRes from "../components/search-res.cmp.vue";
 export default {
   name: "search-page",
   data() {
@@ -53,10 +49,6 @@ export default {
         "Tastemakers",
         "Decades",
       ],
-      serachFor: `the weekend`,
-      ResultNum: 1,
-      YOUTUBEAPIKEY: "AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg",
-      getVideo: `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${this.YOUTUBEAPIKEY}&q=${this.serachFor}`,
     };
   },
   computed: {
@@ -66,9 +58,9 @@ export default {
     browseGenres() {
       return this.genres.splice(3);
     },
-    songIdToPlay() {
-      return this.$store.getters.songIdToPlay
-    }
+  },
+  components: {
+    serachRes,
   },
 };
 </script>

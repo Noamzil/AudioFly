@@ -16,6 +16,21 @@
     flex-direction: row;
     width: 100%;
 
+    & .heart-btn {
+      background: transparent;
+      border: 0;
+
+      & .empty{
+        color: #b3b3b3;
+        stroke: #b3b3b3;
+        stroke-width: 1%;
+
+        &:hover{
+          color: white;
+        }
+      }
+    }
+
     & .play-btn {
       height: rem(56px);
       width: rem(56px);
@@ -63,11 +78,9 @@
   display: flex;
   display: grid;
   grid-template-columns: 32px 6fr 4fr 3fr minmax(120px, 1fr);
-  // padding: 32px 24px 0;
   padding-top: 32px;
   padding-bottom: 10px;
   text-transform: uppercase;
-  // justify-content: space-between;
   & svg {
     height: 16px;
     width: 16px;

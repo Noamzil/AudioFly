@@ -4,4 +4,23 @@
   justify-content: flex-end;
   min-width: 180px;
   width: 30%;
+
+  & .volume-bar {
+    
+    display: inline-flex;
+    display: flex;
+    justify-content: center;
+    & input {
+      margin: 0;
+    }
+  }
+
+  & .slider::-webkit-slider-thumb{
+    height: 15px;
+    width: 15px;
+  }
+}
+
+.slider-container{
+  margin-top: 5px;
 }

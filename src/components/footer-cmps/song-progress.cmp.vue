@@ -37,17 +37,25 @@
     </div>
     <div class="playback-bar">
       <div class="progress-time-start">
-        <p>{{ progressTimeStart }}</p>
+        <p>{{ currTimeStr }}</p>
       </div>
-      <input
-        class="progress-bar-input"
-        type="range"
-        :min="progressTimeStart"
-        :max="progressTimeEnd"
-        step="0.01"
-      />
+      <div
+        @mouseover="isHover = true"
+        @mouseleave="isHover = false"
+        class="slider-container"
+      >
+        <input
+          :style="progressPercentStr"
+          v-model="currTime"
+          @input="changeTime"
+          type="range"
+          min="0"
+          :max="songLength"
+          class="slider"
+        />
+      </div>
       <div class="progress-time-end">
-        <p>{{ progressTimeEnd }}</p>
+        <p>{{ songLengthStr }}</p>
       </div>
     </div>
   </div>
@@ -58,9 +66,48 @@ export default {
   name: 'song-progress',
   data() {
     return {
-      progressTimeStart: '00:00',
-      progressTimeEnd: '03:00',
+      isHover: false,
+      currTime: 0,
+      currTimeStr: '',
+      songLength: 180,
+      songLengthStr: '',
+      progressPercent: 0,
     };
+  },
+  created() {
+    this.currTimeStr = this.getTimeStr(this.currTime);
+    this.songLengthStr = this.getTimeStr(this.songLength);
+  },
+  methods: {
+    changeTime() {
+      this.currTimeStr = this.getTimeStr(this.currTime);
+      this.progressPercent = (this.currTime / this.songLength) * 100;
+    },
+    getTimeStr(time) {
+      var sec_num = parseInt(time, 10); // don't forget the second param
+      var hours = Math.floor(sec_num / 3600);
+      var minutes = Math.floor((sec_num - hours * 3600) / 60);
+      var seconds = sec_num - hours * 3600 - minutes * 60;
+
+      if (seconds < 10) {
+        seconds = '0' + seconds;
+      }
+
+      if (hours === 0) {
+        return minutes + ':' + seconds;
+      }
+
+      return hours + ':' + minutes + ':' + seconds;
+    },
+  },
+  computed: {
+    progressPercentStr() {
+      return {
+        background: !this.isHover
+          ? `linear-gradient(90deg, #b3b3b3 ${this.progressPercent}% , #535353 ${this.progressPercent}%)`
+          : `linear-gradient(90deg, #1db954 ${this.progressPercent}% ,#535353 ${this.progressPercent}%)`,
+      };
+    },
   },
 };
 </script>
