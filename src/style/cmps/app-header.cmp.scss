@@ -24,3 +24,26 @@ header.main-header {
     }
   }
 }
+.left-side-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.input-container {
+  display: flex;
+  background-color: white;
+  border-radius: 32px;
+  height: 40px;
+  align-items: center;
+  gap: 5px;
+  width: 350px;
+  padding: 0 10px;
+  svg {
+    color: #b3b3b3;
+    transform: scaleX(-1);
+  }
+  input {
+    border: none;
+    width: 70%;
+  }
+}

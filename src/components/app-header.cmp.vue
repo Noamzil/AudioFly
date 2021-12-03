@@ -1,46 +1,60 @@
 <template>
   <header class="main-header">
-    <div>
-      <button @click="nextHistory" :class="isNext ? 'active' : ''">
-        <svg role="img" focusable="false" viewBox="0 0 24 24">
-          <polyline points="16 4 7 12 16 20" fill="none"></polyline>
+    <section class="left-side-header">
+      <div>
+        <button @click="nextHistory" :class="isNext ? 'active' : ''">
+          <svg role="img" focusable="false" viewBox="0 0 24 24">
+            <polyline points="16 4 7 12 16 20" fill="none"></polyline>
+          </svg>
+        </button>
+        <button @click="prevHistory" :class="isPrev ? 'active' : ''">
+          <svg role="img" focusable="false" viewBox="0 0 24 24">
+            <polyline points="8 4 17 12 8 20" fill="none"></polyline>
+          </svg>
+        </button>
+      </div>
+      <div class="input-container">
+        <svg role="img" class="search-icon-input" viewBox="0 0 24 24">
+          <path
+            d="M16.736 16.262A8.457 8.457 0 0019 10.5a8.5 8.5 0 10-3.779 7.067l4.424 5.18 1.521-1.299-4.43-5.186zM10.5 17C6.916 17 4 14.084 4 10.5S6.916 4 10.5 4 17 6.916 17 10.5 14.084 17 10.5 17z"
+          ></path>
         </svg>
-      </button>
-      <button @click="prevHistory" :class="isPrev ? 'active' : ''">
-        <svg role="img" focusable="false" viewBox="0 0 24 24">
-          <polyline points="8 4 17 12 8 20" fill="none"></polyline>
-        </svg>
-      </button>
-    </div>
-    <input type="search" @input="search" v-model="searchTxt" />
+        <input
+          type="search"
+          @input="search"
+          v-model="searchTxt"
+          placeholder="Search Songs"
+        />
+      </div>
+    </section>
 
     <user-nav></user-nav>
   </header>
 </template>
 
 <script>
-import userNav from './user-nav.cmp.vue';
+import userNav from "./user-nav.cmp.vue";
 export default {
-  name: 'app-header',
+  name: "app-header",
   data() {
     return {
       isNext: false,
       isPrev: false,
-      searchTxt: '',
+      searchTxt: "",
     };
   },
   methods: {
     nextHistory() {
       this.isNext = !this.isNext;
-      console.log('Going to the next page on your history');
+      console.log("Going to the next page on your history");
     },
     prevHistory() {
       this.isPrev = !this.isPrev;
-      console.log('Going to the previous page on your history');
+      console.log("Going to the previous page on your history");
     },
     search() {
       const key = this.searchTxt;
-      this.$store.dispatch({ type: 'search', key });
+      this.$store.dispatch({ type: "search", key });
     },
   },
   components: {

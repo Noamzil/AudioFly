@@ -1,8 +1,8 @@
 <template>
   <div class="playedNowDetails">
-    <div class="artistImg"><img :src="ImgUrl" /></div>
+    <div class="artistImg"><img :src="currSong.img" /></div>
     <div class="songDescription">
-      <p class="title">{{ artists }}</p>
+      <p class="title">{{ currSong.title }}</p>
       <small class="names">{{ songName }}</small>
     </div>
     <template v-if="pressed">
@@ -62,5 +62,10 @@ export default {
       this.pressed = !this.pressed;
     },
   },
+  computed: {
+    currSong() {
+      return this.$store.getters.currSong
+    }
+  }
 };
 </script>
