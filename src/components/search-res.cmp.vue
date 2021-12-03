@@ -1,5 +1,5 @@
 <template>
-  <section v-if="this.$store.getters.songsRes" class="songs-res-container">
+  <section v-if="this.$store.getters.songsRes.length" class="songs-res-container">
     <!-- <h1>Top result</h1> -->
     <!-- <h1>Songs</h1> -->
     <div class="top-res" v-if="topSong">
@@ -42,13 +42,27 @@ export default {
       var times = [];
       songs.forEach((song) => {
         apiService.getVideoDetails(song.id).then((length) => {
-          times.push(length);
+          var reptms = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/;
+          var hours = 0,
+            minutes = 0,
+            seconds = 0,
+            totalseconds;
+
+          if (reptms.test(length)) {
+            var matches = reptms.exec(length);
+            if (matches[1]) hours = Number(matches[1]);
+            if (matches[2]) minutes = Number(matches[2]);
+            if (matches[3]) seconds = Number(matches[3]);
+            totalseconds = hours * 3600 + minutes * 60 + seconds;
+          }
+          times.push(this.getTimeStr(totalseconds));
         });
       });
+
       this.videosLength = times;
       return songs;
     },
-    topSong() {
+        topSong() {
       return this.$store.getters.songsRes.splice(0, 1)[0];
     },
   },
@@ -58,6 +72,23 @@ export default {
       this.$store.commit({ type: 'playSong', song });
       this.$store.commit({ type: 'toggleMute' });
     },
+    getTimeStr(time) {
+      var sec_num = parseInt(time, 10); 
+      var hours = Math.floor(sec_num / 3600);
+      var minutes = Math.floor((sec_num - hours * 3600) / 60);
+      var seconds = sec_num - hours * 3600 - minutes * 60;
+
+      if (seconds < 10) {
+        seconds = '0' + seconds;
+      }
+
+      if (hours === 0) {
+        return minutes + ':' + seconds;
+      }
+
+      return hours + ':' + minutes + ':' + seconds;
+    },
+
   },
 };
 </script>
