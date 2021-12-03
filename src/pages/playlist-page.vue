@@ -1,8 +1,9 @@
 <template>
   <section class="playlist-page">
-    <playlist-description />
-    <playlist-linear />
-    <playlist-content />
+    <!--  SENT TO EVERY CMPS HERE -->
+    <playlist-description :playlist="currPlaylist"/>
+    <playlist-linear :playlist="currPlaylist" />
+    <playlist-content :playlist="currPlaylist" />
   </section>
 </template>
 
@@ -11,11 +12,25 @@ import playlistDescription from '../components/playlist-cmps/playlist-descriptio
 import playlistLinear from '../components/playlist-cmps/playlist-linear.cmp.vue';
 import playlistContent from '../components/playlist-cmps/playlist-content.cmp.vue';
 
+import { playlistService } from '../services/playlist.service.js';
+
 export default {
   name: 'playlist-page',
-  //   props: ['playlist'], pass to the cmps
   data() {
-    return {};
+    return {
+      currPlaylist: null,
+    };
+  },
+  watch: {
+    '$route.params.playlistId': {
+      async handler() {
+        const playlistId = this.$route.params.playlistId;
+        var playlist = await playlistService.getPlaylistById(playlistId);
+        this.currPlaylist = JSON.parse(JSON.stringify(playlist));
+        console.log(this.currPlaylist);
+      },
+      immediate: true,
+    },
   },
   components: {
     playlistDescription,
