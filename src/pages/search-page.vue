@@ -31,8 +31,6 @@
         />
       </div>
     </div>
-    <h1>{{this.$store.getters.currSong}}</h1>
-    <div class="youtube-video"></div>
   </section>
 </template>
 
