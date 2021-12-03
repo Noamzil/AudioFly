@@ -1,6 +1,7 @@
-const YOUTUBEAPIKEY = 'AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg';
+const YOUTUBEAPIKEY = 'AIzaSyBVmgJQKxDMf5hcZMHwps9TnkYLWNNnoU8';
 
 //ELIOR KEY =AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg
+//another elior key =AIzaSyBVmgJQKxDMf5hcZMHwps9TnkYLWNNnoU8
 
 // OR KEY = AIzaSyC0bJTtOXo5KJTAeYz5nzVqN8N8OJQyFR4
 const axios = require('axios');
@@ -19,10 +20,10 @@ export const apiService = {
 async function getVideoId(key) {
   try {
     const res = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&videoEmbeddable=true&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
+      `https://www.googleapis.com/youtube/v3/search?videoCategoryId=10&part=snippet&maxResults=5&videoEmbeddable=true&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
     );
     // const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=theweekend&key=AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg`)
-    console.log(res.data);
+    // console.log(res.data);
 
     const songs = res.data.items.map((song) => {
       return {
@@ -38,9 +39,12 @@ async function getVideoId(key) {
   }
 }
 async function getVideoDetails(id) {
-  console.log(`video details`, id);
-  const res = await axios.get(
-    `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&key=${YOUTUBEAPIKEY}`
-  );
-  return (res.data.items[0].contentDetails.duration);
+  try {
+    const res = await axios.get(
+      `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&key=${YOUTUBEAPIKEY}`
+    );
+    return res.data.items[0].contentDetails.duration;
+  } catch (error) {
+    throw error;
+  }
 }
