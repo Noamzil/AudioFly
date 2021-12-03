@@ -3,6 +3,7 @@
     <played-note-details />
     <song-progress />
     <device-control />
+    <song-player/>
   </section>
 </template>
 
@@ -10,6 +11,7 @@
 import playedNoteDetails from './footer-cmps/played-note-details.cmp.vue';
 import songProgress from './footer-cmps/song-progress.cmp.vue';
 import deviceControl from './footer-cmps/device-control.cmp.vue';
+import songPlayer from './footer-cmps/play-song.cmp.vue'
 
 export default {
   name: 'app-footer',
@@ -20,6 +22,7 @@ export default {
     playedNoteDetails,
     songProgress,
     deviceControl,
+    songPlayer,
   },
 };
 </script>

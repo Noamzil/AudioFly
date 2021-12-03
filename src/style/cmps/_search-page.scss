@@ -95,6 +95,18 @@
     }
 }
 
+.play-top-song-btn {
+    background-color: $clrGreen;
+    color: $clrTxt;
+    border: none;
+    border-radius: 50%;
+    height: 48px;
+    width: 48px;
+    position: relative;
+    left: 90%;
+}
+
+
 .Pop {
     background-color: rgb(141, 103, 171);
 }
