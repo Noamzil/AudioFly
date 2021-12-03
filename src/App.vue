@@ -5,7 +5,7 @@
       <router-view />
     </div>
     <app-side-bar />
-    <app-footer />
+    <app-footer v-if="setCurrSong.id" />
   </section>
 </template>
 
@@ -14,8 +14,12 @@ import appHeader from './components/app-header.cmp.vue';
 import appSideBar from './components/side-bar.cmp.vue';
 import appFooter from './components/app-footer.cmp.vue';
 
-
 export default {
+  computed: {
+    setCurrSong() {
+      return this.$store.getters.currSong;
+    },
+  },
   components: {
     appHeader,
     appFooter,

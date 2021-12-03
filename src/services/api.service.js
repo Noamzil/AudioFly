@@ -1,8 +1,10 @@
-const YOUTUBEAPIKEY = 'AIzaSyDjWXGiL77YK1-4bOnP4knERUmni3_GPp8';
+const YOUTUBEAPIKEY = 'AIzaSyAWkIrHccCMiaw5q4iGxR3l02lrQW6FgtY';
 
 //ELIOR'S KEY = AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg
 // OR'S KEY = AIzaSyC0bJTtOXo5KJTAeYz5nzVqN8N8OJQyFR4
 //Noam's KEY = AIzaSyDjWXGiL77YK1-4bOnP4knERUmni3_GPp8
+// extra key = AIzaSyCQ-PEdSmyAJhd86KUTBN2hlQUGv--dUQ0
+//and another one =AIzaSyAWkIrHccCMiaw5q4iGxR3l02lrQW6FgtY
 const axios = require('axios');
 // import Axios from 'axios'
 // var axios = Axios.create({
@@ -13,13 +15,14 @@ const axios = require('axios');
 
 export const apiService = {
   getVideoId,
-  getVideoDetails,
+  getVideoLength,
 };
 
 async function getVideoId(key) {
+    console.log(`in api req`);
   try {
     const res = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?videoCategoryId=10&part=snippet&maxResults=5&videoEmbeddable=true&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
+      `https://www.googleapis.com/youtube/v3/search?videoDuration=short&lr=en&eventType=completed&videoCategoryId=10&part=snippet&maxResults=5&videoEmbeddable=true&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
     );
     // const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=theweekend&key=AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg`)
     // console.log(res.data);
@@ -37,7 +40,8 @@ async function getVideoId(key) {
     throw err;
   }
 }
-async function getVideoDetails(id) {
+async function getVideoLength(id) {
+    console.log(`in api req`);
   try {
     const res = await axios.get(
       `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&key=${YOUTUBEAPIKEY}`

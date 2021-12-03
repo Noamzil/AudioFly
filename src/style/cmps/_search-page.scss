@@ -9,7 +9,7 @@
         width: 128px;
         transform: rotate(25deg) translate(18%, -2%);
         position: relative;
-        left: 300px;
+        float: right;
         top: 10px;
     }
     .top-genres-container {
@@ -40,6 +40,8 @@
     .browse-genre-container {
         width: 210px;
         height: 210px;
+        max-width: 290px;
+        flex-grow: 2;
         border-radius: 8px;
         overflow: hidden;
         h3 {
@@ -49,7 +51,7 @@
         img {
             transform: rotate(25deg) translate(18%, -2%);
             position: relative;
-            left: 105px;
+            float: right;
             top: 50px;
             height: 100px;
             width: 100px;

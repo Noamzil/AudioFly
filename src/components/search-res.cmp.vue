@@ -39,9 +39,10 @@ export default {
   computed: {
     songsRes() {
       var songs = this.$store.getters.songsRes;
+      console.log(songs);
       var times = [];
       songs.forEach((song) => {
-        apiService.getVideoDetails(song.id).then((length) => {
+        apiService.getVideoLength(song.id).then((length) => {
           var reptms = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/;
           var hours = 0,
             minutes = 0,
@@ -60,6 +61,7 @@ export default {
       });
 
       this.videosLength = times;
+      console.log(times);
       return songs;
     },
         topSong() {
