@@ -8,7 +8,7 @@
       @mouseleave="hoverToogle(index, false)"
     >
       <p v-if="!hover[index]" class="index">{{ index + 1 }}</p>
-      <button v-else class="play-btn">
+      <button v-else @click="playSong( index)" class="play-btn">
         <svg role="img" viewBox="0 0 24 24">
           <polygon
             points="21.57 12 5.98 3 5.98 21 21.57 12"
@@ -86,6 +86,10 @@ export default {
   methods: {
     hoverToogle(idx, isHover) {
       this.hover.splice(idx, 1, isHover);
+    },
+    playSong(idx) {
+      console.log(idx);
+      console.log(`play `,this.playlist.songs[idx]);
     },
   },
 };

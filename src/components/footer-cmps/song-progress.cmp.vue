@@ -39,14 +39,18 @@
       <div class="progress-time-start">
         <p>{{ currTimeStr }}</p>
       </div>
-      <div class="slider-container">
+      <div
+        @mouseover="isHover = true"
+        @mouseleave="isHover = false"
+        class="slider-container"
+      >
         <input
+          :style="progressPercentStr"
           v-model="currTime"
           @input="changeTime"
           type="range"
           min="0"
           :max="songLength"
-          id="myRange"
           class="slider"
         />
       </div>
@@ -62,10 +66,12 @@ export default {
   name: 'song-progress',
   data() {
     return {
+      isHover: false,
       currTime: 0,
       currTimeStr: '',
       songLength: 180,
       songLengthStr: '',
+      progressPercent: 0,
     };
   },
   created() {
@@ -75,6 +81,7 @@ export default {
   methods: {
     changeTime() {
       this.currTimeStr = this.getTimeStr(this.currTime);
+      this.progressPercent = (this.currTime / this.songLength) * 100;
     },
     getTimeStr(time) {
       var sec_num = parseInt(time, 10); // don't forget the second param
@@ -89,10 +96,18 @@ export default {
       if (hours === 0) {
         return minutes + ':' + seconds;
       }
-      
+
       return hours + ':' + minutes + ':' + seconds;
     },
   },
-  computed: {},
+  computed: {
+    progressPercentStr() {
+      return {
+        background: !this.isHover
+          ? `linear-gradient(90deg, #b3b3b3 ${this.progressPercent}% , #535353 ${this.progressPercent}%)`
+          : `linear-gradient(90deg, #1db954 ${this.progressPercent}% ,#535353 ${this.progressPercent}%)`,
+      };
+    },
+  },
 };
 </script>
