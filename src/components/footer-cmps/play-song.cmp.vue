@@ -1,6 +1,6 @@
 <template>
   <section class="song-player">
-    <iframe hidden
+    <iframe 
       width="0"
       height="0"
       allow="autoplay"
