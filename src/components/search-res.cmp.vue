@@ -33,18 +33,19 @@ export default {
   name: 'search-res',
   data() {
     return {
-      videosLength: [],
+      videosLength: null,
     };
   },
   computed: {
     songsRes() {
-      this.videosLength = [];
       var songs = this.$store.getters.songsRes;
+      var times = [];
       songs.forEach((song) => {
         apiService.getVideoDetails(song.id).then((length) => {
-          this.videosLength.push(length);
+          times.push(length);
         });
       });
+      this.videosLength = times;
       return songs;
     },
     topSong() {

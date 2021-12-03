@@ -16,7 +16,6 @@ export const playStore = {
     mutations: {
         search(state, { songs }) {
             state.searchedSongs = songs
-            console.log(songs);
         },
         playSong(state, { song }) {
             state.currSong = song
