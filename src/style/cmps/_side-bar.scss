@@ -85,6 +85,10 @@ svg {
   &:hover {
     opacity: 1;
   }
+  & svg {
+    height: 12px;
+    width: 12px;
+  }
 }
 .action-txt {
   font-size: 14px;
