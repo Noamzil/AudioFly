@@ -2,7 +2,6 @@
   <section class="sidebarPlaylist">
     <div class="playlist" v-for="playlist in playlists" :key="playlist._id">
       <router-link :to="'/playlist/' + playlist._id"> 
-      <!-- pass playlist as prps -->
         <h1>{{ playlist.name }}</h1>
       </router-link>
     </div>
@@ -15,10 +14,10 @@ export default {
   data() {
     return {
       playlists: [
-        { name: 'My Playlist #1', _id: 'pl101' },
-        { name: 'My Playlist #2', _id: 'pl102' },
-        { name: 'My Playlist #3', _id: 'pl103' },
-        { name: 'My Playlist #4', _id: 'pl104' },
+        { name: 'My Playlist #1', _id: 'PTr1X' },
+        { name: 'My Playlist #2', _id: 'WvQks' },
+        { name: 'My Playlist #3', _id: 'NVljz' },
+        { name: 'My Playlist #4', _id: 'IRMIt' },
       ],
     };
   },

@@ -6,6 +6,7 @@
   width: 30%;
 
   & .volume-bar {
+    
     display: inline-flex;
     display: flex;
     justify-content: center;
@@ -20,3 +21,6 @@
   }
 }
 
+.slider-container{
+  margin-top: 5px;
+}

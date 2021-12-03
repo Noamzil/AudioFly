@@ -51,5 +51,10 @@
   & svg {
     stroke: #b3b3b3;
     stroke-width: 1%;
+
+    &.heart-clicked{
+      stroke-width: 0;
+      color: $clrGreen;
+    }
   }
 }
