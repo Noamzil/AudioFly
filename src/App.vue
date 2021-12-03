@@ -15,6 +15,9 @@ import appSideBar from './components/side-bar.cmp.vue'
 import appFooter from './components/app-footer.cmp.vue';
 
 export default {
+  created() {
+    this.$store.dispatch({type: 'loadPlaylists'})
+  },
   components: {
     appHeader,
     appFooter,

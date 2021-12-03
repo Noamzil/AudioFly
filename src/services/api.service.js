@@ -1,4 +1,6 @@
-const YOUTUBEAPIKEY = "AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg";
+// const YOUTUBEAPIKEY = "AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg"; // elior
+const YOUTUBEAPIKEY = "AIzaSyC0bJTtOXo5KJTAeYz5nzVqN8N8OJQyFR4"; // or
+// Or YouTube key AIzaSyC0bJTtOXo5KJTAeYz5nzVqN8N8OJQyFR4
 const axios = require('axios')
 // import Axios from 'axios'
 // var axios = Axios.create({
@@ -24,7 +26,7 @@ async function getVideoId(key) {
         })
         return songId
     } catch (err) {
-        console.log('Error geting song from youTube');
+        console.log('Error geting song from youTube', err);
         throw err
     }
 }
