@@ -37,27 +37,21 @@
     </div>
     <div class="playback-bar">
       <div class="progress-time-start">
-        <p>{{ progressTimeStart }}</p>
+        <p>{{ currTimeStr }}</p>
       </div>
-      <!-- <input
-        class="progress-bar-input"
-        type="range"
-        :min="progressTimeStart"
-        :max="progressTimeEnd"
-        step="0.01"
-      /> -->
       <div class="slider-container">
         <input
+          v-model="currTime"
+          @input="changeTime"
           type="range"
-          min="1"
-          max="100"
-          value="1"
+          min="0"
+          :max="songLength"
           id="myRange"
           class="slider"
         />
       </div>
       <div class="progress-time-end">
-        <p>{{ progressTimeEnd }}</p>
+        <p>{{ songLengthStr }}</p>
       </div>
     </div>
   </div>
@@ -68,9 +62,37 @@ export default {
   name: 'song-progress',
   data() {
     return {
-      progressTimeStart: '00:00',
-      progressTimeEnd: '03:00',
+      currTime: 0,
+      currTimeStr: '',
+      songLength: 180,
+      songLengthStr: '',
     };
   },
+  created() {
+    this.currTimeStr = this.getTimeStr(this.currTime);
+    this.songLengthStr = this.getTimeStr(this.songLength);
+  },
+  methods: {
+    changeTime() {
+      this.currTimeStr = this.getTimeStr(this.currTime);
+    },
+    getTimeStr(time) {
+      var sec_num = parseInt(time, 10); // don't forget the second param
+      var hours = Math.floor(sec_num / 3600);
+      var minutes = Math.floor((sec_num - hours * 3600) / 60);
+      var seconds = sec_num - hours * 3600 - minutes * 60;
+
+      if (seconds < 10) {
+        seconds = '0' + seconds;
+      }
+
+      if (hours === 0) {
+        return minutes + ':' + seconds;
+      }
+      
+      return hours + ':' + minutes + ':' + seconds;
+    },
+  },
+  computed: {},
 };
 </script>
