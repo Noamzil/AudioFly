@@ -14,10 +14,10 @@ export const apiService = {
 
 async function getVideoId(key) {
     try {
-        const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=contentDetails&maxResults=5&videoEmbeddable=true&type=video&key=${YOUTUBEAPIKEY}&q=${key}`)
+        const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&videoEmbeddable=true&type=video&key=${YOUTUBEAPIKEY}&q=${key}`)
         // const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=theweekend&key=AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg`)
         console.log(res.data);
-        getVideoDetails()
+        getVideoDetails(id)
         // const songs = res.data.items.map(song => {
         //     return {
         //         id: song.id.videoId,
@@ -32,7 +32,7 @@ async function getVideoId(key) {
         throw err
     }
 }
-async function getVideoDetails() {
+async function getVideoDetails(id){
     const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=9bZkp7q19f0&part=contentDetails&key=${YOUTUBEAPIKEY}`)
     console.log(res.data);
 }
