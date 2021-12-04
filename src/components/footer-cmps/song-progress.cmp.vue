@@ -62,19 +62,24 @@
 </template>
 
 <script>
+import { apiService } from '../../services/api.service';
 export default {
   name: 'song-progress',
   data() {
     return {
+      currSong: null,
       isHover: false,
       currTime: 0,
       currTimeStr: '',
-      songLength: 180,
+      songLength: null,
       songLengthStr: '',
       progressPercent: 0,
     };
   },
-  created() {
+  async created() {
+    this.currSong = this.$store.getters.currSong;
+    var lengthStr = await apiService.getVideoLength(this.currSong.id);
+    this.songLength = this.ISOStringToSec(lengthStr);
     this.currTimeStr = this.getTimeStr(this.currTime);
     this.songLengthStr = this.getTimeStr(this.songLength);
   },
@@ -98,6 +103,22 @@ export default {
       }
 
       return hours + ':' + minutes + ':' + seconds;
+    },
+    ISOStringToSec(str) {
+      var reptms = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/;
+      var hours = 0,
+        minutes = 0,
+        seconds = 0,
+        totalseconds;
+
+      if (reptms.test(str)) {
+        var matches = reptms.exec(str);
+        if (matches[1]) hours = Number(matches[1]);
+        if (matches[2]) minutes = Number(matches[2]);
+        if (matches[3]) seconds = Number(matches[3]);
+        totalseconds = hours * 3600 + minutes * 60 + seconds;
+      }
+      return totalseconds;
     },
   },
   computed: {

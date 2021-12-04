@@ -19,12 +19,9 @@
             d="M16.736 16.262A8.457 8.457 0 0019 10.5a8.5 8.5 0 10-3.779 7.067l4.424 5.18 1.521-1.299-4.43-5.186zM10.5 17C6.916 17 4 14.084 4 10.5S6.916 4 10.5 4 17 6.916 17 10.5 14.084 17 10.5 17z"
           ></path>
         </svg>
-        <form @submit.prevent="search">
-        <input
-          type="search"
-          v-model="searchTxt"
-          placeholder="Search Songs"
-        />
+
+        <form @submit.prevent="search" action="">
+          <input type="search" v-model="searchTxt" placeholder="Search Songs" />
         </form>
       </div>
     </section>
@@ -34,28 +31,28 @@
 </template>
 
 <script>
-import userNav from "./user-nav.cmp.vue";
+import userNav from './user-nav.cmp.vue';
 export default {
-  name: "app-header",
+  name: 'app-header',
   data() {
     return {
       isNext: false,
       isPrev: false,
-      searchTxt: "",
+      searchTxt: '',
     };
   },
   methods: {
     nextHistory() {
       this.isNext = !this.isNext;
-      console.log("Going to the next page on your history");
+      console.log('Going to the next page on your history');
     },
     prevHistory() {
       this.isPrev = !this.isPrev;
-      console.log("Going to the previous page on your history");
+      console.log('Going to the previous page on your history');
     },
     search() {
       const key = this.searchTxt;
-      this.$store.dispatch({ type: "search", key });
+      this.$store.dispatch({ type: 'search', key });
     },
   },
   components: {
