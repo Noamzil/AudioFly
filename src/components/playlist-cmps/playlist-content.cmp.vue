@@ -4,10 +4,10 @@
       class="song-container"
       v-for="(song, index) in playlist.songs"
       :key="song.youtubeId"
-      @mouseover="hoverToogle(index, true)"
-      @mouseleave="hoverToogle(index, false)"
+      @mouseover="hoverSongToogle(index, true)"
+      @mouseleave="hoverSongToogle(index, false)"
     >
-      <p v-if="!hover[index]" class="index">{{ index + 1 }}</p>
+      <p v-if="!hoverSong[index]" class="index">{{ index + 1 }}</p>
       <button v-else @click="playSong(index)" class="play-btn">
         <svg role="img" viewBox="0 0 24 24">
           <polygon
@@ -17,12 +17,28 @@
         </svg>
       </button>
       <div class="song-details">
-        <img class="song-img" :src="currPlaylist.playlistImg" />
+        <img class="song-img" :src="song.img" />
         <p>{{ song.title }}</p>
       </div>
       <a href="">Album name</a>
+
       <p>{{ song.addedAt }}</p>
-      <p>{{ song.length }}</p>
+      <div class="songOptions">
+        <div class="heart-container">
+          <section v-if="hoverSong[index]">
+            <button
+              @click="toogleLiked(index)"
+              :class="{
+                fas: liked[index],
+                far: !liked[index],
+                btnLiked: liked[index],
+              }"
+              class="like-btn fa-heart"
+            ></button>
+          </section>
+        </div>
+        <p>{{ song.length }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +51,9 @@ export default {
   props: ['currPlaylist'],
   data() {
     return {
-      hover: [],
+      hoverSong: [],
+      liked: [],
+      playlist: null,
     };
   },
   created() {
@@ -47,12 +65,25 @@ export default {
     },
   },
   methods: {
-    hoverToogle(idx, isHover) {
-      this.hover.splice(idx, 1, isHover);
+    hoverSongToogle(idx, ishoverSong) {
+      this.hoverSong.splice(idx, 1, ishoverSong);
     },
     playSong(idx) {
       var song = this.currPlaylist.songs[idx];
       this.$store.commit({ type: 'playSong', song });
+    },
+    addSongTofavorites(song) {
+      console.log('add to favorites ', song);
+    },
+    removeSongFromfavorites(song) {
+      console.log('remove from favorites ', song);
+    },
+    toogleLiked(idx) {
+      this.liked[idx] = !this.liked[idx];
+      var song = this.playlist.songs[idx];
+      if (this.liked[idx]) {
+        this.addSongTofavorites(song);
+      } else this.removeSongFromfavorites(song);
     },
   },
 };

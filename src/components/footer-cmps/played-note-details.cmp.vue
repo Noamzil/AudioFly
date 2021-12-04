@@ -64,8 +64,8 @@ export default {
   },
   computed: {
     currSong() {
-      return this.$store.getters.currSong
-    }
-  }
+      return this.$store.getters.currSong;
+    },
+  },
 };
 </script>

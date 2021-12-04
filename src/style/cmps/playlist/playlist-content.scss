@@ -50,3 +50,26 @@
   justify-self: start;
   margin-left: 25%;
 }
+
+.song-container .like-btn {
+  background-color: transparent;
+  border: none;
+  color: #b3b3b3;
+  font-size: 0.9375rem;
+
+  &:hover {
+    color: white;
+  }
+  &.btnLiked {
+    color: $clrGreen;
+  }
+}
+
+.song-container .songOptions {
+  display: flex;
+  align-items: center;
+
+  & .heart-container {
+    min-width: 32px;
+  }
+}
