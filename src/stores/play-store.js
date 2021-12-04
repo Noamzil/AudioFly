@@ -9,15 +9,17 @@ export const playStore = {
     },
     getters: {
         songsRes({ searchedSongs }) { return searchedSongs },
-        currSong ({currSong}) {return currSong},
-        isMute({isMute}) {return isMute},
-        isPlaying({isPlaying}) {return isPlaying}
+        currSong({ currSong }) { return currSong },
+        isMute({ isMute }) { return isMute },
+        isPlaying({ isPlaying }) { return isPlaying }
     },
     mutations: {
         search(state, { songs }) {
             state.searchedSongs = songs
         },
         playSong(state, { song }) {
+            console.log('im here')
+            console.log(song)
             state.currSong = song
         },
         unMute(state) {
@@ -37,6 +39,6 @@ export const playStore = {
             }
         },
 
-        
+
     },
 }
