@@ -6,6 +6,8 @@
   font-family: CircularSpotify;
   grid-row: 1/-1;
   padding: 5px;
+  position: fixed;
+  height: 100vh;
 
   hr {
     background-color: #282828;
@@ -17,6 +19,10 @@
   a {
     text-decoration: none;
   }
+}
+.logo-container .logo {
+  text-decoration: none;
+  color: white;
 }
 
 .spotify-logo--text {

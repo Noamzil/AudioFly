@@ -1,15 +1,24 @@
 <template>
   <article class="playlist-preview">
-    <div class="low-layer" :class="isHighlight">
-    <div class="high-layer" @mouseover="highlight=true" 
-    @mouseleave="highlight=false" @click="goToPlaylist">
-      <img class="playlist-img" :src="playlist.playlistImg"/>
-      <h1 class="playlist-name">{{playlist.name}}</h1>
+    <!-- :class="isHighlight" -->
+    <div
+      @mouseover="highlight = true"
+      @mouseleave="highlight = false"
+      @click="goToPlaylist"
+      class="playlist-prev-container"
+    >
+      <img class="playlist-img" :src="playlist.playlistImg" />
+      <h1 class="playlist-name">{{ playlist.name }}</h1>
       <div class="song-name-container">
-      <span v-for="song in first2Songs" :key="song.youtubeId">{{song.title}}|</span>
+        <span v-for="song in first2Songs" :key="song.youtubeId"
+          >{{ song.title }}|</span
+        >
       </div>
-      <!-- <button >go</button> -->
-      <button class="play-top-playlist" :class="isHighlight" @click="playSong(topSong)">
+      <button
+        class="play-top-playlist"
+        :class="isHighlight"
+        @click="playSong(topSong)"
+      >
         <svg role="img" viewBox="0 0 24 24">
           <polygon
             points="21.57 12 5.98 3 5.98 21 21.57 12"
@@ -17,7 +26,6 @@
           ></polygon>
         </svg>
       </button>
-    </div>
     </div>
   </article>
 </template>
