@@ -57,6 +57,7 @@ export default {
     },
     playSong(idx) {
       var song = this.currPlaylist.songs[idx];
+      console.log(song);
       this.$store.commit({ type: 'playSong', song });
     },
   },
