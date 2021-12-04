@@ -31,7 +31,7 @@ async function getVideoId(key) {
 
     const songs = res.data.items.map((song) => {
       return {
-        id: song.id.videoId,
+        youtubeId: song.id.videoId,
         title: song.snippet.title,
         img: song.snippet.thumbnails.default.url,
       };
