@@ -1,8 +1,8 @@
 <template>
-  <section class="playlist-page">
+  <section v-if="currPlaylist" class="playlist-page">
     <!--  SENT TO EVERY CMPS HERE -->
-    <playlist-description :playlist="currPlaylist"/>
-    <playlist-linear :playlist="currPlaylist" />
+    <playlist-description :currPlaylist="currPlaylist" />
+    <playlist-linear :currPlaylist="currPlaylist" />
     <playlist-content :currPlaylist="currPlaylist" />
   </section>
 </template>
@@ -21,9 +21,9 @@ export default {
     };
   },
   async created() {
-    const {playlistId} = this.$route.params
-    const playlist = await playlistService.getPlaylistById(playlistId)
-    this.currPlaylist = playlist
+    const { playlistId } = this.$route.params;
+    const playlist = await playlistService.getPlaylistById(playlistId);
+    this.currPlaylist = playlist;
   },
   watch: {
     '$route.params.playlistId': {

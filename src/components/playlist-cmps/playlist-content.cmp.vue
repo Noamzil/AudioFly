@@ -1,7 +1,12 @@
 <template>
   <div class="playlist-content" v-if="playlist">
-    <div class="song-container" v-for="(song, index) in playlist.songs" :key="song.youtubeId"
-      @mouseover="hoverToogle(index, true)" @mouseleave="hoverToogle(index, false)">
+    <div
+      class="song-container"
+      v-for="(song, index) in playlist.songs"
+      :key="song.youtubeId"
+      @mouseover="hoverToogle(index, true)"
+      @mouseleave="hoverToogle(index, false)"
+    >
       <p v-if="!hover[index]" class="index">{{ index + 1 }}</p>
       <button v-else @click="playSong(index)" class="play-btn">
         <svg role="img" viewBox="0 0 24 24">
@@ -12,13 +17,13 @@
         </svg>
       </button>
       <div class="song-details">
-        <img class="song-img" :src="require('../../' + playlist.playlistImg + '.jpeg')"/>
-        <!-- <p>{{ song.name }}</p> -->
+        <img class="song-img" :src="playlist.playlistImg"/>
+        <p>{{ song.title }}</p>
       </div>
       <a href="">Album name</a>
-      <!-- <p>{{ playlist.createdAt }}</p>
-      <p>{{ playlistTime }}</p> -->
-      <!-- <p>CurrSong: {{this.$store.getters.currSong}}</p> -->
+      <p>added at :{{ song.createdAt }}</p>
+      <p> song length: {{ song.time }}</p>
+      <!-- <p v-if="this.$store.getters.currSong">CurrSong: {{this.$store.getters.currSong}}</p> -->
     </div>
   </div>
 </template>
@@ -27,12 +32,11 @@
 import { utilService } from '../../services/util.service.js';
 
 export default {
-  name: "playlist-content",
-    props: ['currPlaylist'],
+  name: 'playlist-content',
+  props: ['currPlaylist'],
   data() {
     return {
       hover: [],
-      playlist: null,
     };
   },
   created() {
@@ -40,11 +44,11 @@ export default {
     //   this.hover.push(false);
     // });
     console.log(this.currPlaylist);
-    this.playlist = JSON.parse(JSON.stringify(this.currPlaylist))
+    this.playlist = JSON.parse(JSON.stringify(this.currPlaylist));
   },
   computed: {
     playlistTime() {
-      return utilService.getTimeStr(this.playlist.time);
+      return utilService.getTimeStr(this.currPlaylist.time);
     },
   },
   methods: {
@@ -52,19 +56,9 @@ export default {
       this.hover.splice(idx, 1, isHover);
     },
     playSong(idx) {
-      console.log(idx);
-      console.log(`play `, this.playlist.songs[idx]);
-      var song = this.playlist.songs[idx];
-      console.log('currSong:', song);
+      var song = this.currPlaylist.songs[idx];
       this.$store.commit({ type: 'playSong', song });
     },
-  },
-  watch: {
-    playlist: {
-      handler() {
-        this.playlist = JSON.parse(JSON.stringify(this.currPlaylist))
-      }
-    }
   },
 };
 </script>
