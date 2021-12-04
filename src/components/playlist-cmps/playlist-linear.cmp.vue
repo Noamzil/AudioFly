@@ -2,7 +2,7 @@
   <div class="linear-container">
     <section>
       <div class="btns-container">
-        <button class="play-btn">
+        <button @click="playFirstSong" class="play-btn">
           <svg role="img" viewBox="0 0 24 24" aria-hidden="true">
             <polygon
               points="21.57 12 5.98 3 5.98 21 21.57 12"
@@ -57,12 +57,17 @@ export default {
   methods: {
     disLike() {
       this.toogleLike();
+      this.$emit('removePlaylist');
     },
     like() {
       this.toogleLike();
+      this.$emit('addPlaylist');
     },
     toogleLike() {
       this.isLike = !this.isLike;
+    },
+    playFirstSong() {
+      this.$emit('playFirstSong');
     },
   },
 };

@@ -17,13 +17,12 @@
         </svg>
       </button>
       <div class="song-details">
-        <img class="song-img" :src="currPlaylist.playlistImg"/>
+        <img class="song-img" :src="currPlaylist.playlistImg" />
         <p>{{ song.title }}</p>
       </div>
       <a href="">Album name</a>
-      <p>added at :{{ song.createdAt }}</p>
-      <p> song length: {{ song.time }}</p>
-      <!-- <p v-if="this.$store.getters.currSong">CurrSong: {{this.$store.getters.currSong}}</p> -->
+      <p>{{ song.addedAt }}</p>
+      <p>{{ song.length }}</p>
     </div>
   </div>
 </template>
@@ -40,10 +39,6 @@ export default {
     };
   },
   created() {
-    // this.playlist.songs.forEach(() => {
-    //   this.hover.push(false);
-    // });
-    console.log(this.currPlaylist);
     this.playlist = JSON.parse(JSON.stringify(this.currPlaylist));
   },
   computed: {
@@ -57,7 +52,6 @@ export default {
     },
     playSong(idx) {
       var song = this.currPlaylist.songs[idx];
-      console.log(song);
       this.$store.commit({ type: 'playSong', song });
     },
   },

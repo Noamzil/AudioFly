@@ -109,10 +109,34 @@ function _createPlaylist(num) {
     discription: 'Lorem ipsum, dolor sit amet consectetur!',
     time: 80000000,
     songs: [
-      { youtubeId: 'XXYlFuWEuKI', title: 'The Weekend - Save Your Tears', img: '' },
-      { youtubeId: '_Yhyp-_hX2s', title: 'Eminem - Lose Yourself', img: '' },
-      { youtubeId: 'NF-kLy44Hls', title: 'Duft Punk - Lose Yourself To Dance', img: '' },
-      { youtubeId: 'Q0oIoR9mLwc', title: 'Red Hot Chili Peppers - Dark Necessities', img: '' },
+      {
+        youtubeId: 'XXYlFuWEuKI',
+        title: 'The Weekend - Save Your Tears',
+        img: '',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+      },
+      {
+        youtubeId: '_Yhyp-_hX2s',
+        title: 'Eminem - Lose Yourself',
+        img: '',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+      },
+      {
+        youtubeId: 'NF-kLy44Hls',
+        title: 'Duft Punk - Lose Yourself To Dance',
+        img: '',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+      },
+      {
+        youtubeId: 'Q0oIoR9mLwc',
+        title: 'Red Hot Chili Peppers - Dark Necessities',
+        img: '',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+      },
     ],
   };
   return playlist;
