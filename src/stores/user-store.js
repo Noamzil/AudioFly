@@ -4,7 +4,7 @@ import { userService } from '../services/user.service.js'
 export const userStore = {
     state: {
         users: [],
-        currUser: userService.getSessionUser() || null,
+        currUser: userService.getSessionUser() || null
     },
     // getters: {
     //     users({ users }) { return users },
