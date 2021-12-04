@@ -11,17 +11,15 @@
         padding: 10px;
         border-radius: 5px;
         background-color: rgba(211, 211, 211, 0.055);
-        transition: background .2s ;
+        transition: background .2s;
         
         &.highlight {
             background-color: rgba(77, 77, 77, 0.63);
-       
         };
 
         .high-layer {
             height: 100%;
             width: 100%;
-            // background-color: black;
             padding: 5px;
             display: flex;
             flex-direction: column;
