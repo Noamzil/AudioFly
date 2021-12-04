@@ -3,7 +3,7 @@
     height: 80%;
     width: 200px;
     border-radius: 15px;
-    
+
     .low-layer {
         box-sizing: content-box;
         width: 100%;
@@ -20,7 +20,8 @@
         .high-layer {
             height: 100%;
             width: 100%;
-            padding: 5px;
+            // background-color: black;
+            // padding: 5px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -35,27 +36,32 @@
                 height: 100%;
                 width: 100%;
                 z-index: -1;
-
             }
             .playlist-name {
                 align-self: flex-start;
             }
             button {
                 visibility: hidden;
-                background: none;
-                border: 1px solid black;
                 height: 40px;
                 width: 40px;
                 opacity: 0;
+                border: none;
                 border-radius: 50%;
                 background-color: $clrGreen;
-                transition: opacity .5s;
+                transition: opacity 0.5s;
+                position: relative;
+                left: 35%;
+                bottom: 60%;
                 &.highlight {
                     visibility: visible;
                     opacity: 1;
-                    box-shadow: 0px 3px 8px black
+                }
+                svg {
+                    height: 16px;
+                    width: 16px;
+                    color: white;
                 }
             }
-        };
+        }
     }
 }

@@ -21,7 +21,7 @@
         </svg>
 
         <form @submit.prevent="search" action="">
-          <input type="search" v-model="searchTxt" placeholder="Search Songs" />
+          <input type="search" v-model="searchTxt" placeholder="Search Songs" spellcheck="false" />
         </form>
       </div>
     </section>

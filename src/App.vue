@@ -5,7 +5,7 @@
       <router-view />
     </div>
     <app-side-bar />
-    <app-footer v-if="setCurrSong.id" />
+    <app-footer v-if="setCurrSong._id" />
   </section>
 </template>
 
