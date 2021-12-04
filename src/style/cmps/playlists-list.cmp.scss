@@ -1,0 +1,11 @@
+.playlists-list {
+    height: 350px;
+    // border: 2px solid black;
+
+    .playlists-container {
+        display: flex;
+        padding: 15px;
+        list-style: none;
+        height: 100%;
+    }
+}

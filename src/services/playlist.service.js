@@ -9,7 +9,6 @@ const PLAYLIST_URL =
 const PLAYLIST_KEY = 'audioFlyPlaylistsDB';
 const SONG_KEY = 'audioFlySongsDB';
 
-_createSongs();
 _createPlaylists();
 export const playlistService = {
   query,
@@ -99,7 +98,7 @@ function _createPlaylist(num) {
   const playlist = {
     _id: utilService.makeId(),
     type: 'playlist',
-    playlistImg: `../assets/img/test-data/playlist${num}.jpg`,
+    playlistImg: `https://www.liveabout.com/thmb/pwO4o_iDrZRTmmhs7eOfD25Qoqw=/1500x1125/smart/filters:no_upscale()/pop-music-57bce3863df78c87634ea806.jpg`,
     createdBy: {
       userName: 'Udi Ofly',
       _id: 'u101',
@@ -109,33 +108,12 @@ function _createPlaylist(num) {
     name: 'My Playlist' + num,
     discription: 'Lorem ipsum, dolor sit amet consectetur!',
     time: 80000000,
-    songs: [],
+    songs: [
+      { youtubeId: 'XXYlFuWEuKI', title: 'The Weekend - Save Your Tears', img: '' },
+      { youtubeId: '_Yhyp-_hX2s', title: 'Eminem - Lose Yourself', img: '' },
+      { youtubeId: 'NF-kLy44Hls', title: 'Duft Punk - Lose Yourself To Dance', img: '' },
+      { youtubeId: 'Q0oIoR9mLwc', title: 'Red Hot Chili Peppers - Dark Necessities', img: '' },
+    ],
   };
   return playlist;
-}
-function _createSongs() {
-  var songs = localStorage.getItem(SONG_KEY);
-  if (songs) return;
-  songs = [
-    _createSong(1),
-    _createSong(2),
-    _createSong(3),
-    _createSong(4),
-    _createSong(5),
-    _createSong(6),
-  ];
-  localStorage.setItem(SONG_KEY, JSON.stringify(songs));
-}
-function _createSong(name) {
-  const song = {
-    _id: utilService.makeId(),
-    type: 'song',
-    songName: name + '',
-    artist: 'aminem',
-    time: utilService.makeLength(),
-    album: 'aminem ' + name,
-    youTubeUrl: `../assets/img/test-data/eminem${name}.jpg`,
-    url: null,
-  };
-  return song;
 }

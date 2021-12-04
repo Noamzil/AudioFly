@@ -89,8 +89,6 @@ async function addLike(entity) {
 async function removeLike(entity) {
     try {
         const loggedUser = getSessionUser()
-        // const likedEntitys = loggedUser.liked[entity.type].filter(currEntity => currEntity._id !== entity._id)
-        // loggedUser.liked[entity.type] = likedEntitys
         const idx = loggedUser.liked[entity.type].findIndex(currEntity => entity._id === currEntity._id)
         loggedUser.liked[entity.type].splice(idx, 1)
         const updetaedUser = await update(loggedUser)
@@ -114,7 +112,6 @@ async function addFollow(newFollow) {
 async function removeFollow(follow) {
     try {
         const loggedUser = getSessionUser()
-        // loggedUser.follows = loggedUser.follows.filter(currFollow => currFollow._id !== follow._id)
         const idx = loggedUser.follows.findIndex(currFollow => follow._id === currFollow._id)
         loggedUser.follows.splice(idx, 1)
         const updetaedUser = await update(loggedUser)

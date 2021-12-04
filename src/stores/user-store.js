@@ -32,8 +32,6 @@ export const userStore = {
         }
     },
     actions: {
-        // async loadUsers({ commit }) {
-        // },
         async logIn({ commit }, { user }) {
             try {
                 const loggedUser = await userService.logIn(user)
