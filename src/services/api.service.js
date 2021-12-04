@@ -42,16 +42,6 @@ async function getVideoId(key) {
     throw err;
   }
 }
-async function getVideoDetails(id) {
-  try {
-    const res = await axios.get(
-      `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&key=${YOUTUBEAPIKEY}`
-    );
-    return res.data.items[0].contentDetails.duration;
-  } catch (error) {
-    throw error;
-  }
-}
 async function getVideoLength(id) {
   console.log(`in api req`);
   try {

@@ -32,30 +32,32 @@
 </template>
 
 <script>
+import { utilService } from '../../services/util.service.js';
+
 export default {
-  name: "playlist-content",
+  name: 'playlist-content',
   //   props: ['playlist'],
   data() {
     return {
       hover: [],
       playlist: {
-        _id: "pl101",
-        type: "playlist",
-        playlistImg: "assets/img/playlist-imgs/Rock&Roll",
-        createdBy: "Orly Amdadi",
+        _id: 'pl101',
+        type: 'playlist',
+        playlistImg: 'assets/img/playlist-imgs/Rock&Roll',
+        createdBy: 'Orly Amdadi',
         createdAt: 150245112,
         likes: 50,
-        tags: ["rock", "pop"],
-        name: "My PlayList",
-        discription: "loem empsum",
+        tags: ['rock', 'pop'],
+        name: 'My PlayList',
+        discription: 'loem empsum',
         time: 12252,
         songs: [
           {
-            _id: "s101",
-            name: "All of Me",
+            _id: 's101',
+            name: 'All of Me',
           },
           {
-            _id: "s102",
+            _id: 's102',
             name: "There's No Way Out of Here",
           },
         ],
@@ -69,19 +71,7 @@ export default {
   },
   computed: {
     playlistTime() {
-      var hours = Math.floor(this.playlist.time / 3600);
-      var minutes = Math.floor((this.playlist.time - hours * 3600) / 60);
-      var seconds = this.playlist.time - hours * 3600 - minutes * 60;
-      if (hours < 10) {
-        hours = "0" + hours;
-      }
-      if (minutes < 10) {
-        minutes = "0" + minutes;
-      }
-      if (seconds < 10) {
-        seconds = "0" + seconds;
-      }
-      return hours + ":" + minutes + ":" + seconds;
+      return utilService.getTimeStr(this.playlist.time);
     },
   },
   methods: {
@@ -92,8 +82,8 @@ export default {
       console.log(idx);
       console.log(`play `, this.playlist.songs[idx]);
       var song = this.playlist.songs[idx];
-      console.log("currSong:", song);
-      this.$store.commit({ type: "playSong", song });
+      console.log('currSong:', song);
+      this.$store.commit({ type: 'playSong', song });
     },
   },
 };
