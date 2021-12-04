@@ -17,7 +17,7 @@
         </svg>
       </button>
       <div class="song-details">
-        <img class="song-img" :src="playlist.playlistImg"/>
+        <img class="song-img" :src="currPlaylist.playlistImg"/>
         <p>{{ song.title }}</p>
       </div>
       <a href="">Album name</a>

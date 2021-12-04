@@ -1,8 +1,7 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
-    <!--  SENT TO EVERY CMPS HERE -->
     <playlist-description :currPlaylist="currPlaylist" />
-    <playlist-linear :currPlaylist="currPlaylist" />
+    <playlist-linear />
     <playlist-content :currPlaylist="currPlaylist" />
   </section>
 </template>
