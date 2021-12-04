@@ -10,7 +10,7 @@ const USER_URL = (process.env.NODE_ENV !== 'development')
     : '//localhost:3030/api/user/'
 
 const USERS_KEY = 'audioFlyUsersDB'
-
+getGuest()
 export const userService = {
     logIn,
     signUp,
@@ -21,6 +21,7 @@ export const userService = {
     addLike,
     removeLike,
     addFollow,
+    getGuest,
     removeFollow
 }
 
@@ -124,4 +125,22 @@ async function removeFollow(follow) {
 
 function getSessionUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY))
+}
+
+function getGuest() {
+    const guest = {
+        _id: 'u101',
+        fullName: 'Udi Ofly',
+        userEmail: 'Udi@gamil.com',
+        password: '0123',
+        liked: {
+            song: [],
+            playlist: [],
+            station: [],
+        },
+        follows: [],
+        playlists: [],
+        imgUrl: ''
+    }
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(guest))
 }

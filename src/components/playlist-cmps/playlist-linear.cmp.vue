@@ -49,32 +49,9 @@
 <script>
 export default {
   name: 'playlist-linear',
-  //   props: ['playlist'],
   data() {
     return {
       isLike: true,
-      playlist: {
-        _id: 'pl101',
-        type: 'playlist',
-        playlistImg: 'img',
-        createdBy: 'Orly Amdadi',
-        createdAt: 150245112,
-        likes: 50,
-        tags: ['rock', 'pop'],
-        name: 'My PlayList',
-        discription: 'loem empsum',
-        time: 12252545448,
-        songs: [
-          {
-            _id: 's101',
-            name: 'All of Me',
-          },
-          {
-            _id: 's102',
-            name: "There's No Way Out of Here",
-          },
-        ],
-      },
     };
   },
   methods: {

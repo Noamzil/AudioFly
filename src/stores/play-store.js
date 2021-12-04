@@ -18,8 +18,6 @@ export const playStore = {
             state.searchedSongs = songs
         },
         playSong(state, { song }) {
-            console.log('im here')
-            console.log(song)
             state.currSong = song
         },
         unMute(state) {
