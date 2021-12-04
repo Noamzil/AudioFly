@@ -5,7 +5,6 @@ export const playStore = {
         searchedSongs: [],
         currSong: {},
         isMute: true,
-        isPlaying: false
     },
     getters: {
         songsRes({ searchedSongs }) { return searchedSongs },
@@ -18,14 +17,12 @@ export const playStore = {
             state.searchedSongs = songs
         },
         playSong(state, { song }) {
+            console.log(song, 'im play store');
             state.currSong = song
         },
         unMute(state) {
             state.isMute = false
         },
-        toggleAutoplay(state) {
-            state.isPlaying = !state.isPlaying
-        }
     },
     actions: {
         async search({ commit }, { key }) {

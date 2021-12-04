@@ -32,3 +32,7 @@
 @import './footer/played-note-details.scss';
 @import './footer/song-progress.scss';
 @import './footer/device-control.scss';
+
+iframe {
+  margin-bottom: 230px;
+}

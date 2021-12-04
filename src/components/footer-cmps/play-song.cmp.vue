@@ -4,7 +4,7 @@
       width="330"
       height="300"
       allow="autoplay"
-      :src="`https://www.youtube.com/embed/${songIdToPlay}${autoPlay}${mute}`"
+      :src="`https://www.youtube.com/embed/${songIdToPlay}?autoplay=1${mute}`"
     >
     </iframe>
   </section>
@@ -19,25 +19,12 @@ export default {
     };
   },
   computed: {
-    autoPlay() {
-      var autoPlay = this.$store.getters.isPlaying
-        ? "?autoplay=1"
-        : "?autoplay=0";
-      return autoPlay;
-    },
     mute() {
       return this.$store.getters.isMute ? "&mute=1" : "&mute=0";
     },
     songIdToPlay() {
-      return this.$store.getters.currSong._id;
+      return this.$store.getters.currSong.id;
     },
   },
-  watch: {
-    songIdToPlay: {
-      handler() {
-        console.log('hii',this.songIdToPlay);
-      }
-    }
-  }
 };
 </script>

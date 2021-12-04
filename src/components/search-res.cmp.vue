@@ -60,8 +60,8 @@ export default {
   },
   methods: {
     playSong(song) {
+      console.log(song, 'in searchRes cmp');
       this.$store.commit({ type: 'unMute' });
-      this.$store.commit({ type: 'toggleAutoplay' });
       this.$store.commit({ type: 'playSong', song });
     },
     getTimeStr(time) {
