@@ -23,7 +23,7 @@ export default {
       return this.$store.getters.isMute ? "&mute=1" : "&mute=0";
     },
     songIdToPlay() {
-      return this.$store.getters.currSong.id;
+      return this.$store.getters.currSong.youtubeId;
     },
   },
 };

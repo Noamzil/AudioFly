@@ -63,7 +63,7 @@
 
 <script>
 import { apiService } from '../../services/api.service.js';
-import { utilSrvice } from '../../services/util.service.js';
+import { utilService } from '../../services/util.service.js';
 
 export default {
   name: 'song-progress',
@@ -79,8 +79,8 @@ export default {
     };
   },
   async created() {
-    var lengthStr = await apiService.getVideoLength(this.currSong.id);
     this.currSong = this.$store.getters.currSong;
+    var lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
     this.songLength = this.ISOStringToSec(lengthStr);
     this.currTimeStr = this.getTimeStr(this.currTime);
     this.songLengthStr = this.getTimeStr(this.songLength);
@@ -91,10 +91,10 @@ export default {
       this.progressPercent = (this.currTime / this.songLength) * 100;
     },
     getTimeStr(time) {
-      return utilSrvice.getTimeStr(time);
+      return utilService.getTimeStr(time);
     },
     ISOStringToSec(str) {
-      return utilSrvice.ISOStringToSec(str);
+      return utilService.ISOStringToSec(str);
     },
   },
   computed: {

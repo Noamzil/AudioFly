@@ -5,8 +5,8 @@
       <router-view />
     </div>
     <app-side-bar />
-    <app-footer />
-    <!-- v-if="setCurrSong._id" -->
+    <app-footer v-if="setCurrSong.youtubeId" />
+    <!--  -->
   </section>
 </template>
 
