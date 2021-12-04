@@ -1,4 +1,4 @@
-const YOUTUBEAPIKEY = 'AIzaSyAWkIrHccCMiaw5q4iGxR3l02lrQW6FgtY';
+const YOUTUBEAPIKEY = 'AIzaSyDjWXGiL77YK1-4bOnP4knERUmni3_GPp8';
 
 //ELIOR'S KEY = AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg
 // OR'S KEY = AIzaSyC0bJTtOXo5KJTAeYz5nzVqN8N8OJQyFR4
@@ -45,7 +45,7 @@ async function getVideoId(key) {
 async function getVideoDetails(id) {
   try {
     const res = await axios.get(
-      `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&regionCode=us&key=${YOUTUBEAPIKEY}`
+      `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&videoCategoryId=10&key=${YOUTUBEAPIKEY}`
     );
     return res.data.items[0].contentDetails.duration;
   } catch (error) {
