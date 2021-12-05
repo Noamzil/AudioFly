@@ -53,8 +53,6 @@ function remove(entityType, entityId) {
 }
 
 function _save(entityType, entities) {
-    localStorage.clear()
-    console.log(entities);
     localStorage.setItem(entityType, JSON.stringify(entities))
 }
 function _makeId(length = 5) {

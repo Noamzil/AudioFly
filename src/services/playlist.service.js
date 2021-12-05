@@ -88,16 +88,16 @@ function _createPlaylists() {
   var playlists = localStorage.getItem(PLAYLIST_KEY);
   if (playlists) return;
   playlists = [
-    _createStassion(4),
+    _createStation(4),
     _createPlaylist(3),
     _createPlaylist(1),
     _createPlaylist(4),
     _createPlaylist(2),
-    _createStassion(3),
+    _createStation(3),
     _createPlaylist(5),
-    _createStassion(2),
-    _createStassion(5),
-    _createStassion(1),
+    _createStation(2),
+    _createStation(5),
+    _createStation(1),
   ];
   localStorage.setItem(PLAYLIST_KEY, JSON.stringify(playlists));
 }
@@ -153,10 +153,10 @@ function _createPlaylist(num) {
   };
   return playlist;
 }
-function _createStassion(num) {
+function _createStation(num) {
   const playlist = {
     _id: utilService.makeId(),
-    type: 'stassion',
+    type: 'station',
     playlistImg: `https://www.liveabout.com/thmb/pwO4o_iDrZRTmmhs7eOfD25Qoqw=/1500x1125/smart/filters:no_upscale()/pop-music-57bce3863df78c87634ea806.jpg`,
     createdBy: {
       userName: 'Udi Ofly',
@@ -165,7 +165,7 @@ function _createStassion(num) {
     createdAt: num,
     likes: num,
     tags: utilService.makeTags(2),
-    name: 'My Stassion' + num,
+    name: 'My Station' + num,
     discription: 'Lorem ipsum, dolor sit amet consectetur!',
     time: 80000000,
     songs: [
