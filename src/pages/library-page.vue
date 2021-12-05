@@ -16,14 +16,22 @@
             </div>
           </div>
         </router-link>
-
-        <div class="recently-added playlists-list">
-          <ul class="playlists-container">
+        <div class="recently-add-container playlists-list">
+          <h3 class="list-title">Recently added</h3>
+          <!-- <ul class="playlists-container recently-added">
             <li v-for="playlist in playlists" :key="playlist._id">
               <playlist-preview :currPlaylist="playlist"></playlist-preview>
             </li>
-          </ul>
+          </ul> -->
         </div>
+      </div>
+      <div class="playlists-list">
+        <h1>Most liked</h1>
+        <ul class="playlists-container">
+          <li v-for="playlist in playlists" :key="playlist._id">
+            <playlist-preview :currPlaylist="playlist"></playlist-preview>
+          </li>
+        </ul>
       </div>
     </div>
   </section>

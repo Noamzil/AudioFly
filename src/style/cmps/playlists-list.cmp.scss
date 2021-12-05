@@ -1,69 +1,70 @@
 .playlists-list {
-    padding: 30px 0;
-    .playlist-category {
-        font-size: 24px;
+  padding: 30px 0;
+  .playlist-category {
+    font-size: 24px;
+  }
+  .playlists-container {
+    display: flex;
+    padding: 15px 0;
+    list-style: none;
+    height: 100%;
+    flex-wrap: wrap;
+  }
+  ul {
+    display: flex;
+    gap: 20px;
+  }
+  li {
+    border-radius: 4px;
+    background-color: #181818;
+    width: 220px;
+    height: 100%;
+  }
+  .playlist-prev-container {
+    padding: 10px;
+    height: 300px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+  }
+  .playlist-img {
+    height: 200px;
+    width: 200px;
+    margin-bottom: 10px;
+    box-shadow: 1px 1px 8px 3px black;
+  }
+  .playlist-name {
+    font-size: 16px;
+  }
+  .song-name-container {
+    font-size: 14px;
+    color: #b3b3b3;
+  }
+  button {
+    visibility: hidden;
+    height: 40px;
+    width: 40px;
+    opacity: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: $clrGreen;
+    transition: opacity 0.5s;
+    position: relative;
+    left: 75%;
+    top: -43%;
+    box-shadow: -1px 3px 8px 0px;
+    &.highlight {
+      visibility: visible;
+      opacity: 1;
     }
-    .playlists-container {
-        display: flex;
-        padding: 15px 0;
-        list-style: none;
-        height: 100%;
+    svg {
+      height: 16px;
+      width: 16px;
+      color: white;
     }
-    ul {
-        display: flex;
-        gap: 20px;
-    }
-    li {
-        border-radius: 4px;
-        background-color: #181818;
-        width: 220px;
-        height: 100%;
-    }
-    .playlist-prev-container {
-        padding: 10px;
-        height: 300px;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: background .3s;
-    }
-    .playlist-img {
-        height: 200px;
-        width: 200px;
-        margin-bottom: 10px;
-        box-shadow: 1px 1px 8px 3px black;
-    }
-    .playlist-name {
-        font-size: 16px;
-    }
-    .song-name-container {
-        font-size: 14px;
-        color: #b3b3b3;
-    }
-    button {
-        visibility: hidden;
-        height: 40px;
-        width: 40px;
-        opacity: 0;
-        border: none;
-        border-radius: 50%;
-        background-color: $clrGreen;
-        transition: opacity 0.5s;
-        position: relative;
-        left: 75%;
-        top: -43%;
-        box-shadow: -1px 3px 8px 0px;
-        &.highlight {
-            visibility: visible;
-            opacity: 1;
-        }
-        svg {
-            height: 16px;
-            width: 16px;
-            color: white;
-        }
-    }
+  }
 }
 
 .playlist-prev-container:hover {
-    background-color: rgba(77, 77, 77, 0.63);
+  background-color: rgba(77, 77, 77, 0.63);
 }

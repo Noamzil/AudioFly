@@ -1,5 +1,9 @@
 .library-page {
   padding: 30px;
+
+  & .playlists-list li {
+    height: 300px;
+  }
   & .library-header {
     font-size: 32px;
   }
@@ -16,8 +20,16 @@
   display: flex;
   flex-wrap: wrap;
   padding-top: 30px;
+  grid-gap: 25px;
   gap: 25px;
   height: 340px;
+  position: relative;
+
+  & .list-title {
+    position: absolute;
+    z-index: 2;
+    top: 5px;
+  }
 
   & .track-tilte {
     overflow: hidden;
