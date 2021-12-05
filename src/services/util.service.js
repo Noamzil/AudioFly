@@ -3,7 +3,8 @@ export const utilService = {
   makeLength,
   makeTags,
   ISOStringToSec,
-  getTimeStr
+  getTimeStr,
+  writeTime
 };
 
 function makeId(length = 5) {
@@ -15,12 +16,10 @@ function makeId(length = 5) {
   }
   return txt;
 }
-
 function makeLength() {
   const length = Math.floor(Math.random() * (6000000 - 3000000) + 3000000);
   return length;
 }
-
 function makeTags(num) {
   const allTags = [
     'rock',
@@ -43,7 +42,6 @@ function makeTags(num) {
   }
   return tags;
 }
-
 function ISOStringToSec(str) {
   var reptms = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/;
   var hours = 0,
@@ -61,18 +59,25 @@ function ISOStringToSec(str) {
   return totalseconds;
 }
 function getTimeStr(time) {
-    var sec_num = parseInt(time, 10); 
-    var hours = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - hours * 3600) / 60);
-    var seconds = sec_num - hours * 3600 - minutes * 60;
+  var sec_num = parseInt(time, 10);
+  var hours = Math.floor(sec_num / 3600);
+  var minutes = Math.floor((sec_num - hours * 3600) / 60);
+  var seconds = sec_num - hours * 3600 - minutes * 60;
 
-    if (seconds < 10) {
-      seconds = '0' + seconds;
-    }
-
-    if (hours === 0) {
-      return minutes + ':' + seconds;
-    }
-
-    return hours + ':' + minutes + ':' + seconds;
+  if (seconds < 10) {
+    seconds = '0' + seconds;
   }
+
+  if (hours === 0) {
+    return minutes + ':' + seconds;
+  }
+
+  return hours + ':' + minutes + ':' + seconds;
+}
+function writeTime(timeStemp) {
+  var min = parseInt(timeStemp / (1000 * 60))
+  var sec = parseInt((timeStemp % (1000 * 60)) / 1000)
+  if (min < 10) min = '0' + min;
+  if (sec < 10) sec = '0' + sec;
+  return min + ':' + sec
+}

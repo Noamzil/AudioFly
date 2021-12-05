@@ -58,11 +58,11 @@ export default {
   methods: {
     disLikePlaylist() {
       this.toogleLike();
-      this.$emit('disLikePlaylist');
+      this.$emit('togglePlaylistLike');
     },
     likePlaylist() {
       this.toogleLike();
-      this.$emit('likePlaylist');
+      this.$emit('togglePlaylistLike');
     },
     toogleLike() {
       this.isLike = !this.isLike;

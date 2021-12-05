@@ -27,13 +27,11 @@ export default {
   },
   methods: {
     togglePlay() {
-      console.log(this.isPlaying);
       if (this.isPlaying) this.pauseSong();
       else this.playSong();
       this.isPlaying = !this.isPlaying;
     },
     pauseSong() {
-      console.log(player);
       player.contentWindow.postMessage(
         JSON.stringify({ event: "command", func: "pauseVideo" }),
         "*"
@@ -49,7 +47,6 @@ export default {
       player.src = `https://www.youtube.com/embed/${this.currSongId}?playsinline=1&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8080&widgetid=1`
     },
     openYtPlayer() {
-      console.log("songId:", this.currSongId);
       var songId = this.currSongId;
       var tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
@@ -70,7 +67,6 @@ export default {
             // onStateChange: onPlayerStateChange,
           },
         });
-        console.log(player);
       };
       function onPlayerReady(event) {
         event.target.playVideo();

@@ -9,7 +9,7 @@
             ></path>
           </svg>
         </button>
-        <button>
+        <button @click="prevSong">
           <svg role="img" viewBox="0 0 16 16">
             <path d="M13 2.5L5 7.119V3H3v10h2V8.881l8 4.619z"></path>
           </svg>
@@ -26,8 +26,8 @@
           <path d="M3 2h3v12H3zm7 0h3v12h-3z"></path>
         </svg>
       </button>
-      <div class="controllers-right" >
-        <button>
+      <div class="controllers-right">
+        <button @click="nextSong">
           <svg role="img" viewBox="0 0 16 16">
             <path d="M11 3v4.119L3 2.5v11l8-4.619V13h2V3z"></path>
           </svg>
@@ -68,25 +68,25 @@
 </template>
 
 <script>
-import { apiService } from '../../services/api.service.js';
-import { utilService } from '../../services/util.service.js';
+import { apiService } from "../../services/api.service.js";
+import { utilService } from "../../services/util.service.js";
 
 export default {
-  name: 'song-progress',
+  name: "song-progress",
   data() {
     return {
       isSongPlaying: true,
-      currSong: null,
+      // currSong: null,
       isHover: false,
       currTime: 0,
-      currTimeStr: '',
+      currTimeStr: "",
       songLength: null,
-      songLengthStr: '',
+      songLengthStr: "",
       progressPercent: 0,
     };
   },
   async created() {
-    this.currSong = this.$store.getters.currSong;
+    // this.currSong = this.$store.getters.currSong;
     var lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
     this.songLength = this.ISOStringToSec(lengthStr);
     this.currTimeStr = this.getTimeStr(this.currTime);
@@ -105,7 +105,23 @@ export default {
     },
     togglePlay() {
       this.isSongPlaying = !this.isSongPlaying;
-      this.$emit('togglePlay');
+      this.$emit("togglePlay");
+    },
+    nextSong() {
+      var song
+      const currPlaylist = this.$store.getters.currPlaylist;
+      var idx = currPlaylist.songs.findIndex(song => song.youtubeId === this.currSong.youtubeId)
+      if (idx === currPlaylist.songs.length - 1) song = currPlaylist.songs[0] 
+      else song = currPlaylist.songs[idx+1] 
+      this.$store.commit({ type: 'playSong', song });
+    },
+    prevSong() {
+      var song
+      const currPlaylist = this.$store.getters.currPlaylist;
+      var idx = currPlaylist.songs.findIndex(song => song.youtubeId === this.currSong.youtubeId)
+      if (idx === 0) song = currPlaylist.songs[currPlaylist.songs.length - 1] 
+      else song = currPlaylist.songs[idx-1] 
+      this.$store.commit({ type: 'playSong', song });
     },
   },
   computed: {
@@ -115,6 +131,9 @@ export default {
           ? `linear-gradient(90deg, #b3b3b3 ${this.progressPercent}% , #535353 ${this.progressPercent}%)`
           : `linear-gradient(90deg, #1db954 ${this.progressPercent}% ,#535353 ${this.progressPercent}%)`,
       };
+    },
+    currSong() {
+      return this.$store.getters.currSong;
     },
   },
 };
