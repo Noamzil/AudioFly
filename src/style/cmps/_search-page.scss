@@ -1,175 +1,176 @@
 .search-page {
-    padding: 20px 40px;
-    padding-bottom: 150px;
-    h1 {
-        font-size: 24px;
+  padding: 20px 40px;
+  padding-bottom: 150px;
+  h1 {
+    font-size: 24px;
+  }
+  .top-genre-img {
+    height: 128px;
+    width: 128px;
+    transform: rotate(25deg) translate(18%, -2%);
+    position: relative;
+    float: right;
+    top: 10px;
+  }
+  .top-genres-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    h3 {
+      padding: 16px;
+      font-size: 40px;
     }
-    .top-genre-img {
-        height: 128px;
-        width: 128px;
-        transform: rotate(25deg) translate(18%, -2%);
-        position: relative;
-        float: right;
-        top: 10px;
-    }
-    .top-genres-container {
-        display: flex;
-        gap: 20px;
-        margin-top: 20px;
-        h3 {
-            padding: 16px;
-            font-size: 40px;
-        }
-    }
-    .top-genre {
-        border: none;
-        border-radius: 8px;
-        height: 220px;
-        overflow: hidden;
-        width: 430px;
-    }
-    .browse-txt {
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-    .all-genres {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-    .browse-genre-container {
-        width: 210px;
-        height: 210px;
-        max-width: 290px;
-        flex-grow: 2;
-        border-radius: 8px;
-        overflow: hidden;
-        z-index: -1;
+  }
+  .top-genre {
+    border: none;
+    border-radius: 8px;
+    height: 220px;
+    overflow: hidden;
+    width: 430px;
+    cursor: pointer;
+  }
+  .browse-txt {
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  .all-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .browse-genre-container {
+    width: 210px;
+    height: 210px;
+    max-width: 290px;
+    flex-grow: 2;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
 
-        h3 {
-            padding: 16px;
-            font-size: 24px;
-        }
-        img {
-            transform: rotate(25deg) translate(18%, -2%);
-            position: relative;
-            float: right;
-            top: 50px;
-            height: 100px;
-            width: 100px;
-        }
+    h3 {
+      padding: 16px;
+      font-size: 24px;
     }
+    img {
+      transform: rotate(25deg) translate(18%, -2%);
+      position: relative;
+      float: right;
+      top: 50px;
+      height: 100px;
+      width: 100px;
+    }
+  }
 }
 
 .songs-res-container {
-    // background-color: rgba(255, 53, 53, 0.63);
-    display: flex;
-    gap: 10px;
-    margin-bottom: 40px;
+  // background-color: rgba(255, 53, 53, 0.63);
+  display: flex;
+  gap: 10px;
+  margin-bottom: 40px;
 }
 
 .top-res {
-    width: 40%;
-    background-color: #181818;
-    padding: 20px;
+  width: 40%;
+  background-color: #181818;
+  padding: 20px;
 
-    img {
-        height: 90px;
-        width: 90px;
-    }
+  img {
+    height: 90px;
+    width: 90px;
+  }
 }
 .songs-res {
-    width: 60%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  width: 60%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .song-res {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    img {
-        height: 40px;
-        width: 40px;
-    }
-    h3 {
-        width: 60%;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  img {
+    height: 40px;
+    width: 40px;
+  }
+  h3 {
+    width: 60%;
+  }
 }
 
 .play-top-song-btn {
-    background-color: $clrGreen;
-    color: $clrTxt;
-    border: none;
-    border-radius: 50%;
-    height: 48px;
-    width: 48px;
-    position: relative;
-    left: 90%;
+  background-color: $clrGreen;
+  color: $clrTxt;
+  border: none;
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  position: relative;
+  left: 90%;
 }
 
 .Pop {
-    background-color: rgb(141, 103, 171);
+  background-color: rgb(141, 103, 171);
 }
 .Rock {
-    background-color: rgb(230, 30, 50);
+  background-color: rgb(230, 30, 50);
 }
 .Indie {
-    background-color: rgb(96, 129, 8);
+  background-color: rgb(96, 129, 8);
 }
 .Hip-Hop {
-    background-color: rgb(186, 93, 7);
+  background-color: rgb(186, 93, 7);
 }
 .Podcasts {
-    background-color: rgb(39, 133, 106);
+  background-color: rgb(39, 133, 106);
 }
 .Made-For-You {
-    background-color: rgb(30, 50, 100);
+  background-color: rgb(30, 50, 100);
 }
 .Charts {
-    background-color: rgb(141, 103, 171);
+  background-color: rgb(141, 103, 171);
 }
 .New-Releases {
-    background-color: rgb(232, 17, 91);
+  background-color: rgb(232, 17, 91);
 }
 .Discover {
-    background-color: rgb(220, 20, 140);
+  background-color: rgb(220, 20, 140);
 }
 .Concerts {
-    background-color: rgb(30, 50, 100);
+  background-color: rgb(30, 50, 100);
 }
 .Mood {
-    background-color: rgb(141, 103, 171);
+  background-color: rgb(141, 103, 171);
 }
 .Chill {
-    background-color: rgb(71, 125, 149);
+  background-color: rgb(71, 125, 149);
 }
 .Party {
-    background-color: rgb(175, 40, 150);
+  background-color: rgb(175, 40, 150);
 }
 .Focus {
-    background-color: rgb(80, 55, 80);
+  background-color: rgb(80, 55, 80);
 }
 .Alternative {
-    background-color: rgb(180, 155, 200);
+  background-color: rgb(180, 155, 200);
 }
 .EQUAL {
-    background-color: rgb(20, 138, 8);
+  background-color: rgb(20, 138, 8);
 }
 .DanceElectronic {
-    background-color: rgb(220, 20, 140);
+  background-color: rgb(220, 20, 140);
 }
 .Wellness {
-    background-color: rgb(165, 103, 82);
+  background-color: rgb(165, 103, 82);
 }
 .Sleep {
-    background-color: rgb(30, 50, 100);
+  background-color: rgb(30, 50, 100);
 }
 .Tastemakers {
-    background-color: rgb(235, 30, 50);
+  background-color: rgb(235, 30, 50);
 }
 .Decades {
-    background-color: rgb(186, 93, 7);
+  background-color: rgb(186, 93, 7);
 }

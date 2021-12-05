@@ -8,7 +8,8 @@ export const userStore = {
     },
     getters: {
         users({ users }) { return users },
-        user({ currUser }) { return currUser }
+        user({ currUser }) { return currUser },
+        userLikedSongs({currUser}) {return currUser.liked.song }
     },
     mutations: {
         loadUser(state) {
