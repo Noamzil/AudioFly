@@ -44,7 +44,6 @@ export default {
           onStateChange: onPlayerStateChange,
         },
       });
-
     };
 
     function onPlayerReady(event) {
@@ -73,7 +72,6 @@ export default {
   },
   methods: {
     toStop() {
-      console.log(YTplayer);
       player.stopVideo();
     },
   },
