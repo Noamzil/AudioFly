@@ -44,6 +44,8 @@
         flex-grow: 2;
         border-radius: 8px;
         overflow: hidden;
+        z-index: -1;
+
         h3 {
             padding: 16px;
             font-size: 24px;
@@ -108,7 +110,6 @@
     left: 90%;
 }
 
-
 .Pop {
     background-color: rgb(141, 103, 171);
 }
@@ -134,7 +135,7 @@
     background-color: rgb(232, 17, 91);
 }
 .Discover {
-    background-color: rgb(141, 103, 171);
+    background-color: rgb(220, 20, 140);
 }
 .Concerts {
     background-color: rgb(30, 50, 100);
@@ -142,7 +143,7 @@
 .Mood {
     background-color: rgb(141, 103, 171);
 }
-.chill {
+.Chill {
     background-color: rgb(71, 125, 149);
 }
 .Party {
@@ -157,7 +158,7 @@
 .EQUAL {
     background-color: rgb(20, 138, 8);
 }
-.Dance-Electronic {
+.DanceElectronic {
     background-color: rgb(220, 20, 140);
 }
 .Wellness {

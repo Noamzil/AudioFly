@@ -4,10 +4,10 @@
       class="song-container"
       v-for="(song, index) in playlist.songs"
       :key="song.youtubeId"
-      @mouseover="hoverToogle(index, true)"
-      @mouseleave="hoverToogle(index, false)"
+      @mouseover="hoverSongToogle(index, true)"
+      @mouseleave="hoverSongToogle(index, false)"
     >
-      <p v-if="!hover[index]" class="index">{{ index + 1 }}</p>
+      <p v-if="!hoverSong[index]" class="index">{{ index + 1 }}</p>
       <button v-else @click="playSong(index)" class="play-btn">
         <svg role="img" viewBox="0 0 24 24">
           <polygon
@@ -17,13 +17,28 @@
         </svg>
       </button>
       <div class="song-details">
-        <img class="song-img" :src="currPlaylist.playlistImg"/>
+        <img class="song-img" :src="song.img" />
         <p>{{ song.title }}</p>
       </div>
       <a href="">Album name</a>
-      <p>added at :{{ song.createdAt }}</p>
-      <p> song length: {{ song.time }}</p>
-      <!-- <p v-if="this.$store.getters.currSong">CurrSong: {{this.$store.getters.currSong}}</p> -->
+
+      <p>{{ song.addedAt }}</p>
+      <div class="songOptions">
+        <div class="heart-container">
+          <section v-if="hoverSong[index]">
+            <button
+              @click="toogleLiked(index)"
+              :class="{
+                fas: currPlaylist.songs[index].isLike,
+                far: !currPlaylist.songs[index].isLike,
+                btnLiked: currPlaylist.songs[index].isLike,
+              }"
+              class="like-btn fa-heart"
+            ></button>
+          </section>
+        </div>
+        <p>{{ song.length }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -36,14 +51,12 @@ export default {
   props: ['currPlaylist'],
   data() {
     return {
-      hover: [],
+      hoverSong: [],
+      liked: [],
+      playlist: null,
     };
   },
   created() {
-    // this.playlist.songs.forEach(() => {
-    //   this.hover.push(false);
-    // });
-    console.log(this.currPlaylist);
     this.playlist = JSON.parse(JSON.stringify(this.currPlaylist));
   },
   computed: {
@@ -52,12 +65,15 @@ export default {
     },
   },
   methods: {
-    hoverToogle(idx, isHover) {
-      this.hover.splice(idx, 1, isHover);
+    hoverSongToogle(idx, ishoverSong) {
+      this.hoverSong.splice(idx, 1, ishoverSong);
     },
     playSong(idx) {
       var song = this.currPlaylist.songs[idx];
       this.$store.commit({ type: 'playSong', song });
+    },
+    toogleLiked(idx) {
+      this.$emit('toogleSongIsLike', idx);
     },
   },
 };

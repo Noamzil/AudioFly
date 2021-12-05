@@ -1,24 +1,24 @@
 <template>
   <section class="playlists-list">
-      <h1>Popular</h1>
+      <h1 class="playlist-category">Popular</h1>
       <ul class="playlists-container">
           <li v-for="playlist in playlists" :key="playlist._id">
               <playlist-preview :currPlaylist="playlist"></playlist-preview>
           </li>
       </ul>
-      <h1>Stassions</h1>
+      <h1 class="playlist-category">Stassions</h1>
       <ul class="playlists-container">
           <li v-for="playlist in playlists" :key="playlist._id">
               <playlist-preview :currPlaylist="playlist"></playlist-preview>
           </li>
       </ul>
-      <h1>New</h1>
+      <h1 class="playlist-category">New</h1>
       <ul class="playlists-container">
           <li v-for="playlist in playlists" :key="playlist._id">
               <playlist-preview :currPlaylist="playlist"></playlist-preview>
           </li>
       </ul>
-      <h1>Back to last point</h1>
+      <h1 class="playlist-category">Back to last point</h1>
       <ul class="playlists-container">
           <li v-for="playlist in playlists" :key="playlist._id">
               <playlist-preview :currPlaylist="playlist"></playlist-preview>

@@ -3,16 +3,31 @@
     <serach-res />
     <h1>Your top genres</h1>
     <div class="top-genres-container">
-      <div v-for="genre in genres" :key="genre" class="top-genre" :class="genre">
+      <div
+        v-for="genre in genres"
+        :key="genre"
+        class="top-genre"
+        :class="genre"
+      >
         <h3>{{ genre }}</h3>
-        <img :src="require('../assets/img/genres-img/' + genre + '.jpg')" class="top-genre-img"/>
+        <img
+          :src="require('../assets/img/genres-img/' + genre + '.jpg')"
+          class="top-genre-img"
+        />
       </div>
     </div>
     <h1 class="browse-txt">Browse all</h1>
     <div class="all-genres">
-      <div v-for="genre in browseGenres" :key="genre" class="browse-genre-container" :class="genre">
+      <div
+        v-for="genre in browseGenres"
+        :key="genre"
+        class="browse-genre-container"
+        :class="genre"
+      >
         <h3>{{ genre }}</h3>
-        <img :src="require('../assets/img/genres-img/' + genre + '.jpg')" class="browse-genre-img"
+        <img
+          :src="require('../assets/img/genres-img/' + genre + '.jpg')"
+          class="browse-genre-img"
         />
       </div>
     </div>
@@ -33,7 +48,7 @@ export default {
         "Hip-Hop",
         "Podcasts",
         "Charts",
-        "Made For You",
+        // "Made For You",
         // "New Releases",
         "Discover",
         "Concerts",

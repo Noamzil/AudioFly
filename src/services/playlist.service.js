@@ -67,6 +67,7 @@ async function addSong(song) {
 async function updatePlaylist(playlist) {
   try {
     const updatedPlaylist = await storageService.put(PLAYLIST_KEY, playlist);
+    return updatedPlaylist
   } catch (err) {
     console.log('Could not update playlist at playlistService');
     throw err;
@@ -109,10 +110,38 @@ function _createPlaylist(num) {
     discription: 'Lorem ipsum, dolor sit amet consectetur!',
     time: 80000000,
     songs: [
-      { youtubeId: 'XXYlFuWEuKI', title: 'The Weekend - Save Your Tears', img: '' },
-      { youtubeId: '_Yhyp-_hX2s', title: 'Eminem - Lose Yourself', img: '' },
-      { youtubeId: 'NF-kLy44Hls', title: 'Duft Punk - Lose Yourself To Dance', img: '' },
-      { youtubeId: 'Q0oIoR9mLwc', title: 'Red Hot Chili Peppers - Dark Necessities', img: '' },
+      {
+        youtubeId: 'XXYlFuWEuKI',
+        title: 'The Weekend - Save Your Tears',
+        img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+        isLike: false,
+      },
+      {
+        youtubeId: '_Yhyp-_hX2s',
+        title: 'Eminem - Lose Yourself',
+        img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+        isLike: false,
+      },
+      {
+        youtubeId: 'NF-kLy44Hls',
+        title: 'Duft Punk - Lose Yourself To Dance',
+        img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+        isLike: false,
+      },
+      {
+        youtubeId: 'Q0oIoR9mLwc',
+        title: 'Red Hot Chili Peppers - Dark Necessities',
+        img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+        isLike: false,
+      },
     ],
   };
   return playlist;

@@ -1,8 +1,15 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
     <playlist-description :currPlaylist="currPlaylist" />
-    <playlist-linear />
-    <playlist-content :currPlaylist="currPlaylist" />
+    <playlist-linear
+      @removePlaylist="removePlaylist"
+      @addPlaylist="addPlaylist"
+      @playFirstSong="playFirstSong"
+    />
+    <playlist-content
+      @toogleSongIsLike="toogleSongIsLike"
+      :currPlaylist="currPlaylist"
+    />
   </section>
 </template>
 
@@ -32,6 +39,36 @@ export default {
         this.currPlaylist = JSON.parse(JSON.stringify(playlist));
       },
       immediate: true,
+    },
+  },
+  methods: {
+    removePlaylist() {
+      var playlistId = this.currPlaylist._id;
+      this.$store.dispatch({ type: 'removePlaylist', playlistId });
+    },
+    addPlaylist() {
+      var playlist = this.currPlaylist;
+      this.$store.dispatch({ type: 'addPlaylist', playlist });
+    },
+    playFirstSong() {
+      var song = this.currPlaylist.songs[0];
+      this.$store.commit({ type: 'playSong', song });
+    },
+    toogleSongIsLike(idx) {
+      var playlist = this.currPlaylist;
+      playlist.songs[idx].isLike = !playlist.songs[idx].isLike;
+      this.$store.dispatch({ type: 'updatePlaylist', playlist });
+
+      // var song = playlist.songs[idx];
+      // if (playlist.songs[idx].isLike) {
+      //   this.addSongTofavorites(song);
+      // } else this.removeSongFromfavorites(song);
+    },
+    addSongTofavorites(song) {
+      console.log('add to favorites ', song);
+    },
+    removeSongFromfavorites(song) {
+      console.log('remove from favorites ', song);
     },
   },
   components: {
