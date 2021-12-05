@@ -1,36 +1,98 @@
 <template>
   <section class="footer">
     <played-note-details />
-    <song-progress />
+    <song-progress @togglePlay="togglePlay"/>
     <device-control />
-    <song-player/>
+    <!-- <song-player :isPlaying="isPlaying" /> -->
+    <div id="player"></div>
   </section>
 </template>
 
 <script>
-import playedNoteDetails from './footer-cmps/played-note-details.cmp.vue';
-import songProgress from './footer-cmps/song-progress.cmp.vue';
-import deviceControl from './footer-cmps/device-control.cmp.vue';
-import songPlayer from './footer-cmps/play-song.cmp.vue'
+import playedNoteDetails from "./footer-cmps/played-note-details.cmp.vue";
+import songProgress from "./footer-cmps/song-progress.cmp.vue";
+import deviceControl from "./footer-cmps/device-control.cmp.vue";
+// import songPlayer from "./footer-cmps/play-song.cmp.vue";
 
 export default {
-  name: 'app-footer',
+  name: "app-footer",
   data() {
     return {
-      isPlay: true,
+      isPlaying: true,
+      YTplayer: null
     };
   },
-  
+  created() {
+    this.openYtPlayer();
+  },
   methods: {
-    play() {
-      this.isPlay = false
-    }
+    togglePlay() {
+      console.log(this.isPlaying);
+      if (this.isPlaying) this.pauseSong();
+      else this.playSong();
+      this.isPlaying = !this.isPlaying;
+    },
+    pauseSong() {
+      console.log(player);
+      player.contentWindow.postMessage(
+        JSON.stringify({ event: "command", func: "pauseVideo" }),
+        "*"
+      );
+    },
+    playSong() {
+      player.contentWindow.postMessage(
+        JSON.stringify({ event: "command", func: "playVideo" }),
+        "*"
+      );
+    },
+    changeSong() {
+      player.src = `https://www.youtube.com/embed/${this.currSongId}?playsinline=1&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8080&widgetid=1`
+    },
+    openYtPlayer() {
+      console.log("songId:", this.currSongId);
+      var songId = this.currSongId;
+      var tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      var player
+      if (player) console.log('im here');
+      window.onYouTubePlayerAPIReady = function () {
+        player = new YT.Player("player", {
+          height: "300 ",
+          width: "400",
+          videoId: songId,
+          playerVars: {
+            playsinline: 1,
+          },
+          events: {
+            onReady: onPlayerReady,
+            // onStateChange: onPlayerStateChange,
+          },
+        });
+        console.log(player);
+      };
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+    },
+  },
+  computed: {
+    currSongId() {
+      return this.$store.getters.currSong.youtubeId;
+    },
+  },
+  watch: {
+    currSongId() {
+      this.openYtPlayer();
+      this.changeSong()
+    },
   },
   components: {
     playedNoteDetails,
     songProgress,
     deviceControl,
-    songPlayer,
+    // songPlayer,
   },
 };
 </script>

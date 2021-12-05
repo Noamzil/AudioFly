@@ -25,6 +25,11 @@ const routes = [
     name: 'playlist',
     component: () => import('../pages/playlist-page.vue'),
   },
+  {
+    path: '/library',
+    name: 'library',
+    component: () => import('../pages/library-page.vue'),
+  },
 ];
 
 const router = new VueRouter({

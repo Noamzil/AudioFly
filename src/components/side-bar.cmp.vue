@@ -28,14 +28,14 @@
         <h3>Search</h3>
       </router-link>
 
-      <a class="side-bar-icon">
+      <router-link to="/library" class="side-bar-icon">
         <svg role="img" class="collection-icon" viewBox="0 0 24 24">
           <path
             d="M13.66 4.097l-.913.406 7.797 17.513.914-.406L13.66 4.097zM3 22h1V4H3v18zm6 0h1V4H9v18z"
           ></path>
         </svg>
         <h3>Your Library</h3>
-      </a>
+      </router-link>
     </div>
 
     <div class="action-btns-container">
@@ -48,19 +48,19 @@
         </div>
         <h1 class="action-txt">Add Playlist</h1>
       </div>
-        <router-link to="/liked-songs">
-      <div class="side-bar-icons-container">
-        <div class="liked-songs-icon square-icon">
-          <svg role="img" aria-hidden="true" viewBox="0 0 16 16">
-            <path fill="none" d="M0 0h16v16H0z"></path>
-            <path
-              d="M13.797 2.727a4.057 4.057 0 00-5.488-.253.558.558 0 01-.31.112.531.531 0 01-.311-.112 4.054 4.054 0 00-5.487.253c-.77.77-1.194 1.794-1.194 2.883s.424 2.113 1.168 2.855l4.462 5.223a1.791 1.791 0 002.726 0l4.435-5.195a4.052 4.052 0 001.195-2.883 4.057 4.057 0 00-1.196-2.883z"
-            ></path>
-          </svg>
+      <router-link to="/liked-songs">
+        <div class="side-bar-icons-container">
+          <div class="liked-songs-icon square-icon">
+            <svg role="img" aria-hidden="true" viewBox="0 0 16 16">
+              <path fill="none" d="M0 0h16v16H0z"></path>
+              <path
+                d="M13.797 2.727a4.057 4.057 0 00-5.488-.253.558.558 0 01-.31.112.531.531 0 01-.311-.112 4.054 4.054 0 00-5.487.253c-.77.77-1.194 1.794-1.194 2.883s.424 2.113 1.168 2.855l4.462 5.223a1.791 1.791 0 002.726 0l4.435-5.195a4.052 4.052 0 001.195-2.883 4.057 4.057 0 00-1.196-2.883z"
+              ></path>
+            </svg>
+          </div>
+          <h1 class="action-txt">Liked Songs</h1>
         </div>
-        <h1 class="action-txt">Liked Songs</h1>
-      </div>
-          </router-link>
+      </router-link>
     </div>
 
     <hr />
@@ -69,10 +69,10 @@
 </template>
 
 <script>
-import sidebarPlaylist from "./sidebar-playlist.cmp.vue";
+import sidebarPlaylist from './sidebar-playlist.cmp.vue';
 
 export default {
-  name: "sidebar",
+  name: 'sidebar',
   data() {
     return {};
   },

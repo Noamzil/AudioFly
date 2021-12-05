@@ -1,0 +1,64 @@
+.library-page {
+  padding: 30px;
+  & .library-header {
+    font-size: 32px;
+  }
+  & a {
+    text-decoration: none;
+  }
+
+  & .router-link-liked-song {
+    margin-bottom: 30px;
+  }
+}
+
+.library-row1 {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 30px;
+  gap: 25px;
+  height: 340px;
+
+  & .track-tilte {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px;
+    max-height: 200px;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.liked-songs-container {
+  padding: 20px;
+  background: linear-gradient(149.46deg, #450af5, #8e8ee5 99.16%);
+  width: 425px;
+  height: 280px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  & h2,
+  p {
+    color: hsla(0, 0%, 100%, 0.664);
+    text-decoration: none;
+  }
+
+  & p {
+    margin: 10px 0;
+  }
+
+  &:hover {
+    & h2,
+    p {
+      color: white;
+    }
+  }
+
+  & .tracks-info {
+    position: absolute;
+    bottom: 20px;
+  }
+}

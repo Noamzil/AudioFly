@@ -15,12 +15,18 @@
           </svg>
         </button>
       </div>
-      <button class="play-btn" @click="$emit('play')">
+      <button v-if="!isSongPlaying" class="play-btn" @click="togglePlay">
         <svg role="img" viewBox="0 0 16 16">
           <path d="M4.018 14L14.41 8 4.018 2z"></path>
         </svg>
       </button>
-      <div class="controllers-right">
+      <button v-else class="play-btn" @click="togglePlay">
+        <svg role="img" viewBox="0 0 16 16">
+          <path fill="none" d="M0 0h16v16H0z"></path>
+          <path d="M3 2h3v12H3zm7 0h3v12h-3z"></path>
+        </svg>
+      </button>
+      <div class="controllers-right" >
         <button>
           <svg role="img" viewBox="0 0 16 16">
             <path d="M11 3v4.119L3 2.5v11l8-4.619V13h2V3z"></path>
@@ -69,6 +75,7 @@ export default {
   name: 'song-progress',
   data() {
     return {
+      isSongPlaying: true,
       currSong: null,
       isHover: false,
       currTime: 0,
@@ -95,6 +102,10 @@ export default {
     },
     ISOStringToSec(str) {
       return utilService.ISOStringToSec(str);
+    },
+    togglePlay() {
+      this.isSongPlaying = !this.isSongPlaying;
+      this.$emit('togglePlay');
     },
   },
   computed: {

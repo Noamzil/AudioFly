@@ -1,13 +1,5 @@
 <template>
   <section class="song-player">
-    <!-- <iframe
-      ref="video"
-      width="330"
-      height="300"
-      allow="autoplay"
-      :src="`https://www.youtube.com/embed/${songIdToPlay}?autoplay=1${mute}`"
-    >
-    </iframe> -->
     <button @click="toPlay">play</button>
     <button @click="toStop">pause</button>
     <div id="player"></div>
@@ -17,7 +9,7 @@
 <script>
 export default {
   name: "song-player",
-  props: ['isAtPlay'],
+  props:['isPlaying'],
   data() {
     return {
       isPlay: this.isAtPlay,
@@ -28,21 +20,15 @@ export default {
     this.openYtPlayer();
   },
   computed: {
-    mute() {
-      return this.$store.getters.isMute ? "&mute=1" : "&mute=0";
-    },
-    songIdToPlay() {
-      return this.$store.getters.currSong.youtubeId;
-    },
   },
   methods: {
-    toStop() {
+    pasueSong() {
       player.contentWindow.postMessage(
         JSON.stringify({ event: "command", func: "pauseVideo" }),
         "*"
       );
     },
-    toPlay() {
+    playSong() {
       player.contentWindow.postMessage(
         JSON.stringify({ event: "command", func: "playVideo" }),
         "*"
