@@ -31,6 +31,7 @@ export default {
     console.log(this.$router);
     const { playlistId } = this.$route.params;
     const playlist = await playlistService.getPlaylistById(playlistId);
+    this.$store.commit({type:'currPlaylist',playlist} )
     this.currPlaylist = playlist;
   },
   watch: {
