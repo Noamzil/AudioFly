@@ -35,7 +35,7 @@ export default {
       player = new YT.Player('player', {
         height: '390',
         width: '640',
-        videoId: songId,
+        videoId: songId ,
         playerVars: {
           playsinline: 1,
         },
