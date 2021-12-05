@@ -11,3 +11,22 @@
         color: #b3b3b3;
     }
 }
+
+.liked-songs-linear {
+    padding: 30px;
+    button {
+        height: rem(56px);
+        width: rem(56px);
+        margin-inline-end: 32px;
+        background-color: $clrGreen;
+        color: $clrTxt;
+        border: 0;
+        border-radius: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    button:hover {
+        transform: scale(1.07);
+    }
+}

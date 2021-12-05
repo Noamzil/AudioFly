@@ -8,12 +8,23 @@
         <h2>PLAYLIST</h2>
         <h1>Liked Songs</h1>
         <div class="flex">
-          <p>user info </p>
-          <span> • </span>
+          <p>user info</p>
+          <span>•</span>
           <p class="songs-length">list length</p>
         </div>
       </div>
     </div>
+    <div class="liked-songs-linear">
+      <button class="play-btn">
+        <svg role="img" viewBox="0 0 24 24" aria-hidden="true">
+          <polygon
+            points="21.57 12 5.98 3 5.98 21 21.57 12"
+            fill="currentColor"
+          ></polygon>
+        </svg>
+      </button>
+    </div>
+    
   </section>
 </template>
 
