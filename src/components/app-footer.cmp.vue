@@ -59,8 +59,8 @@ export default {
       if (player) console.log('im here');
       window.onYouTubePlayerAPIReady = function () {
         player = new YT.Player("player", {
-          height: "300 ",
-          width: "400",
+          height: "0 ",
+          width: "0",
           videoId: songId,
           playerVars: {
             playsinline: 1,
