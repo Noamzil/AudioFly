@@ -13,7 +13,7 @@ const axios = require('axios');
 //     withCredentials: true
 // })
 
-// getVideo: `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${this.YOUTUBEAPIKEY}&q=${this.serachFor}`,
+// getVideo: `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&type=video&key=${this.YOUTUBEAPIKEY}&q=${this.serachFor}`,
 
 export const apiService = {
   getVideoId,
@@ -26,7 +26,9 @@ async function getVideoId(key) {
     const res = await axios.get(
       `https://www.googleapis.com/youtube/v3/search?videoDuration=short&lr=en&videoCategoryId=10&part=snippet&maxResults=5&videoEmbeddable=true&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
     );
-    // const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=theweekend&key=AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg`)
+    // const res = await axios.get(
+    //   `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&type=video&q=${key}&key=${YOUTUBEAPIKEY}`
+    // );
     // console.log(res.data);
 
     const songs = res.data.items.map((song) => {
@@ -53,7 +55,7 @@ async function getVideoDetails(id) {
   }
 }
 async function getVideoLength(id) {
-  console.log(`in api req`,id);
+  console.log(`in api req`, id);
   try {
     const res = await axios.get(
       `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&key=${YOUTUBEAPIKEY}`

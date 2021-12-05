@@ -9,6 +9,12 @@
     grid-template-columns: 32px 6fr 4fr 3fr minmax(120px, 1fr);
     border-radius: 5px;
     height: 56px;
+    z-index: 10;
+    cursor: grab;
+
+    &:active{
+      cursor: grabbing;
+    }
 
     & .song-details {
       display: flex;
@@ -72,4 +78,9 @@
   & .heart-container {
     min-width: 32px;
   }
+}
+
+.allow-drop {
+  height: 40px;
+  width: 100%;
 }

@@ -18,11 +18,11 @@
         </router-link>
         <div class="recently-add-container playlists-list">
           <h3 class="list-title">Recently added</h3>
-          <!-- <ul class="playlists-container recently-added">
+          <ul class="playlists-container recently-added">
             <li v-for="playlist in playlists" :key="playlist._id">
               <playlist-preview :currPlaylist="playlist"></playlist-preview>
             </li>
-          </ul> -->
+          </ul>
         </div>
       </div>
       <div class="playlists-list">
