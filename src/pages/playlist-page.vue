@@ -8,7 +8,7 @@
       :isLiked="isPlaylistLiked"
     />
     <playlist-content
-      @toogleSongIsLike="toogleSongIsLike"
+      @likeSong="likeSong"
       :currPlaylist="currPlaylist"
     />
   </section>
@@ -28,6 +28,7 @@ export default {
     };
   },
   async created() {
+    console.log(this.$router);
     const { playlistId } = this.$route.params;
     const playlist = await playlistService.getPlaylistById(playlistId);
     this.currPlaylist = playlist;
@@ -51,27 +52,16 @@ export default {
       var {_id, type, } = this.currPlaylist;
       const miniPlaylist = {_id, type}
       this.$store.dispatch({ type: 'addLike', entity: miniPlaylist });
-      // console.log(playlist);
+    },
+    likeSong(song) {
+      this.$store.dispatch({type: 'addLike', entity: song})
+    },
+    disLikeSong(song) {
+      this.$store.dispatch({type: 'removeLike', entity: song})
     },
     playFirstSong() {
       var song = this.currPlaylist.songs[0];
       this.$store.commit({ type: 'playSong', song });
-    },
-    toogleSongIsLike(idx) {
-      var playlist = this.currPlaylist;
-      playlist.songs[idx].isLike = !playlist.songs[idx].isLike;
-      this.$store.dispatch({ type: 'updatePlaylist', playlist });
-
-      // var song = playlist.songs[idx];
-      // if (playlist.songs[idx].isLike) {
-      //   this.addSongTofavorites(song);
-      // } else this.removeSongFromfavorites(song);
-    },
-    addSongTofavorites(song) {
-      console.log('add to favorites ', song);
-    },
-    removeSongFromfavorites(song) {
-      console.log('remove from favorites ', song);
     },
     imgUpload(fileUploadEv) {
       const img = fileUploadEv.target.files[0];

@@ -17,9 +17,10 @@
 <script>
 export default {
   name: "song-player",
+  props: ['isAtPlay'],
   data() {
     return {
-      isPlay: false,
+      isPlay: this.isAtPlay,
       YTplayer: null,
     };
   },
@@ -43,14 +44,13 @@ export default {
     },
     toPlay() {
       player.contentWindow.postMessage(
-        JSON.stringify({ event: "command", func: "setVolume(volume:50)" }),
+        JSON.stringify({ event: "command", func: "playVideo" }),
         "*"
       );
     },
     openYtPlayer() {
       var songId = this.$store.getters.currSong.youtubeId;
       var tag = document.createElement("script");
-
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName("script")[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);

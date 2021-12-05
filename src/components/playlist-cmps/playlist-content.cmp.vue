@@ -1,11 +1,8 @@
 <template>
   <div class="playlist-content" v-if="playlist">
-    <div
-      class="song-container"
-      v-for="(song, index) in playlist.songs"
-      :key="song.youtubeId"
-      @mouseover="hoverSongToogle(index, true)"
-      @mouseleave="hoverSongToogle(index, false)">
+    <div class="song-container"
+      v-for="(song, index) in playlist.songs" :key="song.youtubeId"
+      @mouseover="hoverSongToogle(index, true)" @mouseleave="hoverSongToogle(index, false)">
       <p v-if="!hoverSong[index]" class="index">{{ index + 1 }}</p>
       <button v-else @click="playSong(index)" class="play-btn">
         <svg role="img" viewBox="0 0 24 24">
@@ -20,13 +17,12 @@
         <p>{{ song.title }}</p>
       </div>
       <a href="">Album name</a>
-
       <p>{{ song.addedAt }}</p>
       <div class="songOptions">
         <div class="heart-container">
           <section v-if="hoverSong[index]">
             <button
-              @click="toogleLiked(index)"
+              @click="$emit('likeSong',song)"
               :class="{
                 fas: currPlaylist.songs[index].isLike,
                 far: !currPlaylist.songs[index].isLike,
@@ -71,8 +67,8 @@ export default {
       var song = this.currPlaylist.songs[idx];
       this.$store.commit({ type: 'playSong', song });
     },
-    toogleLiked(idx) {
-      this.$emit('toogleSongIsLike', idx);
+    likeSong(idx) {
+      this.$emit('likeSong', idx);
     },
   },
 };

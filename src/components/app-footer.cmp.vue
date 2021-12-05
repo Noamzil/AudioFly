@@ -16,7 +16,15 @@ import songPlayer from './footer-cmps/play-song.cmp.vue'
 export default {
   name: 'app-footer',
   data() {
-    return {};
+    return {
+      isPlay: true,
+    };
+  },
+  
+  methods: {
+    play() {
+      this.isPlay = false
+    }
   },
   components: {
     playedNoteDetails,
