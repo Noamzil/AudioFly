@@ -24,7 +24,7 @@ async function getVideoId(key) {
   console.log(`in api req`);
   try {
     const res = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?videoDuration=short&lr=en&eventType=completed&videoCategoryId=10&part=snippet&maxResults=5&videoEmbeddable=true&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
+      `https://www.googleapis.com/youtube/v3/search?videoDuration=short&lr=en&videoCategoryId=10&part=snippet&maxResults=5&videoEmbeddable=true&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
     );
     // const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=theweekend&key=AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg`)
     // console.log(res.data);
