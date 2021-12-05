@@ -17,13 +17,20 @@
           </div>
         </router-link>
 
-        <div class="recently-added">recently added</div>
+        <div class="recently-added playlists-list">
+          <ul class="playlists-container">
+            <li v-for="playlist in playlists" :key="playlist._id">
+              <playlist-preview :currPlaylist="playlist"></playlist-preview>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import playlistPreview from '../components/playlist-preview.cmp.vue';
 export default {
   name: 'library-page',
   data() {
@@ -48,8 +55,13 @@ export default {
   computed: {
     // songs() {
     //   return this.$store.getters.userLikedSongs;
-    // },
+    // },  computed: {
+    playlists() {
+      return this.$store.getters.playlists;
+    },
   },
-  components: {},
+  components: {
+    playlistPreview,
+  },
 };
 </script>
