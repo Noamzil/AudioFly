@@ -5,7 +5,7 @@
   width: 260px;
   font-family: CircularSpotify;
   grid-row: 1/-1;
-  padding: 5px;
+  padding: 0 15px;
   position: fixed;
   height: 100vh;
 
@@ -117,4 +117,17 @@ svg {
 }
 .sidebarPlaylist h1:hover {
   color: white;
+}
+
+.side-bar-img-container {
+  display: flex;
+  align-items: baseline;
+  padding: 20px 0;
+  gap: 3px;
+  img {
+    height: 50px;
+  }
+  .logo-txt {
+    height: 40px;
+  }
 }
