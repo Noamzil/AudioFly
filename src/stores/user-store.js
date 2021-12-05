@@ -4,13 +4,16 @@ import { userService } from '../services/user.service.js'
 export const userStore = {
     state: {
         users: [],
-        currUser: userService.getSessionUser() || null
+        currUser: null
     },
-    // getters: {
-    //     users({ users }) { return users },
-    //     user({ currUser }) { return currUser }
-    // },
+    getters: {
+        users({ users }) { return users },
+        user({ currUser }) { return currUser }
+    },
     mutations: {
+        loadUser(state) {
+            state.currUser = userService.getSessionUser() || null
+        },
         setCurrUser(state, { user }) {
             state.currUser = user
         },
@@ -35,7 +38,7 @@ export const userStore = {
         async logIn({ commit }, { user }) {
             try {
                 const loggedUser = await userService.logIn(user)
-                commit({ type: 'setCurrUser', loggedUser })
+                commit({ type: 'setCurrUser', user: loggedUser })
             } catch (err) {
                 console.log('Could not logIn user in userStore', err);
             }
@@ -52,42 +55,43 @@ export const userStore = {
             try {
                 const signedUser = await userService.post(user)
                 commit({ type: 'signUp', signedUser })
-                commit({ type: 'setCurrUser', signedUser })
+                commit({ type: 'setCurrUser', user: signedUser })
             } catch (err) {
                 console.log('Could not signUp user in userStore', err);
             }
         },
         async addLike({ commit }, { entity }) {
             try {
-                const updatedUser = await storageService.addLike(entity)
-                commit({ type: 'setCurrUser', updatedUser })
+                const updatedUser = await userService.addLike(entity)
+                commit({ type: 'setCurrUser', user: updatedUser })
             } catch (err) {
                 console.log('Could not add like in userStore', err);
             }
         },
         async removeLike({ commit }, { entity }) {
             try {
-                const updatedUser = await storageService.removeLike(entity)
-                commit({ type: 'setCurrUser', updatedUser })
+                const updatedUser = await userService.removeLike(entity)
+                commit({ type: 'setCurrUser', user: updatedUser })
             } catch (err) {
                 console.log('Could not add like in userStore', err);
             }
         },
         async addFollow({ commit }, { newFollow }) {
             try {
-                const updatedUser = await storageService.addFollow(newFollow)
-                commit({ type: 'setCurrUser', updatedUser })
+                const updatedUser = await userService.addFollow(newFollow)
+                commit({ type: 'setCurrUser', user: updatedUser })
             } catch (err) {
                 console.log('Could not add follow in userStore', err);
             }
         },
         async removeFollow({ commit }, { follow }) {
             try {
-                const updatedUser = await storageService.removeFollow(newFollow)
-                commit({ type: 'setCurrUser', updatedUser })
+                const updatedUser = await userService.removeFollow(newFollow)
+                commit({ type: 'setCurrUser', user: updatedUser })
             } catch (err) {
                 console.log('Could not add follow in userStore', err);
             }
         },
+
     },
 }
