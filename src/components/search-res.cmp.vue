@@ -46,7 +46,7 @@ export default {
       var songs = this.$store.getters.songsRes;
       var times = [];
       songs.forEach((song) => {
-        apiService.getVideoLength(song.id).then((length) => {
+        apiService.getVideoLength(song.youtubeId).then((length) => {
           var totalseconds = utilService.ISOStringToSec(length);
           times.push(this.getTimeStr(totalseconds));
         });

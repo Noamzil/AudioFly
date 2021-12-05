@@ -29,9 +29,9 @@
             <button
               @click="toogleLiked(index)"
               :class="{
-                fas: liked[index],
-                far: !liked[index],
-                btnLiked: liked[index],
+                fas: currPlaylist.songs[index].isLike,
+                far: !currPlaylist.songs[index].isLike,
+                btnLiked: currPlaylist.songs[index].isLike,
               }"
               class="like-btn fa-heart"
             ></button>
@@ -72,18 +72,8 @@ export default {
       var song = this.currPlaylist.songs[idx];
       this.$store.commit({ type: 'playSong', song });
     },
-    addSongTofavorites(song) {
-      console.log('add to favorites ', song);
-    },
-    removeSongFromfavorites(song) {
-      console.log('remove from favorites ', song);
-    },
     toogleLiked(idx) {
-      this.liked[idx] = !this.liked[idx];
-      var song = this.playlist.songs[idx];
-      if (this.liked[idx]) {
-        this.addSongTofavorites(song);
-      } else this.removeSongFromfavorites(song);
+      this.$emit('toogleSongIsLike', idx);
     },
   },
 };

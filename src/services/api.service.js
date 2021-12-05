@@ -53,7 +53,7 @@ async function getVideoDetails(id) {
   }
 }
 async function getVideoLength(id) {
-  console.log(`in api req`);
+  console.log(`in api req`,id);
   try {
     const res = await axios.get(
       `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&key=${YOUTUBEAPIKEY}`

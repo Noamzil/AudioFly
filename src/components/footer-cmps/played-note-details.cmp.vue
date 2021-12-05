@@ -3,7 +3,6 @@
     <div class="artistImg"><img :src="currSong.img" /></div>
     <div class="songDescription">
       <p class="title">{{ currSong.title }}</p>
-      <small class="names">{{ songName }}</small>
     </div>
     <template v-if="pressed">
       <button class="LikeBtn" @click="disLike">
@@ -46,9 +45,6 @@ export default {
   data() {
     return {
       pressed: false,
-      ImgUrl: `https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228`,
-      artists: `Artists Song name Song `,
-      songName: `Song name Song name Song name`,
     };
   },
   methods: {

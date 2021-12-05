@@ -67,6 +67,7 @@ async function addSong(song) {
 async function updatePlaylist(playlist) {
   try {
     const updatedPlaylist = await storageService.put(PLAYLIST_KEY, playlist);
+    return updatedPlaylist
   } catch (err) {
     console.log('Could not update playlist at playlistService');
     throw err;
@@ -115,6 +116,7 @@ function _createPlaylist(num) {
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
         length: '03:00',
         addedAt: new Date(Date.now()),
+        isLike: false,
       },
       {
         youtubeId: '_Yhyp-_hX2s',
@@ -122,6 +124,7 @@ function _createPlaylist(num) {
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
         length: '03:00',
         addedAt: new Date(Date.now()),
+        isLike: false,
       },
       {
         youtubeId: 'NF-kLy44Hls',
@@ -129,6 +132,7 @@ function _createPlaylist(num) {
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
         length: '03:00',
         addedAt: new Date(Date.now()),
+        isLike: false,
       },
       {
         youtubeId: 'Q0oIoR9mLwc',
@@ -136,6 +140,7 @@ function _createPlaylist(num) {
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
         length: '03:00',
         addedAt: new Date(Date.now()),
+        isLike: false,
       },
     ],
   };

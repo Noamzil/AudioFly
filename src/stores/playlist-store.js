@@ -19,9 +19,9 @@ export const playlistStore = {
     addPlaylist(state, playlist) {
       state.playlists.push(playlist);
     },
-    updatePlaylist({ playlists }, { playlist }) {
-      const idx = playlists.findIndex((currPL) => playlist._id === currPL._id);
-      playlists.splice(idx, 1, playlist);
+    updatePlaylist({ playlists },  {updatedPlaylist} ) {
+      const idx = playlists.findIndex((currPL) => updatedPlaylist._id === currPL._id);
+      playlists.splice(idx, 1, updatedPlaylist);
     },
     removePlaylist(state, { playlistId }) {
       console.log(playlistId);
@@ -51,7 +51,7 @@ export const playlistStore = {
     },
     async updatePlaylist({ commit }, { playlist }) {
       try {
-        const updatedPlaylist = playlistService.updatePlaylist(playlist);
+        const updatedPlaylist = await playlistService.updatePlaylist(playlist);
         commit({ type: 'updatePlaylist', updatedPlaylist });
       } catch (err) {
         console.log('Could not update playlists at playlistStore', err);

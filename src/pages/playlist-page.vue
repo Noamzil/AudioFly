@@ -6,7 +6,10 @@
       @addPlaylist="addPlaylist"
       @playFirstSong="playFirstSong"
     />
-    <playlist-content :currPlaylist="currPlaylist" />
+    <playlist-content
+      @toogleSongIsLike="toogleSongIsLike"
+      :currPlaylist="currPlaylist"
+    />
   </section>
 </template>
 
@@ -50,6 +53,22 @@ export default {
     playFirstSong() {
       var song = this.currPlaylist.songs[0];
       this.$store.commit({ type: 'playSong', song });
+    },
+    toogleSongIsLike(idx) {
+      var playlist = this.currPlaylist;
+      playlist.songs[idx].isLike = !playlist.songs[idx].isLike;
+      this.$store.dispatch({ type: 'updatePlaylist', playlist });
+
+      // var song = playlist.songs[idx];
+      // if (playlist.songs[idx].isLike) {
+      //   this.addSongTofavorites(song);
+      // } else this.removeSongFromfavorites(song);
+    },
+    addSongTofavorites(song) {
+      console.log('add to favorites ', song);
+    },
+    removeSongFromfavorites(song) {
+      console.log('remove from favorites ', song);
     },
   },
   components: {
