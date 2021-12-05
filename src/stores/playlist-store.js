@@ -19,7 +19,7 @@ export const playlistStore = {
     addPlaylist(state, playlist) {
       state.playlists.push(playlist);
     },
-    updatePlaylist({ playlists },  {updatedPlaylist} ) {
+    updatePlaylist({ playlists }, { updatedPlaylist }) {
       const idx = playlists.findIndex((currPL) => updatedPlaylist._id === currPL._id);
       playlists.splice(idx, 1, updatedPlaylist);
     },

@@ -1,7 +1,7 @@
 <template>
   <section class="home-page">
       <h1 class="greeting-home-page">{{greeting}}</h1>
-    <playlists-list :playlists="playlists"></playlists-list>
+    <playlists-list :playlistsList="playlists"></playlists-list>
   </section>
 </template>
 

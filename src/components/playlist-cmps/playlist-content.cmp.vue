@@ -5,8 +5,7 @@
       v-for="(song, index) in playlist.songs"
       :key="song.youtubeId"
       @mouseover="hoverSongToogle(index, true)"
-      @mouseleave="hoverSongToogle(index, false)"
-    >
+      @mouseleave="hoverSongToogle(index, false)">
       <p v-if="!hoverSong[index]" class="index">{{ index + 1 }}</p>
       <button v-else @click="playSong(index)" class="play-btn">
         <svg role="img" viewBox="0 0 24 24">

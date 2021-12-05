@@ -1,6 +1,6 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
-    <playlist-description :currPlaylist="currPlaylist" />
+    <playlist-description @imgUpload="imgUpload"  :currPlaylist="currPlaylist" />
     <playlist-linear
       @removePlaylist="removePlaylist"
       @addPlaylist="addPlaylist"
@@ -70,6 +70,16 @@ export default {
     removeSongFromfavorites(song) {
       console.log('remove from favorites ', song);
     },
+    imgUpload(fileUploadEv) {
+      const img = fileUploadEv.target.files[0];
+      const reader = new FileReader()
+      reader.readAsDataURL(img);
+      reader.onload = ev => {
+        this.currPlaylist.playlistImg = ev.target.result;
+      }
+      const playlist = this.currPlaylist
+      this.$store.dispatch({type: 'updatePlaylist', playlist})
+  },
   },
   components: {
     playlistDescription,

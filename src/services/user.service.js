@@ -140,6 +140,7 @@ function getGuest() {
         },
         follows: [],
         playlists: [],
+        playlistHistory: [],
         imgUrl: ''
     }
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(guest))
