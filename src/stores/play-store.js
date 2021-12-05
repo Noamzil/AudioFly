@@ -4,24 +4,17 @@ export const playStore = {
     state: {
         searchedSongs: [],
         currSong: {},
-        isMute: true,
     },
     getters: {
         songsRes({ searchedSongs }) { return searchedSongs },
         currSong({ currSong }) { return currSong },
-        isMute({ isMute }) { return isMute },
-        isPlaying({ isPlaying }) { return isPlaying }
     },
     mutations: {
         search(state, { songs }) {
             state.searchedSongs = songs
         },
         playSong(state, { song }) {
-            console.log(song, 'im play store');
             state.currSong = song
-        },
-        unMute(state) {
-            state.isMute = false
         },
     },
     actions: {

@@ -26,7 +26,7 @@
           <path d="M3 2h3v12H3zm7 0h3v12h-3z"></path>
         </svg>
       </button>
-      <div class="controllers-right">
+      <div class="controllers-right" >
         <button>
           <svg role="img" viewBox="0 0 16 16">
             <path d="M11 3v4.119L3 2.5v11l8-4.619V13h2V3z"></path>

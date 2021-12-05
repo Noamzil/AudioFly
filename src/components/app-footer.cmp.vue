@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       isPlaying: true,
+      YTplayer: null
     };
   },
   created() {
@@ -27,9 +28,9 @@ export default {
   methods: {
     togglePlay() {
       console.log(this.isPlaying);
-      if (this.isPlaying) this.pauseSong()
-      else this.playSong() 
-      this.isPlaying = !this.isPlaying
+      if (this.isPlaying) this.pauseSong();
+      else this.playSong();
+      this.isPlaying = !this.isPlaying;
     },
     pauseSong() {
       console.log(player);
@@ -44,17 +45,22 @@ export default {
         "*"
       );
     },
+    changeSong() {
+      player.src = `https://www.youtube.com/embed/${this.currSongId}?playsinline=1&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8080&widgetid=1`
+    },
     openYtPlayer() {
-      var songId = this.$store.getters.currSong.youtubeId;
+      console.log("songId:", this.currSongId);
+      var songId = this.currSongId;
       var tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName("script")[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      var player;
+      var player
+      if (player) console.log('im here');
       window.onYouTubePlayerAPIReady = function () {
         player = new YT.Player("player", {
-          height: "390",
-          width: "640",
+          height: "300 ",
+          width: "400",
           videoId: songId,
           playerVars: {
             playsinline: 1,
@@ -64,10 +70,22 @@ export default {
             // onStateChange: onPlayerStateChange,
           },
         });
+        console.log(player);
       };
-     function onPlayerReady(event) {
+      function onPlayerReady(event) {
         event.target.playVideo();
       }
+    },
+  },
+  computed: {
+    currSongId() {
+      return this.$store.getters.currSong.youtubeId;
+    },
+  },
+  watch: {
+    currSongId() {
+      this.openYtPlayer();
+      this.changeSong()
     },
   },
   components: {
