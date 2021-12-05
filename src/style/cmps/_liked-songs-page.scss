@@ -1,0 +1,13 @@
+.liked-songs-description {
+    display: flex;
+    padding: 30px;
+    gap: 30px;
+    background-color: rgb(80, 56, 160);
+    img {
+        height: 232px;
+        width: 232px;
+    }
+    .songs-length {
+        color: #b3b3b3;
+    }
+}
