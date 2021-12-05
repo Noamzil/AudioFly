@@ -1,6 +1,13 @@
 <template>
   <div class="playlist-description">
-    <img :src="currPlaylist.playlistImg" />
+    <label for="file-uplaod">
+      <input type="file" id="file-uplaod" accept="image/png, image/jpeg"
+      @change="imgInput" hidden>
+    <img :src="currPlaylist.playlistImg" @click="playlistEdit=!playlistEdit"/>
+    </label>
+    <div class="playlist-edit-container">
+
+    </div>
     <div class="description-txt">
       <h2>Playlist</h2>
       <h1>{{ currPlaylist.name }}</h1>
@@ -23,7 +30,14 @@ export default {
   name: 'playlist-description',
   props: ['currPlaylist'],
   data() {
-    return {};
+    return {
+      playlistEdit: false,
+    }
   },
+  methods: {
+    imgInput(ev) {
+      this.$emit('imgUpload', ev)
+    }
+  }
 };
 </script>

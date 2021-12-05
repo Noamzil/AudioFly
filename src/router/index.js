@@ -16,6 +16,11 @@ const routes = [
     component: () => import('../pages/search-page.vue'),
   },
   {
+    path: '/liked-songs',
+    name: 'liked-songs',
+    component: () => import('../pages/liked-songs-page.vue'),
+  },
+  {
     path: '/playlist/:playlistId',
     name: 'playlist',
     component: () => import('../pages/playlist-page.vue'),

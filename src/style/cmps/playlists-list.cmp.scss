@@ -24,11 +24,13 @@
         height: 300px;
         cursor: pointer;
         border-radius: 4px;
+        transition: background .3s;
     }
     .playlist-img {
         height: 200px;
         width: 200px;
         margin-bottom: 10px;
+        box-shadow: 1px 1px 8px 3px black;
     }
     .playlist-name {
         font-size: 16px;
@@ -63,6 +65,5 @@
 }
 
 .playlist-prev-container:hover {
-    background-color: yellow;
     background-color: rgba(77, 77, 77, 0.63);
 }

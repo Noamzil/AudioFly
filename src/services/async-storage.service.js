@@ -28,15 +28,12 @@ function post(entityType, newEntity) {
 function postMany(entityType, newEntities) {
     return query(entityType)
         .then(entities => {
-            newEntities = newEntities.map(entity => ({...entity, _id: _makeId()}))
+            newEntities = newEntities.map(entity => ({ ...entity, _id: _makeId() }))
             entities.push(...newEntities)
             _save(entityType, entities)
             return entities
         })
 }
-
-
-
 function put(entityType, updatedEntity) {
     return query(entityType)
         .then(entities => {
@@ -46,7 +43,6 @@ function put(entityType, updatedEntity) {
             return updatedEntity
         })
 }
-
 function remove(entityType, entityId) {
     return query(entityType)
         .then(entities => {
@@ -56,11 +52,9 @@ function remove(entityType, entityId) {
         })
 }
 
-
 function _save(entityType, entities) {
     localStorage.setItem(entityType, JSON.stringify(entities))
 }
-
 function _makeId(length = 5) {
     var text = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -71,4 +65,3 @@ function _makeId(length = 5) {
 }
 
 
-  

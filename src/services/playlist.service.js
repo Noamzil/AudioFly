@@ -82,16 +82,22 @@ async function removePlaylist(id) {
   }
 }
 
+
 // test-data
 function _createPlaylists() {
   var playlists = localStorage.getItem(PLAYLIST_KEY);
   if (playlists) return;
   playlists = [
-    _createPlaylist(1),
-    _createPlaylist(2),
+    _createStation(4),
     _createPlaylist(3),
+    _createPlaylist(1),
     _createPlaylist(4),
+    _createPlaylist(2),
+    _createStation(3),
     _createPlaylist(5),
+    _createStation(2),
+    _createStation(5),
+    _createStation(1),
   ];
   localStorage.setItem(PLAYLIST_KEY, JSON.stringify(playlists));
 }
@@ -104,9 +110,62 @@ function _createPlaylist(num) {
       userName: 'Udi Ofly',
       _id: 'u101',
     },
-    likes: 50,
+    createdAt: num,
+    likes: num,
     tags: utilService.makeTags(2),
     name: 'My Playlist' + num,
+    discription: 'Lorem ipsum, dolor sit amet consectetur!',
+    time: 80000000,
+    songs: [
+      {
+        youtubeId: 'XXYlFuWEuKI',
+        title: 'The Weekend - Save Your Tears',
+        img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+        isLike: false,
+      },
+      {
+        youtubeId: '_Yhyp-_hX2s',
+        title: 'Eminem - Lose Yourself',
+        img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+        isLike: false,
+      },
+      {
+        youtubeId: 'NF-kLy44Hls',
+        title: 'Duft Punk - Lose Yourself To Dance',
+        img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+        isLike: false,
+      },
+      {
+        youtubeId: 'Q0oIoR9mLwc',
+        title: 'Red Hot Chili Peppers - Dark Necessities',
+        img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
+        length: '03:00',
+        addedAt: new Date(Date.now()),
+        isLike: false,
+      },
+    ],
+  };
+  return playlist;
+}
+function _createStation(num) {
+  const playlist = {
+    _id: utilService.makeId(),
+    type: 'station',
+    playlistImg: `https://www.liveabout.com/thmb/pwO4o_iDrZRTmmhs7eOfD25Qoqw=/1500x1125/smart/filters:no_upscale()/pop-music-57bce3863df78c87634ea806.jpg`,
+    createdBy: {
+      userName: 'Udi Ofly',
+      _id: 'u101',
+    },
+    createdAt: num,
+    likes: num,
+    tags: utilService.makeTags(2),
+    name: 'My Station' + num,
     discription: 'Lorem ipsum, dolor sit amet consectetur!',
     time: 80000000,
     songs: [

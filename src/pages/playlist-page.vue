@@ -1,10 +1,11 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
-    <playlist-description :currPlaylist="currPlaylist" />
+    <playlist-description @imgUpload="imgUpload"  :currPlaylist="currPlaylist" />
     <playlist-linear
-      @removePlaylist="removePlaylist"
-      @addPlaylist="addPlaylist"
+      @disLikePlaylist="disLikePlaylist"
+      @likePlaylist="likePlaylist"
       @playFirstSong="playFirstSong"
+      :isLiked="isPlaylistLiked"
     />
     <playlist-content
       @toogleSongIsLike="toogleSongIsLike"
@@ -42,13 +43,15 @@ export default {
     },
   },
   methods: {
-    removePlaylist() {
-      var playlistId = this.currPlaylist._id;
-      this.$store.dispatch({ type: 'removePlaylist', playlistId });
-    },
-    addPlaylist() {
+    disLikePlaylist() {
       var playlist = this.currPlaylist;
-      this.$store.dispatch({ type: 'addPlaylist', playlist });
+      this.$store.dispatch({ type: 'removeLike', entity: playlist });
+    },
+    likePlaylist() {
+      var {_id, type, } = this.currPlaylist;
+      const miniPlaylist = {_id, type}
+      this.$store.dispatch({ type: 'addLike', entity: miniPlaylist });
+      // console.log(playlist);
     },
     playFirstSong() {
       var song = this.currPlaylist.songs[0];
@@ -70,6 +73,23 @@ export default {
     removeSongFromfavorites(song) {
       console.log('remove from favorites ', song);
     },
+    imgUpload(fileUploadEv) {
+      const img = fileUploadEv.target.files[0];
+      const reader = new FileReader()
+      reader.readAsDataURL(img);
+      reader.onload = ev => {
+        this.currPlaylist.playlistImg = ev.target.result;
+        const playlist = this.currPlaylist
+        this.$store.dispatch({type: 'updatePlaylist', playlist})
+      }
+  },
+  },
+  computed: {
+    isPlaylistLiked() {
+      const userLiked = this.$store.getters.user.liked.playlist
+      const isLiked = userLiked.find(playlist => playlist._id === this.$route.params.playlistId)
+      return isLiked ? true : false;
+    }
   },
   components: {
     playlistDescription,

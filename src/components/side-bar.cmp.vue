@@ -48,6 +48,7 @@
         </div>
         <h1 class="action-txt">Add Playlist</h1>
       </div>
+        <router-link to="/liked-songs">
       <div class="side-bar-icons-container">
         <div class="liked-songs-icon square-icon">
           <svg role="img" aria-hidden="true" viewBox="0 0 16 16">
@@ -59,6 +60,7 @@
         </div>
         <h1 class="action-txt">Liked Songs</h1>
       </div>
+          </router-link>
     </div>
 
     <hr />

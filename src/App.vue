@@ -18,6 +18,7 @@ import appFooter from './components/app-footer.cmp.vue';
 export default {
   created() {
     this.$store.dispatch({type: 'loadPlaylists'})
+    this.$store.commit({type: 'loadUser'})
   },
   computed: {
     setCurrSong() {

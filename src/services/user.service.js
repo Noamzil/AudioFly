@@ -10,7 +10,7 @@ const USER_URL = (process.env.NODE_ENV !== 'development')
     : '//localhost:3030/api/user/'
 
 const USERS_KEY = 'audioFlyUsersDB'
-getGuest()
+if (!JSON.parse(sessionStorage.getItem(STORAGE_KEY))) getGuest()
 export const userService = {
     logIn,
     signUp,
@@ -36,8 +36,9 @@ async function query() {
 }
 async function update(user) {
     try {
-        var currUser = await storageService.put(user)
-        sessionStorage.setItem(STORAGE_KEY, currUser)
+        var currUser = await storageService.put(USERS_KEY, user)
+        console.log('hii');
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(currUser))
         return currUser
     } catch (err) {
         console.log('Could not save user in userService');
@@ -83,7 +84,7 @@ async function addLike(entity) {
         const updetaedUser = await update(loggedUser)
         return updetaedUser
     } catch (err) {
-        console.log('Could not like song in userService');
+        console.log('Could not like entity in userService');
         throw err
     }
 }
@@ -140,6 +141,7 @@ function getGuest() {
         },
         follows: [],
         playlists: [],
+        playlistHistory: [],
         imgUrl: ''
     }
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(guest))

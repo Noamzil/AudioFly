@@ -1,7 +1,7 @@
 <template>
   <section class="home-page">
       <h1 class="greeting-home-page">{{greeting}}</h1>
-    <playlists-list :playlists="playlists"></playlists-list>
+    <playlists-list :playlistsList="playlists" :userLiked="userLiked"></playlists-list>
   </section>
 </template>
 
@@ -14,6 +14,9 @@ export default {
   computed: {
     playlists() {
       return this.$store.getters.playlists;
+    },
+    userLiked() {
+      return this.$store.getters.user.liked;
     },
     greeting() {
       var currHr = new Date().getHours()

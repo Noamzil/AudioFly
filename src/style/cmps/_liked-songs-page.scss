@@ -1,0 +1,32 @@
+.liked-songs-description {
+    display: flex;
+    padding: 30px;
+    gap: 30px;
+    background-color: rgb(80, 56, 160);
+    img {
+        height: 232px;
+        width: 232px;
+    }
+    .songs-length {
+        color: #b3b3b3;
+    }
+}
+
+.liked-songs-linear {
+    padding: 30px;
+    button {
+        height: rem(56px);
+        width: rem(56px);
+        margin-inline-end: 32px;
+        background-color: $clrGreen;
+        color: $clrTxt;
+        border: 0;
+        border-radius: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    button:hover {
+        transform: scale(1.07);
+    }
+}
