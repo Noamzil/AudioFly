@@ -8,6 +8,7 @@
     <app-side-bar />
     <app-footer v-if="setCurrSong.youtubeId" />
     <msg-modal></msg-modal>
+    <div></div>
   </section>
 </template>
 
