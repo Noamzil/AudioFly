@@ -61,7 +61,7 @@ export default {
       await this.player.setVolume(50);
     },
     startAt(ev) {
-      this.player.loadVideoById(this.videoId, ev);
+      this.player.loadVideoById(this.$store.getters.currSong.youtubeId, ev);
     },
   },
   computed: {

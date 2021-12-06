@@ -92,7 +92,8 @@ export default {
     this.songLengthStr = this.secToStr(this.songLength);
     this.$emit('togglePlay');
     this.timeInterval = setInterval(() => {
-      this.currTime += 1;
+      this.currTime = +this.currTime + 1;
+      console.log(this.currTime);
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;
     }, 1000);
@@ -103,6 +104,7 @@ export default {
       this.songLength = this.ISOStringToSec(lengthStr);
     },
     changeTime() {
+      console.log(this.currTime);
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;
       var sec = this.currTime;
@@ -119,7 +121,7 @@ export default {
         clearInterval(this.timeInterval);
       } else {
         this.timeInterval = setInterval(() => {
-          this.currTime += 1;
+          this.currTime = +this.currTime + 1;
           this.currTimeStr = this.secToStr(this.currTime);
           this.progressPercent = (this.currTime / this.songLength) * 100;
         }, 1000);
@@ -127,6 +129,7 @@ export default {
       this.$emit('togglePlay');
     },
     nextSong() {
+      clearInterval(this.timeInterval);
       var song;
       const currPlaylist = this.$store.getters.currPlaylist;
       var idx = currPlaylist.songs.findIndex(
@@ -135,8 +138,15 @@ export default {
       if (idx === currPlaylist.songs.length - 1) song = currPlaylist.songs[0];
       else song = currPlaylist.songs[idx + 1];
       this.$store.commit({ type: 'playSong', song });
+
+      this.timeInterval = setInterval(() => {
+        this.currTime = +this.currTime + 1;
+        this.currTimeStr = this.secToStr(this.currTime);
+        this.progressPercent = (this.currTime / this.songLength) * 100;
+      }, 1000);
     },
     prevSong() {
+      clearInterval(this.timeInterval);
       var song;
       const currPlaylist = this.$store.getters.currPlaylist;
       var idx = currPlaylist.songs.findIndex(
@@ -145,6 +155,12 @@ export default {
       if (idx === 0) song = currPlaylist.songs[currPlaylist.songs.length - 1];
       else song = currPlaylist.songs[idx - 1];
       this.$store.commit({ type: 'playSong', song });
+
+      this.timeInterval = setInterval(() => {
+        this.currTime = +this.currTime + 1;
+        this.currTimeStr = this.secToStr(this.currTime);
+        this.progressPercent = (this.currTime / this.songLength) * 100;
+      }, 1000);
     },
   },
   computed: {
