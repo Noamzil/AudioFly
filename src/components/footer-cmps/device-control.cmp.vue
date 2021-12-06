@@ -33,6 +33,7 @@
         class="slider-container"
       >
         <input
+          @input="changeVolume"
           :style="currVolumeStyle"
           v-model="currVolume"
           type="range"
@@ -73,10 +74,14 @@ export default {
   data() {
     return {
       isHover: false,
-      currVolume: 50,
+      currVolume: 100,
     };
   },
-  methods: {},
+  methods: {
+    changeVolume() {
+      this.$emit('changeVolume', this.currVolume);
+    },
+  },
   computed: {
     currVolumeStyle() {
       return {
@@ -89,6 +94,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>
