@@ -4,10 +4,14 @@ export const playStore = {
     state: {
         searchedSongs: [],
         currSong: {},
+        currTime: 0
     },
     getters: {
         songsRes({ searchedSongs }) { return searchedSongs },
         currSong({ currSong }) { return currSong },
+        currPlaylist({ currPlaylist }) { return currPlaylist },
+        currTime({ currTime }) { return currTime }
+
     },
     mutations: {
         search(state, { songs }) {
@@ -16,6 +20,17 @@ export const playStore = {
         playSong(state, { song }) {
             state.currSong = song
         },
+        currPlaylist(state, { playlist }) {
+            state.currPlaylist = playlist
+        },
+        currTime(state) {
+            state.currTime += 1
+            console.log(state.currTime)
+        },
+        changeCurrTime(state) {
+            console.log('im here');
+            state.currTime = 0 
+        }
     },
     actions: {
         async search({ commit }, { key }) {

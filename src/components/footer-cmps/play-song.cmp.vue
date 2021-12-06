@@ -1,7 +1,5 @@
 <template>
   <section class="song-player">
-    <button @click="toPlay">play</button>
-    <button @click="toStop">pause</button>
     <div id="player"></div>
   </section>
 </template>

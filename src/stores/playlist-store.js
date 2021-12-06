@@ -12,7 +12,6 @@ export const playlistStore = {
     playlists({ playlists }) {
       return playlists;
     },
-    currPlaylist({currPlaylist}) {return currPlaylist}
   },
   mutations: {
     loadPlaylists(state, { playlists }) {
@@ -32,10 +31,7 @@ export const playlistStore = {
       );
       state.playlists.splice(idx, 1);
     },
-    currPlaylist(state, {playlist}) {
-      state.currPlaylist = playlist
 
-    }
   },
   actions: {
     async loadPlaylists({ commit }) {

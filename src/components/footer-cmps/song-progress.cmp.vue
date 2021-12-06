@@ -52,8 +52,8 @@
       >
         <input
           :style="progressPercentStr"
-          v-model="currTime"
           @input="changeTime"
+          v-model="currTime"
           type="range"
           min="0"
           :max="songLength"
@@ -61,7 +61,7 @@
         />
       </div>
       <div class="progress-time-end">
-        <p>{{ songLengthStr }}</p>
+        <p>{{ songTimeStr }}</p>
       </div>
     </div>
   </div>
@@ -76,26 +76,28 @@ export default {
   data() {
     return {
       isSongPlaying: true,
-      // currSong: null,
       isHover: false,
-      currTime: 0,
       currTimeStr: "",
       songLength: null,
-      songLengthStr: "",
       progressPercent: 0,
     };
   },
-  async created() {
-    // this.currSong = this.$store.getters.currSong;
-    var lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
-    this.songLength = this.ISOStringToSec(lengthStr);
+  created() {
+    this.songLengthfunc();
     this.currTimeStr = this.getTimeStr(this.currTime);
-    this.songLengthStr = this.getTimeStr(this.songLength);
   },
   methods: {
+    async songLengthfunc() {
+      var lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
+      this.songLength = this.ISOStringToSec(lengthStr);
+    },
     changeTime() {
       this.currTimeStr = this.getTimeStr(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;
+      // console.log('currTime:',this.currTime);
+      // console.log('currTimeStr:',this.currTimeStr);
+      // console.log('progressPrecent',this.progressPercent)
+
     },
     getTimeStr(time) {
       return utilService.getTimeStr(time);
@@ -105,23 +107,28 @@ export default {
     },
     togglePlay() {
       this.isSongPlaying = !this.isSongPlaying;
+      if (this.isSongPlaying) console.log(this.isSongPlaying);
       this.$emit("togglePlay");
     },
     nextSong() {
-      var song
+      var song;
       const currPlaylist = this.$store.getters.currPlaylist;
-      var idx = currPlaylist.songs.findIndex(song => song.youtubeId === this.currSong.youtubeId)
-      if (idx === currPlaylist.songs.length - 1) song = currPlaylist.songs[0] 
-      else song = currPlaylist.songs[idx+1] 
-      this.$store.commit({ type: 'playSong', song });
+      var idx = currPlaylist.songs.findIndex(
+        (song) => song.youtubeId === this.currSong.youtubeId
+      );
+      if (idx === currPlaylist.songs.length - 1) song = currPlaylist.songs[0];
+      else song = currPlaylist.songs[idx + 1];
+      this.$store.commit({ type: "playSong", song });
     },
     prevSong() {
-      var song
+      var song;
       const currPlaylist = this.$store.getters.currPlaylist;
-      var idx = currPlaylist.songs.findIndex(song => song.youtubeId === this.currSong.youtubeId)
-      if (idx === 0) song = currPlaylist.songs[currPlaylist.songs.length - 1] 
-      else song = currPlaylist.songs[idx-1] 
-      this.$store.commit({ type: 'playSong', song });
+      var idx = currPlaylist.songs.findIndex(
+        (song) => song.youtubeId === this.currSong.youtubeId
+      );
+      if (idx === 0) song = currPlaylist.songs[currPlaylist.songs.length - 1];
+      else song = currPlaylist.songs[idx - 1];
+      this.$store.commit({ type: "playSong", song });
     },
   },
   computed: {
@@ -135,6 +142,23 @@ export default {
     currSong() {
       return this.$store.getters.currSong;
     },
+    songTimeStr() {
+      var time = this.songLength;
+      return utilService.getTimeStr(time);
+    },
+    currTime() {
+      return this.$store.getters.currTime;
+    },
   },
+  watch: {
+    currSong() {
+      this.songLengthfunc()
+      this.$store.commit({type: 'changeCurrTime'})
+    },
+    currTime() {
+      this.getTimeStr(this.currTime)
+      this.changeTime()
+    }
+  }
 };
 </script>

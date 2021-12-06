@@ -1,7 +1,7 @@
 <template>
   <section class="footer">
     <played-note-details />
-    <song-progress @togglePlay="togglePlay"/>
+    <song-progress @togglePlay="togglePlay" />
     <device-control />
     <!-- <song-player :isPlaying="isPlaying" /> -->
     <div id="player"></div>
@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       isPlaying: true,
-      YTplayer: null
+      YTplayer: null,
+      timeInterval: null,
     };
   },
   created() {
@@ -36,15 +37,19 @@ export default {
         JSON.stringify({ event: "command", func: "pauseVideo" }),
         "*"
       );
+      clearInterval(this.timeInterval);
     },
     playSong() {
       player.contentWindow.postMessage(
         JSON.stringify({ event: "command", func: "playVideo" }),
         "*"
       );
+      this.timeInterval = setInterval(() => {
+        this.$store.commit({ type: "currTime" });
+      }, 1000);
     },
     changeSong() {
-      player.src = `https://www.youtube.com/embed/${this.currSongId}?playsinline=1&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8080&widgetid=1`
+      player.src = `https://www.youtube.com/embed/${this.currSongId}?start=20&playsinline=1&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8080&widgetid=1`;
     },
     openYtPlayer() {
       var songId = this.currSongId;
@@ -52,12 +57,12 @@ export default {
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName("script")[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      var player
-      if (player) console.log('im here');
+      var player;
       window.onYouTubePlayerAPIReady = function () {
         player = new YT.Player("player", {
           height: "0 ",
           width: "0",
+          startSeconds:10,
           videoId: songId,
           playerVars: {
             playsinline: 1,
@@ -67,6 +72,7 @@ export default {
             // onStateChange: onPlayerStateChange,
           },
         });
+        if (player) console.log(player);
       };
       function onPlayerReady(event) {
         event.target.playVideo();
@@ -81,7 +87,7 @@ export default {
   watch: {
     currSongId() {
       this.openYtPlayer();
-      this.changeSong()
+      this.changeSong();
     },
   },
   components: {
