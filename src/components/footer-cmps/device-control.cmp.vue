@@ -76,6 +76,7 @@ export default {
       currVolume: 50,
     };
   },
+  methods: {},
   computed: {
     currVolumeStyle() {
       return {
@@ -87,3 +88,7 @@ export default {
   },
 };
 </script>
+
+<style>
+
+</style>

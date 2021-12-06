@@ -19,8 +19,8 @@ import bodyModal from './components/body-modal.cmp.vue'
 import msgModal from './components/msg-modal.cmp.vue'
 export default {
   created() {
-    this.$store.dispatch({type: 'loadPlaylists'})
-    this.$store.commit({type: 'loadUser'})
+    this.$store.dispatch({ type: 'loadPlaylists' });
+    this.$store.commit({ type: 'loadUser' });
   },
   methods: {
     logOut() {

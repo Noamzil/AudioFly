@@ -1,0 +1,27 @@
+.list-ops {
+    border-radius: 4px;
+    z-index: 9999;
+    position: absolute;
+    background-color: #282828;
+    margin-top: 170px;
+    margin-right: 20px;
+  
+    & ul {
+      padding: 0;
+    }
+    & li {
+      padding: 15px;
+      border-bottom: 2px solid #3b3b3b;
+      color: #b3b3b3;
+      &:hover {
+        color: white;
+      }
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  
+    &:hover {
+      cursor: pointer;
+    }
+  }

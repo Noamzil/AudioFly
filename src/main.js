@@ -8,7 +8,7 @@ import Element from 'element-ui';
 import VueYoutube from 'vue-youtube';
 
 Vue.use(Element);
-Vue.use(VueYoutube)
+Vue.use(VueYoutube);
 
 Vue.config.productionTip = false;
 

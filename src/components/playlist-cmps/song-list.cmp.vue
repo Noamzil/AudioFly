@@ -9,6 +9,7 @@
         <song-preview
           :song="song"
           :songNum="index + 1"
+          @removeSong="removeSong"
           @toggleLikeSong="toggleLikeSong"
           @playSong="playSong"
         ></song-preview>
@@ -57,14 +58,22 @@ export default {
       );
       this.$store.dispatch({ type: 'updatePlaylist', playlist });
     },
+    removeSong(ev) {
+      var playlist = this.playlist;
+      var idx = playlist.songs.findIndex((song) => {
+        return song.youtubeId === ev.youtubeId;
+      });
+      playlist.songs.splice(idx, 1);
+      this.$store.dispatch({ type: 'updatePlaylist', playlist });
+    },
   },
   watch: {
     currPlaylist: {
       handler() {
-        this.playlist = JSON.parse(JSON.stringify(this.currPlaylist))
+        this.playlist = JSON.parse(JSON.stringify(this.currPlaylist));
       },
       immediate: true,
-    }
+    },
   },
   components: {
     songPreview,

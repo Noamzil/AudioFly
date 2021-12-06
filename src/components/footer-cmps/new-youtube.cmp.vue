@@ -1,10 +1,5 @@
 <template>
-  <div class="youtube-player">
-    <button @click="playVideo">play</button>
-    <button @click="pauseVideo">pause</button>
-    <button @click="getVolume">volume</button>
-    <youtube :video-id="videoId" ref="youtube" @playing="playing"></youtube>
-  </div>
+
 </template>
 
 <script>
@@ -29,6 +24,10 @@ export default {
     },
     async getVolume() {
       var player = await this.player.setVolume(50);
+    },
+    startAt() {
+      console.log(this.player);
+      this.player.cueVideoById(this.videoId,10);
     },
   },
   computed: {

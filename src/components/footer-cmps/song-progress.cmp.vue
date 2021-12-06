@@ -61,33 +61,35 @@
         />
       </div>
       <div class="progress-time-end">
-        <p>{{ songTimeStr }}</p>
+        <p>{{ songLengthStr }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { apiService } from "../../services/api.service.js";
-import { utilService } from "../../services/util.service.js";
+import { apiService } from '../../services/api.service.js';
+import { utilService } from '../../services/util.service.js';
 
 export default {
-  name: "song-progress",
+  name: 'song-progress',
+  props: [`currSong`],
   data() {
     return {
-      isSongPlaying: true,
+      currTime: 0,
       isHover: false,
-      currTimeStr: "",
+      currTimeStr: '',
+      songLengthStr: '',
       songLength: null,
       progressPercent: 0,
     };
   },
   async created() {
-    // this.currSong = this.$store.getters.currSong;
     var lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
     this.songLength = this.ISOStringToSec(lengthStr);
-    this.currTimeStr = this.writeTime(this.currTime);
-    this.songLengthStr = this.writeTime(this.songLength);
+    this.currTimeStr = this.secToStr(this.currTime);
+    this.songLengthStr = this.secToStr(this.songLength);
+    this.$emit('togglePlay');
   },
   methods: {
     async songLengthfunc() {
@@ -95,23 +97,19 @@ export default {
       this.songLength = this.ISOStringToSec(lengthStr);
     },
     changeTime() {
-      this.currTimeStr = this.writeTime(this.currTime);
+      this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;
-      // console.log('currTime:',this.currTime);
-      // console.log('currTimeStr:',this.currTimeStr);
-      // console.log('progressPrecent',this.progressPercent)
-
+      var sec = this.currTime;
+      this.$emit('startAt', sec);
     },
-    writeTime(time) {
-      return utilService.writeTime(time);
+    secToStr(time) {
+      return utilService.secToStr(time);
     },
     ISOStringToSec(str) {
       return utilService.ISOStringToSec(str);
     },
     togglePlay() {
-      this.isSongPlaying = !this.isSongPlaying;
-      if (this.isSongPlaying) console.log(this.isSongPlaying);
-      this.$emit("togglePlay");
+      this.$emit('togglePlay');
     },
     nextSong() {
       var song;
@@ -121,7 +119,7 @@ export default {
       );
       if (idx === currPlaylist.songs.length - 1) song = currPlaylist.songs[0];
       else song = currPlaylist.songs[idx + 1];
-      this.$store.commit({ type: "playSong", song });
+      this.$store.commit({ type: 'playSong', song });
     },
     prevSong() {
       var song;
@@ -131,7 +129,7 @@ export default {
       );
       if (idx === 0) song = currPlaylist.songs[currPlaylist.songs.length - 1];
       else song = currPlaylist.songs[idx - 1];
-      this.$store.commit({ type: "playSong", song });
+      this.$store.commit({ type: 'playSong', song });
     },
   },
   computed: {
@@ -142,26 +140,22 @@ export default {
           : `linear-gradient(90deg, #1db954 ${this.progressPercent}% ,#535353 ${this.progressPercent}%)`,
       };
     },
-    currSong() {
-      return this.$store.getters.currSong;
-    },
     songTimeStr() {
       var time = this.songLength;
-      return utilService.getTimeStr(time);
+      return utilService.secToStr(time);
     },
-    currTime() {
-      return this.$store.getters.currTime;
+    isSongPlaying() {
+      return this.$store.getters.isSongOn;
     },
   },
   watch: {
-    currSong() {
-      this.songLengthfunc()
-      this.$store.commit({type: 'changeCurrTime'})
+    async currSong() {
+      this.lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
+      this.songLength = this.ISOStringToSec(this.lengthStr);
+      this.currTimeStr = this.secToStr(this.currTime);
+      this.songLengthStr = this.secToStr(this.songLength);
+      this.$emit('playNextSong');
     },
-    currTime() {
-      this.getTimeStr(this.currTime)
-      this.changeTime()
-    }
-  }
+  },
 };
 </script>
