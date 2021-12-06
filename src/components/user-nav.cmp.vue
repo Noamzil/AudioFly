@@ -9,7 +9,6 @@
         <path d="M3 6l5 5.794L13 6z"></path>
       </svg>
       <h3>{{ user.username }}</h3>
-      <!-- <avatar :size="35" :username="user.username"></avatar> -->
       <img v-if="user.imgUrl" class="user-avatar" :src="user.imgUrl" />
       <div v-else class="user-avatar">
         <span>{{ firstLetter }}</span>
