@@ -20,12 +20,12 @@
       background: transparent;
       border: 0;
 
-      & .empty{
+      & .empty {
         color: #b3b3b3;
         stroke: #b3b3b3;
         stroke-width: 1%;
 
-        &:hover{
+        &:hover {
           color: white;
         }
       }
@@ -88,5 +88,24 @@
   .time {
     justify-self: end;
     margin-right: 15px;
+  }
+}
+
+.playlist-linear {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & .StationFilter {
+    display: flex;
+    align-items: center;
+
+    & button {
+      border: 0;
+      background-color: transparent;
+      color: hsla(0, 0%, 100%, 0.3803921568627451);
+      width: 1.875rem;
+      height: 1.875rem;
+    }
   }
 }
