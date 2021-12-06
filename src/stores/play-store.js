@@ -9,7 +9,7 @@ export const playStore = {
     getters: {
         songsRes({ searchedSongs }) { return searchedSongs },
         currSong({ currSong }) { return currSong },
-        currPlaylist({ currPlaylist }) { return currPlaylist },
+        // currPlaylist({ currPlaylist }) { return currPlaylist },
         currTime({ currTime }) { return currTime }
 
     },
@@ -29,7 +29,7 @@ export const playStore = {
         },
         changeCurrTime(state) {
             console.log('im here');
-            state.currTime = 0 
+            state.currTime = 0
         }
     },
     actions: {

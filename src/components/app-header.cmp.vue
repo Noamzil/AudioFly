@@ -27,9 +27,8 @@
     <div class="login-container">
       <template v-if="!$store.getters.realUser">
       <button @click="openModal('login-modal')" class="login-btn">Login</button>
-      <button class="signin-btn">Sign up</button>
       </template>
-    <user-nav></user-nav>
+    <user-nav @logOut="$emit('logOut')"></user-nav>
     </div>
   </header>
 </template>

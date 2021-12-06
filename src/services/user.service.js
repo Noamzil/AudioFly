@@ -10,7 +10,8 @@ const USER_URL = (process.env.NODE_ENV !== 'development')
     : '//localhost:3030/api/user/'
 
 const USERS_KEY = 'audioFlyUsersDB'
-if (!JSON.parse(sessionStorage.getItem(STORAGE_KEY))) getGuest()
+// if (!JSON.parse(sessionStorage.getItem(STORAGE_KEY))) getGuest()
+// if (!JSON.parse(localStorage.getItem(USERS_KEY))) localStorage.setItem(USERS_KEY, JSON.stringify([]))
 export const userService = {
     logIn,
     signUp,
@@ -21,7 +22,6 @@ export const userService = {
     addLike,
     removeLike,
     addFollow,
-    getGuest,
     removeFollow
 }
 
@@ -49,6 +49,7 @@ async function logIn(user) {
     try {
         const users = await storageService.query(USERS_KEY)
         const loggedUser = users.find(currUser => user.username === currUser.username)
+        if (!loggedUser) return
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify(loggedUser))
         return loggedUser
     } catch (err) {
@@ -129,13 +130,15 @@ async function removeFollow(follow) {
 }
 
 function getSessionUser() {
-    return JSON.parse(sessionStorage.getItem(STORAGE_KEY))
+    const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY)) || _getGuest()
+    return user
 }
 
-function getGuest() {
+function _getGuest() {
     const guest = {
         _id: 'u101',
         fullName: 'Udi Ofly',
+        username: 'Guest',
         userEmail: 'Udi@gamil.com',
         password: '0123',
         liked: {
@@ -149,4 +152,5 @@ function getGuest() {
         imgUrl: ''
     }
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(guest))
+    return guest
 }

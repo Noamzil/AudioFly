@@ -18,9 +18,22 @@
         box-shadow: 0 0 8px 2px black;
         font-size: 1.25rem;
 
-        * {
+        label {
             margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+        }
 
+        .img-select-container {
+            flex-direction: row;
+            justify-content: start;
+            align-items: flex-start;
+            width: 100%;
+            img {
+                width: 75px;
+                height: 75px;
+                border-radius: 50%;
+            }
         }
 
         form {

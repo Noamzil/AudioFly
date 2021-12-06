@@ -1,11 +1,11 @@
 import { storageService } from '../services/async-storage.service.js'
 import { userService } from '../services/user.service.js'
-
+import { eventBus } from '../services/event-bus.cmp.js'
 export const userStore = {
     state: {
         users: [],
         currUser: null,
-        realUser: false,
+        realUser: true,
     },
     getters: {
         users({ users }) { return users },
@@ -16,18 +16,17 @@ export const userStore = {
     mutations: {
         loadUser(state) {
             state.currUser = userService.getSessionUser() || null
+            if (state.currUser.username === 'Guest') state.realUser = false;
         },
         setCurrUser(state, { user }) {
-            state.currUser = user
+            state.currUser = user;
+            state.realUser = true;
         },
         logOut(state) {
-            state.currUser = null
+            state.realUser = false;
         },
         signUp(state, { user }) {
             state.users.push(user)
-        },
-        likeSong(state, { song }) {
-            state.currUser.liked.push(song)
         },
         addFriend(state, { user }) {
             state.currUser.friends.push(user)
@@ -41,7 +40,12 @@ export const userStore = {
         async logIn({ commit }, { user }) {
             try {
                 const loggedUser = await userService.logIn(user)
+                if (!loggedUser) {
+                    eventBus.$emit('showMsg', 'User was not found')
+                    return
+                }
                 commit({ type: 'setCurrUser', user: loggedUser })
+                eventBus.$emit('showMsg', `Wellcome ${user.username}`)
             } catch (err) {
                 console.log('Could not logIn user in userStore', err);
             }
@@ -49,6 +53,7 @@ export const userStore = {
         async logOut({ commit }) {
             try {
                 await userService.logOut()
+                commit({ type: 'loadUser' })
                 commit({ type: 'logOut' })
             } catch {
                 console.log('Could not logOut user in userStore', err);
@@ -56,9 +61,10 @@ export const userStore = {
         },
         async signUp({ commit }, { user }) {
             try {
-                const signedUser = await userService.post(user)
+                const signedUser = await userService.signUp(user)
                 commit({ type: 'signUp', signedUser })
                 commit({ type: 'setCurrUser', user: signedUser })
+                eventBus.$emit('showMsg', `Wellcome ${user.username}`)
             } catch (err) {
                 console.log('Could not signUp user in userStore', err);
             }
@@ -67,6 +73,7 @@ export const userStore = {
             try {
                 const updatedUser = await userService.addLike(entity)
                 commit({ type: 'setCurrUser', user: updatedUser })
+                eventBus.$emit('showMsg', `A new ${entity.type} has been added to your favorites`)
             } catch (err) {
                 console.log('Could not add like in userStore', err);
             }

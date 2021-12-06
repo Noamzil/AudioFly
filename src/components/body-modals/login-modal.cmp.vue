@@ -1,15 +1,16 @@
 <template>
-  <form class="login-modal" >
+  <form class="login-modal" @submit.prevent="$emit('logUser', user)">
       <label>
           Username:
-          <input type="text" v-model="username">
+          <input type="text" v-model="user.username">
       </label>
       <label>
           Password: 
-          <input type="password" v-model="password">
+          <input type="password" v-model="user.password">
       </label>
       <button class="action-btn">LogIn</button>
-      <p>Not a member? <button class="link-btn">sign here</button></p>
+      <p>Not a member? <button @click="$emit('openModal', 'signup-modal')" 
+      class="link-btn">sign here</button></p>
   </form>
 </template>
 
@@ -28,7 +29,3 @@ methods: {
 }
 }
 </script>
-
-<style>
-
-</style>

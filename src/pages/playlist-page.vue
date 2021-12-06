@@ -72,8 +72,9 @@ export default {
   },
   computed: {
     isPlaylistLiked() {
-      const userLiked = this.$store.getters.user.liked.playlist
-      const isLiked = userLiked.find(playlist => playlist._id === this.$route.params.playlistId)
+      const userLiked = this.$store.getters.user.liked
+      const isLiked = userLiked.playlist.find(playlist => playlist._id === this.$route.params.playlistId) || 
+      userLiked.station.find(station => station._id === this.$route.params.playlistId)
       return isLiked ? true : false;
     },
     isSongLiked() {

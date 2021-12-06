@@ -1,0 +1,24 @@
+.msg-modal {
+    position: fixed;
+    bottom: 100px;
+    height: 80px;
+    width: 400px;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: $clrGreen;
+    border-radius: 2px;
+    box-shadow: 0 1px 5px ;
+    
+}
+.fade-enter {
+    opacity: 0;
+    &-active {
+        transition: opacity .7s;
+    }
+}
+ 
+.fade-leave-active {
+    transition: opacity 1s;
+    opacity: 0;
+}
+

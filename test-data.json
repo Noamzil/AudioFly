@@ -13,6 +13,7 @@
 { //user Data
     "_id": "u101",
     "fullName": "Orly Amdadi",
+    "username": "Amdadi",
     "userEmail": "orly@amdadi.com",
     "password": "0123",
     "liked": {
