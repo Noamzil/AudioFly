@@ -15,12 +15,13 @@
 import appHeader from './components/app-header.cmp.vue';
 import appSideBar from './components/side-bar.cmp.vue';
 import appFooter from './components/app-footer.cmp.vue';
-import bodyModal from './components/body-modal.cmp.vue'
+import bodyModal from './components/body-modal.cmp.vue';
 export default {
   created() {
-    this.$store.dispatch({type: 'loadPlaylists'})
-    this.$store.commit({type: 'loadUser'})
+    this.$store.dispatch({ type: 'loadPlaylists' });
+    this.$store.commit({ type: 'loadUser' });
   },
+  methods: {},
   computed: {
     setCurrSong() {
       return this.$store.getters.currSong;
@@ -30,7 +31,7 @@ export default {
     appHeader,
     appFooter,
     appSideBar,
-    bodyModal
+    bodyModal,
   },
 };
 </script>

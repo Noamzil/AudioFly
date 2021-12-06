@@ -15,7 +15,7 @@
           </svg>
         </button>
       </div>
-      <button v-if="isSongPlaying" class="play-btn" @click="togglePlay">
+      <button v-if="!isSongPlaying" class="play-btn" @click="togglePlay">
         <svg role="img" viewBox="0 0 16 16">
           <path d="M4.018 14L14.41 8 4.018 2z"></path>
         </svg>
@@ -73,9 +73,9 @@ import { utilService } from '../../services/util.service.js';
 
 export default {
   name: 'song-progress',
+  props: [`currSong`],
   data() {
     return {
-      isSongPlaying: true,
       currTime: 0,
       isHover: false,
       currTimeStr: '',
@@ -89,6 +89,7 @@ export default {
     this.songLength = this.ISOStringToSec(lengthStr);
     this.currTimeStr = this.secToStr(this.currTime);
     this.songLengthStr = this.secToStr(this.songLength);
+    this.$emit('togglePlay');
   },
   methods: {
     async songLengthfunc() {
@@ -108,8 +109,6 @@ export default {
       return utilService.ISOStringToSec(str);
     },
     togglePlay() {
-      this.isSongPlaying = !this.isSongPlaying;
-      if (this.isSongPlaying) console.log(this.isSongPlaying);
       this.$emit('togglePlay');
     },
     nextSong() {
@@ -141,17 +140,21 @@ export default {
           : `linear-gradient(90deg, #1db954 ${this.progressPercent}% ,#535353 ${this.progressPercent}%)`,
       };
     },
-    currSong() {
-      return this.$store.getters.currSong;
-    },
     songTimeStr() {
       var time = this.songLength;
       return utilService.secToStr(time);
     },
+    isSongPlaying() {
+      return this.$store.getters.isSongOn;
+    },
   },
   watch: {
-   async currSong() {
-      this.$store.commit({ type: 'changeCurrTime' });
+    async currSong() {
+      this.lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
+      this.songLength = this.ISOStringToSec(this.lengthStr);
+      this.currTimeStr = this.secToStr(this.currTime);
+      this.songLengthStr = this.secToStr(this.songLength);
+      this.$emit('playNextSong');
     },
   },
 };

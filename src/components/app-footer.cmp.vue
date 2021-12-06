@@ -2,12 +2,17 @@
   <section>
     <section class="footer">
       <played-note-details />
-      <song-progress @togglePlay="togglePlay" @startAt="startAt" />
+      <song-progress
+        :currSong="currSong"
+        @togglePlay="togglePlay"
+        @startAt="startAt"
+        @playNextSong="playNextSong"
+      />
       <device-control />
     </section>
     <div class="youtube-player">
       <button @click="getVolume">volume</button>
-      <youtube :video-id="videoId" ref="youtube"></youtube>
+      <youtube :video-id="videoId" @playing="playing" ref="youtube"></youtube>
     </div>
   </section>
 </template>
@@ -23,7 +28,6 @@ export default {
   data() {
     return {
       videoId: null,
-      isPlaying: false,
       songLength: 300,
     };
   },
@@ -31,17 +35,27 @@ export default {
     this.videoId = this.$store.getters.currSong.youtubeId;
   },
   methods: {
+    playing() {
+      console.log(`in`);
+      this.playVideo();
+    },
     togglePlay() {
+      console.log(this.isPlaying);
       if (this.isPlaying) this.pauseVideo();
       else this.playVideo();
-      this.isPlaying = !this.isPlaying;
     },
     playVideo() {
+      console.log(`in play`);
+      this.$store.commit('continueSong');
       this.player.playVideo();
     },
     pauseVideo() {
       console.log(this.player);
+      this.$store.commit('stopSong');
       this.player.pauseVideo();
+    },
+    playNextSong() {
+      this.player.loadVideoById(this.$store.getters.currSong.youtubeId, 0);
     },
     async getVolume() {
       await this.player.setVolume(50);
@@ -54,8 +68,13 @@ export default {
     player() {
       return this.$refs.youtube.player;
     },
+    currSong() {
+      return this.$store.getters.currSong;
+    },
+    isPlaying() {
+      return this.$store.getters.isSongOn;
+    },
   },
-  watch: {},
   components: {
     playedNoteDetails,
     songProgress,
