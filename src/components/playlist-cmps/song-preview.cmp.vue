@@ -30,17 +30,24 @@
         </section>
       </div>
       <p>{{ songTime }}</p>
+      <div @click="openSongOpts" class="dots-container">
+        <div v-if="isHover">• • •</div>
+      </div>
+      <song-ops @removeSong="removeSong" :song="song" v-if="showOps" />
     </div>
   </article>
 </template>
 
 <script>
 import { utilService } from '../../services/util.service.js';
+import songOps from './song-options.cmp.vue';
+
 export default {
   name: 'songPreview',
   props: ['song', 'songNum'],
   data() {
     return {
+      showOps: false,
       isHover: false,
     };
   },
@@ -56,10 +63,20 @@ export default {
       return isLiked ? true : false;
     },
     dateAdded() {
-      var addedAt = this.song.addedAt 
-      return addedAt.slice(0,10)
-    }
+      var addedAt = this.song.addedAt;
+      return addedAt.slice(0, 10);
+    },
   },
-  methods: {},
+  methods: {
+    openSongOpts() {
+      this.showOps = !this.showOps;
+    },
+    removeSong(ev) {
+      this.$emit('removeSong', ev);
+    },
+  },
+  components: {
+    songOps,
+  },
 };
 </script>

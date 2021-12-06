@@ -82,6 +82,19 @@ li {
   }
 }
 
+.song-container .dots-container {
+  width: 25px;
+  height: 16px;
+  margin-left: 10px;
+  font-size: rem(9px);
+  font-weight: lighter;
+  color: #b3b3b3;
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
+
 .allow-drop {
   height: 40px;
   width: 100%;
