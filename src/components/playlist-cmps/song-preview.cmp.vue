@@ -1,50 +1,62 @@
 <template>
-<article  class="song-container" @mouseover="isHover=true" @mouseleave="isHover=false">
+  <article
+    class="song-container"
+    @mouseover="isHover = true"
+    @mouseleave="isHover = false"
+  >
     <button v-if="isHover" @click="$emit('playSong', song)" class="play-btn">
-        <svg role="img" viewBox="0 0 24 24">
-          <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="currentColor">
-          </polygon>
-        </svg>
+      <svg role="img" viewBox="0 0 24 24">
+        <polygon
+          points="21.57 12 5.98 3 5.98 21 21.57 12"
+          fill="currentColor"
+        ></polygon>
+      </svg>
     </button>
-    <p class="index" v-else>{{songNum}}</p>
+    <p class="index" v-else>{{ songNum }}</p>
     <div class="song-details">
-        <img class="song-img" :src="song.img">
-        <p>{{song.title}}</p>
+      <img class="song-img" :src="song.img" />
+      <p>{{ song.title }}</p>
     </div>
-    <a href="">Album name</a>
-    <p>{{song.addedAt}}</p>
+    <p>Album name</p>
+    <p>{{ song.addedAt }}</p>
     <div class="song-options">
-        <div class="heart-container">
-            <section v-if="isHover">
-                <button @click="$emit('toggleLikeSong', song)" v-if="isHover" class="like-btn fa-heart" 
-                :class="isSongLiked ? 'fas btn-liked' : 'far'"></button>
-            </section>
-        </div>
-    <p>{{songTime}}</p>
+      <div class="heart-container">
+        <section v-if="isHover">
+          <button
+            @click="$emit('toggleLikeSong', song)"
+            v-if="isHover"
+            class="like-btn fa-heart"
+            :class="isSongLiked ? 'fas btn-liked' : 'far'"
+          ></button>
+        </section>
+      </div>
+      <p>{{ songTime }}</p>
     </div>
-</article>
+  </article>
 </template>
 
 <script>
-import {utilService} from '../../services/util.service.js'
+import { utilService } from '../../services/util.service.js';
 export default {
-    name: 'songPreview',
-    props: ['song', 'songNum'],
-    data() {
-        return {
-            isHover: false
-        }
+  name: 'songPreview',
+  props: ['song', 'songNum'],
+  data() {
+    return {
+      isHover: false,
+    };
+  },
+  computed: {
+    songTime() {
+      return utilService.writeTime(this.song.time);
     },
-    computed: {
-        songTime() {
-            return utilService.writeTime(this.song.time)
-        },
-        isSongLiked() {
-            const userLiked = this.$store.getters.user.liked.song
-            const isLiked = userLiked.find(song => song.youtubeId === this.song.youtubeId)
-            return isLiked ? true : false
-        }
-    }
-
-}
+    isSongLiked() {
+      const userLiked = this.$store.getters.user.liked.song;
+      const isLiked = userLiked.find(
+        (song) => song.youtubeId === this.song.youtubeId
+      );
+      return isLiked ? true : false;
+    },
+  },
+  methods: {},
+};
 </script>
