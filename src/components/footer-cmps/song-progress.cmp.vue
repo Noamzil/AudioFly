@@ -82,6 +82,7 @@ export default {
       songLengthStr: '',
       songLength: null,
       progressPercent: 0,
+      timeInterval: null,
     };
   },
   async created() {
@@ -90,6 +91,11 @@ export default {
     this.currTimeStr = this.secToStr(this.currTime);
     this.songLengthStr = this.secToStr(this.songLength);
     this.$emit('togglePlay');
+    this.timeInterval = setInterval(() => {
+      this.currTime += 1;
+      this.currTimeStr = this.secToStr(this.currTime);
+      this.progressPercent = (this.currTime / this.songLength) * 100;
+    }, 1000);
   },
   methods: {
     async songLengthfunc() {
@@ -109,6 +115,15 @@ export default {
       return utilService.ISOStringToSec(str);
     },
     togglePlay() {
+      if (this.isSongPlaying) {
+        clearInterval(this.timeInterval);
+      } else {
+        this.timeInterval = setInterval(() => {
+          this.currTime += 1;
+          this.currTimeStr = this.secToStr(this.currTime);
+          this.progressPercent = (this.currTime / this.songLength) * 100;
+        }, 1000);
+      }
       this.$emit('togglePlay');
     },
     nextSong() {
@@ -154,6 +169,9 @@ export default {
       this.songLength = this.ISOStringToSec(this.lengthStr);
       this.currTimeStr = this.secToStr(this.currTime);
       this.songLengthStr = this.secToStr(this.songLength);
+      this.currTime = 0;
+      this.currTimeStr = this.secToStr(this.currTime);
+      this.progressPercent = 0;
       this.$emit('playNextSong');
     },
   },
