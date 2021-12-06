@@ -18,7 +18,7 @@
       <p>{{ song.title }}</p>
     </div>
     <p>Album name</p>
-    <p>{{ song.addedAt }}</p>
+    <p>{{ dateAdded }}</p>
     <div class="song-options">
       <div class="heart-container">
         <section v-if="isHover || isSongLiked">
@@ -55,6 +55,10 @@ export default {
       );
       return isLiked ? true : false;
     },
+    dateAdded() {
+      var addedAt = this.song.addedAt 
+      return addedAt.slice(0,10)
+    }
   },
   methods: {},
 };

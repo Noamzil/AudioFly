@@ -38,12 +38,16 @@ export default {
         JSON.stringify({ event: 'command', func: 'pauseVideo' }),
         '*'
       );
+      clearInterval(this.timeInterval);
     },
     playSong() {
       player.contentWindow.postMessage(
         JSON.stringify({ event: 'command', func: 'playVideo' }),
         '*'
       );
+      this.timeInterval = setInterval(() => {
+        this.$store.commit({ type: "currTime" });
+      }, 1000);
     },
     changeSong() {
       player.src = `https://www.youtube.com/embed/${this.currSongId}?playsinline=1&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8080&widgetid=1`;
@@ -69,6 +73,7 @@ export default {
             // onStateChange: onPlayerStateChange,
           },
         });
+        if (player) console.log(player);
       };
       function onPlayerReady(event) {
         event.target.playVideo();

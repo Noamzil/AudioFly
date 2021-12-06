@@ -111,6 +111,19 @@
   left: 90%;
 }
 
+.heart-search-res {
+  background-color: transparent;
+  border: none;
+  color: #b3b3b3;
+
+  svg {
+    stroke-width: 0;
+    color: #1db954;
+    height: 16px;
+    width: 16px;
+  }
+}
+
 .Pop {
   background-color: rgb(141, 103, 171);
 }
