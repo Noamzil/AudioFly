@@ -55,7 +55,7 @@ export default {
       songs.forEach((song) => {
         apiService.getVideoLength(song.youtubeId).then((length) => {
           var totalseconds = utilService.ISOStringToSec(length);
-          times.push(this.getTimeStr(totalseconds));
+          times.push(this.writeTime(totalseconds));
         });
       });
       this.videosLength = times;
@@ -71,8 +71,8 @@ export default {
       this.$store.commit({ type: "unMute" });
       this.$store.commit({ type: "playSong", song });
     },
-    getTimeStr(time) {
-      return utilService.getTimeStr(time);
+    writeTime(time) {
+      return utilService.writeTime(time);
     },
   },
 };
