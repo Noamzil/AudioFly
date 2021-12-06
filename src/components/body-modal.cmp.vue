@@ -1,6 +1,6 @@
 <template>
 <section class="body-modal" v-if="modalType" @click="exitModal">
-    <div class="modal-box">
+    <div class="modal-box" @click.stop="stop">
         <component :is="modalType" ></component>
     </div>
 </section>
@@ -26,6 +26,9 @@ export default {
         },
         openModal(type) {
             this.modalType = type
+        },
+        stop() {
+            
         }
     },
     components: {

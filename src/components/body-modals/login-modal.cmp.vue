@@ -1,5 +1,5 @@
 <template>
-  <form class="login-modal" @click.stop="stop" >
+  <form class="login-modal" >
       <label>
           Username:
           <input type="text" v-model="username">
@@ -25,7 +25,6 @@ data() {
     }
 },
 methods: {
-    stop() {}
 }
 }
 </script>
