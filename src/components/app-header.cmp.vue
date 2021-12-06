@@ -60,7 +60,7 @@ export default {
       this.$store.dispatch({ type: 'search', key });
     },
     openModal(type) {
-      // eventBus.$emit('openModal', type)
+      eventBus.$emit('openModal', type)
     }
   },
   components: {

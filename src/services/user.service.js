@@ -91,7 +91,11 @@ async function addLike(entity) {
 async function removeLike(entity) {
     try {
         const loggedUser = getSessionUser()
-        const idx = loggedUser.liked[entity.type].findIndex(currEntity => entity._id === currEntity._id)
+        if (entity.type !== 'song') {
+            var idx = loggedUser.liked[entity.type].findIndex(currEntity => entity._id === currEntity._id)
+        } else {
+            var idx = loggedUser.liked.song.findIndex(song => song.youtubeId === entity.youtubeId)
+        }
         loggedUser.liked[entity.type].splice(idx, 1)
         const updetaedUser = await update(loggedUser)
         return updetaedUser
