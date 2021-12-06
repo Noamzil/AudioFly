@@ -1,3 +1,8 @@
+ul,
+li {
+  list-style-type: none;
+}
+
 .playlist-content {
   padding: 0 32px;
   grid-gap: 16px;
@@ -9,6 +14,8 @@
     grid-template-columns: 32px 6fr 4fr 3fr minmax(120px, 1fr);
     border-radius: 5px;
     height: 56px;
+    z-index: 10;
+    cursor: grab;
 
     & .song-details {
       display: flex;
@@ -72,4 +79,20 @@
   & .heart-container {
     min-width: 32px;
   }
+}
+
+.allow-drop {
+  height: 40px;
+  width: 100%;
+}
+
+.ghost {
+  border-left: 6px solid $clrGreen;
+  box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.14);
+  opacity: 0.7;
+  transform: translateX(-20px) !important;
+  margin: 15px 0;
+}
+.sortable-drag {
+  opacity: 0;
 }
