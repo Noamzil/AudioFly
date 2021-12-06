@@ -22,8 +22,7 @@
       <div class="playlist-songs-details">
         <a>{{ currPlaylist.createdBy }}</a>
         <span class="dot"> • </span>
-        <span
-          >{{ currPlaylist.songs.length }} songs
+        <span>{{ currPlaylist.songs.length }} songs
           <span class="dot"> • </span> 00:00 (cpmputed album time)</span
         >
       </div>
