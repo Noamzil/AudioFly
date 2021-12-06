@@ -1,13 +1,19 @@
 <template>
   <div class="playlist-description">
     <label for="file-uplaod">
-      <input type="file" id="file-uplaod" accept="image/png, image/jpeg"
-      @change="imgInput" hidden>
-    <img :src="currPlaylist.playlistImg" @click="playlistEdit=!playlistEdit"/>
+      <input
+        type="file"
+        id="file-uplaod"
+        accept="image/png, image/jpeg"
+        @change="imgInput"
+        hidden
+      />
+      <img
+        :src="currPlaylist.playlistImg"
+        @click="playlistEdit = !playlistEdit"
+      />
     </label>
-    <div class="playlist-edit-container">
-
-    </div>
+    <div class="playlist-edit-container"></div>
     <div class="description-txt">
       <h2>Playlist</h2>
       <h1>{{ currPlaylist.name }}</h1>
@@ -16,8 +22,10 @@
       <div class="playlist-songs-details">
         <a>{{ currPlaylist.createdBy }}</a>
         <span class="dot"> • </span>
-        <span>{{ currPlaylist.songs.length }} songs <span class="dot"> • </span> 00:00
-          (cpmputed album time)</span>
+        <span
+          >{{ currPlaylist.songs.length }} songs
+          <span class="dot"> • </span> 00:00 (cpmputed album time)</span
+        >
       </div>
     </div>
   </div>
@@ -30,12 +38,12 @@ export default {
   data() {
     return {
       playlistEdit: false,
-    }
+    };
   },
   methods: {
     imgInput(ev) {
-      this.$emit('imgUpload', ev)
-    }
-  }
+      this.$emit('imgUpload', ev);
+    },
+  },
 };
 </script>

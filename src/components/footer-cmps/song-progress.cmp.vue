@@ -89,16 +89,16 @@ export default {
     // this.currSong = this.$store.getters.currSong;
     var lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
     this.songLength = this.ISOStringToSec(lengthStr);
-    this.currTimeStr = this.getTimeStr(this.currTime);
-    this.songLengthStr = this.getTimeStr(this.songLength);
+    this.currTimeStr = this.writeTime(this.currTime);
+    this.songLengthStr = this.writeTime(this.songLength);
   },
   methods: {
     changeTime() {
-      this.currTimeStr = this.getTimeStr(this.currTime);
+      this.currTimeStr = this.writeTime(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;
     },
-    getTimeStr(time) {
-      return utilService.getTimeStr(time);
+    writeTime(time) {
+      return utilService.writeTime(time);
     },
     ISOStringToSec(str) {
       return utilService.ISOStringToSec(str);
