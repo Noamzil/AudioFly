@@ -14,9 +14,6 @@ export const playStore = {
     currSong({ currSong }) {
       return currSong;
     },
-    currPlaylist({ currPlaylist }) {
-      return currPlaylist;
-    },
     currTime({ currTime }) {
       return currTime;
     },
