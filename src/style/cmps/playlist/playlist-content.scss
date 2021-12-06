@@ -75,6 +75,7 @@ li {
 .song-container .song-options {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   & .heart-container {
     min-width: 32px;

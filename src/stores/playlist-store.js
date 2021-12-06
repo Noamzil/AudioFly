@@ -12,6 +12,7 @@ export const playlistStore = {
     playlists({ playlists }) {
       return playlists;
     },
+    currPlaylist({ currPlaylist }) { return currPlaylist }
   },
   mutations: {
     loadPlaylists(state, { playlists }) {
@@ -31,7 +32,13 @@ export const playlistStore = {
       );
       state.playlists.splice(idx, 1);
     },
+<<<<<<< HEAD
 
+=======
+    setCurrPlaylist(state, { playlist }) {
+      state.currPlaylist = playlist
+    }
+>>>>>>> 1afc31e750b0a97d1e37322efe9cfd4860c4d4e8
   },
   actions: {
     async loadPlaylists({ commit }) {
@@ -67,5 +74,13 @@ export const playlistStore = {
         console.log('Could not remove playlists at playlistStore', err);
       }
     },
+    async setCurrPlaylist({ commit }, { playlistId }) {
+      try {
+        const playlist = await playlistService.getPlaylistById(playlistId)
+        commit({ type: 'setCurrPlaylist', playlist })
+      } catch (err) {
+        console.log('Could not set playlist at playlistStore', err);
+      }
+    }
   },
 };

@@ -27,39 +27,32 @@ export default {
       songToCheck: null,
     };
   },
-  async created() {
-    console.log(this.$router);
-    const { playlistId } = this.$route.params;
-    const playlist = await playlistService.getPlaylistById(playlistId);
-    this.$store.commit({type:'currPlaylist',playlist} )
-    this.currPlaylist = playlist;
-  },
   watch: {
     '$route.params.playlistId': {
       async handler() {
-        const playlistId = this.$route.params.playlistId;
-        var playlist = await playlistService.getPlaylistById(playlistId);
-        this.currPlaylist = JSON.parse(JSON.stringify(playlist));
+        const {playlistId} = this.$route.params;
+        await this.$store.dispatch({type: 'setCurrPlaylist', playlistId})
+        this.currPlaylist = this.$store.getters.currPlaylist
       },
       immediate: true,
     },
   },
   methods: {
-    togglePlaylistLike() {
+    async togglePlaylistLike() {
       const {_id, type} = this.currPlaylist
       if (this.isPlaylistLiked) {
-        this.$store.dispatch({type: 'removeLike', entity: {_id, type}})
+        await this.$store.dispatch({type: 'removeLike', entity: {_id, type}})
       } else {
-        this.$store.dispatch({type: 'addLike', entity: {_id, type}})
+        await this.$store.dispatch({type: 'addLike', entity: {_id, type}})
       }
     },
-    toggleLikeSong(song) {
+    async toggleLikeSong(song) {
       song.type = 'song'
       this.songToCheck = song
       if (this.isSongLiked) {
-        this.$store.dispatch({type: 'removeLike', entity: song})
+        await this.$store.dispatch({type: 'removeLike', entity: song})
       } else {
-        this.$store.dispatch({type: 'addLike', entity: song})
+        await this.$store.dispatch({type: 'addLike', entity: song})
       }
     },
     playFirstSong() {
@@ -75,7 +68,7 @@ export default {
         const playlist = this.currPlaylist
         this.$store.dispatch({type: 'updatePlaylist', playlist})
       }
-  },
+    },
   },
   computed: {
     isPlaylistLiked() {
