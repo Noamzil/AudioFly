@@ -18,14 +18,14 @@ export default {
         }
     },
     created() {
-        // eventBus.$on('openModal')
+        eventBus.$on('openModal', this.openModal)
     },
     methods: {
         exitModal() {
             this.modalType = ''
         },
         openModal(type) {
-            console.log(type);
+            this.modalType = type
         }
     },
     components: {

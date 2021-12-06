@@ -32,9 +32,6 @@ export default {
       newIndex: '',
     };
   },
-  created() {
-    this.playlist = JSON.parse(JSON.stringify(this.currPlaylist));
-  },
   methods: {
     playSong(song) {
       this.$store.commit({ type: 'playSong', song });
@@ -58,11 +55,17 @@ export default {
         0,
         playlist.songs.splice(this.oldIndex, 1)[0]
       );
-
       this.$store.dispatch({ type: 'updatePlaylist', playlist });
     },
   },
-
+  watch: {
+    currPlaylist: {
+      handler() {
+        this.playlist = JSON.parse(JSON.stringify(this.currPlaylist))
+      },
+      immediate: true,
+    }
+  },
   components: {
     songPreview,
     draggable,

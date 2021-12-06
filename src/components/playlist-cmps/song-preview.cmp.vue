@@ -21,10 +21,9 @@
     <p>{{ song.addedAt }}</p>
     <div class="song-options">
       <div class="heart-container">
-        <section v-if="isHover">
+        <section v-if="isHover || isSongLiked">
           <button
             @click="$emit('toggleLikeSong', song)"
-            v-if="isHover"
             class="like-btn fa-heart"
             :class="isSongLiked ? 'fas btn-liked' : 'far'"
           ></button>

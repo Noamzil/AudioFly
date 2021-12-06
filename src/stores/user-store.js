@@ -5,7 +5,7 @@ export const userStore = {
     state: {
         users: [],
         currUser: null,
-        realUser: true,
+        realUser: false,
     },
     getters: {
         users({ users }) { return users },
