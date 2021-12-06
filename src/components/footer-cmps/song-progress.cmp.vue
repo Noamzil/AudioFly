@@ -147,7 +147,7 @@ export default {
     },
     songTimeStr() {
       var time = this.songLength;
-      return utilService.getTimeStr(time);
+      return utilService.writeTime(time);
     },
     currTime() {
       return this.$store.getters.currTime;
@@ -159,7 +159,7 @@ export default {
       this.$store.commit({type: 'changeCurrTime'})
     },
     currTime() {
-      this.getTimeStr(this.currTime)
+      this.writeTime(this.currTime)
       this.changeTime()
     }
   }
