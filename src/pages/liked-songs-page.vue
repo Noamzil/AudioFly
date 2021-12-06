@@ -24,12 +24,34 @@
         </svg>
       </button>
     </div>
-    
+    <ul class="playlist-content">
+      <li v-for="(song, index) in likedSongs" :key="song.youtubeId">
+        <song-preview :song="song" :songNum="index+1" @toggleLikeSong="disLikeSong" @playSong="playSong"></song-preview>
+      </li>
+    </ul>
   </section>
 </template>
 
 <script>
-export default {};
+import songPreview from '../components/playlist-cmps/song-preview.cmp.vue'
+export default {
+  methods:{
+    disLikeSong(song) {
+      this.$store.dispatch({type: 'removeLike', entity: song})
+    },
+    playSong(song) {
+      this.$store.commit({type: 'playSong', song})
+    }
+  },
+  computed: {
+    likedSongs() {
+      return this.$store.getters.user.liked.song
+    }
+  },
+  components: {
+    songPreview
+  }
+};
 </script>
 
 <style>

@@ -1,5 +1,6 @@
 <template>
   <section class="main-app-container">
+    <body-modal></body-modal>
     <app-header />
     <div id="app">
       <router-view />
@@ -14,7 +15,7 @@
 import appHeader from './components/app-header.cmp.vue';
 import appSideBar from './components/side-bar.cmp.vue';
 import appFooter from './components/app-footer.cmp.vue';
-
+import bodyModal from './components/body-modal.cmp.vue'
 export default {
   created() {
     this.$store.dispatch({type: 'loadPlaylists'})
@@ -29,6 +30,7 @@ export default {
     appHeader,
     appFooter,
     appSideBar,
+    bodyModal
   },
 };
 </script>

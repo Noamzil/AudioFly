@@ -1,0 +1,59 @@
+.body-modal {
+    position: fixed;
+    width: 100vw;
+    height: 100vw;
+    background-color:rgba(56, 57, 65, 0.493);
+    z-index: 100;
+
+    .modal-box {
+        background-color: #282828;
+        width: 350px;
+        height: 500px;
+        padding: 15px;
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%);
+        top: 10%;
+        border:  3px solid rgb(203, 209, 209);
+        box-shadow: 0 0 8px 2px black;
+        font-size: 1.25rem;
+
+        * {
+            margin-bottom: 25px;
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 100%;
+            width: 100%;
+        }
+
+        input {
+            // grid;
+            border-radius: 15px;
+            height: 30px;
+            width: 200px;
+        }
+
+        .link-btn {
+            background: none;
+            border: none;
+            text-decoration: underline;
+            color: rgb(36, 3, 112);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .action-btn {
+            width: 70px;
+            height: 35px;
+            border-radius: 15px;
+            // border: none;
+        }
+
+        
+    }
+}

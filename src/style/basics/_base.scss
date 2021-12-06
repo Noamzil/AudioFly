@@ -21,6 +21,9 @@ svg {
 button {
   cursor: pointer;
 }
+ul {
+  list-style: none;
+}
 
 #app {
   grid-column: 2/-1;

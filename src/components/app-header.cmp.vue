@@ -24,13 +24,19 @@
         </form>
       </div>
     </section>
-
+    <div class="login-container">
+      <template v-if="!$store.getters.realUser">
+      <button @click="openModal('login-modal')" class="login-btn">Login</button>
+      <button class="signin-btn">Sign up</button>
+      </template>
     <user-nav></user-nav>
+    </div>
   </header>
 </template>
 
 <script>
 import userNav from './user-nav.cmp.vue';
+import {eventBus} from '../services/event-bus.cmp.js'
 export default {
   name: 'app-header',
   data() {
@@ -53,6 +59,9 @@ export default {
       const key = this.searchTxt;
       this.$store.dispatch({ type: 'search', key });
     },
+    openModal(type) {
+      // eventBus.$emit('openModal', type)
+    }
   },
   components: {
     userNav,

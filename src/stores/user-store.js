@@ -4,12 +4,14 @@ import { userService } from '../services/user.service.js'
 export const userStore = {
     state: {
         users: [],
-        currUser: null
+        currUser: null,
+        realUser: true,
     },
     getters: {
         users({ users }) { return users },
         user({ currUser }) { return currUser },
-        userLikedSongs({currUser}) {return currUser.liked.song }
+        userLikedSongs({ currUser }) { return currUser.liked.song },
+        realUser({ realUser }) { return realUser }
     },
     mutations: {
         loadUser(state) {
@@ -33,7 +35,7 @@ export const userStore = {
         removeFriend(state, { userId }) {
             const idx = null
             state.currUser.friends.splice(idx, 1)
-        }
+        },
     },
     actions: {
         async logIn({ commit }, { user }) {
