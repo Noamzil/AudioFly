@@ -8,10 +8,9 @@
         @startAt="startAt"
         @playNextSong="playNextSong"
       />
-      <device-control />
+      <device-control @changeVolume="changeVolume" />
     </section>
     <div class="youtube-player">
-      <button @click="getVolume">volume</button>
       <youtube :video-id="videoId" @playing="playing" ref="youtube"></youtube>
     </div>
   </section>
@@ -57,8 +56,9 @@ export default {
     playNextSong() {
       this.player.loadVideoById(this.$store.getters.currSong.youtubeId, 0);
     },
-    async getVolume() {
-      await this.player.setVolume(50);
+    async changeVolume(ev) {
+      console.log(ev);
+      await this.player.setVolume(ev);
     },
     startAt(ev) {
       this.player.loadVideoById(this.$store.getters.currSong.youtubeId, ev);

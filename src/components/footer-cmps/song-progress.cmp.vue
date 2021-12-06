@@ -87,16 +87,11 @@ export default {
   },
   async created() {
     var lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
-    this.songLength = this.ISOStringToSec(lengthStr);
+    this.songLength = this.ISOStringToSec(lengthStr) - 1;
     this.currTimeStr = this.secToStr(this.currTime);
     this.songLengthStr = this.secToStr(this.songLength);
     this.$emit('togglePlay');
-    this.timeInterval = setInterval(() => {
-      this.currTime = +this.currTime + 1;
-      console.log(this.currTime);
-      this.currTimeStr = this.secToStr(this.currTime);
-      this.progressPercent = (this.currTime / this.songLength) * 100;
-    }, 1000);
+    this.createInterval();
   },
   methods: {
     async songLengthfunc() {
@@ -104,7 +99,6 @@ export default {
       this.songLength = this.ISOStringToSec(lengthStr);
     },
     changeTime() {
-      console.log(this.currTime);
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;
       var sec = this.currTime;
@@ -120,11 +114,7 @@ export default {
       if (this.isSongPlaying) {
         clearInterval(this.timeInterval);
       } else {
-        this.timeInterval = setInterval(() => {
-          this.currTime = +this.currTime + 1;
-          this.currTimeStr = this.secToStr(this.currTime);
-          this.progressPercent = (this.currTime / this.songLength) * 100;
-        }, 1000);
+        this.createInterval();
       }
       this.$emit('togglePlay');
     },
@@ -139,11 +129,7 @@ export default {
       else song = currPlaylist.songs[idx + 1];
       this.$store.commit({ type: 'playSong', song });
 
-      this.timeInterval = setInterval(() => {
-        this.currTime = +this.currTime + 1;
-        this.currTimeStr = this.secToStr(this.currTime);
-        this.progressPercent = (this.currTime / this.songLength) * 100;
-      }, 1000);
+      this.createInterval();
     },
     prevSong() {
       clearInterval(this.timeInterval);
@@ -155,11 +141,18 @@ export default {
       if (idx === 0) song = currPlaylist.songs[currPlaylist.songs.length - 1];
       else song = currPlaylist.songs[idx - 1];
       this.$store.commit({ type: 'playSong', song });
-
+    },
+    createInterval() {
       this.timeInterval = setInterval(() => {
         this.currTime = +this.currTime + 1;
         this.currTimeStr = this.secToStr(this.currTime);
         this.progressPercent = (this.currTime / this.songLength) * 100;
+        if (
+          this.currTime === this.songLength ||
+          this.currTime > this.songLength
+        ) {
+            this.nextSong();
+        }
       }, 1000);
     },
   },
