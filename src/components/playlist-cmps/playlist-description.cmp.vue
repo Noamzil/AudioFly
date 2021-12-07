@@ -20,7 +20,7 @@
       <p>{{ currPlaylist.discription }}</p>
       <p>Artists names in the album...</p>
       <div class="playlist-songs-details">
-        <a>{{ currPlaylist.createdBy }}</a>
+        <a>{{ currPlaylist.createdBy.userName }}</a>
         <span class="dot"> • </span>
         <span
           >{{ currPlaylist.songs.length }} songs

@@ -78,7 +78,7 @@ border-radius: 500px;
 
  &:hover{
    opacity: 1;
-   background: linear-gradient(90deg, #1db954 60% ,#535353 40%);
+   background: linear-gradient(90deg, $clrGreen 60% ,#535353 40%);
   }
 
  &::-webkit-slider-thumb{
@@ -90,10 +90,10 @@ border-radius: 500px;
   border-radius: 50%;
   cursor: pointer;
   &:hover{
-    background:#1db954 ;
+    background:$clrGreen ;
   }
   &:active{
-    background:#1db954 ;
+    background:$clrGreen ;
   }
  }
 
