@@ -1,6 +1,6 @@
 <template>
   <section class="liked-song-page">
-    <div class="liked-songs-description">
+    <div class="flex liked-songs-description ">
       <img
         src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
       />
