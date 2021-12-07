@@ -94,10 +94,6 @@ export default {
     this.createInterval();
   },
   methods: {
-    async songLengthfunc() {
-      var lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
-      this.songLength = this.ISOStringToSec(lengthStr);
-    },
     changeTime() {
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;

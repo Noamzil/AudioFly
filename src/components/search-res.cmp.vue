@@ -3,8 +3,6 @@
     v-if="this.$store.getters.songsRes.length"
     class="songs-res-container"
   >
-    <!-- <h1>Top result</h1> -->
-    <!-- <h1>Songs</h1> -->
     <div class="top-res" v-if="topSong">
       <img :src="topSong.img" />
       <h1>{{ topSong.title }}</h1>
@@ -18,7 +16,7 @@
       </button>
     </div>
     <div class="songs-res" v-if="this.$store.getters.songsRes">
-      <div v-for="(song, index) in songsRes" :key="song.id" class="song-res">
+      <div v-for="song in songsRes" :key="song.id" class="song-res">
         <img :src="song.img" @click="playSong(song)" />
         <h3>{{ song.title }}</h3>
         <button class="heart-search-res">
@@ -29,33 +27,35 @@
             ></path>
           </svg>
         </button>
-        <small>{{ videosLength[index] }}</small>
+        <small v-if="isFetch">{{ song.duration }}</small>
       </div>
     </div>
-
-    <!-- <h1 v-if="songsRes">{{songsRes}}</h1> -->
   </section>
 </template>
 
 <script>
-import { apiService } from "../services/api.service.js";
-import { utilService } from "../services/util.service.js";
+import { apiService } from '../services/api.service.js';
+import { utilService } from '../services/util.service.js';
 
 export default {
-  name: "search-res",
+  name: 'search-res',
   data() {
     return {
       videosLength: null,
+      isFetch: false,
     };
   },
   computed: {
     songsRes() {
+      this.isFetch = false;
       var songs = this.$store.getters.songsRes;
       var times = [];
       songs.forEach((song) => {
         apiService.getVideoLength(song.youtubeId).then((length) => {
           var totalseconds = utilService.ISOStringToSec(length);
-          times.push(this.writeTime(totalseconds));
+          song.duration = this.writeTime(totalseconds);
+          times.push({ id: song.youtubeId, str: this.writeTime(totalseconds) });
+          if (times.length === songs.length) this.isFetch = true;
         });
       });
       this.videosLength = times;
@@ -67,13 +67,13 @@ export default {
   },
   methods: {
     playSong(song) {
-      console.log(song, "in searchRes cmp");
-      this.$store.commit({ type: "unMute" });
-      this.$store.commit({ type: "playSong", song });
+      console.log(song, 'in searchRes cmp');
+      this.$store.commit({ type: 'playSong', song });
     },
     writeTime(time) {
-      return utilService.writeTime(time);
+      return utilService.secToStr(time);
     },
   },
+  components: {},
 };
 </script>

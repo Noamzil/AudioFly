@@ -71,8 +71,8 @@ export default {
     openSongOpts() {
       this.showOps = !this.showOps;
     },
-    removeSong(ev) {
-      this.$emit('removeSong', ev);
+    removeSong() {
+      this.$emit('removeSong', this.song);
     },
   },
   components: {
