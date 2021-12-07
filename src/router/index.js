@@ -35,6 +35,11 @@ const routes = [
     name: 'library',
     component: () => import('../pages/library-page.vue'),
   },
+  {
+    path: '/genre/:genreType',
+    name: 'genre',
+    component: () => import('../pages/genre-page.vue'),
+  },
 ];
 
 const router = new VueRouter({
