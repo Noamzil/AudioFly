@@ -26,10 +26,16 @@ const routes = [
     component: () => import('../pages/liked-songs-page.vue'),
   },
   {
+    path: '/playlist/new',
+    name: 'playlist',
+    component: () => import('../pages/create-playlist.vue'),
+  },
+  {
     path: '/playlist/:playlistId',
     name: 'playlist',
     component: () => import('../pages/playlist-page.vue'),
   },
+
   {
     path: '/library',
     name: 'library',

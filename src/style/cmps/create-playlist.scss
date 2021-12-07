@@ -1,0 +1,45 @@
+.create-playlist {
+  background-color: rgb(84, 84, 84);
+
+  & .playlist-description {
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+    padding: 30px;
+    gap: 30px;
+    .songs-length {
+      color: #b3b3b3;
+    }
+  }
+  & .img-edit-container {
+    height: 232px;
+    width: 232px;
+    background-color: #282828;
+    position: relative;
+    bottom: 40px;
+    display: inline-block;
+    box-shadow: 0 4px 60px rgb(0 0 0 / 50%);
+    cursor: pointer;
+    bottom: 0;
+
+    & .img-awesome {
+      font-size: 5rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      grid-gap: 10px;
+      gap: 10px;
+    }
+  }
+
+  & .description-txt {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+    cursor: pointer;
+  }
+  & .playlist-page .linear-container {
+    background-color: rgb(84, 84, 84);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), #121212);
+  }
+}
