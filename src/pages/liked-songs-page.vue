@@ -14,45 +14,45 @@
         </div>
       </div>
     </div>
-    <div class="liked-songs-linear">
-      <button class="play-btn">
-        <svg role="img" viewBox="0 0 24 24" aria-hidden="true">
-          <polygon
-            points="21.57 12 5.98 3 5.98 21 21.57 12"
-            fill="currentColor"
-          ></polygon>
-        </svg>
-      </button>
+    <div class="playlist-page">
+      <playlist-linear> </playlist-linear> 
+      <!-- add events and emits  like the playlist page-->
     </div>
     <ul class="playlist-content">
       <li v-for="(song, index) in likedSongs" :key="song.youtubeId">
-        <song-preview :song="song" :songNum="index+1" @toggleLikeSong="disLikeSong" @playSong="playSong"></song-preview>
+        <song-preview
+          :song="song"
+          :songNum="index + 1"
+          @toggleLikeSong="disLikeSong"
+          @playSong="playSong"
+        ></song-preview>
       </li>
     </ul>
   </section>
 </template>
 
 <script>
-import songPreview from '../components/playlist-cmps/song-preview.cmp.vue'
+import songPreview from '../components/playlist-cmps/song-preview.cmp.vue';
+import playlistLinear from '../components/playlist-cmps/playlist-linear.cmp.vue';
 export default {
-  methods:{
+  methods: {
     disLikeSong(song) {
-      this.$store.dispatch({type: 'removeLike', entity: song})
+      this.$store.dispatch({ type: 'removeLike', entity: song });
     },
     playSong(song) {
-      this.$store.commit({type: 'playSong', song})
-    }
+      this.$store.commit({ type: 'playSong', song });
+    },
   },
   computed: {
     likedSongs() {
-      return this.$store.getters.user.liked.song
-    }
+      return this.$store.getters.user.liked.song;
+    },
   },
   components: {
-    songPreview
-  }
+    songPreview,
+    playlistLinear,
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

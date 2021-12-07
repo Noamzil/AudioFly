@@ -1,4 +1,4 @@
-const YOUTUBEAPIKEY = 'AIzaSyDjWXGiL77YK1-4bOnP4knERUmni3_GPp8';
+const YOUTUBEAPIKEY = 'AIzaSyC0bJTtOXo5KJTAeYz5nzVqN8N8OJQyFR4';
 
 //ELIOR'S KEY = AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg
 // OR'S KEY = AIzaSyC0bJTtOXo5KJTAeYz5nzVqN8N8OJQyFR4
@@ -18,13 +18,14 @@ const axios = require('axios');
 export const apiService = {
   getVideoId,
   getVideoLength,
+  getFourVideoDetails,
 };
 
 async function getVideoId(key) {
   console.log(`in api req`);
   try {
     const res = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?regionCode=us&videoDuration=short&lr=en&videoCategoryId=10&part=snippet&maxResults=5&videoEmbeddable=true&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
+      `https://www.googleapis.com/youtube/v3/search?regionCode=us&videoDuration=short&lr=en&videoCategoryId=10&part=snippet&maxResults=5&eventType=completed&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
     );
     // const res = await axios.get(
     //   `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&type=video&q=${key}&key=${YOUTUBEAPIKEY}`
@@ -36,6 +37,7 @@ async function getVideoId(key) {
         youtubeId: song.id.videoId,
         title: song.snippet.title,
         img: song.snippet.thumbnails.default.url,
+        type:'song'
       };
     });
     return songs;
@@ -44,12 +46,12 @@ async function getVideoId(key) {
     throw err;
   }
 }
-async function getVideoDetails(id) {
+async function getFourVideoDetails(id1,id2,id3,id4) {
   try {
     const res = await axios.get(
-      `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&videoCategoryId=10&key=${YOUTUBEAPIKEY}`
+      `https://www.googleapis.com/youtube/v3/videos?id=${id1}&id=${id2}&id=${id3}&id=${id4}&part=contentDetails&videoCategoryId=10&key=${YOUTUBEAPIKEY}`
     );
-    return res.data.items[0].contentDetails.duration;
+    return res.data.items.contentDetails.duration;
   } catch (error) {
     throw error;
   }

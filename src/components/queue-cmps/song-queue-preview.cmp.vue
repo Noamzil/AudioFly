@@ -13,12 +13,12 @@
       </svg>
     </button>
     <p class="index" v-else>{{ songNum }}</p>
+
     <div class="song-details">
       <img class="song-img" :src="song.img" />
       <p>{{ song.title }}</p>
     </div>
-    <p>Album name</p>
-    <p>{{ dateAdded }}</p>
+
     <div class="song-options">
       <div class="heart-container">
         <section v-if="isHover || isSongLiked">
@@ -30,21 +30,18 @@
         </section>
       </div>
       <p>{{ songTime }}</p>
-      <div @click="openSongOpts" class="dots-container">
+      <div class="dots-container">
         <div v-if="isHover">• • •</div>
       </div>
-      <song-ops @removeSong="removeSong" :song="song" v-if="showOps" />
     </div>
   </article>
 </template>
 
 <script>
-import { utilService } from '../../services/util.service.js';
-import songOps from './song-options.cmp.vue';
+import { utilService } from "../../services/util.service.js";
 
 export default {
-  name: 'songPreview',
-  props: ['song', 'songNum'],
+  props: ["song", "songNum"],
   data() {
     return {
       showOps: false,
@@ -67,16 +64,8 @@ export default {
       return addedAt.slice(0, 10);
     },
   },
-  methods: {
-    openSongOpts() {
-      this.showOps = !this.showOps;
-    },
-    removeSong() {
-      this.$emit('removeSong', this.song);
-    },
-  },
-  components: {
-    songOps,
-  },
 };
 </script>
+
+<style>
+</style>

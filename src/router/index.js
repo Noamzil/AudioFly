@@ -16,6 +16,11 @@ const routes = [
     component: () => import('../pages/search-page.vue'),
   },
   {
+    path: '/queue',
+    name: 'queue',
+    component: () => import('../pages/queue-page.vue'),
+  },
+  {
     path: '/liked-songs',
     name: 'liked-songs',
     component: () => import('../pages/liked-songs-page.vue'),

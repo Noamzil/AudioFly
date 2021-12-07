@@ -1,8 +1,9 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
-    <playlist-description @imgUpload="imgUpload"  :currPlaylist="currPlaylist" />
+    <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
     <playlist-linear
     @openModal="openModal"
+      @filter="setFilter"
       @togglePlaylistLike="togglePlaylistLike"
       @playFirstSong="playFirstSong"
       :isLiked="isPlaylistLiked"
@@ -11,7 +12,6 @@
       @toggleLikeSong="toggleLikeSong"
       :currPlaylist="currPlaylist"
     />
-    <h1>hi</h1>
   </section>
 </template>
 
@@ -32,29 +32,37 @@ export default {
   watch: {
     '$route.params.playlistId': {
       async handler() {
-        const {playlistId} = this.$route.params;
-        await this.$store.dispatch({type: 'setCurrPlaylist', playlistId})
-        this.currPlaylist = this.$store.getters.currPlaylist
+        const { playlistId } = this.$route.params;
+        await this.$store.dispatch({ type: 'setCurrPlaylist', playlistId });
+        this.currPlaylist = this.$store.getters.currPlaylist;
       },
       immediate: true,
     },
   },
   methods: {
+    setFilter(filterBy) {
+      this.$store.dispatch({ type: 'setFilter', filterBy });
+    },
+
+
     async togglePlaylistLike() {
-      const {_id, type} = this.currPlaylist
+      const { _id, type } = this.currPlaylist;
       if (this.isPlaylistLiked) {
-        await this.$store.dispatch({type: 'removeLike', entity: {_id, type}})
+        await this.$store.dispatch({
+          type: 'removeLike',
+          entity: { _id, type },
+        });
       } else {
-        await this.$store.dispatch({type: 'addLike', entity: {_id, type}})
+        await this.$store.dispatch({ type: 'addLike', entity: { _id, type } });
       }
     },
     async toggleLikeSong(song) {
-      song.type = 'song'
-      this.songToCheck = song
+      song.type = 'song';
+      this.songToCheck = song;
       if (this.isSongLiked) {
-        await this.$store.dispatch({type: 'removeLike', entity: song})
+        await this.$store.dispatch({ type: 'removeLike', entity: song });
       } else {
-        await this.$store.dispatch({type: 'addLike', entity: song})
+        await this.$store.dispatch({ type: 'addLike', entity: song });
       }
     },
     playFirstSong() {
@@ -63,13 +71,13 @@ export default {
     },
     imgUpload(fileUploadEv) {
       const img = fileUploadEv.target.files[0];
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.readAsDataURL(img);
-      reader.onload = ev => {
+      reader.onload = (ev) => {
         this.currPlaylist.playlistImg = ev.target.result;
-        const playlist = this.currPlaylist
-        this.$store.dispatch({type: 'updatePlaylist', playlist})
-      }
+        const playlist = this.currPlaylist;
+        this.$store.dispatch({ type: 'updatePlaylist', playlist });
+      };
     },
     openModal(type) {
             console.log('hii');
@@ -79,14 +87,21 @@ export default {
   },
   computed: {
     isPlaylistLiked() {
-      const userLiked = this.$store.getters.user.liked
-      const isLiked = userLiked.playlist.find(playlist => playlist._id === this.$route.params.playlistId) || 
-      userLiked.station.find(station => station._id === this.$route.params.playlistId)
+      const userLiked = this.$store.getters.user.liked;
+      const isLiked =
+        userLiked.playlist.find(
+          (playlist) => playlist._id === this.$route.params.playlistId
+        ) ||
+        userLiked.station.find(
+          (station) => station._id === this.$route.params.playlistId
+        );
       return isLiked ? true : false;
     },
     isSongLiked() {
-      const userLiked = this.$store.getters.user.liked.song
-      const isLiked = userLiked.find(song => song.youtubeId === this.songToCheck.youtubeId)
+      const userLiked = this.$store.getters.user.liked.song;
+      const isLiked = userLiked.find(
+        (song) => song.youtubeId === this.songToCheck.youtubeId
+      );
       return isLiked ? true : false;
     },
   },

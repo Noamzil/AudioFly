@@ -87,21 +87,13 @@ export default {
   },
   async created() {
     var lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
-    this.songLength = this.ISOStringToSec(lengthStr);
+    this.songLength = this.ISOStringToSec(lengthStr) - 1;
     this.currTimeStr = this.secToStr(this.currTime);
     this.songLengthStr = this.secToStr(this.songLength);
     this.$emit('togglePlay');
-    this.timeInterval = setInterval(() => {
-      this.currTime += 1;
-      this.currTimeStr = this.secToStr(this.currTime);
-      this.progressPercent = (this.currTime / this.songLength) * 100;
-    }, 1000);
+    this.createInterval();
   },
   methods: {
-    async songLengthfunc() {
-      var lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
-      this.songLength = this.ISOStringToSec(lengthStr);
-    },
     changeTime() {
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;
@@ -118,15 +110,12 @@ export default {
       if (this.isSongPlaying) {
         clearInterval(this.timeInterval);
       } else {
-        this.timeInterval = setInterval(() => {
-          this.currTime += 1;
-          this.currTimeStr = this.secToStr(this.currTime);
-          this.progressPercent = (this.currTime / this.songLength) * 100;
-        }, 1000);
+        this.createInterval();
       }
       this.$emit('togglePlay');
     },
     nextSong() {
+      clearInterval(this.timeInterval);
       var song;
       const currPlaylist = this.$store.getters.currPlaylist;
       var idx = currPlaylist.songs.findIndex(
@@ -135,8 +124,11 @@ export default {
       if (idx === currPlaylist.songs.length - 1) song = currPlaylist.songs[0];
       else song = currPlaylist.songs[idx + 1];
       this.$store.commit({ type: 'playSong', song });
+
+      this.createInterval();
     },
     prevSong() {
+      clearInterval(this.timeInterval);
       var song;
       const currPlaylist = this.$store.getters.currPlaylist;
       var idx = currPlaylist.songs.findIndex(
@@ -145,6 +137,19 @@ export default {
       if (idx === 0) song = currPlaylist.songs[currPlaylist.songs.length - 1];
       else song = currPlaylist.songs[idx - 1];
       this.$store.commit({ type: 'playSong', song });
+    },
+    createInterval() {
+      this.timeInterval = setInterval(() => {
+        this.currTime = +this.currTime + 1;
+        this.currTimeStr = this.secToStr(this.currTime);
+        this.progressPercent = (this.currTime / this.songLength) * 100;
+        if (
+          this.currTime === this.songLength ||
+          this.currTime > this.songLength
+        ) {
+            this.nextSong();
+        }
+      }, 1000);
     },
   },
   computed: {
