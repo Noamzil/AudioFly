@@ -37,6 +37,7 @@ async function getVideoId(key) {
         youtubeId: song.id.videoId,
         title: song.snippet.title,
         img: song.snippet.thumbnails.default.url,
+        type:'song'
       };
     });
     return songs;

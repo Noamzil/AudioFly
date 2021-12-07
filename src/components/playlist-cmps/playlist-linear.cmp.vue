@@ -40,7 +40,8 @@
           <div @click="toogleOps" class="sort-container">
             <p>Custom order</p>
 
-            <div class="fas fa-sort-down"></div>
+            <div v-if="!isOps" class="fas fa-sort-down"></div>
+            <div v-else class="fas fa-sort-up"></div>
           </div>
           <input
             :class="{ show: isShow }"
@@ -50,7 +51,7 @@
             placeholder="Search in playlist"
             autocomplete="off"
           />
-          <div :class="{ hidden: isOps }" class="list-ops playlist-ops">
+          <div :class="{ hidden: !isOps }" class="list-ops playlist-ops">
             <ul>
               <li>Custom order</li>
               <li @click="sortByTitle">Title</li>

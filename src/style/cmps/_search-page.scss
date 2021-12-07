@@ -67,6 +67,23 @@
   display: flex;
   gap: 10px;
   margin-bottom: 40px;
+  & .like-btn {
+    background-color: transparent;
+    border: none;
+    color: #b3b3b3;
+    font-size: 0.9375rem;
+
+    &:hover {
+      color: white;
+    }
+    &.btn-liked {
+      color: $clrGreen;
+    }
+  }
+
+  & small {
+    width: 40px;
+  }
 }
 
 .top-res {

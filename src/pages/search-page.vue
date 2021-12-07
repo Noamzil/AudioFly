@@ -1,6 +1,6 @@
 <template>
   <section class="search-page">
-    <serach-res />
+    <serach-res @toggleLikeSong="toggleLikeSong" />
     <h1>Your top genres</h1>
     <div class="top-genres-container">
       <div
@@ -35,34 +35,34 @@
 </template>
 
 <script>
-import serachRes from "../components/search-res.cmp.vue";
+import serachRes from '../components/search-res.cmp.vue';
 export default {
-  name: "search-page",
+  name: 'search-page',
   data() {
     return {
-      imgUrl: "../assets/img/genres-img/Rock.jpeg",
+      imgUrl: '../assets/img/genres-img/Rock.jpeg',
       genres: [
-        "Pop",
-        "Rock",
-        "Indie",
-        "Hip-Hop",
-        "Podcasts",
-        "Charts",
+        'Pop',
+        'Rock',
+        'Indie',
+        'Hip-Hop',
+        'Podcasts',
+        'Charts',
         // "Made For You",
         // "New Releases",
-        "Discover",
-        "Concerts",
-        "Mood",
-        "Chill",
-        "Party",
-        "Focus",
-        "Alternative",
-        "EQUAL",
-        "DanceElectronic",
-        "Wellness",
-        "Sleep",
-        "Tastemakers",
-        "Decades",
+        'Discover',
+        'Concerts',
+        'Mood',
+        'Chill',
+        'Party',
+        'Focus',
+        'Alternative',
+        'EQUAL',
+        'DanceElectronic',
+        'Wellness',
+        'Sleep',
+        'Tastemakers',
+        'Decades',
       ],
     };
   },
@@ -72,6 +72,24 @@ export default {
     },
     browseGenres() {
       return this.genres.splice(3);
+    },
+  },
+  methods: {
+    async toggleLikeSong(song) {
+      song.type = 'song';
+      song.addedAt = '2021-12-06T18:32:22.270Z';
+      console.log(song);
+      const userLiked = this.$store.getters.user.liked.song;
+      const isLiked = userLiked.findIndex(
+        (currSong) => currSong.youtubeId === song.youtubeId
+      );
+      console.log(isLiked);
+
+      if (isLiked > -1) {
+        await this.$store.dispatch({ type: 'removeLike', entity: song });
+      } else {
+        await this.$store.dispatch({ type: 'addLike', entity: song });
+      }
     },
   },
   components: {
