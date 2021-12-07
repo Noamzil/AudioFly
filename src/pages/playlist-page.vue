@@ -2,7 +2,7 @@
   <section v-if="currPlaylist" class="playlist-page">
     <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
     <playlist-linear
-    @openModal="openModal"
+      @openModal="openModal"
       @filter="setFilter"
       @togglePlaylistLike="togglePlaylistLike"
       @playFirstSong="playFirstSong"
@@ -20,7 +20,9 @@ import playlistDescription from '../components/playlist-cmps/playlist-descriptio
 import playlistLinear from '../components/playlist-cmps/playlist-linear.cmp.vue';
 import playlistContent from '../components/playlist-cmps/song-list.cmp.vue';
 import { playlistService } from '../services/playlist.service.js';
-import {eventBus} from '../services/event-bus.cmp.js'
+import { eventBus } from '../services/event-bus.cmp.js';
+import { utilService } from '../services/util.service';
+
 export default {
   name: 'playlist-page',
   data() {
@@ -41,9 +43,16 @@ export default {
   },
   methods: {
     setFilter(filterBy) {
-      this.$store.dispatch({ type: 'setFilter', filterBy });
+      var playlist = JSON.parse(
+        JSON.stringify(this.$store.getters.currPlaylist)
+      );
+      var fileterdSongs = playlistService.filterPlaylist(
+        playlist.songs,
+        filterBy
+      );
+      playlist.songs = fileterdSongs;
+      this.currPlaylist = playlist;
     },
-
 
     async togglePlaylistLike() {
       const { _id, type } = this.currPlaylist;
@@ -80,8 +89,8 @@ export default {
       };
     },
     openModal(type) {
-      eventBus.$emit('openModal', type)
-    }
+      eventBus.$emit('openModal', type);
+    },
   },
   computed: {
     isPlaylistLiked() {

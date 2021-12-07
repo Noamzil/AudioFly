@@ -7,8 +7,19 @@ export const playlistStore = {
     albums: [],
     likedSongs: [],
     currPlaylist: null,
-    filterBy: null,
-    tags: ['pop', 'Funk', 'Punk', 'Rock', 'Rap', 'Hip-Hop', 'Dance', 'Indie', 'Singer-Songwriter', 'Alternative Rock', 'jazz']
+    tags: [
+      'pop',
+      'Funk',
+      'Punk',
+      'Rock',
+      'Rap',
+      'Hip-Hop',
+      'Dance',
+      'Indie',
+      'Singer-Songwriter',
+      'Alternative Rock',
+      'jazz',
+    ],
   },
   getters: {
     playlists({ playlists }) {
@@ -17,7 +28,9 @@ export const playlistStore = {
     currPlaylist({ currPlaylist }) {
       return currPlaylist;
     },
-    tags({ tags }) { return tags }
+    tags({ tags }) {
+      return tags;
+    },
   },
   mutations: {
     loadPlaylists(state, { playlists }) {
@@ -42,15 +55,11 @@ export const playlistStore = {
     setCurrPlaylist(state, { playlist }) {
       state.currPlaylist = playlist;
     },
-    setFilter(state, { filterBy }) {
-      state.filterBy = filterBy;
-      console.log(`in store set filtet by to`, filterBy);
-    },
   },
   actions: {
-    async loadPlaylists({ commit }, { filterBy }) {
+    async loadPlaylists({ commit }) {
       try {
-        const playlists = await playlistService.query(filterBy);
+        const playlists = await playlistService.query();
         commit({ type: 'loadPlaylists', playlists });
       } catch (err) {
         console.log('Could not load playlists at playlistStore', err);
@@ -88,10 +97,6 @@ export const playlistStore = {
       } catch (err) {
         console.log('Could not set playlist at playlistStore', err);
       }
-    },
-    setFilter({ commit, dispatch }, { filterBy }) {
-      commit({ type: 'setFilter', filterBy });
-      dispatch({ type: 'loadPlaylists', filterBy });
     },
   },
 };

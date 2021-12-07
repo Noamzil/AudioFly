@@ -1,8 +1,8 @@
 import { storageService } from './async-storage.service.js';
 import { utilService } from './util.service.js';
-import { httpService } from './http.service.js'
+import { httpService } from './http.service.js';
 
-const PLAYLIST_URL = 'playlist/'
+const PLAYLIST_URL = 'playlist/';
 // process.env.NODE_ENV !== 'development'
 //   ? '/api/playlist/'
 //   : '//localhost:3030/api/playlist/';
@@ -17,9 +17,9 @@ export const playlistService = {
   addPlaylist,
   updatePlaylist,
   removePlaylist,
+  filterPlaylist,
 };
-async function query(filterBy) {
-  console.log('in service filter by ', filterBy);
+async function query() {
   try {
     // const playlists = await httpService.get(PLAYLIST_URL)
     const playlists = await storageService.query(PLAYLIST_KEY);
@@ -53,7 +53,7 @@ async function updatePlaylist(playlist) {
   try {
     // const updatedPlaylist = await httpService.put(PLAYLIST_URL, playlist)
     const updatedPlaylist = await storageService.put(PLAYLIST_KEY, playlist);
-    return updatedPlaylist
+    return updatedPlaylist;
   } catch (err) {
     console.log('Could not update playlist at playlistService');
     throw err;
@@ -69,7 +69,38 @@ async function removePlaylist(id) {
   }
 }
 
+function filterPlaylist(songs, filterBy) {
+  if (filterBy.search) {
+    songs = songs.filter((song) => {
+      return song.title.toLowerCase().includes(filterBy.search.toLowerCase());
+    });
+  }
 
+  if (filterBy.sort === 'title')
+    songs.sort((a, b) => {
+      if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return -1;
+      }
+      if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    });
+
+  if (filterBy.sort === 'date') {
+    songs.sort((a, b) => {
+      return Date.parse(b.addedAt) - Date.parse(a.addedAt);
+    });
+  }
+
+  if (filterBy.sort === 'duration') {
+    songs.sort((a, b) => {
+      return a.time - b.time;
+    });
+  }
+  return songs
+}
+// _createPlaylists()
 // test-data
 function _createPlaylists() {
   var playlists = localStorage.getItem(PLAYLIST_KEY);
@@ -161,7 +192,7 @@ function _createStation(num) {
         youtubeId: 'XXYlFuWEuKI',
         title: 'The Weekend - Save Your Tears',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        time: 180050,
+        time: 160050,
         addedAt: new Date(Date.now()),
       },
       {
@@ -169,24 +200,24 @@ function _createStation(num) {
         youtubeId: '_Yhyp-_hX2s',
         title: 'Eminem - Lose Yourself',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        time: 180050,
-        addedAt: new Date(Date.now()),
+        time: 189050,
+        addedAt: new Date(Date.now() + 5),
       },
       {
         type: 'song',
         youtubeId: 'NF-kLy44Hls',
         title: 'Duft Punk - Lose Yourself To Dance',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        time: 180050,
-        addedAt: new Date(Date.now()),
+        time: 180000,
+        addedAt: new Date(Date.now() - 10),
       },
       {
         type: 'song',
         youtubeId: 'Q0oIoR9mLwc',
         title: 'Red Hot Chili Peppers - Dark Necessities',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        time: 180050,
-        addedAt: new Date(Date.now()),
+        time: 181050,
+        addedAt: new Date(Date.now() - 5),
       },
     ],
   };

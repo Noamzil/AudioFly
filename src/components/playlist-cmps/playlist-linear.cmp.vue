@@ -107,14 +107,17 @@ export default {
     sortByTitle() {
       this.filterBy.sort ="title"
       this.$emit('filter', { ...this.filterBy });
+      this.isOps = false
     },
     sortByDate() {
       this.filterBy.sort ="date"
       this.$emit('filter', { ...this.filterBy });
+      this.isOps = false
     },
     sortByDuration() {
       this.filterBy.sort ="duration"
       this.$emit('filter', { ...this.filterBy });
+      this.isOps = false
     },
 
     likePlaylist() {
