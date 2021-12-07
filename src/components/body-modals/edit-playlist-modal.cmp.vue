@@ -1,10 +1,10 @@
 <template>
 <form class="edit-playlist-modal" @submit="$emit('updatePlaylist')">
-    <!-- <label for="playlist-img-edit">
+    <label for="playlist-img-edit">
         <img :src="currPlaylist.playlistImg">
         <input id="playlist-img-edit" type="file" accept="image/jpeg image/png" 
         @change="loadImg" hidden>
-    </label> -->
+    </label>
     <label>
         Playlist Name:
         <input type="text" v-model="currPlaylist.name">
