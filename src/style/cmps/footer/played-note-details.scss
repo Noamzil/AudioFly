@@ -38,6 +38,8 @@
   & .title {
     grid-area: title;
     justify-self: start;
+    text-overflow: ellipsis;
+    max-height: 58px;
   }
 
   & .names {

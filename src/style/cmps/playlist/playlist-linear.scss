@@ -162,7 +162,7 @@
   & li {
     padding: 15px 50px 15px 25px;
 
-    &:hover {
+    &:hover:not(:first-child) {
       background-color: #4f4f4f;
     }
   }

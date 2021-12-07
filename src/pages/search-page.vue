@@ -2,7 +2,7 @@
   <section class="search-page">
     <serach-res @toggleLikeSong="toggleLikeSong" />
     <h1>Your top genres</h1>
-    <div class="top-genres-container">
+    <div class="flex top-genres-container">
       <div
         v-for="genre in genres"
         :key="genre"
@@ -18,7 +18,7 @@
       </div>
     </div>
     <h1 class="browse-txt">Browse all</h1>
-    <div class="all-genres">
+    <div class="flex all-genres">
       <div
         v-for="genre in browseGenres"
         :key="genre"

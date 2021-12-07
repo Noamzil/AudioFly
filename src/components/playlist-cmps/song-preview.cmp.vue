@@ -13,7 +13,7 @@
       </svg>
     </button>
     <p class="index" v-else>{{ songNum }}</p>
-    <div class="song-details">
+    <div class="flex song-details">
       <img class="song-img" :src="song.img" />
       <p>{{ song.title }}</p>
     </div>

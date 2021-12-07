@@ -18,14 +18,22 @@ body {
 svg {
   cursor: pointer;
 }
+
 button {
   cursor: pointer;
+  border: none;
 }
+
 ul {
   list-style: none;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style-type: none;
 }
 
 #app {
   grid-column: 2/-1;
 }
-
