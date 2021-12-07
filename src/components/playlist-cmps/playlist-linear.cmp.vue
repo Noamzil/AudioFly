@@ -25,11 +25,15 @@
               ></path>
             </svg>
           </button>
+          <button @click="openModal">
           <svg class="dots" role="img" viewBox="0 0 32 32">
             <path
               d="M5.998 13.999A2 2 0 105.999 18a2 2 0 00-.001-4zm10.001 0A2 2 0 1016 18a2 2 0 000-4zm10.001 0A2 2 0 1026.001 18 2 2 0 0026 14z"
             ></path>
+          
+          
           </svg>
+          </button>
         </div>
 
         <form @submit.prevent class="StationFilter">
@@ -122,6 +126,9 @@ export default {
     },
     playFirstSong() {
       this.$emit('playFirstSong');
+    },
+    openModal() {
+      this.$emit('openModal', 'edit-playlist-modal')
     },
     toogleSearch() {
       this.isShow = !this.isShow;
