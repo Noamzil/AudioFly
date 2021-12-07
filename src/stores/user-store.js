@@ -73,7 +73,7 @@ export const userStore = {
             try {
                 const updatedUser = await userService.addLike(entity)
                 commit({ type: 'setCurrUser', user: updatedUser })
-                eventBus.$emit('showMsg', `A new ${entity.type} has been added to your favorites`)
+                eventBus.$emit('showMsg', `New ${entity.type} added to your favorites`)
             } catch (err) {
                 console.log('Could not add like in userStore', err);
             }
