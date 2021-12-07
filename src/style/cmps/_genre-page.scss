@@ -1,3 +1,17 @@
 .gerne-page {
-    background-color: antiquewhite;
+    padding: 40px;
+    h1 {
+        font-size: 96px;
+    }
+    h3 {
+        color: aqua;
+        color: #b3b3b3;
+        font-size: 12px;
+    }
+    .playlists-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
 }
