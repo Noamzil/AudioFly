@@ -1,27 +1,27 @@
 import { storageService } from './async-storage.service.js';
 import { utilService } from './util.service.js';
+import { httpService } from './http.service.js'
 
-const PLAYLIST_URL =
-  process.env.NODE_ENV !== 'development'
-    ? '/api/playlist/'
-    : '//localhost:3030/api/playlist/';
+const PLAYLIST_URL = 'playlist/'
+// process.env.NODE_ENV !== 'development'
+//   ? '/api/playlist/'
+//   : '//localhost:3030/api/playlist/';
 
 const PLAYLIST_KEY = 'audioFlyPlaylistsDB';
 const SONG_KEY = 'audioFlySongsDB';
 
-_createPlaylists();
+// _createPlaylists();
 export const playlistService = {
   query,
   getPlaylistById,
-  getSongById,
   addPlaylist,
   updatePlaylist,
   removePlaylist,
-  addSong,
 };
 async function query(filterBy) {
   console.log('in service filter by ', filterBy);
   try {
+    // const playlists = await httpService.get(PLAYLIST_URL)
     const playlists = await storageService.query(PLAYLIST_KEY);
     return playlists;
   } catch (err) {
@@ -31,6 +31,7 @@ async function query(filterBy) {
 }
 async function getPlaylistById(id) {
   try {
+    // const playlist = await httpService.get(PLAYLIST_URL, id)
     const playlist = await storageService.get(PLAYLIST_KEY, id);
     return playlist;
   } catch (err) {
@@ -38,17 +39,9 @@ async function getPlaylistById(id) {
     throw err;
   }
 }
-async function getSongById(id) {
-  try {
-    const song = await storageService.get(SONG_KEY, id);
-    return song;
-  } catch (err) {
-    console.log('Could not find song in getById in playlistService');
-    throw err;
-  }
-}
 async function addPlaylist(playlist) {
   try {
+    // const newPlaylist = await httpService.post(PLAYLIST_URL, playlist)
     const newPlaylist = await storageService.post(PLAYLIST_KEY, playlist);
     return newPlaylist;
   } catch (err) {
@@ -56,17 +49,9 @@ async function addPlaylist(playlist) {
     throw err;
   }
 }
-async function addSong(song) {
-  try {
-    const newSong = await storageService.post(SONG_KEY, song);
-    return newSong;
-  } catch (err) {
-    console.log('Could not add song at playlisyService');
-    throw err;
-  }
-}
 async function updatePlaylist(playlist) {
   try {
+    // const updatedPlaylist = await httpService.put(PLAYLIST_URL, playlist)
     const updatedPlaylist = await storageService.put(PLAYLIST_KEY, playlist);
     return updatedPlaylist
   } catch (err) {
@@ -76,6 +61,7 @@ async function updatePlaylist(playlist) {
 }
 async function removePlaylist(id) {
   try {
+    // await httpService.delete(PLAYLIST_URL, id) // Pay attention!!!
     await storageService.remove(PLAYLIST_KEY, id);
   } catch (err) {
     console.log('Could not remove playlist at playlist service');

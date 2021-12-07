@@ -71,9 +71,7 @@ export default {
             this.$store.dispatch({type: 'updatePlaylist', playlist})
             this.modalType = ''
         },
-        stop() {
-            
-        },
+        stop() {},
     },
     watch: {
         '$route.params.playlistId': {

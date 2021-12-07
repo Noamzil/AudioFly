@@ -1,17 +1,19 @@
 import { storageService } from './async-storage.service.js'
+import { httpService } from './http.service.js'
 
 const AUTH_URL = (process.env.NODE_ENV !== 'development')
     ? '/api/auth/'
     : '//localhost:3030/api/auth/'
 const STORAGE_KEY = 'audioFlyLoggedUser'
 
-const USER_URL = (process.env.NODE_ENV !== 'development')
-    ? '/api/user/'
-    : '//localhost:3030/api/user/'
+const USER_URL = 'user/'
+// (process.env.NODE_ENV !== 'development')
+//     ? '/api/user/'
+//     : '//localhost:3030/api/user/'
 
 const USERS_KEY = 'audioFlyUsersDB'
 // if (!JSON.parse(sessionStorage.getItem(STORAGE_KEY))) getGuest()
-// if (!JSON.parse(localStorage.getItem(USERS_KEY))) localStorage.setItem(USERS_KEY, JSON.stringify([]))
+if (!JSON.parse(localStorage.getItem(USERS_KEY))) localStorage.setItem(USERS_KEY, JSON.stringify([]))
 export const userService = {
     logIn,
     signUp,
@@ -27,6 +29,7 @@ export const userService = {
 
 async function query() {
     try {
+        // const users = await httpService.get(USER_URL)
         const users = await storageService.query(USERS_KEY)
         return users
     } catch (err) {
@@ -36,8 +39,8 @@ async function query() {
 }
 async function update(user) {
     try {
+        // const currUser = await httpService.put(USER_URL, user)
         var currUser = await storageService.put(USERS_KEY, user)
-        console.log('hii');
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify(currUser))
         return currUser
     } catch (err) {
@@ -47,7 +50,8 @@ async function update(user) {
 }
 async function logIn(user) {
     try {
-        const users = await storageService.query(USERS_KEY)
+        // const users = await storageService.query(USERS_KEY)
+        const users = query()
         const loggedUser = users.find(currUser => user.username === currUser.username)
         if (!loggedUser) return
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify(loggedUser))
@@ -59,6 +63,7 @@ async function logIn(user) {
 }
 async function signUp(user) {
     try {
+        // const signedUser = await httpService.post(USER_URL, user)
         user.liked = { song: [], playlist: [], station: [], album: [] }
         user.follows = []
         user.playlists = []
