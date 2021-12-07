@@ -52,6 +52,8 @@ export default {
     },
     prevHistory() {
       this.isPrev = !this.isPrev;
+      // console.log(this.$router)
+      // console.log(this.$router.back())
       console.log('Going to the previous page on your history');
     },
     search() {
