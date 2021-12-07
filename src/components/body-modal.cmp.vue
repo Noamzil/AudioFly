@@ -1,8 +1,8 @@
 <template>
 <section class="body-modal" v-if="modalType" @click="exitModal">
     <div class="modal-box" @click.stop="stop">
-        <component :is="modalType" :userImg="userImg" @signUser="signUser" 
-        @logUser="logUser" @openModal="openModal" @loadImg="loadImg">
+        <component :is="modalType" :userImg="userImg" :currPlaylist="currPlaylist"
+        @signUser="signUser" @logUser="logUser" @openModal="openModal" @loadImg="loadImg">
         </component>
     </div>
 </section>
@@ -12,7 +12,9 @@
 <script>
 import loginModal from './body-modals/login-modal.cmp.vue'
 import signupModal from './body-modals/signup-modal.cmp.vue'
+import editPlaylistModal from './body-modals/edit-playlist-modal.cmp.vue'
 import {eventBus} from '../services/event-bus.cmp.js'
+import {playlistService} from '../services/playlist.service.js'
 export default {
     name: 'body-modal',
     data() {
@@ -55,9 +57,16 @@ export default {
             
         },
     },
+    computed: {
+        async currPlaylist() {
+            const {playlistId} = this.$route.params
+            return await playlistService.getPlaylistById(playlistId)
+        }
+    },
     components: {
         loginModal,
-        signupModal
+        signupModal,
+        editPlaylistModal
     }
 
 }
