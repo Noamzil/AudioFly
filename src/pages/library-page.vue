@@ -42,28 +42,13 @@ import playlistPreview from '../components/playlist-preview.cmp.vue';
 export default {
   name: 'library-page',
   data() {
-    return {
-      songs: [
-        {
-          title: 'The Weekend - Save Your Tears',
-        },
-        {
-          title: 'Eminem - Lose Yourself',
-        },
-        {
-          title: 'Duft Punk - Lose Yourself To Dance',
-        },
-        {
-          title: 'Red Hot Chili Peppers - Dark Necessities',
-        },
-      ],
-    };
+    return {};
   },
   created() {},
   computed: {
-    // songs() {
-    //   return this.$store.getters.userLikedSongs;
-    // },  computed: {
+    songs() {
+      return this.$store.getters.userLikedSongs;
+    },
     playlists() {
       return this.$store.getters.playlists;
     },

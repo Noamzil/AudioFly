@@ -31,22 +31,36 @@
             ></path>
           </svg>
         </div>
-        <form class="StationFilter">
-          <button class="fas fa-search btn-search"></button>
-          <div class="sort-container">
-            <div>Custom order</div>
+
+        <form @submit.prevent class="StationFilter">
+          <button
+            @click="toogleSearch"
+            class="fas fa-search btn-search"
+          ></button>
+          <div @click="toogleOps" class="sort-container">
+            <p>Custom order</p>
+
             <div class="fas fa-sort-down"></div>
           </div>
           <input
-            class="unshow"
+            :class="{ show: isShow }"
             type="text"
+            @input="sendFilter"
+            v-model="filterBy.search"
             placeholder="Search in playlist"
-            name="title"
             autocomplete="off"
-            value=""
           />
+          <div :class="{ hidden: isOps }" class="list-ops playlist-ops">
+            <ul>
+              <li>Custom order</li>
+              <li @click="sortByTitle">Title</li>
+              <li @click="sortByDate">Date added</li>
+              <li @click="sortByDuration">Duration</li>
+            </ul>
+          </div>
         </form>
       </div>
+
       <div class="content-header">
         <small class="hashtag">#</small>
         <small class="title">Title</small>
@@ -70,13 +84,34 @@ export default {
   data() {
     return {
       isLike: this.isLiked,
+      filterBy: { search: '', sort: '' },
+      isShow: false,
+      isOps: false,
     };
   },
+  created() {},
   methods: {
     disLikePlaylist() {
       this.toogleLike();
       this.$emit('togglePlaylistLike');
     },
+    sendFilter() {
+      this.$emit('filter', { ...this.filterBy });
+    },
+
+    sortByTitle() {
+      this.filterBy.sort ="title"
+      this.$emit('filter', { ...this.filterBy });
+    },
+    sortByDate() {
+      this.filterBy.sort ="date"
+      this.$emit('filter', { ...this.filterBy });
+    },
+    sortByDuration() {
+      this.filterBy.sort ="duration"
+      this.$emit('filter', { ...this.filterBy });
+    },
+
     likePlaylist() {
       this.toogleLike();
       this.$emit('togglePlaylistLike');
@@ -86,6 +121,12 @@ export default {
     },
     playFirstSong() {
       this.$emit('playFirstSong');
+    },
+    toogleSearch() {
+      this.isShow = !this.isShow;
+    },
+    toogleOps() {
+      this.isOps = !this.isOps;
     },
   },
 };

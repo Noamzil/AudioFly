@@ -2,6 +2,7 @@
   <section v-if="currPlaylist" class="playlist-page">
     <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
     <playlist-linear
+      @filter="setFilter"
       @togglePlaylistLike="togglePlaylistLike"
       @playFirstSong="playFirstSong"
       :isLiked="isPlaylistLiked"
@@ -38,6 +39,11 @@ export default {
     },
   },
   methods: {
+    setFilter(filterBy) {
+      this.$store.dispatch({ type: 'setFilter', filterBy });
+    },
+
+
     async togglePlaylistLike() {
       const { _id, type } = this.currPlaylist;
       if (this.isPlaylistLiked) {

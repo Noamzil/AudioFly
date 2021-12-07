@@ -6,13 +6,16 @@ export const playlistStore = {
     playlists: [],
     albums: [],
     likedSongs: [],
-    currPlaylist: null
+    currPlaylist: null,
+    filterBy: null,
   },
   getters: {
     playlists({ playlists }) {
       return playlists;
     },
-    currPlaylist({ currPlaylist }) { return currPlaylist }
+    currPlaylist({ currPlaylist }) {
+      return currPlaylist;
+    },
   },
   mutations: {
     loadPlaylists(state, { playlists }) {
@@ -22,7 +25,9 @@ export const playlistStore = {
       state.playlists.push(playlist);
     },
     updatePlaylist({ playlists }, { updatedPlaylist }) {
-      const idx = playlists.findIndex((currPL) => updatedPlaylist._id === currPL._id);
+      const idx = playlists.findIndex(
+        (currPL) => updatedPlaylist._id === currPL._id
+      );
       playlists.splice(idx, 1, updatedPlaylist);
     },
     removePlaylist(state, { playlistId }) {
@@ -33,13 +38,17 @@ export const playlistStore = {
       state.playlists.splice(idx, 1);
     },
     setCurrPlaylist(state, { playlist }) {
-      state.currPlaylist = playlist
-    }
+      state.currPlaylist = playlist;
+    },
+    setFilter(state, { filterBy }) {
+      state.filterBy = filterBy;
+      console.log(`in store set filtet by to`, filterBy);
+    },
   },
   actions: {
-    async loadPlaylists({ commit }) {
+    async loadPlaylists({ commit }, { filterBy }) {
       try {
-        const playlists = await playlistService.query();
+        const playlists = await playlistService.query(filterBy);
         commit({ type: 'loadPlaylists', playlists });
       } catch (err) {
         console.log('Could not load playlists at playlistStore', err);
@@ -72,11 +81,15 @@ export const playlistStore = {
     },
     async setCurrPlaylist({ commit }, { playlistId }) {
       try {
-        const playlist = await playlistService.getPlaylistById(playlistId)
-        commit({ type: 'setCurrPlaylist', playlist })
+        const playlist = await playlistService.getPlaylistById(playlistId);
+        commit({ type: 'setCurrPlaylist', playlist });
       } catch (err) {
         console.log('Could not set playlist at playlistStore', err);
       }
-    }
+    },
+    setFilter({ commit, dispatch }, { filterBy }) {
+      commit({ type: 'setFilter', filterBy });
+      dispatch({ type: 'loadPlaylists', filterBy });
+    },
   },
 };

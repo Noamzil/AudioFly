@@ -19,7 +19,8 @@ export const playlistService = {
   removePlaylist,
   addSong,
 };
-async function query() {
+async function query(filterBy) {
+  console.log('in service filter by ', filterBy);
   try {
     const playlists = await storageService.query(PLAYLIST_KEY);
     return playlists;
