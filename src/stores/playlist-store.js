@@ -8,6 +8,7 @@ export const playlistStore = {
     likedSongs: [],
     currPlaylist: null,
     filterBy: null,
+    tags: ['pop', 'Funk', 'Punk', 'Rock', 'Rap', 'Hip-Hop', 'Dance', 'Indie', 'Singer-Songwriter', 'Alternative Rock', 'jazz']
   },
   getters: {
     playlists({ playlists }) {
@@ -16,6 +17,7 @@ export const playlistStore = {
     currPlaylist({ currPlaylist }) {
       return currPlaylist;
     },
+    tags({ tags }) { return tags }
   },
   mutations: {
     loadPlaylists(state, { playlists }) {

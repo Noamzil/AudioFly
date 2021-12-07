@@ -80,9 +80,7 @@ export default {
       };
     },
     openModal(type) {
-            console.log('hii');
-
-      eventBus.$emit('opanModal', type)
+      eventBus.$emit('openModal', type)
     }
   },
   computed: {

@@ -46,7 +46,7 @@ created() {
 },
 methods: {
     loadImg(ev) {
-        this.$emit('loadImg', ev)
+        this.$emit('loadImg', ev, 'user')
     },
     signUser() {
         if (this.user.password === this.rePassword) {

@@ -2,7 +2,8 @@
 <section class="body-modal" v-if="modalType" @click="exitModal">
     <div class="modal-box" @click.stop="stop">
         <component :is="modalType" :userImg="userImg" :currPlaylist="currPlaylist"
-        @signUser="signUser" @logUser="logUser" @openModal="openModal" @loadImg="loadImg">
+        @signUser="signUser" @logUser="logUser" @openModal="openModal" 
+        @loadImg="loadImg" @tagPlaylist="tagPlaylist" @updatePlaylist="updatePlaylist">
         </component>
     </div>
 </section>
@@ -21,6 +22,7 @@ export default {
         return {
             modalType: '', 
             userImg: '',
+            currPlaylist: null,
         }
     },
     created() {
@@ -45,22 +47,41 @@ export default {
                 this.modalType = ''
             }        
         },
-        loadImg(fileEv) {
+        loadImg(fileEv, type) {
             const img = fileEv.target.files[0];
             const reader = new FileReader()
             reader.readAsDataURL(img)
             reader.onload = ev => {
-                this.userImg = ev.target.result
+                if (type === 'user'){
+                    this.userImg = ev.target.result
+                } else if (type === 'playlist') {
+                    this.currPlaylist.playlistImg = ev.target.result
+                }
             }
+        },
+        tagPlaylist(tag) {
+            if (this.currPlaylist.tags.includes(tag)) {
+                const idx = this.currPlaylist.tags.findIndex(currTag => tag === currTag)
+                this.currPlaylist.tags.splice(idx, 1)
+            } else this.currPlaylist.tags.push(tag)
+
+        },
+        updatePlaylist() {
+            const playlist = this.currPlaylist
+            this.$store.dispatch({type: 'updatePlaylist', playlist})
+            this.modalType = ''
         },
         stop() {
             
         },
     },
-    computed: {
-        async currPlaylist() {
-            const {playlistId} = this.$route.params
-            return await playlistService.getPlaylistById(playlistId)
+    watch: {
+        '$route.params.playlistId': {
+            async handler() {
+                const {playlistId} = this.$route.params
+                const playlist = await playlistService.getPlaylistById(playlistId)
+                this.currPlaylist = JSON.parse(JSON.stringify(playlist))
+            }
         }
     },
     components: {
