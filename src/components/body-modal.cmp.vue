@@ -74,50 +74,10 @@ export default {
         this.currPlaylist.tags.splice(idx, 1);
       } else this.currPlaylist.tags.push(tag);
     },
-    methods: {
-        exitModal() {
-            this.modalType = ''
-        },
-        openModal(type) {
-            this.modalType = type
-        },
-        async logUser(user) {
-            await this.$store.dispatch({type: 'logIn', user})
-            if (this.$store.getters.user.username === user.username) {
-                this.modalType = ''
-            }
-        },
-        async signUser(user) {
-            await this.$store.dispatch({type: 'signUp', user})
-            if (this.$store.getters.user.username === user.username) {
-                this.modalType = ''
-            }        
-        },
-        loadImg(fileEv, type) {
-            const img = fileEv.target.files[0];
-            const reader = new FileReader()
-            reader.readAsDataURL(img)
-            reader.onload = ev => {
-                if (type === 'user'){
-                    this.userImg = ev.target.result
-                } else if (type === 'playlist') {
-                    this.currPlaylist.playlistImg = ev.target.result
-                }
-            }
-        },
-        tagPlaylist(tag) {
-            if (this.currPlaylist.tags.includes(tag)) {
-                const idx = this.currPlaylist.tags.findIndex(currTag => tag === currTag)
-                this.currPlaylist.tags.splice(idx, 1)
-            } else this.currPlaylist.tags.push(tag)
-
-        },
-        updatePlaylist() {
-            const playlist = this.currPlaylist
-            this.$store.dispatch({type: 'updatePlaylist', playlist})
-            this.modalType = ''
-        },
-        stop() {},
+    updatePlaylist() {
+      const playlist = this.currPlaylist;
+      this.$store.dispatch({ type: 'updatePlaylist', playlist });
+      this.modalType = '';
     },
     stop() {},
   },
