@@ -1,7 +1,7 @@
 <template>
   <section
     v-if="this.$store.getters.songsRes.length"
-    class="songs-res-container"
+    class="flex songs-res-container"
   >
     <div class="top-res" v-if="topSong">
       <img :src="topSong.img" />
@@ -15,8 +15,8 @@
         </svg>
       </button>
     </div>
-    <div class="songs-res" v-if="this.$store.getters.songsRes">
-      <div v-for="song in songsRes" :key="song.id" class="song-res">
+    <div class="flex songs-res" v-if="this.$store.getters.songsRes">
+      <div v-for="song in songsRes" :key="song.id" class="flex song-res">
         <img :src="song.img" @click="playSong(song)" />
         <h3>{{ song.title }}</h3>
 

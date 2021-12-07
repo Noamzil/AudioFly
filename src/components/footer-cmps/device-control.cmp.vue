@@ -50,14 +50,16 @@
         ></path>
       </svg>
     </button>
-    <button>
-      <span aria-hidden="true"
-        ><svg role="img" viewBox="0 0 16 16">
-          <path
-            d="M2 2v5l4.33-2.5L2 2zm0 12h14v-1H2v1zm0-4h14V9H2v1zm7-5v1h7V5H9z"
-          ></path></svg
-      ></span>
-    </button>
+    <router-link to="/queue">
+      <button class="queue">
+        <span aria-hidden="true"
+          ><svg role="img" viewBox="0 0 16 16">
+            <path
+              d="M2 2v5l4.33-2.5L2 2zm0 12h14v-1H2v1zm0-4h14V9H2v1zm7-5v1h7V5H9z"
+            ></path></svg
+        ></span>
+      </button>
+    </router-link>
     <button>
       <svg role="img" viewBox="0 0 16 16">
         <path
@@ -70,7 +72,7 @@
 
 <script>
 export default {
-  name: 'device-control',
+  name: "device-control",
   data() {
     return {
       isHover: false,
@@ -79,7 +81,7 @@ export default {
   },
   methods: {
     changeVolume() {
-      this.$emit('changeVolume', this.currVolume);
+      this.$emit("changeVolume", this.currVolume);
     },
   },
   computed: {

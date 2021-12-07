@@ -1,7 +1,6 @@
 header.main-header {
   height: 65px;
   background-color: rgb(28, 11, 102);
-  display: flex;
   justify-content: space-between;
   align-items: center;
   grid-column: 2/4;
@@ -11,7 +10,6 @@ header.main-header {
     border-radius: 50%;
     height: 40px;
     width: 40px;
-    border: none;
     background-color: rgba(0, 0, 0, 0.397);
     &.active {
       background-color: rgba(0, 0, 0, 0.602);
@@ -24,7 +22,6 @@ header.main-header {
     }
   }
   .login-container {
-    display: flex;
     align-items: center;
 
     >* {
@@ -36,18 +33,15 @@ header.main-header {
       width: 100px;
       height: 40px;
       border-radius: 30px;
-      border: none;
       font-weight: bold;
     }
   }  
 }
 .left-side-header {
-  display: flex;
   gap: 20px;
   align-items: center;
 }
 .input-container {
-  display: flex;
   background-color: white;
   border-radius: 32px;
   height: 40px;

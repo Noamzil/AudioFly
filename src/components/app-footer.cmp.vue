@@ -1,6 +1,6 @@
 <template>
   <section>
-    <section class="footer">
+    <section class="flex footer">
       <played-note-details />
       <song-progress
         :currSong="currSong"
