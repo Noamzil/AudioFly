@@ -1,5 +1,9 @@
 <template>
-  <article class="song-container" @mouseover="isHover = true" @mouseleave="isHover = false">
+  <article
+    class="song-container"
+    @mouseover="isHover = true"
+    @mouseleave="isHover = false"
+  >
     <button v-if="isHover" @click="$emit('playSong', song)" class="play-btn">
       <svg role="img" viewBox="0 0 24 24">
         <polygon
@@ -14,7 +18,7 @@
       <p>{{ song.title }}</p>
     </div>
     <p>Album name</p>
-    <p>{{ song.addedAt }}</p>
+    <p>{{ dateAdded }}</p>
     <div class="song-options">
       <div class="heart-container">
         <section v-if="isHover || isSongLiked">
@@ -59,9 +63,10 @@ export default {
       );
       return isLiked ? true : false;
     },
+
     dateAdded() {
       var addedAt = this.song.addedAt;
-      return addedAt.slice(0, 10);
+      return utilService.getRelativeTime(addedAt);
     },
   },
   methods: {

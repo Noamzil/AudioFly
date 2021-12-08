@@ -7,11 +7,17 @@
         @togglePlay="togglePlay"
         @startAt="startAt"
         @playNextSong="playNextSong"
+        @shufflePlaylist="shufflePlaylist"
       />
       <device-control @changeVolume="changeVolume" />
     </section>
     <div class="youtube-player">
-      <youtube hidden :video-id="videoId" @playing="playing" ref="youtube"></youtube>
+      <youtube
+        hidden
+        :video-id="videoId"
+        @playing="playing"
+        ref="youtube"
+      ></youtube>
     </div>
   </section>
 </template>
@@ -56,6 +62,9 @@ export default {
     },
     startAt(ev) {
       this.player.loadVideoById(this.$store.getters.currSong.youtubeId, ev);
+    },
+    shufflePlaylist() {
+      this.$store.commit('shufflePlaylist');
     },
   },
   computed: {
