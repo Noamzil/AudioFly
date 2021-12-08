@@ -33,8 +33,9 @@ export default {
     '$route.params.playlistId': {
       async handler() {
         const { playlistId } = this.$route.params;
-        await this.$store.dispatch({ type: 'setCurrPlaylist', playlistId });
-        this.currPlaylist = this.$store.getters.currPlaylist;
+        // await this.$store.dispatch({ type: 'setCurrPlaylist', playlistId });
+        // this.currPlaylist = this.$store.getters.currPlaylist;
+        this.currPlaylist = await playlistService.getPlaylistById(playlistId)
       },
       immediate: true,
     },

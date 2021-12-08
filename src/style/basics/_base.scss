@@ -34,6 +34,11 @@ li {
   list-style-type: none;
 }
 
+.not-btn {
+  background: none;
+  border: none;
+}
+
 #app {
   grid-column: 2/-1;
   margin-bottom: 200px;

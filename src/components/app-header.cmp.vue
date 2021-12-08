@@ -26,7 +26,7 @@
     </section>
     <div class=" flex login-container">
       <template v-if="!$store.getters.realUser">
-      <button @click="openModal('login-modal')" class="login-btn">Login</button>
+      <button @click="$router.push('/login')" class="login-btn">Login</button>
       </template>
     <user-nav @logOut="$emit('logOut')"></user-nav>
     </div>

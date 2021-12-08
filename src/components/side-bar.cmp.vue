@@ -50,7 +50,7 @@
         <!-- </router-link> -->
       </div>
       <!-- <router-link to="/liked-songs"> -->
-      <div @click="createNewPlaylist" class="side-bar-icons-container">
+      <div @click="$router.push('/liked-songs')" class="side-bar-icons-container">
         <div class="liked-songs-icon flex square-icon">
           <svg role="img" aria-hidden="true" viewBox="0 0 16 16">
             <path fill="none" d="M0 0h16v16H0z"></path>

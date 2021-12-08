@@ -3,23 +3,16 @@
     <div class="modal-box" @click.stop="stop">
       <component
         :is="modalType"
-        :userImg="userImg"
         :currPlaylist="currPlaylist"
-        @signUser="signUser"
-        @logUser="logUser"
         @openModal="openModal"
-        @loadImg="loadImg"
         @tagPlaylist="tagPlaylist"
-        @updatePlaylist="updatePlaylist"
-      >
+        @updatePlaylist="updatePlaylist">
       </component>
     </div>
   </section>
 </template>
 
 <script>
-import loginModal from './body-modals/login-modal.cmp.vue';
-import signupModal from './body-modals/signup-modal.cmp.vue';
 import editPlaylistModal from './body-modals/edit-playlist-modal.cmp.vue';
 import { eventBus } from '../services/event-bus.cmp.js';
 import { playlistService } from '../services/playlist.service.js';
@@ -29,7 +22,6 @@ export default {
   data() {
     return {
       modalType: '',
-      userImg: '',
       currPlaylist: null,
     };
   },
@@ -42,26 +34,6 @@ export default {
     },
     openModal(type) {
       this.modalType = type;
-    },
-    async logUser(user) {
-      await this.$store.dispatch({ type: 'logIn', user });
-      if (this.$store.getters.user.username === user.username) {
-        this.modalType = '';
-      }
-    },
-    async signUser(user) {
-      await this.$store.dispatch({ type: 'signUp', user });
-      if (this.$store.getters.user.username === user.username) {
-        this.modalType = '';
-      }
-    },
-    async loadImg(fileUploadEv) {
-      try {
-        const res = await uploadImg(fileUploadEv)
-        this.userImg = res.url
-      } catch (err) {
-        console.log('Couls not upload image', err);
-      }
     },
     tagPlaylist(tag) {
       if (this.currPlaylist.tags.includes(tag)) {
@@ -90,8 +62,6 @@ export default {
     },
   },
   components: {
-    loginModal,
-    signupModal,
     editPlaylistModal,
   },
 };
