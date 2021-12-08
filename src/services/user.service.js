@@ -142,7 +142,7 @@ function getSessionUser() {
 
 function _getGuest() {
     const guest = {
-        _id: '61b0ddc1679197742c490fa5',
+        _id: '61b0e6997912467302a11c47',
         fullName: 'Udi Ofly',
         username: 'Guest',
         userEmail: 'Udi@gamil.com',
