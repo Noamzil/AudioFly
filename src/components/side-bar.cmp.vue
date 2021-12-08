@@ -36,28 +36,14 @@
     </div>
 
     <div class="action-btns-container">
-      <div class="flex side-bar-icons-container">
-        <router-link to="/playlist/new">
-          <div class="create-playlist-icon flex square-icon">
-            <svg role="img" aria-hidden="true" viewBox="0 0 16 16">
-              <path d="M14 7H9V2H7v5H2v2h5v5h2V9h5z"></path>
-              <path fill="none" d="M0 0h16v16H0z"></path>
-            </svg>
-          </div>
-        </router-link>
-        <!-- <router-link to="/playlist/new"> -->
-        <h1 @click="createNewPlaylist" class="action-txt">Add Playlist</h1>
-        <!-- </router-link> -->
-      </div>
-      <!-- <router-link to="/liked-songs"> -->
-      <div @click="$router.push('/liked-songs')" class="side-bar-icons-container">
-        <div class="liked-songs-icon flex square-icon">
+      <div @click="createNewPlaylist" class="flex side-bar-icons-container">
+        <div class="create-playlist-icon flex square-icon">
           <svg role="img" aria-hidden="true" viewBox="0 0 16 16">
             <path d="M14 7H9V2H7v5H2v2h5v5h2V9h5z"></path>
             <path fill="none" d="M0 0h16v16H0z"></path>
           </svg>
         </div>
-        <h1 @click="createNewPlaylist" class="action-txt">Add Playlist</h1>
+        <h1 class="action-txt">Add Playlist</h1>
       </div>
       <router-link to="/liked-songs">
         <div class="side-bar-icons-container">
