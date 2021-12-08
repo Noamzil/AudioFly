@@ -102,6 +102,7 @@ export default {
     },
     addSong(song) {
       song.addedAt = Date.now()
+      console.log(song.addedAt);
       this.currPlaylist.songs.push(song)
       this.$store.dispatch({type: 'updatePlaylist', playlist: this.currPlaylist})
       console.log(this.currPlaylist);
