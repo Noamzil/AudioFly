@@ -52,7 +52,7 @@
     transition: opacity 0.5s;
     position: relative;
     left: 75%;
-    top: -43%;
+    top: -55%;
     box-shadow: -1px 3px 8px 0px;
     &.highlight {
       visibility: visible;
@@ -87,6 +87,9 @@
     .song-name-container {
       font-size: 14px;
     }
+    button {
+      top: -48%;
+    }
   }
 }
 
@@ -106,6 +109,11 @@
     }
     .song-name-container {
       font-size: 14px;
+    }
+    button {
+      top: -53%;
+      left: 70%
+
     }
   }
 }
