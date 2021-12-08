@@ -1,6 +1,5 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
-    <a :href="currPlaylist.imgUrl" download="My-Playlist">Download</a>
     <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
     <playlist-linear
       @openModal="openModal"
@@ -13,6 +12,15 @@
       @toggleLikeSong="toggleLikeSong"
       :currPlaylist="currPlaylist"
     />
+    <section class="playlist-search-song" @mouseleave="isSearch=false">
+      <div class="search-container">
+        <button @click="isSearch=true">+</button>
+        <input type="text" v-model="songToSearch" v-if="isSearch" @keyup.enter="search">
+      </div>
+      <div class="search-result-container">
+
+      </div>
+    </section>
   </section>
 </template>
 
@@ -24,12 +32,16 @@ import { playlistService } from '../services/playlist.service.js';
 import { eventBus } from '../services/event-bus.cmp.js';
 import { utilService } from '../services/util.service';
 import {uploadImg} from '../services/upload-service.js'
+import {apiService} from '../services/api.service.js'
 export default {
   name: 'playlist-page',
   data() {
     return {
       currPlaylist: null,
       songToCheck: null,
+      isSearch: false,
+      songToSearch: '',
+      songsToShow: []
     };
   },
   watch: {
@@ -92,6 +104,18 @@ export default {
     openModal(type) {
       eventBus.$emit('openModal', type);
     },
+    async search() {
+      const songs = await apiService.getVideoId(this.songToSearch)
+      songs.forEach(song => {
+        apiService.getVideoLength(song.youtubeId)
+          .then(length => {
+            const totalSeconds = utilService.ISOStringToSec(length);
+            song.duration = utilService.secToStr(totalSeconds) 
+          })
+      })
+      console.log(songs);
+      this.songToSearch = ''
+    }
   },
   computed: {
     isPlaylistLiked() {

@@ -12,6 +12,12 @@
     font-size: rem(10px);
     margin: 0 4px;
   }
+  .playlist-search-song {
+    .search-container {
+      width: 100%;
+      display: flex;
+    }
+  }
 }
 
 @import '../playlist/playlist-header.scss';

@@ -18,42 +18,29 @@ const axios = require('axios');
 export const apiService = {
   getVideoId,
   getVideoLength,
-  getFourVideoDetails,
+  // getFourVideoDetails,
 };
 
 async function getVideoId(key) {
-  console.log(`in api req`);
+  // console.log(`in api req`);
   try {
     const res = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?regionCode=us&videoDuration=short&lr=en&videoCategoryId=10&part=snippet&maxResults=5&eventType=completed&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
+      `https://www.googleapis.com/youtube/v3/search?regionCode=us&videoDuration=short&lr=en&videoCategoryId=10&part=snippet&maxResults=5&type=video&key=${YOUTUBEAPIKEY}&q=${key}`
     );
-    // const res = await axios.get(
-    //   `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&type=video&q=${key}&key=${YOUTUBEAPIKEY}`
-    // );
     // console.log(res.data);
-
     const songs = res.data.items.map((song) => {
       return {
         youtubeId: song.id.videoId,
         title: song.snippet.title,
         img: song.snippet.thumbnails.default.url,
-        type:'song'
+        type: 'song'
       };
     });
+    // console.log(songs);
     return songs;
   } catch (err) {
     console.log('Error geting song from youTube');
     throw err;
-  }
-}
-async function getFourVideoDetails(id1,id2,id3,id4) {
-  try {
-    const res = await axios.get(
-      `https://www.googleapis.com/youtube/v3/videos?id=${id1}&id=${id2}&id=${id3}&id=${id4}&part=contentDetails&videoCategoryId=10&key=${YOUTUBEAPIKEY}`
-    );
-    return res.data.items.contentDetails.duration;
-  } catch (error) {
-    throw error;
   }
 }
 async function getVideoLength(id) {
