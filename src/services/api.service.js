@@ -29,9 +29,15 @@ async function getVideoId(key) {
     );
     // console.log(res.data);
     const songs = res.data.items.map((song) => {
+      var songTtile = song.snippet.title
+      if (song.snippet.title.includes('(')) {
+        var idx = song.snippet.title.indexOf('(')
+        songTtile = song.snippet.title.slice(0, idx)
+        console.log(song.snippet.title);
+      }
       return {
         youtubeId: song.id.videoId,
-        title: song.snippet.title,
+        title: songTtile,
         img: song.snippet.thumbnails.default.url,
         type: 'song'
       };
@@ -44,7 +50,7 @@ async function getVideoId(key) {
   }
 }
 async function getVideoLength(id) {
-  console.log(`in api req`, id);
+  // console.log(`in api req`, id);
   try {
     const res = await axios.get(
       `https://www.googleapis.com/youtube/v3/videos?id=${id}&part=contentDetails&key=${YOUTUBEAPIKEY}`

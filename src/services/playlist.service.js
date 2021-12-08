@@ -22,8 +22,8 @@ export const playlistService = {
 };
 async function query() {
   try {
-    const playlists = await httpService.get(PLAYLIST_URL)
-    // const playlists = await storageService.query(PLAYLIST_KEY);
+    // const playlists = await httpService.get(PLAYLIST_URL)
+    const playlists = await storageService.query(PLAYLIST_KEY);
     return playlists;
   } catch (err) {
     console.log('Could not get playlists in playlistService', err);
@@ -32,8 +32,8 @@ async function query() {
 }
 async function getPlaylistById(id) {
   try {
-    const playlist = await httpService.get(PLAYLIST_URL + id)
-    // const playlist = await storageService.get(PLAYLIST_KEY, id);
+    // const playlist = await httpService.get(PLAYLIST_URL + id)
+    const playlist = await storageService.get(PLAYLIST_KEY, id);
     console.log(id);
     return playlist;
   } catch (err) {
@@ -43,8 +43,8 @@ async function getPlaylistById(id) {
 }
 async function addPlaylist(playlist) {
   try {
-    const newPlaylist = await httpService.post(PLAYLIST_URL, playlist)
-    // const newPlaylist = await storageService.post(PLAYLIST_KEY, playlist);
+    // const newPlaylist = await httpService.post(PLAYLIST_URL, playlist)
+    const newPlaylist = await storageService.post(PLAYLIST_KEY, playlist);
     return newPlaylist;
   } catch (err) {
     console.log('Could not add playlist at playlistService');
@@ -53,8 +53,8 @@ async function addPlaylist(playlist) {
 }
 async function updatePlaylist(playlist) {
   try {
-    const updatedPlaylist = await httpService.put(PLAYLIST_URL, playlist)
-    // const updatedPlaylist = await storageService.put(PLAYLIST_KEY, playlist);
+    // const updatedPlaylist = await httpService.put(PLAYLIST_URL, playlist)
+    const updatedPlaylist = await storageService.put(PLAYLIST_KEY, playlist);
     return updatedPlaylist;
   } catch (err) {
     console.log('Could not update playlist at playlistService');
@@ -63,8 +63,8 @@ async function updatePlaylist(playlist) {
 }
 async function removePlaylist(id) {
   try {
-    await httpService.delete(PLAYLIST_URL, id) // Pay attention!!!
-    // await storageService.remove(PLAYLIST_KEY, id);
+    // await httpService.delete(PLAYLIST_URL, id) // Pay attention!!!
+    await storageService.remove(PLAYLIST_KEY, id);
   } catch (err) {
     console.log('Could not remove playlist at playlist service');
     throw err;
