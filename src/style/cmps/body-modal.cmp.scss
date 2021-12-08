@@ -76,3 +76,29 @@
 .el-select-dropdown.is-multiple .el-select-dropdown__item.selected span {
   color: #606266;
 }
+
+.share-playlist-modal-container {
+  height: 100%;
+  a {
+    text-decoration: none;
+  }
+  .headline {
+    font-size: 30px;
+  }
+  .share-playlist-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    height: 100%;
+    .clipboard {
+      font-size: 96px;
+      cursor: pointer;
+      text-align: center;
+    }
+    img {
+      height: 100px;
+      cursor: pointer;
+    }
+  }
+}

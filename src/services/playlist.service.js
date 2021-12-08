@@ -91,7 +91,7 @@ function filterPlaylist(songs, filterBy) {
 
   if (filterBy.sort === 'date') {
     songs.sort((a, b) => {
-      return Date.parse(b.addedAt) - Date.parse(a.addedAt);
+      return b.addedAt - a.addedAt;
     });
   }
 

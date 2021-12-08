@@ -30,10 +30,17 @@ async function getVideoId(key) {
     // console.log(res.data);
     const songs = res.data.items.map((song) => {
       var songTtile = song.snippet.title
+      if (song.snippet.title.includes('Lyrics') || song.snippet.title.includes('lyrics')) {
+        var idx = song.snippet.title.indexOf('Lyrics') || song.snippet.title.indexOf('lyrics')
+        songTtile = song.snippet.title.slice(0, idx)
+      }
       if (song.snippet.title.includes('(')) {
         var idx = song.snippet.title.indexOf('(')
         songTtile = song.snippet.title.slice(0, idx)
-        console.log(song.snippet.title);
+      }
+      if (song.snippet.title.includes('[')) {
+        var idx = song.snippet.title.indexOf('[')
+        songTtile = song.snippet.title.slice(0, idx)
       }
       return {
         youtubeId: song.id.videoId,

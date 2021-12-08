@@ -83,7 +83,8 @@ export const userStore = {
             try {
                 const updatedUser = await userService.removeLike(entity)
                 commit({ type: 'setCurrUser', user: updatedUser })
-                eventBus.$emit('showMsg', `The ${entity.type} was removed from your librery`)
+                var songStr =  entity.type.charAt(0).toUpperCase() + entity.type.slice(1);
+                eventBus.$emit('showMsg', ` ${songStr} removed from your favorites`)
             } catch (err) {
                 console.log('Could not add like in userStore', err);
             }
