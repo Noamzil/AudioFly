@@ -1,8 +1,8 @@
 .liked-songs-description {
-  padding: 30px;
-  gap: 30px;
+  padding: 30px !important;
+  gap: 30px !important;
   background: linear-gradient(transparent 0, rgba(0, 0, 0, 0.5) 100%),
-    rgb(80, 56, 160);
+    rgb(80, 56, 160) !important;
   img {
     height: 232px;
     width: 232px;
@@ -14,6 +14,6 @@
 
 .liked-song-page {
   & .playlist-page .linear-container {
-    background-color: #5038a0;
+    background-color: #5038a0 !important;
   }
 }
