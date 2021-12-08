@@ -73,8 +73,8 @@ export default {
     },
     async imgUpload(fileUploadEv) {
       try {
-        const res = await uploadImg(fileUploadEv)
-      this.currPlaylist.playlistImg = res.url
+        const res = await uploadImg(fileUploadEv);
+        this.currPlaylist.playlistImg = res.url;
         const playlist = this.currPlaylist;
         this.$store.dispatch({ type: 'updatePlaylist', playlist });
       } catch (err) {
