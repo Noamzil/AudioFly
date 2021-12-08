@@ -43,3 +43,15 @@ li {
   grid-column: 2/-1;
   margin-bottom: 200px;
 }
+
+
+@media (max-width:840px) {
+  .main-app-container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr auto;
+  }
+  #app {
+    grid-column: 1/2;
+  }
+}

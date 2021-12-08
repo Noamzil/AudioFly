@@ -17,7 +17,10 @@ export default {
       this.$emit('removeSong', this.song);
     },
     addToQueue() {
+      // console.log(this.song);
       console.log(`addToQueue`);
+      const entity = this.song
+      this.$store.commit({type:'addToQueue', entity })
     },
     share() {
       console.log(`share`);
