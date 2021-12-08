@@ -27,7 +27,7 @@
           </button>
           <div @click="openPlaylistOpts" class="dots-container">
             <div>• • •</div>
-          <playlist-options v-if="isPlaylistOps" @editPlaylist="openModal"/>
+          <playlist-options v-if="isPlaylistOps" @editPlaylist="openModalforEdit" @sharePlaylist="openModalforShare"/>
           </div>
         </div>
 
@@ -128,8 +128,11 @@ export default {
     playFirstSong() {
       this.$emit("playFirstSong");
     },
-    openModal() {
+    openModalforEdit() {
       this.$emit("openModal", "edit-playlist-modal");
+    },
+    openModalforShare() {
+      this.$emit("openModal", "share-playlist-modal");
     },
     toogleSearch() {
       this.isShow = !this.isShow;
@@ -142,7 +145,8 @@ export default {
     }
   },
   components: {
-    playlistOptions
+    playlistOptions,
+    
   }
 };
 </script>

@@ -50,8 +50,6 @@ export default {
         "Hip-Hop",
         "Podcasts",
         "Charts",
-        // "Made For You",
-        // "New Releases",
         "Discover",
         "Concerts",
         "Mood",

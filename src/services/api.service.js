@@ -31,7 +31,6 @@ async function getVideoId(key) {
     const songs = res.data.items.map((song) => {
       var songTtile = song.snippet.title
       if (song.snippet.title.includes('Lyrics') || song.snippet.title.includes('lyrics')) {
-        console.log(song.snippet.title);
         var idx = song.snippet.title.indexOf('Lyrics') || song.snippet.title.indexOf('lyrics')
         songTtile = song.snippet.title.slice(0, idx)
       }

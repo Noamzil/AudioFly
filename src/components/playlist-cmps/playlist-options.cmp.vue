@@ -11,11 +11,7 @@
 <script>
 export default {
   name: "playlist-options",
-  //   props: ['song'],
   methods: {
-    // removeSong() {
-    //   this.$emit('removeSong', this.song);
-    // },
     addToQueue() {
       console.log(`addToQueue playlist`);
       this.currPlayList.songs.forEach((song) => {
@@ -25,6 +21,7 @@ export default {
     },
     share() {
       console.log(`share`);
+      this.$emit('sharePlaylist')
     },
     editPlaylist() {
       this.$emit('editPlaylist')
