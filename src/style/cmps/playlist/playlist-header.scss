@@ -2,11 +2,51 @@
   padding: 30px 32px 24px;
   display: flex;
 
-  background: linear-gradient(transparent,rgba(0,0,0,.5));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
   & img {
     height: 232px;
     width: 232px;
     margin-inline-end: 24px;
+  }
+
+  & .img-edit-container {
+    height: 232px;
+    width: 232px;
+    background-color: #282828;
+    position: relative;
+    bottom: 90px;
+    display: inline-block;
+    box-shadow: 0 4px 60px rgb(0 0 0 / 50%);
+    cursor: pointer;
+    bottom: 0px;
+    margin-right: 20px;
+
+    & .hide {
+      opacity: 0.5;
+    }
+
+    & .hidden{
+      opacity: 0.3;
+    }
+
+    & .img-awesome {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      flex-wrap: wrap;
+      justify-content: space-around;
+      grid-gap: 10px;
+      gap: 10px;
+
+      &.note {
+        font-size: 5rem;
+      }
+
+      & .pencil {
+        font-size: 3.125rem;
+      }
+    }
   }
 }
 

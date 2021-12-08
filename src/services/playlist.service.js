@@ -95,8 +95,15 @@ function filterPlaylist(songs, filterBy) {
   }
 
   if (filterBy.sort === 'duration') {
+    songs.forEach((song) => {
+      var a = song.duration.split(':');
+      song.duration = +a[0] * 60 + +a[1];
+    });
     songs.sort((a, b) => {
-      return a.time - b.time;
+      return a.duration - b.duration;
+    });
+    songs.forEach((song) => {
+      song.duration = utilService.secToStr(song.duration);
     });
   }
   return songs;
@@ -120,7 +127,7 @@ function getEmptyPlaylist() {
   };
   return playlist;
 }
-_createPlaylists()
+_createPlaylists();
 // test-data
 function _createPlaylists() {
   var playlists = localStorage.getItem(PLAYLIST_KEY);
