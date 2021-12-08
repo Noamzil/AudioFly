@@ -62,3 +62,10 @@ header.main-header {
     outline: none;
   }
 }
+
+
+@media (max-width:840px) {
+  header.main-header {
+    grid-column: 1/-1;
+  }
+}

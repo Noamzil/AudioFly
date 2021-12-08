@@ -37,3 +37,15 @@ li {
 #app {
   grid-column: 2/-1;
 }
+
+
+@media (max-width:840px) {
+  .main-app-container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr auto;
+  }
+  #app {
+    grid-column: 1/2;
+  }
+}
