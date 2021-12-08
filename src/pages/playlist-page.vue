@@ -23,7 +23,8 @@ import playlistContent from '../components/playlist-cmps/song-list.cmp.vue';
 import { playlistService } from '../services/playlist.service.js';
 import { eventBus } from '../services/event-bus.cmp.js';
 import { utilService } from '../services/util.service';
-import {uploadImg} from '../services/upload-service.js'
+import { uploadImg } from '../services/upload-service.js';
+
 export default {
   name: 'playlist-page',
   data() {
@@ -77,8 +78,8 @@ export default {
     },
     async imgUpload(fileUploadEv) {
       try {
-        const res = await uploadImg(fileUploadEv)
-      this.currPlaylist.playlistImg = res.url
+        const res = await uploadImg(fileUploadEv);
+        this.currPlaylist.playlistImg = res.url;
         const playlist = this.currPlaylist;
         this.$store.dispatch({ type: 'updatePlaylist', playlist });
       } catch (err) {

@@ -18,6 +18,7 @@ export const playlistService = {
   updatePlaylist,
   removePlaylist,
   filterPlaylist,
+  getEmptyPlaylist,
 };
 async function query() {
   try {
@@ -98,7 +99,27 @@ function filterPlaylist(songs, filterBy) {
       return a.time - b.time;
     });
   }
-  return songs
+  return songs;
+}
+
+function getEmptyPlaylist() {
+  const playlist = {
+    _id: utilService.makeId(),
+    type: 'playlist',
+    playlistImg: ``,
+    createdBy: {
+      userName: '',
+      _id: '',
+    },
+    createdAt: new Date(Date.now()),
+    likes: 0,
+    tags: [],
+    name: '',
+    discription: '',
+    time: 0,
+    songs: [],
+  };
+  return playlist;
 }
 // _createPlaylists()
 // test-data

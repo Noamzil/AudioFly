@@ -27,7 +27,6 @@ export default {
   data() {
     return {
       videoId: null,
-      songLength: 300,
     };
   },
   created() {
@@ -46,7 +45,6 @@ export default {
       this.player.playVideo();
     },
     pauseVideo() {
-      console.log(this.player);
       this.$store.commit('stopSong');
       this.player.pauseVideo();
     },
