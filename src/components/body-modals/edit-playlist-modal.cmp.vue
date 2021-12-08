@@ -57,17 +57,17 @@ export default {
   props: ["currPlaylist"],
   data() {
     return {
-      options: [
-        {
-          value: "Option1",
-          label: "Option1",
-        },
-        {
-          value: "Option2",
-          label: "Option2",
-        },
-      ],
-      value1: [],
+      // options: [
+      //   {
+      //     value: "Option1",
+      //     label: "Option1",
+      //   },
+      //   {
+      //     value: "Option2",
+      //     label: "Option2",
+      //   },
+      // ],
+      value1: this.currPlaylist.tags || [],
     };
   },
   methods: {
@@ -83,6 +83,16 @@ export default {
     tags() {
       return this.$store.getters.tags;
     },
+    options() {
+      var tags = this.tags
+      const options = tags.map(tag => {
+        return {
+          value: tag,
+          label: tag
+        }
+      })
+      return options
+    }
   },
 };
 </script>
