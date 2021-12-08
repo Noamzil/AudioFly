@@ -128,7 +128,7 @@ function getEmptyPlaylist() {
   };
   return playlist;
 }
-// _createPlaylists()
+_createPlaylists()
 // test-data
 function _createPlaylists() {
   var playlists = localStorage.getItem(PLAYLIST_KEY);
