@@ -44,24 +44,24 @@
               <path fill="none" d="M0 0h16v16H0z"></path>
             </svg>
           </div>
-          </router-link>
-          <router-link to="/playlist/new">
-          <h1 class="action-txt">Add Playlist</h1>
         </router-link>
+        <!-- <router-link to="/playlist/new"> -->
+        <h1 @click="createNewPlaylist" class="action-txt">Add Playlist</h1>
+        <!-- </router-link> -->
       </div>
-      <router-link to="/liked-songs">
-        <div class="side-bar-icons-container">
-          <div class="liked-songs-icon flex square-icon">
-            <svg role="img" aria-hidden="true" viewBox="0 0 16 16">
-              <path fill="none" d="M0 0h16v16H0z"></path>
-              <path
-                d="M13.797 2.727a4.057 4.057 0 00-5.488-.253.558.558 0 01-.31.112.531.531 0 01-.311-.112 4.054 4.054 0 00-5.487.253c-.77.77-1.194 1.794-1.194 2.883s.424 2.113 1.168 2.855l4.462 5.223a1.791 1.791 0 002.726 0l4.435-5.195a4.052 4.052 0 001.195-2.883 4.057 4.057 0 00-1.196-2.883z"
-              ></path>
-            </svg>
-          </div>
-          <h1 class="action-txt">Liked Songs</h1>
+      <!-- <router-link to="/liked-songs"> -->
+      <div @click="createNewPlaylist" class="side-bar-icons-container">
+        <div class="liked-songs-icon flex square-icon">
+          <svg role="img" aria-hidden="true" viewBox="0 0 16 16">
+            <path fill="none" d="M0 0h16v16H0z"></path>
+            <path
+              d="M13.797 2.727a4.057 4.057 0 00-5.488-.253.558.558 0 01-.31.112.531.531 0 01-.311-.112 4.054 4.054 0 00-5.487.253c-.77.77-1.194 1.794-1.194 2.883s.424 2.113 1.168 2.855l4.462 5.223a1.791 1.791 0 002.726 0l4.435-5.195a4.052 4.052 0 001.195-2.883 4.057 4.057 0 00-1.196-2.883z"
+            ></path>
+          </svg>
         </div>
-      </router-link>
+        <h1 class="action-txt">Liked Songs</h1>
+      </div>
+      <!-- </router-link> -->
     </div>
 
     <hr />
@@ -71,11 +71,41 @@
 
 <script>
 import sidebarPlaylist from './sidebar-playlist.cmp.vue';
+import { playlistService } from '../services/playlist.service.js';
 
 export default {
   name: 'sidebar',
   data() {
-    return {};
+    return {
+      newPlaylist: null,
+    };
+  },
+  created() {},
+  methods: {
+    createNewPlaylist() {
+      this.$store.dispatch({
+        type: 'createNewPlaylist',
+      });
+      // this.newPlaylist = playlistService.getEmptyPlaylist();
+      // var user = this.$store.getters.user;
+
+      // this.newPlaylist.createdBy = { username: user.username, _id: user._id };
+      // this.newPlaylist.name = `My playlist #` + this.getPlaylistsAmount;
+      // console.log(this.newPlaylist);
+
+      // this.newPlaylist._id = `1`;
+
+      // this.$store.dispatch({
+      //   type: 'updatePlaylist',
+      //   playlist: this.newPlaylist,
+      // });
+      // this.$router.push(`/playlist/${this.newPlaylist._id}`);
+    },
+  },
+  computed: {
+    getPlaylistsAmount() {
+      return this.$store.getters.user.playlists.length + 1;
+    },
   },
   components: {
     sidebarPlaylist,

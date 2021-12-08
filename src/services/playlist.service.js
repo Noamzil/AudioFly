@@ -104,11 +104,10 @@ function filterPlaylist(songs, filterBy) {
 
 function getEmptyPlaylist() {
   const playlist = {
-    _id: utilService.makeId(),
     type: 'playlist',
     playlistImg: ``,
     createdBy: {
-      userName: '',
+      username: '',
       _id: '',
     },
     createdAt: new Date(Date.now()),
@@ -146,7 +145,7 @@ function _createPlaylist(num) {
     type: 'playlist',
     playlistImg: `https://www.liveabout.com/thmb/pwO4o_iDrZRTmmhs7eOfD25Qoqw=/1500x1125/smart/filters:no_upscale()/pop-music-57bce3863df78c87634ea806.jpg`,
     createdBy: {
-      userName: 'Udi Ofly',
+      username: 'Udi Ofly',
       _id: 'u101',
     },
     createdAt: num,
@@ -198,7 +197,7 @@ function _createStation(num) {
     type: 'station',
     playlistImg: `https://www.liveabout.com/thmb/pwO4o_iDrZRTmmhs7eOfD25Qoqw=/1500x1125/smart/filters:no_upscale()/pop-music-57bce3863df78c87634ea806.jpg`,
     createdBy: {
-      userName: 'Udi Ofly',
+      username: 'Udi Ofly',
       _id: 'u101',
     },
     createdAt: num,
