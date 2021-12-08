@@ -43,7 +43,7 @@ export default {
   methods: {
     setFilter(filterBy) {
       var playlist = JSON.parse(
-        JSON.stringify(this.$store.getters.currPlaylist)
+        JSON.stringify(this.currPlaylist)
       );
       console.log(playlist);
       var fileterdSongs = playlistService.filterPlaylist(
