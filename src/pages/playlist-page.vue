@@ -1,35 +1,32 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
-    <a :href="currPlaylist.imgUrl" download="My-Playlist">Download</a>
     <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
-    <playlist-linear
-      @openModal="openModal"
-      @filter="setFilter"
-      @togglePlaylistLike="togglePlaylistLike"
-      @playFirstSong="playFirstSong"
-      :isLiked="isPlaylistLiked"
-    />
-    <playlist-content
-      @toggleLikeSong="toggleLikeSong"
-      :currPlaylist="currPlaylist"
-    />
+    <playlist-linear @openModal="openModal" @filter="setFilter"
+     @togglePlaylistLike="togglePlaylistLike" @playFirstSong="playFirstSong"
+      :isLiked="isPlaylistLiked" />
+    <playlist-list @toggleLikeSong="toggleLikeSong" @update="update" @playSong="playSong" :currPlaylist="currPlaylist" :songs="currPlaylist.songs"/>
+    <add-song @search="search" @addSong=addSong @close="songsToShow=null" :songs="songsToShow"></add-song>
   </section>
 </template>
 
 <script>
 import playlistDescription from '../components/playlist-cmps/playlist-description.cmp.vue';
 import playlistLinear from '../components/playlist-cmps/playlist-linear.cmp.vue';
-import playlistContent from '../components/playlist-cmps/song-list.cmp.vue';
+import playlistList from '../components/playlist-cmps/song-list.cmp.vue';
+import addSong from '../components/playlist-cmps/add-song.cmp.vue';
 import { playlistService } from '../services/playlist.service.js';
 import { eventBus } from '../services/event-bus.cmp.js';
 import { utilService } from '../services/util.service';
 import {uploadImg} from '../services/upload-service.js'
+import {apiService} from '../services/api.service.js'
 export default {
   name: 'playlist-page',
   data() {
     return {
       currPlaylist: null,
       songToCheck: null,
+      isSearch: false,
+      songsToShow: null,
     };
   },
   watch: {
@@ -54,7 +51,6 @@ export default {
       playlist.songs = fileterdSongs;
       this.currPlaylist = playlist;
     },
-
     async togglePlaylistLike() {
       const { _id, type } = this.currPlaylist;
       if (this.isPlaylistLiked) {
@@ -77,13 +73,24 @@ export default {
     },
     async imgUpload(fileUploadEv) {
       try {
-        const res = await uploadImg(fileUploadEv)
-      this.currPlaylist.playlistImg = res.url
+        const res = await uploadImg(fileUploadEv);
+        this.currPlaylist.playlistImg = res.url;
         const playlist = this.currPlaylist;
         this.$store.dispatch({ type: 'updatePlaylist', playlist });
       } catch (err) {
         console.log('Couls not upload image', err);
       }
+    },
+    async search(key) {
+      const songs = await apiService.getVideoId(key)
+      songs.forEach(song => {
+        apiService.getVideoLength(song.youtubeId)
+          .then(length => {
+            const totalSeconds = utilService.ISOStringToSec(length);
+            song.duration = utilService.secToStr(totalSeconds) 
+          })
+      })
+      this.songsToShow = songs
     },
     playFirstSong() {
       var song = this.currPlaylist.songs[0];
@@ -92,6 +99,19 @@ export default {
     openModal(type) {
       eventBus.$emit('openModal', type);
     },
+    addSong(song) {
+      song.addedAt = Date.now()
+      this.currPlaylist.songs.push(song)
+      this.$store.dispatch({type: 'updatePlaylist', playlist: this.currPlaylist})
+      console.log(this.currPlaylist);
+    },
+    update(songs) {
+      this.currPlaylist.songs = songs;
+      this.$store.dispatch({type: 'updatePlaylist', playlist: this.currPlaylist})
+    },
+    playSong(song) {
+      this.$store.commit({ type: 'playSong', song });
+    }
   },
   computed: {
     isPlaylistLiked() {
@@ -116,7 +136,8 @@ export default {
   components: {
     playlistDescription,
     playlistLinear,
-    playlistContent,
+    playlistList,
+    addSong,
   },
 };
 </script>

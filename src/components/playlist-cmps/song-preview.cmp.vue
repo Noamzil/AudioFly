@@ -1,9 +1,5 @@
 <template>
-  <article
-    class="song-container"
-    @mouseover="isHover = true"
-    @mouseleave="isHover = false"
-  >
+  <article class="song-container" @mouseover="isHover = true" @mouseleave="isHover = false">
     <button v-if="isHover" @click="$emit('playSong', song)" class="play-btn">
       <svg role="img" viewBox="0 0 24 24">
         <polygon
@@ -18,7 +14,7 @@
       <p>{{ song.title }}</p>
     </div>
     <p>Album name</p>
-    <p>{{ dateAdded }}</p>
+    <p>{{ song.addedAt }}</p>
     <div class="song-options">
       <div class="heart-container">
         <section v-if="isHover || isSongLiked">
@@ -29,7 +25,7 @@
           ></button>
         </section>
       </div>
-      <p>{{ songTime }}</p>
+      <p>{{ song.duration }}</p>
       <div @click="openSongOpts" class="dots-container">
         <div v-if="isHover">• • •</div>
       </div>
@@ -53,7 +49,8 @@ export default {
   },
   computed: {
     songTime() {
-      return utilService.writeTime(this.song.time);
+      console.log(this.song);
+      return utilService.writeTime(this.song.duration);
     },
     isSongLiked() {
       const userLiked = this.$store.getters.user.liked.song;
