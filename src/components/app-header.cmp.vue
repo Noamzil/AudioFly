@@ -1,5 +1,5 @@
 <template>
-  <header class="flex main-header">
+  <header :class="{ 'moving-header': !isTopScreen }" class="flex main-header">
     <section class="flex left-side-header">
       <div>
         <button @click="prevHistory" :class="isPrev ? 'active' : ''">
@@ -26,7 +26,7 @@
     </section>
     <div class="flex login-container">
       <template v-if="!$store.getters.realUser">
-      <button @click="$router.push('/login')" class="login-btn">Login</button>
+        <button @click="$router.push('/login')" class="login-btn">Login</button>
       </template>
       <user-nav @logOut="$emit('logOut')"></user-nav>
     </div>
@@ -34,38 +34,52 @@
 </template>
 
 <script>
-import userNav from "./user-nav.cmp.vue";
-import { eventBus } from "../services/event-bus.cmp.js";
+import userNav from './user-nav.cmp.vue';
+import { eventBus } from '../services/event-bus.cmp.js';
+
 export default {
-  name: "app-header",
+  name: 'app-header',
   data() {
     return {
       isNext: false,
       isPrev: false,
-      searchTxt: "",
+      searchTxt: '',
       currPagePath: null,
+      isTopScreen: null,
     };
+  },
+  created() {
+    window.addEventListener('scroll', this.handleScroll);
   },
   methods: {
     nextHistory() {
       this.isNext = !this.isNext;
-      if(this.currPagePath === this.$router.currentRoute.path) return
+      if (this.currPagePath === this.$router.currentRoute.path) return;
       if (this.currPagePath) this.$router.push(this.currPagePath);
-      console.log("Going to the next page on your history");
+      console.log('Going to the next page on your history');
     },
     prevHistory() {
       this.isPrev = !this.isPrev;
       this.currPagePath = this.$router.history.current.path;
       this.$router.back();
-      console.log("Going to the previous page on your history");
+      console.log('Going to the previous page on your history');
     },
     search() {
       const key = this.searchTxt;
-      this.$store.dispatch({ type: "search", key });
+      this.$store.dispatch({ type: 'search', key });
     },
     openModal(type) {
-      eventBus.$emit("openModal", type);
+      eventBus.$emit('openModal', type);
     },
+    handleScroll(event) {
+      var pageY = event.path[1].pageYOffset;
+      if (!pageY) {
+        this.isTopScreen = true;
+      } else this.isTopScreen = false;
+    },
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   computed: {
     route() {
