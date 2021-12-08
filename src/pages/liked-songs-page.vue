@@ -1,6 +1,6 @@
 <template>
   <section class="liked-song-page">
-    <div class="flex liked-songs-description ">
+    <div class="flex liked-songs-description">
       <img
         src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
       />
@@ -8,14 +8,14 @@
         <h2>PLAYLIST</h2>
         <h1>Liked Songs</h1>
         <div class="flex">
-          <p>user info</p>
+          <p>{{ getUser }}</p>
           <span>•</span>
           <p class="songs-length">list length</p>
         </div>
       </div>
     </div>
     <div class="playlist-page">
-      <playlist-linear> </playlist-linear> 
+      <playlist-linear> </playlist-linear>
       <!-- add events and emits  like the playlist page-->
     </div>
     <ul class="playlist-content">
@@ -46,6 +46,9 @@ export default {
   computed: {
     likedSongs() {
       return this.$store.getters.user.liked.song;
+    },
+    getUser() {
+      return this.$store.getters.user.fullName;
     },
   },
   components: {
