@@ -37,7 +37,7 @@ export const playlistStore = {
     loadPlaylists(state, { playlists }) {
       state.playlists = playlists;
     },
-    addPlaylist(state, {playlist}) {
+    addPlaylist(state, { playlist }) {
       state.playlists.push(playlist);
       console.log(playlist);
       router.push(`/playlist/${playlist._id}`);
@@ -57,6 +57,20 @@ export const playlistStore = {
     },
     setCurrPlaylist(state, { playlist }) {
       state.currPlaylist = playlist;
+    },
+    shufflePlaylist(state) {
+      var songs = state.currPlaylist.songs;
+      let currentIndex = songs.length;
+      let randomIndex = null;
+      while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [songs[currentIndex], songs[randomIndex]] = [
+          songs[randomIndex],
+          songs[currentIndex],
+        ];
+      }
+      return songs;
     },
   },
   actions: {
