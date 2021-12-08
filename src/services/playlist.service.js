@@ -160,14 +160,14 @@ function _createPlaylist(num) {
     tags: utilService.makeTags(2),
     name: 'My Playlist' + num,
     discription: 'Lorem ipsum, dolor sit amet consectetur!',
-    time: 80000000,
+    time: 0,
     songs: [
       {
         type: 'song',
         youtubeId: 'XXYlFuWEuKI',
         title: 'The Weekend - Save Your Tears',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        duration: 180050,
+        duration: '03:00',
         addedAt: new Date(Date.now()),
       },
       {
@@ -175,7 +175,7 @@ function _createPlaylist(num) {
         youtubeId: '_Yhyp-_hX2s',
         title: 'Eminem - Lose Yourself',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        duration: 180050,
+        duration: '03:00',
         addedAt: new Date(Date.now()),
       },
       {
@@ -183,7 +183,7 @@ function _createPlaylist(num) {
         youtubeId: 'NF-kLy44Hls',
         title: 'Duft Punk - Lose Yourself To Dance',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        duration: 180050,
+        duration: '03:00',
         addedAt: new Date(Date.now()),
       },
       {
@@ -191,7 +191,7 @@ function _createPlaylist(num) {
         youtubeId: 'Q0oIoR9mLwc',
         title: 'Red Hot Chili Peppers - Dark Necessities',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        duration: 180050,
+        duration: '03:00',
         addedAt: new Date(Date.now()),
       },
     ],
@@ -219,7 +219,7 @@ function _createStation(num) {
         youtubeId: 'XXYlFuWEuKI',
         title: 'The Weekend - Save Your Tears',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        duration: 160050,
+        duration: '03:00',
         addedAt: new Date(Date.now()),
       },
       {
@@ -227,7 +227,7 @@ function _createStation(num) {
         youtubeId: '_Yhyp-_hX2s',
         title: 'Eminem - Lose Yourself',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        duration: 189050,
+        duration: '03:00',
         addedAt: new Date(Date.now() + 5),
       },
       {
@@ -235,7 +235,7 @@ function _createStation(num) {
         youtubeId: 'NF-kLy44Hls',
         title: 'Duft Punk - Lose Yourself To Dance',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        duration: 180000,
+        duration: '03:00',
         addedAt: new Date(Date.now() - 10),
       },
       {
@@ -243,7 +243,7 @@ function _createStation(num) {
         youtubeId: 'Q0oIoR9mLwc',
         title: 'Red Hot Chili Peppers - Dark Necessities',
         img: 'https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228',
-        duration: 181050,
+        duration: '03:00',
         addedAt: new Date(Date.now() - 5),
       },
     ],
