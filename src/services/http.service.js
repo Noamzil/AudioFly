@@ -43,3 +43,11 @@ async function ajax(endpoint, method = 'GET', data = null) {
         throw err
     }
 }
+
+// async function downloadFile() {
+//     try {
+//         const res = await axios({
+//             url: 
+//         })
+//     } catch (err) { }
+// }

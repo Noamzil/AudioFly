@@ -23,6 +23,7 @@ import signupModal from './body-modals/signup-modal.cmp.vue';
 import editPlaylistModal from './body-modals/edit-playlist-modal.cmp.vue';
 import { eventBus } from '../services/event-bus.cmp.js';
 import { playlistService } from '../services/playlist.service.js';
+import {uploadImg} from '../services/upload-service.js'
 export default {
   name: 'body-modal',
   data() {
@@ -54,17 +55,13 @@ export default {
         this.modalType = '';
       }
     },
-    loadImg(fileEv, type) {
-      const img = fileEv.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(img);
-      reader.onload = (ev) => {
-        if (type === 'user') {
-          this.userImg = ev.target.result;
-        } else if (type === 'playlist') {
-          this.currPlaylist.playlistImg = ev.target.result;
-        }
-      };
+    async loadImg(fileUploadEv) {
+      try {
+        const res = await uploadImg(fileUploadEv)
+        this.userImg = res.url
+      } catch (err) {
+        console.log('Couls not upload image', err);
+      }
     },
     tagPlaylist(tag) {
       if (this.currPlaylist.tags.includes(tag)) {

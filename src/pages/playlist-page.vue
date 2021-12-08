@@ -1,5 +1,6 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
+    <a :href="currPlaylist.imgUrl" download="My-Playlist">Download</a>
     <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
     <playlist-linear
       @openModal="openModal"
@@ -22,7 +23,7 @@ import playlistContent from '../components/playlist-cmps/song-list.cmp.vue';
 import { playlistService } from '../services/playlist.service.js';
 import { eventBus } from '../services/event-bus.cmp.js';
 import { utilService } from '../services/util.service';
-
+import {uploadImg} from '../services/upload-service.js'
 export default {
   name: 'playlist-page',
   data() {
@@ -74,19 +75,19 @@ export default {
         await this.$store.dispatch({ type: 'addLike', entity: song });
       }
     },
+    async imgUpload(fileUploadEv) {
+      try {
+        const res = await uploadImg(fileUploadEv)
+      this.currPlaylist.playlistImg = res.url
+        const playlist = this.currPlaylist;
+        this.$store.dispatch({ type: 'updatePlaylist', playlist });
+      } catch (err) {
+        console.log('Couls not upload image', err);
+      }
+    },
     playFirstSong() {
       var song = this.currPlaylist.songs[0];
       this.$store.commit({ type: 'playSong', song });
-    },
-    imgUpload(fileUploadEv) {
-      const img = fileUploadEv.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(img);
-      reader.onload = (ev) => {
-        this.currPlaylist.playlistImg = ev.target.result;
-        const playlist = this.currPlaylist;
-        this.$store.dispatch({ type: 'updatePlaylist', playlist });
-      };
     },
     openModal(type) {
       eventBus.$emit('openModal', type);
