@@ -24,9 +24,10 @@
         :key="genre"
         class="browse-genre-container"
         :class="genre"
+        @click="toGenrePage(genre)"
       >
         <h3>{{ genre }}</h3>
-        <img
+        <img 
           :src="require('../assets/img/genres-img/' + genre + '.jpg')"
           class="browse-genre-img"
         />

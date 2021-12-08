@@ -10,7 +10,7 @@
     transform: rotate(25deg) translate(18%, -2%);
     position: relative;
     float: right;
-    top: 10px;
+    top: 70px;
   }
   .top-genres-container {
     gap: 20px;
@@ -23,9 +23,9 @@
   .top-genre {
     border: none;
     border-radius: 8px;
-    height: 220px;
+    height: 280px;
     overflow: hidden;
-    width: 430px;
+    width: 490px;
     cursor: pointer;
   }
   .browse-txt {
@@ -196,4 +196,23 @@
 }
 .Decades {
   background-color: rgb(186, 93, 7);
+}
+
+@media (max-width: 1400px) {
+  .search-page {
+    // background-color: rgb(0, 255, 21);
+    .top-genre {
+      height: 200px;
+    }
+    .top-genre-img {
+      top: 10px;
+    }
+  }
+}
+
+@media (max-width: 840px) {
+  .search-page {
+    // background-color: orange;
+    max-width: 820px;
+  }
 }

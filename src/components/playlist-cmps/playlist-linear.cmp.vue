@@ -25,15 +25,10 @@
               ></path>
             </svg>
           </button>
-          <button @click="openModal">
-          <svg class="dots" role="img" viewBox="0 0 32 32">
-            <path
-              d="M5.998 13.999A2 2 0 105.999 18a2 2 0 00-.001-4zm10.001 0A2 2 0 1016 18a2 2 0 000-4zm10.001 0A2 2 0 1026.001 18 2 2 0 0026 14z"
-            ></path>
-          
-          
-          </svg>
-          </button>
+          <div @click="openPlaylistOpts" class="dots-container">
+            <div>• • •</div>
+          <playlist-options v-if="isPlaylistOps" @editPlaylist="openModal"/>
+          </div>
         </div>
 
         <form @submit.prevent class="StationFilter">
@@ -83,55 +78,58 @@
 </template>
 
 <script>
+import playlistOptions from './playlist-options.cmp.vue'
+
 export default {
-  name: 'playlist-linear',
-  props: ['isLiked'],
+  name: "playlist-linear",
+  props: ["isLiked"],
   data() {
     return {
       isLike: this.isLiked,
-      filterBy: { search: '', sort: '' },
+      filterBy: { search: "", sort: "" },
       isShow: false,
       isOps: false,
+      isPlaylistOps: false
     };
   },
   created() {},
   methods: {
     disLikePlaylist() {
       this.toogleLike();
-      this.$emit('togglePlaylistLike');
+      this.$emit("togglePlaylistLike");
     },
     sendFilter() {
-      this.$emit('filter', { ...this.filterBy });
+      this.$emit("filter", { ...this.filterBy });
     },
 
     sortByTitle() {
-      this.filterBy.sort ="title"
-      this.$emit('filter', { ...this.filterBy });
-      this.isOps = false
+      this.filterBy.sort = "title";
+      this.$emit("filter", { ...this.filterBy });
+      this.isOps = false;
     },
     sortByDate() {
-      this.filterBy.sort ="date"
-      this.$emit('filter', { ...this.filterBy });
-      this.isOps = false
+      this.filterBy.sort = "date";
+      this.$emit("filter", { ...this.filterBy });
+      this.isOps = false;
     },
     sortByDuration() {
-      this.filterBy.sort ="duration"
-      this.$emit('filter', { ...this.filterBy });
-      this.isOps = false
+      this.filterBy.sort = "duration";
+      this.$emit("filter", { ...this.filterBy });
+      this.isOps = false;
     },
 
     likePlaylist() {
       this.toogleLike();
-      this.$emit('togglePlaylistLike');
+      this.$emit("togglePlaylistLike");
     },
     toogleLike() {
       this.isLike = !this.isLike;
     },
     playFirstSong() {
-      this.$emit('playFirstSong');
+      this.$emit("playFirstSong");
     },
     openModal() {
-      this.$emit('openModal', 'edit-playlist-modal')
+      this.$emit("openModal", "edit-playlist-modal");
     },
     toogleSearch() {
       this.isShow = !this.isShow;
@@ -139,6 +137,12 @@ export default {
     toogleOps() {
       this.isOps = !this.isOps;
     },
+    openPlaylistOpts() {
+      this.isPlaylistOps = !this.isPlaylistOps
+    }
   },
+  components: {
+    playlistOptions
+  }
 };
 </script>

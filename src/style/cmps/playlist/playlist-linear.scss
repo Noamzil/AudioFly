@@ -16,7 +16,7 @@
     flex-direction: row;
     width: 100%;
 
-     button {
+    button {
       background: transparent;
       border: 0;
 
@@ -114,6 +114,9 @@
       }
     }
   }
+  .dots-container {
+    cursor: pointer;
+  }
 }
 .StationFilter .sort-container {
   display: flex;
@@ -170,5 +173,20 @@
   &.hidden {
     z-index: -1000;
     margin: 0;
+  }
+}
+
+.playlist-linear-ops {
+  border-radius: 4px;
+  z-index: 9999;
+  position: absolute;
+  background-color: #282828;
+  margin-top: 5px;
+  margin-right: 20p;
+  li {
+    padding: 15px;
+    border-bottom: 2px solid #3b3b3b;
+    color: #b3b3b3;
+    width: 170px;
   }
 }

@@ -6,6 +6,7 @@ export const playStore = {
     currSong: {},
     currTime: 0,
     isSongOn: false,
+    queueSongs: []
   },
   getters: {
     songsRes({ searchedSongs }) {
@@ -20,6 +21,7 @@ export const playStore = {
     isSongOn({ isSongOn }) {
       return isSongOn;
     },
+    queueSongs({queueSongs}) {return queueSongs}
   },
   mutations: {
     search(state, { songs }) {
@@ -45,6 +47,10 @@ export const playStore = {
       console.log('im here');
       state.currTime = 0;
     },
+    addToQueue(state, {entity}) {
+      state.queueSongs.push(entity)
+      console.log(state.queueSongs);
+    }
   },
   actions: {
     async search({ commit }, { key }) {
