@@ -12,12 +12,31 @@
     font-size: rem(10px);
     margin: 0 4px;
   }
-  .playlist-search-song {
+  .add-song {
     .search-container {
       width: 100%;
       display: flex;
-    }  
-}
+    } 
+    .search-result-container {
+      display: flex;
+      justify-content: space-between;
+  
+      ul {
+        width: 60%;
+        li {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          img {
+            width: 50px
+          }
+        }
+      }
+      button {
+        align-self: flex-start;
+      }
+    }
+  }
   & .playlist-header-container {
     background-color: rgb(226, 74, 165);
   }

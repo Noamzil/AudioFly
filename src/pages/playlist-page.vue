@@ -1,33 +1,19 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
     <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
-    <playlist-linear
-      @openModal="openModal"
-      @filter="setFilter"
-      @togglePlaylistLike="togglePlaylistLike"
-      @playFirstSong="playFirstSong"
-      :isLiked="isPlaylistLiked"
-    />
-    <playlist-content
-      @toggleLikeSong="toggleLikeSong"
-      :currPlaylist="currPlaylist"
-    />
-    <section class="playlist-search-song" @mouseleave="isSearch=false">
-      <div class="search-container">
-        <button @click="isSearch=true">+</button>
-        <input type="text" v-model="songToSearch" v-if="isSearch" @keyup.enter="search">
-      </div>
-      <div class="search-result-container">
-
-      </div>
-    </section>
+    <playlist-linear @openModal="openModal" @filter="setFilter"
+     @togglePlaylistLike="togglePlaylistLike" @playFirstSong="playFirstSong"
+      :isLiked="isPlaylistLiked" />
+    <playlist-list @toggleLikeSong="toggleLikeSong" @update="update" @playSong="playSong" :currPlaylist="currPlaylist" :songs="currPlaylist.songs"/>
+    <add-song @search="search" @addSong=addSong @close="songsToShow=null" :songs="songsToShow"></add-song>
   </section>
 </template>
 
 <script>
 import playlistDescription from '../components/playlist-cmps/playlist-description.cmp.vue';
 import playlistLinear from '../components/playlist-cmps/playlist-linear.cmp.vue';
-import playlistContent from '../components/playlist-cmps/song-list.cmp.vue';
+import playlistList from '../components/playlist-cmps/song-list.cmp.vue';
+import addSong from '../components/playlist-cmps/add-song.cmp.vue';
 import { playlistService } from '../services/playlist.service.js';
 import { eventBus } from '../services/event-bus.cmp.js';
 import { utilService } from '../services/util.service';
@@ -40,8 +26,7 @@ export default {
       currPlaylist: null,
       songToCheck: null,
       isSearch: false,
-      songToSearch: '',
-      songsToShow: []
+      songsToShow: null,
     };
   },
   watch: {
@@ -66,7 +51,6 @@ export default {
       playlist.songs = fileterdSongs;
       this.currPlaylist = playlist;
     },
-
     async togglePlaylistLike() {
       const { _id, type } = this.currPlaylist;
       if (this.isPlaylistLiked) {
@@ -97,15 +81,8 @@ export default {
         console.log('Couls not upload image', err);
       }
     },
-    playFirstSong() {
-      var song = this.currPlaylist.songs[0];
-      this.$store.commit({ type: 'playSong', song });
-    },
-    openModal(type) {
-      eventBus.$emit('openModal', type);
-    },
-    async search() {
-      const songs = await apiService.getVideoId(this.songToSearch)
+    async search(key) {
+      const songs = await apiService.getVideoId(key)
       songs.forEach(song => {
         apiService.getVideoLength(song.youtubeId)
           .then(length => {
@@ -113,8 +90,27 @@ export default {
             song.duration = utilService.secToStr(totalSeconds) 
           })
       })
-      console.log(songs);
-      this.songToSearch = ''
+      this.songsToShow = songs
+    },
+    playFirstSong() {
+      var song = this.currPlaylist.songs[0];
+      this.$store.commit({ type: 'playSong', song });
+    },
+    openModal(type) {
+      eventBus.$emit('openModal', type);
+    },
+    addSong(song) {
+      song.addedAt = Date.now()
+      this.currPlaylist.songs.push(song)
+      this.$store.dispatch({type: 'updatePlaylist', playlist: this.currPlaylist})
+      console.log(this.currPlaylist);
+    },
+    update(songs) {
+      this.currPlaylist.songs = songs;
+      this.$store.dispatch({type: 'updatePlaylist', playlist: this.currPlaylist})
+    },
+    playSong(song) {
+      this.$store.commit({ type: 'playSong', song });
     }
   },
   computed: {
@@ -140,7 +136,8 @@ export default {
   components: {
     playlistDescription,
     playlistLinear,
-    playlistContent,
+    playlistList,
+    addSong,
   },
 };
 </script>

@@ -1,18 +1,10 @@
 <template>
-  <ul class="playlist-content" v-if="playlist">
-    <draggable ghost-class="ghost" :v-model="playlist.songs" @end="onEnd">
-      <li
-        class="sortable"
-        v-for="(song, index) in playlist.songs"
-        :key="song.youtubeId"
-      >
-        <song-preview
-          :song="song"
-          :songNum="index + 1"
-          @removeSong="removeSong"
-          @toggleLikeSong="toggleLikeSong"
-          @playSong="playSong"
-        ></song-preview>
+  <ul class="playlist-content" v-if="songList">
+    <draggable ghost-class="ghost" :v-model="songList" @end="onEnd">
+      <li class="sortable" v-for="(song, index) in songList" :key="song.youtubeId">
+        <song-preview :song="song" :songNum="index + 1"
+        @removeSong="removeSong" @toggleLikeSong="toggleLikeSong" @playSong="playSong">
+        </song-preview>
       </li>
     </draggable>
   </ul>
@@ -25,55 +17,54 @@ import songPreview from './song-preview.cmp.vue';
 
 export default {
   name: 'playlist-content',
-  props: ['currPlaylist'],
+  props: ['songs'],
   data() {
     return {
-      playlist: null,
       oldIndex: '',
       newIndex: '',
+      songList: null,
     };
   },
   methods: {
     playSong(song) {
-      this.$store.commit({ type: 'playSong', song });
+      this.$emit('playSong', song)
     },
     toggleLikeSong(song) {
       this.$emit('toggleLikeSong', song);
     },
     onEnd(ev) {
-      var playlist = this.playlist;
       this.oldIndex = ev.oldIndex;
       this.newIndex = ev.newIndex;
 
-      if (this.oldIndex >= playlist.songs.length) {
-        var k = this.newIndex - playlist.songs.length + 1;
+      if (this.oldIndex >= this.songList.length) {
+        var k = this.newIndex - this.songList.length + 1;
         while (k--) {
-          playlist.songs.push(undefined);
+          this.songList.push(undefined);
         }
       }
-      playlist.songs.splice(
+      this.songList.splice(
         this.newIndex,
         0,
-        playlist.songs.splice(this.oldIndex, 1)[0]
+        this.songList.splice(this.oldIndex, 1)[0]
       );
-      this.$store.dispatch({ type: 'updatePlaylist', playlist });
+      this.$emit('update', this.songList)
     },
     removeSong(ev) {
-      var playlist = this.playlist;
-      var idx = playlist.songs.findIndex((song) => {
+      var idx = this.songList.findIndex((song) => {
         return song.youtubeId === ev.youtubeId;
       });
-      playlist.songs.splice(idx, 1);
-      this.$store.dispatch({ type: 'updatePlaylist', playlist });
+      this.songList.splice(idx, 1);
+      this.$emit('update', this.songList)
     },
   },
   watch: {
-    currPlaylist: {
+    songs: {
       handler() {
-        this.playlist = JSON.parse(JSON.stringify(this.currPlaylist));
+        this.songList = JSON.parse(JSON.stringify(this.songs))
       },
       immediate: true,
-    },
+      deep: true,
+    }
   },
   components: {
     songPreview,
