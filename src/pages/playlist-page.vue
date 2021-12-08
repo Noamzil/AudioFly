@@ -1,6 +1,7 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
-    <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
+    <div class="playlist-header-container">
+    <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" /></div>
     <playlist-linear
       @openModal="openModal"
       @filter="setFilter"

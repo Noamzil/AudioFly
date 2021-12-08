@@ -1,7 +1,8 @@
 .playlist-page .playlist-description {
   padding: 30px 32px 24px;
   display: flex;
-  background: linear-gradient(transparent, rgb(84, 84, 84, 0.5));
+
+  background: linear-gradient(transparent,rgba(0,0,0,.5));
   & img {
     height: 232px;
     width: 232px;

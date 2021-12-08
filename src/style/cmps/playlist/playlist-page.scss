@@ -12,6 +12,9 @@
     font-size: rem(10px);
     margin: 0 4px;
   }
+  & .playlist-header-container {
+    background-color: rgb(226, 74, 165);
+  }
 }
 
 @import '../playlist/playlist-header.scss';
