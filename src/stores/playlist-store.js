@@ -1,5 +1,6 @@
 import { storageService } from '../services/async-storage.service.js';
 import { playlistService } from '../services/playlist.service.js';
+import router from '../router/index';
 
 export const playlistStore = {
   state: {
@@ -36,8 +37,10 @@ export const playlistStore = {
     loadPlaylists(state, { playlists }) {
       state.playlists = playlists;
     },
-    addPlaylist(state, playlist) {
+    addPlaylist(state, {playlist}) {
       state.playlists.push(playlist);
+      console.log(playlist);
+      router.push(`/playlist/${playlist._id}`);
     },
     updatePlaylist({ playlists }, { updatedPlaylist }) {
       const idx = playlists.findIndex(
@@ -96,6 +99,18 @@ export const playlistStore = {
         commit({ type: 'setCurrPlaylist', playlist });
       } catch (err) {
         console.log('Could not set playlist at playlistStore', err);
+      }
+    },
+    async createNewPlaylist({ commit, getters }) {
+      try {
+        var newPlaylist = playlistService.getEmptyPlaylist();
+        const { _id, username } = getters.user;
+        newPlaylist.createdBy = { username, _id };
+        newPlaylist.name = `New Playlist`;
+        newPlaylist = await playlistService.addPlaylist(newPlaylist);
+        commit({ type: 'addPlaylist', playlist: newPlaylist });
+      } catch (error) {
+        console.log('Could not add playlist ', error);
       }
     },
   },
