@@ -91,7 +91,7 @@ function filterPlaylist(songs, filterBy) {
 
   if (filterBy.sort === 'date') {
     songs.sort((a, b) => {
-      return Date.parse(b.addedAt) - Date.parse(a.addedAt);
+      return b.addedAt - a.addedAt;
     });
   }
 
@@ -128,7 +128,7 @@ function getEmptyPlaylist() {
   };
   return playlist;
 }
-_createPlaylists()
+_createPlaylists();
 // test-data
 function _createPlaylists() {
   var playlists = localStorage.getItem(PLAYLIST_KEY);
