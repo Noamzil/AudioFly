@@ -41,6 +41,16 @@ const routes = [
     name: 'genre',
     component: () => import('../pages/genre-page.vue'),
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../pages/login-page.vue')
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: () => import('../pages/signup-page.vue')
+  }
 ];
 
 const router = new VueRouter({

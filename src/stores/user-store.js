@@ -55,6 +55,7 @@ export const userStore = {
                 await userService.logOut()
                 commit({ type: 'loadUser' })
                 commit({ type: 'logOut' })
+                eventBus.$emit('showMsg', 'GoodBay')
             } catch {
                 console.log('Could not logOut user in userStore', err);
             }
@@ -82,6 +83,7 @@ export const userStore = {
             try {
                 const updatedUser = await userService.removeLike(entity)
                 commit({ type: 'setCurrUser', user: updatedUser })
+                eventBus.$emit('showMsg', `The ${entity.type} was removed from your librery`)
             } catch (err) {
                 console.log('Could not add like in userStore', err);
             }

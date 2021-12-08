@@ -29,8 +29,8 @@ export const userService = {
 
 async function query() {
     try {
-        // const users = await httpService.get(USER_URL)
-        const users = await storageService.query(USERS_KEY)
+        const users = await httpService.get(USER_URL)
+        // const users = await storageService.query(USERS_KEY)
         return users
     } catch (err) {
         console.log('Could not get users in userService', err);
@@ -39,8 +39,8 @@ async function query() {
 }
 async function update(user) {
     try {
-        // const currUser = await httpService.put(USER_URL, user)
-        var currUser = await storageService.put(USERS_KEY, user)
+        const currUser = await httpService.put(USER_URL, user)
+        // var currUser = await storageService.put(USERS_KEY, user)
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify(currUser))
         return currUser
     } catch (err) {
@@ -51,8 +51,9 @@ async function update(user) {
 async function logIn(user) {
     try {
         // const users = await storageService.query(USERS_KEY)
-        const users = query()
-        const loggedUser = users.find(currUser => user.username === currUser.username)
+        const users = await query()
+        console.log(users);
+        const loggedUser = users.find(currUser => user.username.toLowerCase() === currUser.username.toLowerCase())
         if (!loggedUser) return
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify(loggedUser))
         return loggedUser
@@ -63,11 +64,11 @@ async function logIn(user) {
 }
 async function signUp(user) {
     try {
-        // const signedUser = await httpService.post(USER_URL, user)
+        const signedUser = await httpService.post(USER_URL, user)
         user.liked = { song: [], playlist: [], station: [], album: [] }
         user.follows = []
         user.playlists = []
-        const signedUser = await storageService.post(USERS_KEY, user)
+        // const signedUser = await storageService.post(USERS_KEY, user)
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify(signedUser))
         return signedUser
     } catch (err) {
@@ -141,7 +142,7 @@ function getSessionUser() {
 
 function _getGuest() {
     const guest = {
-        _id: 'u101',
+        _id: '61b0ddc1679197742c490fa5',
         fullName: 'Udi Ofly',
         username: 'Guest',
         userEmail: 'Udi@gamil.com',
