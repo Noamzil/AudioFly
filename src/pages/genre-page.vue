@@ -7,7 +7,7 @@
         <h3>SEE ALL</h3>
       </div>
       <div v-for="playlist in playlistsByGenre" :key="playlist">
-        <genre-playlist-list :currPlaylist="playlist"/>
+        <genre-playlist-list :currPlaylist="playlist" />
       </div>
     </div>
     <div class="new-releases">
@@ -16,12 +16,12 @@
         <h3>SEE ALL</h3>
       </div>
     </div>
-    <!-- <pre>{{playlistsByGenre}}</pre> -->
+    <pre>{{ playlistsByGenre }}</pre>
   </section>
 </template>
 
 <script>
-import genrePlaylistList from './genre-playlist-list.cmp.vue'
+import genrePlaylistList from "./genre-playlist-list.cmp.vue";
 export default {
   name: "genre-page",
   data() {
@@ -32,16 +32,17 @@ export default {
       return this.$route.params.genreType;
     },
     playlistsByGenre() {
-      const playlists = this.$store.getters.playlists;
-      var playlistByGenre = playlists.find((playlist) =>
-        playlist.tags.includes(this.genre)
-      );
-      console.log(playlistByGenre);
+      console.log(this.$store.getters.playlists);
+      var playlistByGenre = [];
+      this.$store.getters.playlists.forEach((playlist) => {
+        console.log(playlist);
+        if (playlist.tags.includes(this.genre)) playlistByGenre.push(playlist);
+      });
       return playlistByGenre;
     },
   },
   components: {
-    genrePlaylistList
-  }
+    genrePlaylistList,
+  },
 };
 </script>

@@ -35,6 +35,7 @@ import { eventBus } from "../services/event-bus.cmp.js";
 import { utilService } from "../services/util.service";
 import { uploadImg } from "../services/upload-service.js";
 import { apiService } from "../services/api.service.js";
+import {socketService} from '../services/socket.service.js'
 export default {
   name: "playlist-page",
   data() {
@@ -44,6 +45,10 @@ export default {
       isSearch: false,
       songsToShow: null,
     };
+  },
+  created() {
+    var station = 'station'
+    socketService.emit('chat topic', station)
   },
   watch: {
     "$route.params.playlistId": {
