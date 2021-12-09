@@ -15,8 +15,8 @@
 import appHeader from './components/app-header.cmp.vue';
 import appSideBar from './components/side-bar.cmp.vue';
 import appFooter from './components/app-footer.cmp.vue';
-import bodyModal from './components/body-modal.cmp.vue'
-import msgModal from './components/msg-modal.cmp.vue'
+import bodyModal from './components/body-modal.cmp.vue';
+import msgModal from './components/msg-modal.cmp.vue';
 export default {
   created() {
     this.$store.dispatch({ type: 'loadPlaylists' });
@@ -24,20 +24,21 @@ export default {
   },
   methods: {
     logOut() {
-      this.$store.dispatch({type: 'logOut'})
-    }
+      this.$store.dispatch({ type: 'logOut' });
+    },
   },
   computed: {
     setCurrSong() {
       return this.$store.getters.currSong;
     },
   },
+
   components: {
     appHeader,
     appFooter,
     appSideBar,
     bodyModal,
-    msgModal
+    msgModal,
   },
 };
 </script>

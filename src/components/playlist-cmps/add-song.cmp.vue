@@ -2,7 +2,7 @@
   <section class="add-song" @mouseleave="isSearch=false">
       <div class="search-container">
         <button @click="isSearch=true">+</button>
-        <input type="text" v-model="songToSearch" v-if="isSearch" @keyup.enter="search">
+        <input type="text" v-model="songToSearch" @keyup.enter="search" v-if="isSearch">
       </div>
       <div class="search-result-container" v-if="songs">
         <div class="first-result">

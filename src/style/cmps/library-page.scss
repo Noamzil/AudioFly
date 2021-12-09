@@ -18,17 +18,25 @@
 
 .library-row1 {
   display: flex;
-  flex-wrap: wrap;
   padding-top: 30px;
   grid-gap: 25px;
   gap: 25px;
   height: 340px;
   position: relative;
+  overflow-y: hidden;
+
+  & .recently-add-container {
+    padding: 0;
+
+    & .playlists-container{
+      padding: 0;
+    }
+  }
 
   & .list-title {
     position: absolute;
     z-index: 2;
-    top: 5px;
+    top: 0;
   }
 
   & .track-tilte {
@@ -45,8 +53,8 @@
 .liked-songs-container {
   padding: 20px;
   background: linear-gradient(149.46deg, #450af5, #8e8ee5 99.16%);
-  width: 425px;
-  height: 280px;
+  width: 450px;
+  height: 300px;
   cursor: pointer;
   display: flex;
   flex-direction: column;

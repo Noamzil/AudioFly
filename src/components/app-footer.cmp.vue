@@ -1,13 +1,14 @@
 <template>
   <section>
     <section class="flex footer">
-      <played-note-details />
+      <played-note-details @likeSong="likeSong" @disLikeSong="disLikeSong" />
       <song-progress
         :currSong="currSong"
         @togglePlay="togglePlay"
         @startAt="startAt"
         @playNextSong="playNextSong"
         @shufflePlaylist="shufflePlaylist"
+        @loopSong="loopSong"
       />
       <device-control @changeVolume="changeVolume" />
     </section>
@@ -27,6 +28,7 @@ import playedNoteDetails from './footer-cmps/played-note-details.cmp.vue';
 import songProgress from './footer-cmps/song-progress.cmp.vue';
 import deviceControl from './footer-cmps/device-control.cmp.vue';
 import youtubePlayer from './footer-cmps/new-youtube.cmp.vue';
+import { eventBus } from '../services/event-bus.cmp.js';
 
 export default {
   name: 'app-footer',
@@ -39,6 +41,14 @@ export default {
     this.videoId = this.$store.getters.currSong.youtubeId;
   },
   methods: {
+    likeSong() {
+      const song = this.$store.getters.currSong;
+      this.$store.dispatch({ type: 'addLike', entity: song });
+    },
+    disLikeSong() {
+      const song = this.$store.getters.currSong;
+      this.$store.dispatch({ type: 'removeLike', entity: song });
+    },
     playing() {
       this.playVideo();
     },
@@ -57,6 +67,9 @@ export default {
     playNextSong() {
       this.player.loadVideoById(this.$store.getters.currSong.youtubeId, 0);
     },
+    loopSong(song) {
+      this.player.loadVideoById(song.youtubeId, 0);
+    },
     async changeVolume(ev) {
       await this.player.setVolume(ev);
     },
@@ -65,6 +78,7 @@ export default {
     },
     shufflePlaylist() {
       this.$store.commit('shufflePlaylist');
+      eventBus.$emit('showMsg', 'The playlist have been shuffled');
     },
   },
   computed: {

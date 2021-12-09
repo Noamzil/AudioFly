@@ -57,6 +57,10 @@
   display: flex;
   flex: 1;
   gap: 8px;
+
+ .green{
+    color: $clrGreen;
+  }
 }
 .player-control-btns .controlls-left {
   justify-content: flex-end;

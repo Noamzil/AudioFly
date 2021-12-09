@@ -33,7 +33,12 @@
       <div @click="openSongOpts" class="dots-container">
         <div v-if="isHover">• • •</div>
       </div>
-      <song-ops @removeSong="removeSong" :song="song" v-if="showOps" />
+      <song-ops
+        @removeSong="removeSong"
+        @closeModal="(showOps = false), (isHover = false)"
+        :song="song"
+        v-if="showOps"
+      />
     </div>
   </article>
 </template>

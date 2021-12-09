@@ -1,11 +1,26 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
     <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
-    <playlist-linear @openModal="openModal" @filter="setFilter"
-     @togglePlaylistLike="togglePlaylistLike" @playFirstSong="playFirstSong"
-      :isLiked="isPlaylistLiked" />
-    <playlist-list @toggleLikeSong="toggleLikeSong" @update="update" @playSong="playSong" :currPlaylist="currPlaylist" :songs="currPlaylist.songs"/>
-    <add-song @search="search" @addSong=addSong @close="songsToShow=null" :songs="songsToShow"></add-song>
+    <playlist-linear
+      @openModal="openModal"
+      @filter="setFilter"
+      @togglePlaylistLike="togglePlaylistLike"
+      @playFirstSong="playFirstSong"
+      :isLiked="isPlaylistLiked"
+    />
+    <playlist-list
+      @toggleLikeSong="toggleLikeSong"
+      @update="update"
+      @playSong="playSong"
+      :currPlaylist="currPlaylist"
+      :songs="currPlaylist.songs"
+    />
+    <add-song
+      @search="search"
+      @addSong="addSong"
+      @close="songsToShow = null"
+      :songs="songsToShow"
+    ></add-song>
   </section>
 </template>
 
@@ -17,8 +32,8 @@ import addSong from '../components/playlist-cmps/add-song.cmp.vue';
 import { playlistService } from '../services/playlist.service.js';
 import { eventBus } from '../services/event-bus.cmp.js';
 import { utilService } from '../services/util.service';
-import {uploadImg} from '../services/upload-service.js'
-import {apiService} from '../services/api.service.js'
+import { uploadImg } from '../services/upload-service.js';
+import { apiService } from '../services/api.service.js';
 export default {
   name: 'playlist-page',
   data() {
@@ -33,9 +48,9 @@ export default {
     '$route.params.playlistId': {
       async handler() {
         const { playlistId } = this.$route.params;
-        // await this.$store.dispatch({ type: 'setCurrPlaylist', playlistId });
-        // this.currPlaylist = this.$store.getters.currPlaylist;
-        this.currPlaylist = await playlistService.getPlaylistById(playlistId)
+        await this.$store.dispatch({ type: 'setCurrPlaylist', playlistId });
+        this.currPlaylist = this.$store.getters.currPlaylist;
+        this.currPlaylist = await playlistService.getPlaylistById(playlistId);
       },
       immediate: true,
     },
@@ -83,15 +98,14 @@ export default {
       }
     },
     async search(key) {
-      const songs = await apiService.getVideoId(key)
-      songs.forEach(song => {
-        apiService.getVideoLength(song.youtubeId)
-          .then(length => {
-            const totalSeconds = utilService.ISOStringToSec(length);
-            song.duration = utilService.secToStr(totalSeconds) 
-          })
-      })
-      this.songsToShow = songs
+      const songs = await apiService.getVideoId(key);
+      songs.forEach((song) => {
+        apiService.getVideoLength(song.youtubeId).then((length) => {
+          const totalSeconds = utilService.ISOStringToSec(length);
+          song.duration = utilService.secToStr(totalSeconds);
+        });
+      });
+      this.songsToShow = songs;
     },
     playFirstSong() {
       var song = this.currPlaylist.songs[0];
@@ -101,19 +115,25 @@ export default {
       eventBus.$emit('openModal', type);
     },
     addSong(song) {
-      song.addedAt = Date.now()
+      song.addedAt = Date.now();
       console.log(song.addedAt);
-      this.currPlaylist.songs.push(song)
-      this.$store.dispatch({type: 'updatePlaylist', playlist: this.currPlaylist})
+      this.currPlaylist.songs.push(song);
+      this.$store.dispatch({
+        type: 'updatePlaylist',
+        playlist: this.currPlaylist,
+      });
       console.log(this.currPlaylist);
     },
     update(songs) {
       this.currPlaylist.songs = songs;
-      this.$store.dispatch({type: 'updatePlaylist', playlist: this.currPlaylist})
+      this.$store.dispatch({
+        type: 'updatePlaylist',
+        playlist: this.currPlaylist,
+      });
     },
     playSong(song) {
       this.$store.commit({ type: 'playSong', song });
-    }
+    },
   },
   computed: {
     isPlaylistLiked() {
