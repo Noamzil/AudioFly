@@ -125,7 +125,6 @@ export default {
       var idx = currPlaylist.songs.findIndex(
         (song) => song.youtubeId === this.currSong.youtubeId
       );
-      console.log(this.isSongLoop);
       if (this.isSongLoop) {
         song = currPlaylist.songs[idx];
         this.$emit('loopSong', song);

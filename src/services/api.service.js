@@ -29,24 +29,36 @@ async function getVideoId(key) {
     );
     // console.log(res.data);
     const songs = res.data.items.map((song) => {
-      var songTtile = song.snippet.title
-      if (song.snippet.title.includes('Lyrics') || song.snippet.title.includes('lyrics')) {
-        var idx = song.snippet.title.indexOf('Lyrics') || song.snippet.title.indexOf('lyrics')
-        songTtile = song.snippet.title.slice(0, idx)
+      var songTtile = song.snippet.title;
+      if (
+        song.snippet.title.includes('Lyrics') ||
+        song.snippet.title.includes('lyrics')
+      ) {
+        var idx =
+          song.snippet.title.indexOf('Lyrics') ||
+          song.snippet.title.indexOf('lyrics');
+        songTtile = song.snippet.title.slice(0, idx);
       }
       if (song.snippet.title.includes('(')) {
-        var idx = song.snippet.title.indexOf('(')
-        songTtile = song.snippet.title.slice(0, idx)
+        var idx = song.snippet.title.indexOf('(');
+        songTtile = song.snippet.title.slice(0, idx);
       }
       if (song.snippet.title.includes('[')) {
-        var idx = song.snippet.title.indexOf('[')
-        songTtile = song.snippet.title.slice(0, idx)
+        var idx = song.snippet.title.indexOf('[');
+        songTtile = song.snippet.title.slice(0, idx);
+      }
+      if (song.snippet.title.includes('&#39;')) {
+        var idx = song.snippet.title.indexOf('&#39;');
+        songTtile =
+          song.snippet.title.substring(0, idx ) +
+          "'" +
+          song.snippet.title.substring(idx + 5, song.snippet.title.length);
       }
       return {
         youtubeId: song.id.videoId,
         title: songTtile,
         img: song.snippet.thumbnails.default.url,
-        type: 'song'
+        type: 'song',
       };
     });
     // console.log(songs);

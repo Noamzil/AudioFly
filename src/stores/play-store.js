@@ -6,7 +6,7 @@ export const playStore = {
     currSong: {},
     currTime: 0,
     isSongOn: false,
-    queueSongs: []
+    queueSongs: [],
   },
   getters: {
     songsRes({ searchedSongs }) {
@@ -21,7 +21,9 @@ export const playStore = {
     isSongOn({ isSongOn }) {
       return isSongOn;
     },
-    queueSongs({queueSongs}) {return queueSongs}
+    queueSongs({ queueSongs }) {
+      return queueSongs;
+    },
   },
   mutations: {
     search(state, { songs }) {
@@ -47,10 +49,12 @@ export const playStore = {
       console.log('im here');
       state.currTime = 0;
     },
-    addToQueue(state, {entity}) {
-      state.queueSongs.push(entity)
-      console.log(state.queueSongs);
-    }
+    addToQueue(state, { entity }) {
+      state.queueSongs.push(entity);
+    },
+    updateQueue(state, { updatedQueue }) {
+      state.queueSongs = updatedQueue;
+    },
   },
   actions: {
     async search({ commit }, { key }) {
@@ -59,6 +63,13 @@ export const playStore = {
         commit({ type: 'search', songs });
       } catch (err) {
         console.log('could not get a song id in playStore', err);
+      }
+    },
+    updateQueue({ commit }, { Queue }) {
+      try {
+        commit({ type: 'updateQueue', Queue });
+      } catch (err) {
+        console.log('Could not update Queue at QueueStore', err);
       }
     },
   },

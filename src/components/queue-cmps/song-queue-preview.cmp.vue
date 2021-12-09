@@ -23,49 +23,73 @@
       <div class="heart-container">
         <section v-if="isHover || isSongLiked">
           <button
-            @click="$emit('toggleLikeSong', song)"
+            @click="toggleLikeSong"
             class="like-btn fa-heart"
             :class="isSongLiked ? 'fas btn-liked' : 'far'"
           ></button>
         </section>
       </div>
-      <p>{{ songTime }}</p>
-      <div class="dots-container">
+      <p>{{ song.duration }}</p>
+      <div @click="openSongOpts" class="dots-container">
         <div v-if="isHover">• • •</div>
+        <queue-song-ops
+          @removeSong="removeSong"
+          @closeModal="(showOps = false), (isHover = false)"
+          :song="song"
+          v-if="showOps"
+        />
       </div>
     </div>
   </article>
 </template>
 
 <script>
-import { utilService } from "../../services/util.service.js";
+import { utilService } from '../../services/util.service.js';
+import queueSongOps from '../queue-cmps/queue-song-ops.cmp.vue';
 
 export default {
-  props: ["song", "songNum"],
+  props: ['song', 'songNum'],
   data() {
     return {
       showOps: false,
       isHover: false,
     };
   },
-  computed: {
-    songTime() {
-      return utilService.writeTime(this.song.time);
+  methods: {
+    async toggleLikeSong() {
+      this.song.type = 'song';
+      if (this.isSongLiked) {
+        await this.$store.dispatch({ type: 'removeLike', entity: this.song });
+      } else {
+        await this.$store.dispatch({ type: 'addLike', entity: this.song });
+      }
     },
+    openSongOpts() {
+      this.showOps = !this.showOps;
+    },
+    removeSong() {
+      this.showOps = false;
+      this.$emit('removeSong', this.song);
+    },
+  },
+  computed: {
     isSongLiked() {
       const userLiked = this.$store.getters.user.liked.song;
-      const isLiked = userLiked.find(
+      const isLiked = userLiked.findIndex(
         (song) => song.youtubeId === this.song.youtubeId
       );
-      return isLiked ? true : false;
+      if (isLiked > -1) return true;
+      return false;
     },
     dateAdded() {
       var addedAt = this.song.addedAt;
       return addedAt.slice(0, 10);
     },
   },
+  components: {
+    queueSongOps,
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

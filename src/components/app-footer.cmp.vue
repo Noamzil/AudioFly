@@ -1,7 +1,7 @@
 <template>
   <section>
     <section class="flex footer">
-      <played-note-details />
+      <played-note-details @likeSong="likeSong" @disLikeSong="disLikeSong" />
       <song-progress
         :currSong="currSong"
         @togglePlay="togglePlay"
@@ -41,6 +41,14 @@ export default {
     this.videoId = this.$store.getters.currSong.youtubeId;
   },
   methods: {
+    likeSong() {
+      const song = this.$store.getters.currSong;
+      this.$store.dispatch({ type: 'addLike', entity: song });
+    },
+    disLikeSong() {
+      const song = this.$store.getters.currSong;
+      this.$store.dispatch({ type: 'removeLike', entity: song });
+    },
     playing() {
       this.playVideo();
     },
