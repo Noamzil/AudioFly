@@ -5,8 +5,8 @@
         :is="modalType"
         :currPlaylist="currPlaylist"
         @openModal="openModal"
-        @tagPlaylist="tagPlaylist"
-        @updatePlaylist="updatePlaylist">
+        @updatePlaylist="updatePlaylist"
+      >
       </component>
     </div>
   </section>
@@ -14,10 +14,10 @@
 
 <script>
 import editPlaylistModal from './body-modals/edit-playlist-modal.cmp.vue';
-import sharePlaylistModal from './body-modals/share-playlist-modal.vue'
+import sharePlaylistModal from './body-modals/share-playlist-modal.vue';
 import { eventBus } from '../services/event-bus.cmp.js';
 import { playlistService } from '../services/playlist.service.js';
-import {uploadImg} from '../services/upload-service.js'
+import { uploadImg } from '../services/upload-service.js';
 export default {
   name: 'body-modal',
   data() {
@@ -43,6 +43,8 @@ export default {
         );
         this.currPlaylist.tags.splice(idx, 1);
       } else this.currPlaylist.tags.push(tag);
+      console.log( this.currPlaylist);
+      // updatePlaylist();
     },
     updatePlaylist() {
       const playlist = this.currPlaylist;
@@ -64,7 +66,7 @@ export default {
   },
   components: {
     editPlaylistModal,
-    sharePlaylistModal
+    sharePlaylistModal,
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="playlist-header-container">
+  <div :class="tag" class="playlist-header-container">
     <div class="playlist-description">
       <label
         @mouseover="isHoverImg = true"
@@ -19,7 +19,7 @@
           <p>Choose photo</p>
         </div>
         <div
-          v-if="!currPlaylist.playlistImg "
+          v-if="!currPlaylist.playlistImg"
           :class="{ hidden: isHoverImg }"
           class="fab fa-itunes-note img-awesome note"
         ></div>
@@ -77,6 +77,9 @@ export default {
       });
       albumTime = utilService.secToStr(seconds);
       return albumTime;
+    },
+    tag() {
+      return this.$store.getters.currPlaylist.tags[0];
     },
   },
 };
