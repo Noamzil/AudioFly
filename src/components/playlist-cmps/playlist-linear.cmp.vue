@@ -27,7 +27,11 @@
           </button>
           <div @click="openPlaylistOpts" class="dots-container">
             <div>• • •</div>
-          <playlist-options v-if="isPlaylistOps" @editPlaylist="openModalforEdit" @sharePlaylist="openModalforShare"/>
+            <playlist-options
+              v-if="isPlaylistOps"
+              @editPlaylist="openModalforEdit"
+              @sharePlaylist="openModalforShare"
+            />
           </div>
         </div>
 
@@ -78,61 +82,61 @@
 </template>
 
 <script>
-import playlistOptions from './playlist-options.cmp.vue'
+import playlistOptions from './playlist-options.cmp.vue';
 
 export default {
-  name: "playlist-linear",
-  props: ["isLiked"],
+  name: 'playlist-linear',
+  props: ['isLiked'],
   data() {
     return {
       isLike: this.isLiked,
-      filterBy: { search: "", sort: "" },
+      filterBy: { search: '', sort: '' },
       isShow: false,
       isOps: false,
-      isPlaylistOps: false
+      isPlaylistOps: false,
     };
   },
   created() {},
   methods: {
     disLikePlaylist() {
       this.toogleLike();
-      this.$emit("togglePlaylistLike");
+      this.$emit('togglePlaylistLike');
     },
     sendFilter() {
-      this.$emit("filter", { ...this.filterBy });
+      this.$emit('filter', { ...this.filterBy });
     },
 
     sortByTitle() {
-      this.filterBy.sort = "title";
-      this.$emit("filter", { ...this.filterBy });
+      this.filterBy.sort = 'title';
+      this.$emit('filter', { ...this.filterBy });
       this.isOps = false;
     },
     sortByDate() {
-      this.filterBy.sort = "date";
-      this.$emit("filter", { ...this.filterBy });
+      this.filterBy.sort = 'date';
+      this.$emit('filter', { ...this.filterBy });
       this.isOps = false;
     },
     sortByDuration() {
-      this.filterBy.sort = "duration";
-      this.$emit("filter", { ...this.filterBy });
+      this.filterBy.sort = 'duration';
+      this.$emit('filter', { ...this.filterBy });
       this.isOps = false;
     },
 
     likePlaylist() {
       this.toogleLike();
-      this.$emit("togglePlaylistLike");
+      this.$emit('togglePlaylistLike');
     },
     toogleLike() {
       this.isLike = !this.isLike;
     },
     playFirstSong() {
-      this.$emit("playFirstSong");
+      this.$emit('playFirstSong');
     },
     openModalforEdit() {
-      this.$emit("openModal", "edit-playlist-modal");
+      this.$emit('openModal', 'edit-playlist-modal');
     },
     openModalforShare() {
-      this.$emit("openModal", "share-playlist-modal");
+      this.$emit('openModal', 'share-playlist-modal');
     },
     toogleSearch() {
       this.isShow = !this.isShow;
@@ -141,17 +145,18 @@ export default {
       this.isOps = !this.isOps;
     },
     openPlaylistOpts() {
-      this.isPlaylistOps = !this.isPlaylistOps
-    }
+      this.isPlaylistOps = !this.isPlaylistOps;
+    },
   },
-  computed:{
+  computed: {
     tag() {
-      return this.$store.getters.currPlaylist.tags[0];
+      if (this.$store.getters.currPlaylist) {
+        return this.$store.getters.currPlaylist.tags[0];
+      }else {return 'purple'}
     },
   },
   components: {
     playlistOptions,
-    
-  }
+  },
 };
 </script>
