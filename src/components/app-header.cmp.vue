@@ -39,6 +39,7 @@
 <script>
 import userNav from './user-nav.cmp.vue';
 import { eventBus } from '../services/event-bus.cmp.js';
+import { playlistService } from '../services/playlist.service.js';
 
 export default {
   name: 'app-header',
@@ -48,12 +49,18 @@ export default {
       isPrev: false,
       searchTxt: '',
       currPagePath: null,
-      isTopScreen: null,
+      isTopScreen: true,
       currPlaylist: null,
+      isHome: false,
+      tag: 'defult',
     };
   },
-  created() {
+  async created() {
     window.addEventListener('scroll', this.handleScroll);
+    const { playlistId } = this.$route.params;
+    if (playlistId) {
+      this.currPlaylist = await this.$store.getters.currPlaylist;
+    }
   },
   methods: {
     nextHistory() {
@@ -89,16 +96,37 @@ export default {
     route() {
       return this.$route.path;
     },
-    tag() {
-      const { playlistId } = this.$route.params;
-      if (playlistId) {
-        const playlist = this.$store.getters.currPlaylist;
-        if (!playlist.tags.length) return 'pink';
-        return playlist.tags[0];
-      } else return 'defult';
+    getTag() {
+      if (this.currPlaylist) {
+        if (!this.currPlaylist.tags.length) {
+          this.tag = 'pink';
+        } else this.tag = this.currPlaylist.tags[0];
+      } else if (this.isHome) {
+        this.tag = 'defult';
+      }
     },
   },
-
+  watch: {
+    '$route.params': {
+      async handler() {
+        const { playlistId } = this.$route.params;
+        if (playlistId) {
+          const playlist = await playlistService.getPlaylistById(playlistId);
+          this.currPlaylist = JSON.parse(JSON.stringify(playlist));
+          this.getTag;
+          this.isHome = false;
+        } else {
+          if (this.$route.name === 'liked-songs') {
+            this.isHome = true;
+            this.tag = 'purple';
+          } else {
+            this.isHome = true;
+            this.tag = 'defult';
+          }
+        }
+      },
+    },
+  },
   components: {
     userNav,
   },
