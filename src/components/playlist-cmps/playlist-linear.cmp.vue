@@ -1,5 +1,5 @@
 <template>
-  <div class="linear-container">
+  <div :class="tag" class="linear-container">
     <section>
       <div class="playlist-linear">
         <div class="btns-container">
@@ -143,6 +143,11 @@ export default {
     openPlaylistOpts() {
       this.isPlaylistOps = !this.isPlaylistOps
     }
+  },
+  computed:{
+    tag() {
+      return this.$store.getters.currPlaylist.tags[0];
+    },
   },
   components: {
     playlistOptions,

@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1>Edit Details</h1>
-    <form class="edit-playlist-modal" @submit="$emit('updatePlaylist')">
+    <form class="edit-playlist-modal" @submit.prevent="updatePlaylist">
       <div class="playlist-img-container">
         <label for="playlist-img-edit">
           <img :src="currPlaylist.playlistImg" class="playlist-img" />
@@ -43,8 +43,8 @@
 
 <script>
 export default {
-  name: "editPlaylistModal",
-  props: ["currPlaylist"],
+  name: 'editPlaylistModal',
+  props: ['currPlaylist'],
   data() {
     return {
       value1: this.currPlaylist.tags || [],
@@ -52,11 +52,16 @@ export default {
   },
   methods: {
     loadImg(ev) {
-      this.$emit("loadImg", ev, "playlist");
+      this.$emit('loadImg', ev, 'playlist');
     },
     tagPlaylist() {
-      this.$emit("tagPlaylist", this.currTag);
-      this.currTag = "";
+      this.currPlaylist.tags = [];
+      this.currPlaylist.tags = [...this.value1]
+      this.value1 = '';
+    },
+    updatePlaylist() {
+      this.tagPlaylist();
+      this.$emit('updatePlaylist', this.currPlaylist);
     },
   },
   computed: {
@@ -64,15 +69,15 @@ export default {
       return this.$store.getters.tags;
     },
     options() {
-      var tags = this.tags
-      const options = tags.map(tag => {
+      var tags = this.tags;
+      const options = tags.map((tag) => {
         return {
           value: tag,
-          label: tag
-        }
-      })
-      return options
-    }
+          label: tag,
+        };
+      });
+      return options;
+    },
   },
 };
 </script>

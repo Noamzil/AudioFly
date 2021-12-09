@@ -1,5 +1,8 @@
 <template>
-  <header :class="{ 'moving-header': !isTopScreen }" class="flex main-header">
+  <header
+    :class="[!isTopScreen ? 'moving-header' : tag]"
+    class="flex main-header"
+  >
     <section class="flex left-side-header">
       <div>
         <button @click="prevHistory" :class="isPrev ? 'active' : ''">
@@ -46,6 +49,7 @@ export default {
       searchTxt: '',
       currPagePath: null,
       isTopScreen: null,
+      currPlaylist: null,
     };
   },
   created() {
@@ -85,7 +89,16 @@ export default {
     route() {
       return this.$route.path;
     },
+    tag() {
+      const { playlistId } = this.$route.params;
+      if (playlistId) {
+        const playlist = this.$store.getters.currPlaylist;
+        if (!playlist.tags.length) return 'pink';
+        return playlist.tags[0];
+      } else return 'defult';
+    },
   },
+
   components: {
     userNav,
   },

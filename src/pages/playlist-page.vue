@@ -29,7 +29,7 @@ import playlistDescription from "../components/playlist-cmps/playlist-descriptio
 import playlistLinear from "../components/playlist-cmps/playlist-linear.cmp.vue";
 import playlistList from "../components/playlist-cmps/song-list.cmp.vue";
 import addSong from "../components/playlist-cmps/add-song.cmp.vue";
-import sharePlaylist from "../components/share-playlist.cmp.vue";
+import sharePlaylist from "../components/body-modals/share-playlist-modal.vue";
 import { playlistService } from "../services/playlist.service.js";
 import { eventBus } from "../services/event-bus.cmp.js";
 import { utilService } from "../services/util.service";

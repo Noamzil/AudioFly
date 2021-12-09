@@ -1,13 +1,8 @@
-.main-header.moving-header {
-  z-index: 100000000;
-  position: sticky;
-  top: 0;
-  background-color: #181818 !important;
-}
+
 
 header.main-header {
   height: 65px;
-  background-color: rgb(28, 11, 102);
+  background-color: rgb(83, 83, 83);
   justify-content: space-between;
   align-items: center;
   grid-column: 2/4;
@@ -69,6 +64,13 @@ header.main-header {
     height: 30px;
     outline: none;
   }
+}
+
+.main-header.moving-header {
+  z-index: 100000000;
+  position: sticky;
+  top: 0;
+  background-color: #181818 !important;
 }
 
 @media (max-width: 840px) {
