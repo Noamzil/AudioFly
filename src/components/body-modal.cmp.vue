@@ -14,7 +14,6 @@
 
 <script>
 import editPlaylistModal from './body-modals/edit-playlist-modal.cmp.vue';
-import sharePlaylistModal from './body-modals/share-playlist-modal.vue'
 import { eventBus } from '../services/event-bus.cmp.js';
 import { playlistService } from '../services/playlist.service.js';
 import {uploadImg} from '../services/upload-service.js'
@@ -64,7 +63,6 @@ export default {
   },
   components: {
     editPlaylistModal,
-    sharePlaylistModal
   },
 };
 </script>

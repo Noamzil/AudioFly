@@ -34,7 +34,6 @@ async function getPlaylistById(id) {
   try {
     const playlist = await httpService.get(PLAYLIST_URL + id)
     // const playlist = await storageService.get(PLAYLIST_KEY, id);
-    console.log(id);
     return playlist;
   } catch (err) {
     console.log('Could not find playlist in getById in playlistService');

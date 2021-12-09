@@ -35,16 +35,6 @@
             </el-option>
           </el-select>
         </div>
-
-        <!-- <label>
-          Tags:
-          <select v-model="currTag" @change="tagPlaylist">
-            <option v-for="tag in tags" :key="tag">{{ tag }}</option>
-          </select>
-        </label>
-        <ul>
-          <li v-for="tag in currPlaylist.tags" :key="tag">{{ tag }}</li>
-        </ul> -->
         <button>SAVE</button>
       </div>
     </form>
@@ -57,16 +47,6 @@ export default {
   props: ["currPlaylist"],
   data() {
     return {
-      // options: [
-      //   {
-      //     value: "Option1",
-      //     label: "Option1",
-      //   },
-      //   {
-      //     value: "Option2",
-      //     label: "Option2",
-      //   },
-      // ],
       value1: this.currPlaylist.tags || [],
     };
   },

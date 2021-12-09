@@ -1,7 +1,6 @@
 <template>
   <div class="playlist-linear-ops">
     <ul>
-      <li @click="share">Share</li>
       <li @click="addToQueue">Add to queue</li>
       <li @click="editPlaylist">Edit Playlist</li>
     </ul>
@@ -18,10 +17,6 @@ export default {
         var entity = song;
         this.$store.commit({ type: "addToQueue", entity });
       })
-    },
-    share() {
-      console.log(`share`);
-      this.$emit('sharePlaylist')
     },
     editPlaylist() {
       this.$emit('editPlaylist')

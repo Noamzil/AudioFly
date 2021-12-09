@@ -25,17 +25,18 @@
 </template>
 
 <script>
-import playlistDescription from '../components/playlist-cmps/playlist-description.cmp.vue';
-import playlistLinear from '../components/playlist-cmps/playlist-linear.cmp.vue';
-import playlistList from '../components/playlist-cmps/song-list.cmp.vue';
-import addSong from '../components/playlist-cmps/add-song.cmp.vue';
-import { playlistService } from '../services/playlist.service.js';
-import { eventBus } from '../services/event-bus.cmp.js';
-import { utilService } from '../services/util.service';
-import { uploadImg } from '../services/upload-service.js';
-import { apiService } from '../services/api.service.js';
+import playlistDescription from "../components/playlist-cmps/playlist-description.cmp.vue";
+import playlistLinear from "../components/playlist-cmps/playlist-linear.cmp.vue";
+import playlistList from "../components/playlist-cmps/song-list.cmp.vue";
+import addSong from "../components/playlist-cmps/add-song.cmp.vue";
+import sharePlaylist from "../components/share-playlist.cmp.vue";
+import { playlistService } from "../services/playlist.service.js";
+import { eventBus } from "../services/event-bus.cmp.js";
+import { utilService } from "../services/util.service";
+import { uploadImg } from "../services/upload-service.js";
+import { apiService } from "../services/api.service.js";
 export default {
-  name: 'playlist-page',
+  name: "playlist-page",
   data() {
     return {
       currPlaylist: null,
@@ -45,10 +46,10 @@ export default {
     };
   },
   watch: {
-    '$route.params.playlistId': {
+    "$route.params.playlistId": {
       async handler() {
         const { playlistId } = this.$route.params;
-        await this.$store.dispatch({ type: 'setCurrPlaylist', playlistId });
+        await this.$store.dispatch({ type: "setCurrPlaylist", playlistId });
         this.currPlaylist = this.$store.getters.currPlaylist;
         this.currPlaylist = await playlistService.getPlaylistById(playlistId);
       },
@@ -71,20 +72,20 @@ export default {
       const { _id, type } = this.currPlaylist;
       if (this.isPlaylistLiked) {
         await this.$store.dispatch({
-          type: 'removeLike',
+          type: "removeLike",
           entity: { _id, type },
         });
       } else {
-        await this.$store.dispatch({ type: 'addLike', entity: { _id, type } });
+        await this.$store.dispatch({ type: "addLike", entity: { _id, type } });
       }
     },
     async toggleLikeSong(song) {
-      song.type = 'song';
+      song.type = "song";
       this.songToCheck = song;
       if (this.isSongLiked) {
-        await this.$store.dispatch({ type: 'removeLike', entity: song });
+        await this.$store.dispatch({ type: "removeLike", entity: song });
       } else {
-        await this.$store.dispatch({ type: 'addLike', entity: song });
+        await this.$store.dispatch({ type: "addLike", entity: song });
       }
     },
     async imgUpload(fileUploadEv) {
@@ -92,9 +93,9 @@ export default {
         const res = await uploadImg(fileUploadEv);
         this.currPlaylist.playlistImg = res.url;
         const playlist = this.currPlaylist;
-        this.$store.dispatch({ type: 'updatePlaylist', playlist });
+        this.$store.dispatch({ type: "updatePlaylist", playlist });
       } catch (err) {
-        console.log('Couls not upload image', err);
+        console.log("Couls not upload image", err);
       }
     },
     async search(key) {
@@ -109,17 +110,17 @@ export default {
     },
     playFirstSong() {
       var song = this.currPlaylist.songs[0];
-      this.$store.commit({ type: 'playSong', song });
+      this.$store.commit({ type: "playSong", song });
     },
     openModal(type) {
-      eventBus.$emit('openModal', type);
+      eventBus.$emit("openModal", type);
     },
     addSong(song) {
       song.addedAt = Date.now();
       console.log(song.addedAt);
       this.currPlaylist.songs.push(song);
       this.$store.dispatch({
-        type: 'updatePlaylist',
+        type: "updatePlaylist",
         playlist: this.currPlaylist,
       });
       console.log(this.currPlaylist);
@@ -127,12 +128,12 @@ export default {
     update(songs) {
       this.currPlaylist.songs = songs;
       this.$store.dispatch({
-        type: 'updatePlaylist',
+        type: "updatePlaylist",
         playlist: this.currPlaylist,
       });
     },
     playSong(song) {
-      this.$store.commit({ type: 'playSong', song });
+      this.$store.commit({ type: "playSong", song });
     },
   },
   computed: {
@@ -160,6 +161,7 @@ export default {
     playlistLinear,
     playlistList,
     addSong,
+    sharePlaylist,
   },
 };
 </script>
