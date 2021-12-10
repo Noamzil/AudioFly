@@ -4,10 +4,12 @@
     <div @mouseover="highlight = true"  @mouseleave="highlight = false" @click="goToPlaylist" class="playlist-prev-container">
       <img class="playlist-img" :src="playlist.playlistImg" />
       <h1 class="playlist-name">{{ playlist.name }}</h1>
-      <div class="song-name-container">
+      <!-- <div class="song-name-container">
         <span v-for="song in first2Songs" :key="song.youtubeId">
           {{ song.title }}|</span>
-      </div>
+      </div> -->
+      <hr>
+      <p>{{playlist.discription}}</p>
       <button class="play-top-playlist" :class="isHighlight"
         @click="playSong(topSong)">
         <svg role="img" viewBox="0 0 24 24">
@@ -17,6 +19,7 @@
           ></polygon>
         </svg>
       </button>
+      <span class="likes">{{playlist.likes}} Likes</span>
     </div>
   </article>
 </template>

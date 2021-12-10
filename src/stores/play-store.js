@@ -35,7 +35,6 @@ export const playStore = {
     },
     playSong(state, { song }) {
       state.currSong = song;
-      console.log(currSong);
       console.log(state.currSong);
     },
     continueSong(state) {

@@ -143,6 +143,7 @@ export default {
         type: "updatePlaylist",
         playlist: this.currPlaylist,
       });
+      console.log(this.$socket);
       this.$socket.emit("updatePlaylist", songs);
     },
     playSong(song) {
@@ -171,9 +172,9 @@ export default {
   },
   sockets: {
     updatePlaylist(songs) {
+      console.log("im here in update");
       this.currPlaylist.songs = songs;
       this.$store.commit({ type: "updatePlaylist", updatedPlaylist: songs });
-      console.log("im here in update");
     },
     userJoined() {
       console.log("im here in front end, in user joined");
