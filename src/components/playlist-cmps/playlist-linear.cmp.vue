@@ -84,38 +84,28 @@
 </template>
 
 <script>
-import playlistOptions from './playlist-options.cmp.vue';
-import { socketService } from '@/services/socket.service';
+import playlistOptions from "./playlist-options.cmp.vue";
+import { socketService } from "@/services/socket.service";
 
 export default {
-  name: 'playlist-linear',
-  props: ['isLiked'],
+  name: "playlist-linear",
+  props: ["isLiked"],
   data() {
     return {
       isLike: this.isLiked,
-      filterBy: { search: '', sort: '' },
+      filterBy: { search: "", sort: "" },
       isShow: false,
       isOps: false,
       isPlaylistOps: false,
     };
   },
   created() {
-    socketService.emit('chat topic', `1`);
-    socketService.on('chat addMsg', this.addMsg);
+    socketService.emit("chat topic", `1`);
+    socketService.on("chat addMsg", this.addMsg);
   },
   methods: {
     invite() {
-      var station = this.$store.getters.currPlaylist;
-      var user = this.$store.getters.user;
-      var currTime = this.$store.getters.currTime;
-      var song = this.$store.getters.currSong;
-      var holder = {
-        station: station,
-        username: user.username,
-        currTime: currTime,
-        song: song,
-      };
-      socketService.emit('chat newMsg', holder);
+      this.$socket.emit('invite', this.currPlaylist._id)
     },
     addMsg(holder) {
       this.$router.push(`/playlist/${holder.station._id}`);
@@ -124,50 +114,50 @@ export default {
       const song = holder.song;
       const currTime = holder.currTime;
       console.log(holder);
-      this.$store.commit({ type: 'onStation' });
-      this.$store.commit({ type: 'setCurrPlaylist', playlist });
-      this.$store.commit({ type: 'playSong', song });
-      this.$store.commit({ type: 'updateCurrTime', currTime });
+      this.$store.commit({ type: "onStation" });
+      this.$store.commit({ type: "setCurrPlaylist", playlist });
+      this.$store.commit({ type: "playSong", song });
+      this.$store.commit({ type: "updateCurrTime", currTime });
     },
     disLikePlaylist() {
       this.toogleLike();
-      this.$emit('togglePlaylistLike');
+      this.$emit("togglePlaylistLike");
     },
     sendFilter() {
-      this.$emit('filter', { ...this.filterBy });
+      this.$emit("filter", { ...this.filterBy });
     },
 
     sortByTitle() {
-      this.filterBy.sort = 'title';
-      this.$emit('filter', { ...this.filterBy });
+      this.filterBy.sort = "title";
+      this.$emit("filter", { ...this.filterBy });
       this.isOps = false;
     },
     sortByDate() {
-      this.filterBy.sort = 'date';
-      this.$emit('filter', { ...this.filterBy });
+      this.filterBy.sort = "date";
+      this.$emit("filter", { ...this.filterBy });
       this.isOps = false;
     },
     sortByDuration() {
-      this.filterBy.sort = 'duration';
-      this.$emit('filter', { ...this.filterBy });
+      this.filterBy.sort = "duration";
+      this.$emit("filter", { ...this.filterBy });
       this.isOps = false;
     },
 
     likePlaylist() {
       this.toogleLike();
-      this.$emit('togglePlaylistLike');
+      this.$emit("togglePlaylistLike");
     },
     toogleLike() {
       this.isLike = !this.isLike;
     },
     playFirstSong() {
-      this.$emit('playFirstSong');
+      this.$emit("playFirstSong");
     },
     openModalforEdit() {
-      this.$emit('openModal', 'edit-playlist-modal');
+      this.$emit("openModal", "edit-playlist-modal");
     },
     openModalforShare() {
-      this.$emit('openModal', 'share-playlist-modal');
+      this.$emit("openModal", "share-playlist-modal");
     },
     toogleSearch() {
       this.isShow = !this.isShow;
@@ -184,15 +174,18 @@ export default {
       if (this.$store.getters.currPlaylist) {
         return this.$store.getters.currPlaylist.tags[0];
       } else {
-        return 'purple';
+        return "purple";
       }
     },
     isStation() {
-      return this.$store.getters.currPlaylist.type === 'station';
+      return this.$store.getters.currPlaylist.type === "station";
     },
+    currPlaylist() {
+      return this.$store.getters.currPlaylist
+    }
   },
   destroyed() {
-    socketService.off('chat addMsg', this.addMsg);
+    socketService.off("chat addMsg", this.addMsg);
   },
   components: {
     playlistOptions,

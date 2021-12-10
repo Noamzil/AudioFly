@@ -35,6 +35,7 @@ export const playStore = {
     },
     playSong(state, { song }) {
       state.currSong = song;
+      console.log(currSong);
       console.log(state.currSong);
     },
     continueSong(state) {
@@ -49,10 +50,6 @@ export const playStore = {
     currTime(state) {
       state.currTime += 1;
       console.log(state.currTime);
-    },
-    changeCurrTime(state) {
-      console.log('im here');
-      state.currTime = 0;
     },
     addToQueue(state, { entity }) {
       state.queueSongs.push(entity);

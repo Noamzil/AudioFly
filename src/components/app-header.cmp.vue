@@ -27,6 +27,10 @@
         </form>
       </div>
     </section>
+    <div>
+      <h1><i class="far fa-bell"></i></h1>
+      <h1>{{ notification }}</h1>
+    </div>
     <div class="flex login-container">
       <template v-if="!$store.getters.realUser">
         <button @click="$router.push('/login')" class="login-btn">Login</button>
@@ -37,26 +41,27 @@
 </template>
 
 <script>
-import userNav from './user-nav.cmp.vue';
-import { eventBus } from '../services/event-bus.cmp.js';
-import { playlistService } from '../services/playlist.service.js';
+import userNav from "./user-nav.cmp.vue";
+import { eventBus } from "../services/event-bus.cmp.js";
+import { playlistService } from "../services/playlist.service.js";
 
 export default {
-  name: 'app-header',
+  name: "app-header",
+  props: ['notification', 'invitePlaylist'],
   data() {
     return {
       isNext: false,
       isPrev: false,
-      searchTxt: '',
+      searchTxt: "",
       currPagePath: null,
       isTopScreen: true,
       currPlaylist: null,
       isHome: false,
-      tag: 'defult',
+      tag: "defult",
     };
   },
   async created() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
     const { playlistId } = this.$route.params;
     if (playlistId) {
       this.currPlaylist = await this.$store.getters.currPlaylist;
@@ -67,21 +72,21 @@ export default {
       this.isNext = !this.isNext;
       if (this.currPagePath === this.$router.currentRoute.path) return;
       if (this.currPagePath) this.$router.push(this.currPagePath);
-      console.log('Going to the next page on your history');
+      console.log("Going to the next page on your history");
     },
     prevHistory() {
       this.isPrev = !this.isPrev;
       this.currPagePath = this.$router.history.current.path;
       this.$router.back();
-      console.log('Going to the previous page on your history');
+      console.log("Going to the previous page on your history");
     },
     search() {
       const key = this.searchTxt;
-      this.$store.dispatch({ type: 'search', key });
-      this.$store.commit({ type: 'searchPlaylists', key });
+      this.$store.dispatch({ type: "search", key });
+      this.$store.commit({ type: "searchPlaylists", key });
     },
     openModal(type) {
-      eventBus.$emit('openModal', type);
+      eventBus.$emit("openModal", type);
     },
     handleScroll(event) {
       var pageY = event.path[1].pageYOffset;
@@ -91,7 +96,7 @@ export default {
     },
   },
   destroyed() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   },
   computed: {
     route() {
@@ -100,15 +105,15 @@ export default {
     getTag() {
       if (this.currPlaylist) {
         if (!this.currPlaylist.tags.length) {
-          this.tag = 'pink';
+          this.tag = "pink";
         } else this.tag = this.currPlaylist.tags[0];
       } else if (this.isHome) {
-        this.tag = 'defult';
+        this.tag = "defult";
       }
     },
   },
   watch: {
-    '$route.params': {
+    "$route.params": {
       async handler() {
         const { playlistId } = this.$route.params;
         if (playlistId) {
@@ -117,12 +122,12 @@ export default {
           this.getTag;
           this.isHome = false;
         } else {
-          if (this.$route.name === 'liked-songs') {
+          if (this.$route.name === "liked-songs") {
             this.isHome = true;
-            this.tag = 'purple';
+            this.tag = "purple";
           } else {
             this.isHome = true;
-            this.tag = 'defult';
+            this.tag = "defult";
           }
         }
       },

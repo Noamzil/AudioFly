@@ -35,7 +35,7 @@ import { eventBus } from "../services/event-bus.cmp.js";
 import { utilService } from "../services/util.service";
 import { uploadImg } from "../services/upload-service.js";
 import { apiService } from "../services/api.service.js";
-import {socketService} from '../services/socket.service.js'
+import { socketService } from "../services/socket.service.js";
 export default {
   name: "playlist-page",
   data() {
@@ -44,11 +44,11 @@ export default {
       songToCheck: null,
       isSearch: false,
       songsToShow: null,
+      isAdmin: null,
     };
   },
   created() {
-    var station = 'station'
-    socketService.emit('chat topic', station)
+    console.log(this.$socket);
   },
   watch: {
     "$route.params.playlistId": {
@@ -57,6 +57,12 @@ export default {
         await this.$store.dispatch({ type: "setCurrPlaylist", playlistId });
         this.currPlaylist = this.$store.getters.currPlaylist;
         this.currPlaylist = await playlistService.getPlaylistById(playlistId);
+        if (this.currPlaylist.createdBy._id === this.$store.getters.user._id) {
+          this.isAdmin = true;
+          console.log("im admin");
+        } else {
+          this.$socket.emit("userJoined");
+        }
       },
       immediate: true,
     },
@@ -129,6 +135,7 @@ export default {
         playlist: this.currPlaylist,
       });
       console.log(this.currPlaylist);
+      this.$socket.emit("updatePlaylist", this.currPlaylist.songs);
     },
     update(songs) {
       this.currPlaylist.songs = songs;
@@ -136,6 +143,7 @@ export default {
         type: "updatePlaylist",
         playlist: this.currPlaylist,
       });
+      this.$socket.emit("updatePlaylist", songs);
     },
     playSong(song) {
       this.$store.commit({ type: "playSong", song });
@@ -159,6 +167,30 @@ export default {
         (song) => song.youtubeId === this.songToCheck.youtubeId
       );
       return isLiked ? true : false;
+    },
+  },
+  sockets: {
+    updatePlaylist(songs) {
+      this.currPlaylist.songs = songs;
+      this.$store.commit({ type: "updatePlaylist", updatedPlaylist: songs });
+      console.log("im here in update");
+    },
+    userJoined() {
+      console.log("im here in front end, in user joined");
+      if (this.isAdmin) {
+        const { currSong, currTime } = this.$store.getters;
+        console.log(currSong);
+        console.log(currTime);
+        this.$socket.emit("setSongState", { currSong, currTime });
+      }
+    },
+     setSongState(songState) {
+      console.log(songState);
+      const song = songState.currSong;
+      const { currTime } = songState;
+      this.$store.commit({ type: "updateCurrTime", currTime });
+       this.$store.commit({ type: "playSong", song });
+       
     },
   },
   components: {
