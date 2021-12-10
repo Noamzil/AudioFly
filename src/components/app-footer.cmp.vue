@@ -11,6 +11,7 @@
         @loopSong="loopSong"
       />
       <device-control @changeVolume="changeVolume" />
+      
     </section>
     <div class="youtube-player">
       <youtube
