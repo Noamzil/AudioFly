@@ -63,8 +63,8 @@ async function updatePlaylist(playlist) {
 }
 async function removePlaylist(id) {
   try {
-    // await httpService.delete(PLAYLIST_URL, id) // Pay attention!!!
-    await storageService.remove(PLAYLIST_KEY, id);
+    await httpService.delete(PLAYLIST_URL, id) // Pay attention!!!
+    // await storageService.remove(PLAYLIST_KEY, id);
   } catch (err) {
     console.log('Could not remove playlist at playlist service');
     throw err;

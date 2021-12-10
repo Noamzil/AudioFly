@@ -1,8 +1,7 @@
 <template>
-  <section>
-    <article>
-      <h1>{{currPlaylist.title}}</h1>
-    </article>
+  <section v-if="playlist" >
+      <h1>{{playlist.name}}</h1>
+      <img :src="playlist.playlistImg" class="genre-playlists-img">
   </section>
 </template>
 
@@ -12,7 +11,6 @@ export default {
   props: ["playlist"],
   data() {
     return {
-      playlist: null,
       highlight: false,
     };
   },
@@ -27,12 +25,7 @@ export default {
     isHighlight() {
       return this.highlight ? "highlight" : "";
     },
-    // first2Songs() {
-    //   return this.playlist.songs.slice(0, 2);
-    // },
   },
 };
 </script>
 
-<style>
-</style>

@@ -1,22 +1,14 @@
 <template>
   <section class="gerne-page">
     <h1 class="genre-name">{{ genre }}</h1>
-    <div class="popular-playlists">
-      <div class="playlists-info">
-        <h2>Popular playlists</h2>
-        <h3>SEE ALL</h3>
-      </div>
-      <div v-for="playlist in playlistsByGenre" :key="playlist">
-        <genre-playlist-list :currPlaylist="playlist" />
-      </div>
+    <h2>Popular playlists</h2>
+    <div class="playlist-genre-container">
+      <ul>
+        <li v-for="playlist in playlistsByGenre" :key="playlist._id">
+          <genre-playlist-list :playlist="playlist" class="genre-playlist-list"/>
+        </li>
+      </ul>
     </div>
-    <div class="new-releases">
-      <div class="playlists-info">
-        <h2>New releases</h2>
-        <h3>SEE ALL</h3>
-      </div>
-    </div>
-    <pre>{{ playlistsByGenre }}</pre>
   </section>
 </template>
 
@@ -35,8 +27,8 @@ export default {
       console.log(this.$store.getters.playlists);
       var playlistByGenre = [];
       this.$store.getters.playlists.forEach((playlist) => {
-        console.log(playlist);
-        if (playlist.tags.includes(this.genre)) playlistByGenre.push(playlist);
+        if (playlist.tags && playlist.tags.includes(this.genre))
+          playlistByGenre.push(playlist);
       });
       return playlistByGenre;
     },
@@ -46,3 +38,42 @@ export default {
   },
 };
 </script>
+
+<style>
+.playlist-genre-container {
+  /* background-color: aqua; */
+  padding: 20px 0;
+}
+.playlist-genre-container ul {
+  display: flex;
+  width: 100%;
+  gap: 30px;
+  padding: 20px 0;
+  flex-wrap: wrap;
+}
+.playlist-genre-container li {
+  border-radius: 4px;
+  background-color: #181818;
+  width: 270px;
+  height: 380px;
+  padding: 15px;
+}
+.genre-playlists-img {
+  height: 200px;
+  width: 200px;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 8px 3px black;
+  object-fit: cover;
+}
+.playlist-container {
+  padding: 10px;
+  height: 300px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.genre-playlist-list h1 {
+  font-size: 24px;
+}
+</style>

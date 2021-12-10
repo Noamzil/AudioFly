@@ -3,6 +3,7 @@
     <ul>
       <li @click="addToQueue">Add to queue</li>
       <li @click="editPlaylist">Edit Playlist</li>
+      <li @click="removePlaylist">Remove Playlist</li>
     </ul>
   </div>
 </template>
@@ -20,6 +21,12 @@ export default {
     },
     editPlaylist() {
       this.$emit('editPlaylist')
+    },
+    removePlaylist() {
+      var playlistId = this.currPlayList._id.playlistId
+      // console.log(this.currPlayList);
+      console.log(playlistId)
+      this.$store.dispatch({type:'removePlaylist', playlistId})
     }
   },
   computed: {
