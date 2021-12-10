@@ -78,6 +78,7 @@ export default {
     search() {
       const key = this.searchTxt;
       this.$store.dispatch({ type: 'search', key });
+      this.$store.commit({ type: 'searchPlaylists', key });
     },
     openModal(type) {
       eventBus.$emit('openModal', type);

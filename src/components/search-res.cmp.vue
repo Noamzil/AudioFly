@@ -34,11 +34,11 @@
 </template>
 
 <script>
-import { apiService } from '../services/api.service.js';
-import { utilService } from '../services/util.service.js';
+import { apiService } from "../services/api.service.js";
+import { utilService } from "../services/util.service.js";
 
 export default {
-  name: 'search-res',
+  name: "search-res",
   data() {
     return {
       videosLength: null,
@@ -67,8 +67,8 @@ export default {
   },
   methods: {
     playSong(song) {
-      console.log(song, 'in searchRes cmp');
-      this.$store.commit({ type: 'playSong', song });
+      console.log(song, "in searchRes cmp");
+      this.$store.commit({ type: "playSong", song });
     },
     writeTime(time) {
       return utilService.secToStr(time);
@@ -78,7 +78,7 @@ export default {
       const isLiked = userLiked.findIndex(
         (currSong) => currSong.youtubeId === song.youtubeId
       );
-      this.$emit('toggleLikeSong', song);
+      this.$emit("toggleLikeSong", song);
     },
     isSongLikedCheck(song) {
       const userLiked = this.$store.getters.user.liked.song;
@@ -88,6 +88,7 @@ export default {
       return isLiked > -1 ? true : false;
     },
   },
-  components: {},
+  components: {
+  },
 };
 </script>

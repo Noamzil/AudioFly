@@ -1,6 +1,8 @@
 <template>
   <section class="search-page">
     <serach-res @toggleLikeSong="toggleLikeSong" />
+    <related-playlists-search/>
+
     <h1>Your top genres</h1>
     <div class="flex top-genres-container">
       <div
@@ -38,6 +40,7 @@
 
 <script>
 import serachRes from "../components/search-res.cmp.vue";
+import relatedPlaylistsSearch from '../components/related-playlists.search.cmp.vue'
 export default {
   name: "search-page",
   data() {
@@ -98,6 +101,7 @@ export default {
   },
   components: {
     serachRes,
+    relatedPlaylistsSearch
   },
 };
 </script>

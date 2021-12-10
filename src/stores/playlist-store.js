@@ -35,6 +35,7 @@ export const playlistStore = {
       'Alternative Rock',
       'jazz',
     ],
+    relatedPlaylists: null
   },
   getters: {
     playlists({ playlists }) {
@@ -46,6 +47,7 @@ export const playlistStore = {
     tags({ tags }) {
       return tags;
     },
+    relatedPlaylists({relatedPlaylists}) {return relatedPlaylists}
   },
   mutations: {
     loadPlaylists(state, { playlists }) {
@@ -85,6 +87,10 @@ export const playlistStore = {
         ];
       }
       return songs;
+    },
+    searchPlaylists(state, {key}) {
+      var playlists = state.playlists
+      state.relatedPlaylists = playlistService.searchPlaylists(playlists, key)
     },
   },
   actions: {
