@@ -62,6 +62,7 @@ export default {
           console.log('im admin');
         } else {
           this.$socket.emit('userJoined');
+          console.log(`in else`);
         }
       },
       immediate: true,
@@ -206,7 +207,7 @@ export default {
     userJoined() {
       console.log('im here in front end, in user joined');
       if (this.isAdmin) {
-        const { currSong, currTime } = this.setSong();
+        const { currSong, currTime } = this.$store.getters;
         console.log(currSong);
         console.log(currTime);
         this.$socket.emit('setSongState', { currSong, currTime });

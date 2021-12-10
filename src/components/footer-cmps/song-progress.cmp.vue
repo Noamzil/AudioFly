@@ -102,8 +102,10 @@ export default {
     changeTime() {
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;
-      var sec = this.currTime;
-      this.$emit('startAt', sec);
+
+      const currTime = this.currTime;
+      this.$store.commit({ type: 'updateCurrTime', currTime });
+      this.$emit('startAt', currTime);
     },
     secToStr(time) {
       return utilService.secToStr(time);
@@ -150,8 +152,8 @@ export default {
       );
       if (idx === 0) song = currPlaylist.songs[currPlaylist.songs.length - 1];
       else song = currPlaylist.songs[idx - 1];
-      this.$store.commit({ type: 'playSong', song })
-      this.createInterval();;
+      this.$store.commit({ type: 'playSong', song });
+      this.createInterval();
       this.setSong();
     },
     createInterval() {
