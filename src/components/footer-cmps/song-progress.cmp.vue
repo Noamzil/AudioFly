@@ -68,18 +68,18 @@
 </template>
 
 <script>
-import { apiService } from "../../services/api.service.js";
-import { utilService } from "../../services/util.service.js";
+import { apiService } from '../../services/api.service.js';
+import { utilService } from '../../services/util.service.js';
 
 export default {
-  name: "song-progress",
+  name: 'song-progress',
   props: [`currSong`],
   data() {
     return {
       currTime: this.$store.getters.currTime,
       isHover: false,
-      currTimeStr: "",
-      songLengthStr: "",
+      currTimeStr: '',
+      songLengthStr: '',
       songLength: null,
       progressPercent: 0,
       timeInterval: null,
@@ -91,7 +91,8 @@ export default {
     this.songLength = this.ISOStringToSec(lengthStr) - 1;
     this.currTimeStr = this.secToStr(this.currTime);
     this.songLengthStr = this.secToStr(this.songLength);
-    this.$emit("togglePlay");
+    this.$emit('togglePlay');
+    this.$emit('startAt', this.currTime);
     this.createInterval();
   },
   methods: {
@@ -102,7 +103,7 @@ export default {
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;
       var sec = this.currTime;
-      this.$emit("startAt", sec);
+      this.$emit('startAt', sec);
     },
     secToStr(time) {
       return utilService.secToStr(time);
@@ -116,9 +117,11 @@ export default {
       } else {
         this.createInterval();
       }
-      this.$emit("togglePlay");
+      this.$emit('togglePlay');
     },
     nextSong() {
+      const currTime = 0;
+      this.$store.commit({ type: 'updateCurrTime', currTime });
       clearInterval(this.timeInterval);
       var song;
       const currPlaylist = this.$store.getters.currPlaylist;
@@ -127,16 +130,18 @@ export default {
       );
       if (this.isSongLoop) {
         song = currPlaylist.songs[idx];
-        this.$emit("loopSong", song);
+        this.$emit('loopSong', song);
         this.currTime = 0;
       } else if (idx === currPlaylist.songs.length - 1)
         song = currPlaylist.songs[0];
       else song = currPlaylist.songs[idx + 1];
-      this.$store.commit({ type: "playSong", song });
+      this.$store.commit({ type: 'playSong', song });
       this.createInterval();
-      this.setSong()();
+      this.setSong();
     },
     prevSong() {
+      const currTime = 0;
+      this.$store.commit({ type: 'updateCurrTime', currTime });
       clearInterval(this.timeInterval);
       var song;
       const currPlaylist = this.$store.getters.currPlaylist;
@@ -145,13 +150,13 @@ export default {
       );
       if (idx === 0) song = currPlaylist.songs[currPlaylist.songs.length - 1];
       else song = currPlaylist.songs[idx - 1];
-      this.$store.commit({ type: "playSong", song });
+      this.$store.commit({ type: 'playSong', song })
+      this.createInterval();;
       this.setSong();
     },
     createInterval() {
-      console.log("im in interval");
       this.timeInterval = setInterval(() => {
-        this.currTime = +this.currTime + 1;
+        this.currTime = +this.$store.getters.currTime + 1;
         var currTime = this.currTime;
         this.$store.commit({ type: `updateCurrTime`, currTime });
         this.currTimeStr = this.secToStr(this.currTime);
@@ -171,16 +176,13 @@ export default {
       this.songLengthStr = this.secToStr(this.songLength);
       console.log(this.$store.getters.isOnStation);
       if (!this.$store.getters.isOnStation) {
-        console.log("im in song progress");
         this.currTime = 0;
         this.progressPercent = 0;
         this.currTimeStr = this.secToStr(this.currTime);
       }
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = this.currTime;
-      console.log(this.currTime);
-      // this.$store.commit({ type: 'notOnStation' });
-      this.$emit("playNextSong");
+      this.$emit('playNextSong');
     },
   },
   computed: {
@@ -198,8 +200,25 @@ export default {
     isSongPlaying() {
       return this.$store.getters.isSongOn;
     },
-    
+    getCurrSong() {
+      return this.$store.getters.currSong;
+    },
   },
-  watch: {},
+  watch: {
+    async currSong() {
+      this.lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
+      this.songLength = this.ISOStringToSec(this.lengthStr);
+      this.currTimeStr = this.secToStr(this.currTime);
+      this.songLengthStr = this.secToStr(this.songLength);
+      if (!this.$store.getters.isOnStation) {
+        this.currTime = 0;
+        this.progressPercent = 0;
+        this.currTimeStr = this.secToStr(this.currTime);
+      }
+      this.currTimeStr = this.secToStr(this.currTime);
+      this.progressPercent = this.currTime;
+      this.$emit('playNextSong');
+    },
+  },
 };
 </script>

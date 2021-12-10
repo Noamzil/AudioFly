@@ -67,7 +67,8 @@ export default {
   },
   methods: {
     playSong(song) {
-      console.log(song, "in searchRes cmp");
+      var currTime = 0;
+      this.$store.commit({ type: 'updateCurrTime', currTime });
       this.$store.commit({ type: "playSong", song });
     },
     writeTime(time) {

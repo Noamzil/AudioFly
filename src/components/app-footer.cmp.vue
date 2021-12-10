@@ -65,6 +65,7 @@ export default {
       this.player.pauseVideo();
     },
     playNextSong() {
+      console.log(this.$store.getters.currSong.title);
       this.player.loadVideoById(this.$store.getters.currSong.youtubeId, 0);
     },
     loopSong(song) {
@@ -92,6 +93,11 @@ export default {
     isPlaying() {
       return this.$store.getters.isSongOn;
     },
+  },
+  watch: {
+    // currSong() {
+    //   this.currSong= this.$store.getters.currSong;
+    // },
   },
   components: {
     playedNoteDetails,
