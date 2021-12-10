@@ -1,6 +1,11 @@
 import { storageService } from '../services/async-storage.service.js';
 import { playlistService } from '../services/playlist.service.js';
 import router from '../router/index';
+import {
+  socketService,
+  SOCKET_EVENT_SHARE_STATION,
+  SOCKET_EVENT_REVIEW_ABOUT_YOU,
+} from '../services/socket.service';
 
 export const playlistStore = {
   state: {
@@ -9,25 +14,25 @@ export const playlistStore = {
     likedSongs: [],
     currPlaylist: null,
     tags: [
-      "Pop",
-      "Rock",
-      "Indie",
-      "Hip-Hop",
-      "Podcasts",
-      "Charts",
-      "Discover",
-      "Concerts",
-      "Mood",
-      "Chill",
-      "Party",
-      "Focus",
-      "Alternative",
-      "EQUAL",
-      "DanceElectronic",
-      "Wellness",
-      "Sleep",
-      "Tastemakers",
-      "Decades",
+      'Pop',
+      'Rock',
+      'Indie',
+      'Hip-Hop',
+      'Podcasts',
+      'Charts',
+      'Discover',
+      'Concerts',
+      'Mood',
+      'Chill',
+      'Party',
+      'Focus',
+      'Alternative',
+      'EQUAL',
+      'DanceElectronic',
+      'Wellness',
+      'Sleep',
+      'Tastemakers',
+      'Decades',
       'Funk',
       'Punk',
       'Rap',
@@ -145,6 +150,20 @@ export const playlistStore = {
         commit({ type: 'addPlaylist', playlist: newPlaylist });
       } catch (error) {
         console.log('Could not add playlist ', error);
+      }
+    },
+    async shareStation(context) {
+      try {
+        const playlist = context.state.currPlaylist;
+        context.commit({ type: 'setCurrPlaylist', playlist });
+        socketService.off(SOCKET_EVENT_SHARE_STATION);
+        socketService.on(SOCKET_EVENT_SHARE_STATION, (playlist) => {
+          console.log('Got playlist from socket', playlist);
+          context.commit({ type: 'addPlaylist', playlist });
+        });
+      } catch (err) {
+        console.log('playlist store:cant invite to station', err);
+        throw err;
       }
     },
   },

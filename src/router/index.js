@@ -44,13 +44,18 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('../pages/login-page.vue')
+    component: () => import('../pages/login-page.vue'),
   },
   {
     path: '/signup',
     name: 'signup',
-    component: () => import('../pages/signup-page.vue')
-  }
+    component: () => import('../pages/signup-page.vue'),
+  },
+  {
+    path: '/socket',
+    name: 'socket',
+    component: () => import('../pages/socketcmp/chat.vue'),
+  },
 ];
 
 const router = new VueRouter({

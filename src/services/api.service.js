@@ -1,4 +1,4 @@
-const YOUTUBEAPIKEY = 'AIzaSyDjWXGiL77YK1-4bOnP4knERUmni3_GPp8';
+const YOUTUBEAPIKEY = 'AIzaSyC0bJTtOXo5KJTAeYz5nzVqN8N8OJQyFR4';
 
 //ELIOR'S KEY = AIzaSyCAwn2YlmL22UvEHK4xAiPBwgb5OSU1Teg
 // OR'S KEY = AIzaSyC0bJTtOXo5KJTAeYz5nzVqN8N8OJQyFR4
@@ -53,6 +53,13 @@ async function getVideoId(key) {
           song.snippet.title.substring(0, idx ) +
           "'" +
           song.snippet.title.substring(idx + 5, song.snippet.title.length);
+      }
+      if (song.snippet.title.includes('&quot;')) {
+        var idx = song.snippet.title.indexOf('&quot;');
+        songTtile =
+          song.snippet.title.substring(0, idx ) +
+          "," +
+          song.snippet.title.substring(idx + 6, song.snippet.title.length);
       }
       return {
         youtubeId: song.id.videoId,
