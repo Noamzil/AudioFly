@@ -104,6 +104,7 @@ export default {
         const res = await uploadImg(fileUploadEv);
         this.currPlaylist.playlistImg = res.url;
         const playlist = this.currPlaylist;
+        
         this.$store.dispatch({ type: "updatePlaylist", playlist });
       } catch (err) {
         console.log("Couls not upload image", err);
