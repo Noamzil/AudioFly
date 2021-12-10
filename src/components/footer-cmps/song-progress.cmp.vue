@@ -150,6 +150,8 @@ export default {
     createInterval() {
       this.timeInterval = setInterval(() => {
         this.currTime = +this.currTime + 1;
+        var currTime = this.currTime;
+        this.$store.commit({ type: `updateCurrTime`, currTime });
         this.currTimeStr = this.secToStr(this.currTime);
         this.progressPercent = (this.currTime / this.songLength) * 100;
         if (
@@ -179,13 +181,21 @@ export default {
   },
   watch: {
     async currSong() {
+      
       this.lengthStr = await apiService.getVideoLength(this.currSong.youtubeId);
       this.songLength = this.ISOStringToSec(this.lengthStr);
       this.currTimeStr = this.secToStr(this.currTime);
       this.songLengthStr = this.secToStr(this.songLength);
-      this.currTime = 0;
+      console.log(this.$store.getters.isOnStation);
+      if (!this.$store.getters.isOnStation) {
+        this.currTime = 0;
+        this.progressPercent = 0;
+        this.currTimeStr = this.secToStr(this.currTime);
+      }
       this.currTimeStr = this.secToStr(this.currTime);
-      this.progressPercent = 0;
+      this.progressPercent = this.currTime;
+      console.log(this.currTime);
+      // this.$store.commit({ type: 'notOnStation' });
       this.$emit('playNextSong');
     },
   },

@@ -35,13 +35,15 @@
           </div>
         </div>
 
+        <button v-if="isStation" @click="invite">Invite to station</button>
+
         <form @submit.prevent class="StationFilter">
           <button
             @click="toogleSearch"
             class="fas fa-search btn-search"
           ></button>
           <div @click="toogleOps" class="sort-container">
-            <p>Custom order</p>
+            <p>Sort By</p>
 
             <div v-if="!isOps" class="fas fa-sort-down"></div>
             <div v-else class="fas fa-sort-up"></div>
@@ -56,7 +58,7 @@
           />
           <div :class="{ hidden: !isOps }" class="list-ops playlist-ops">
             <ul>
-              <li>Custom order</li>
+              <li>Sort By</li>
               <li @click="sortByTitle">Title</li>
               <li @click="sortByDate">Date added</li>
               <li @click="sortByDuration">Duration</li>
@@ -83,6 +85,7 @@
 
 <script>
 import playlistOptions from './playlist-options.cmp.vue';
+import { socketService } from '@/services/socket.service';
 
 export default {
   name: 'playlist-linear',
@@ -96,8 +99,36 @@ export default {
       isPlaylistOps: false,
     };
   },
-  created() {},
+  created() {
+    socketService.emit('chat topic', `1`);
+    socketService.on('chat addMsg', this.addMsg);
+  },
   methods: {
+    invite() {
+      var station = this.$store.getters.currPlaylist;
+      var user = this.$store.getters.user;
+      var currTime = this.$store.getters.currTime;
+      var song = this.$store.getters.currSong;
+      var holder = {
+        station: station,
+        username: user.username,
+        currTime: currTime,
+        song: song,
+      };
+      socketService.emit('chat newMsg', holder);
+    },
+    addMsg(holder) {
+      this.$router.push(`/playlist/${holder.station._id}`);
+
+      const playlist = holder.station;
+      const song = holder.song;
+      const currTime = holder.currTime;
+      console.log(holder);
+      this.$store.commit({ type: 'onStation' });
+      this.$store.commit({ type: 'setCurrPlaylist', playlist });
+      this.$store.commit({ type: 'playSong', song });
+      this.$store.commit({ type: 'updateCurrTime', currTime });
+    },
     disLikePlaylist() {
       this.toogleLike();
       this.$emit('togglePlaylistLike');
@@ -152,8 +183,16 @@ export default {
     tag() {
       if (this.$store.getters.currPlaylist) {
         return this.$store.getters.currPlaylist.tags[0];
-      }else {return 'purple'}
+      } else {
+        return 'purple';
+      }
     },
+    isStation() {
+      return this.$store.getters.currPlaylist.type === 'station';
+    },
+  },
+  destroyed() {
+    socketService.off('chat addMsg', this.addMsg);
   },
   components: {
     playlistOptions,

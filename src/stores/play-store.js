@@ -7,6 +7,7 @@ export const playStore = {
     currTime: 0,
     isSongOn: false,
     queueSongs: [],
+    isOnStation: false,
   },
   getters: {
     songsRes({ searchedSongs }) {
@@ -24,6 +25,9 @@ export const playStore = {
     queueSongs({ queueSongs }) {
       return queueSongs;
     },
+    isOnStation({ isOnStation }){
+      return isOnStation;
+    }
   },
   mutations: {
     search(state, { songs }) {
@@ -31,6 +35,7 @@ export const playStore = {
     },
     playSong(state, { song }) {
       state.currSong = song;
+      console.log(state.currSong);
     },
     continueSong(state) {
       state.isSongOn = true;
@@ -54,6 +59,16 @@ export const playStore = {
     },
     updateQueue(state, { updatedQueue }) {
       state.queueSongs = updatedQueue;
+    },
+    updateCurrTime(state, { currTime }) {
+      console.log(`store`, currTime);
+      state.currTime = currTime;
+    },
+    onStation(state) {
+      state.isOnStation = true;
+    },
+    notOnStation(state) {
+      state.isOnStation = false;
     },
   },
   actions: {
