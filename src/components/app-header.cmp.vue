@@ -27,14 +27,20 @@
         </form>
       </div>
     </section>
-    <section style="display:flex">
+    <section style="display: flex">
       <div class="notification-container" @click="toggleNotifications">
         <h1 class="bell"><i class="far fa-bell"></i></h1>
         <div class="notifications-num">
-        <h1>{{ notification }}</h1>
+          <h1>{{ notification }}</h1>
         </div>
       </div>
-      <notifications v-if="openNotifi" :invitePlaylist="invitePlaylist" :inviteUser="inviteUser" :invitations="invitations" @toggleNotification="toggleNotifications"/>
+      <notifications
+        v-if="openNotifi"
+        :invitePlaylist="invitePlaylist"
+        :inviteUser="inviteUser"
+        :invitations="invitations"
+        @toggleNotification="toggleNotifications"
+      />
       <div class="flex login-container">
         <template v-if="!$store.getters.realUser">
           <button @click="$router.push('/login')" class="login-btn">
@@ -47,31 +53,32 @@
   </header>
 </template>
 
-
 <script>
-import userNav from "./user-nav.cmp.vue";
-import notifications from '../components/notifications.cmp.vue'
-import { eventBus } from "../services/event-bus.cmp.js";
-import { playlistService } from "../services/playlist.service.js";
+import userNav from './user-nav.cmp.vue';
+import notifications from '../components/notifications.cmp.vue';
+import { eventBus } from '../services/event-bus.cmp.js';
+import { playlistService } from '../services/playlist.service.js';
 
 export default {
-  name: "app-header",
-  props: ["notification", "invitePlaylist","inviteUser", "invitations"],
+  name: 'app-header',
+  props: ['notification', 'invitePlaylist', 'inviteUser', 'invitations'],
   data() {
     return {
       isNext: false,
       isPrev: false,
-      searchTxt: "",
+      searchTxt: '',
       currPagePath: null,
       isTopScreen: true,
       currPlaylist: null,
       isHome: false,
-      tag: "defult",
-      openNotifi: false
+      tag: 'defult',
+      openNotifi: false,
     };
   },
   async created() {
-    window.addEventListener("scroll", this.handleScroll);
+    this.tag = await this.$store.getters.currHomeTag;
+    console.log(this.tag);
+    window.addEventListener('scroll', this.handleScroll);
     const { playlistId } = this.$route.params;
     if (playlistId) {
       this.currPlaylist = await this.$store.getters.currPlaylist;
@@ -92,11 +99,11 @@ export default {
     },
     search() {
       const key = this.searchTxt;
-      this.$store.dispatch({ type: "search", key });
-      this.$store.commit({ type: "searchPlaylists", key });
+      this.$store.dispatch({ type: 'search', key });
+      this.$store.commit({ type: 'searchPlaylists', key });
     },
     openModal(type) {
-      eventBus.$emit("openModal", type);
+      eventBus.$emit('openModal', type);
     },
     handleScroll(event) {
       var pageY = event.path[1].pageYOffset;
@@ -105,28 +112,31 @@ export default {
       } else this.isTopScreen = false;
     },
     toggleNotifications() {
-      this.openNotifi = !this.openNotifi
-    }
+      this.openNotifi = !this.openNotifi;
+    },
   },
   destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
   },
   computed: {
     route() {
       return this.$route.path;
     },
     getTag() {
+      var tag = this.$store.getters.currHomeTag;
+      console.log(tag);
+      console.log(this.currPlaylist);
       if (this.currPlaylist) {
         if (!this.currPlaylist.tags.length) {
-          this.tag = "pink";
+          this.tag = 'pink';
         } else this.tag = this.currPlaylist.tags[0];
       } else if (this.isHome) {
-        this.tag = "defult";
+        this.tag = 'defult';
       }
     },
   },
   watch: {
-    "$route.params": {
+    '$route.params': {
       async handler() {
         const { playlistId } = this.$route.params;
         if (playlistId) {
@@ -135,20 +145,28 @@ export default {
           this.getTag;
           this.isHome = false;
         } else {
-          if (this.$route.name === "liked-songs") {
+          if (this.$route.name === 'liked-songs') {
             this.isHome = true;
-            this.tag = "purple";
+            this.tag = 'purple';
           } else {
             this.isHome = true;
-            this.tag = "defult";
+            this.tag = 'defult';
           }
         }
       },
     },
+    // '$store.state.currHomeTag':{
+    //   handler(){
+    //     const tag = this.$store.getters.currHomeTag
+    //     console.log(tag);
+    //     this.tag = tag
+
+    //   }
+    // }
   },
   components: {
     userNav,
-    notifications
+    notifications,
   },
 };
 </script>

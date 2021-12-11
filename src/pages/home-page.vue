@@ -22,18 +22,22 @@ export default {
       isLoading: false,
       tags: null,
       tag: null,
+      tagInterval: null,
     };
   },
   created() {
     this.isLoading = true;
-    this.tags = this.$store.getters.tags.slice(0,19)
+    this.tags = this.$store.getters.tags.slice(0, 19);
     var idx = Math.floor(Math.random() * 19);
-    this.tag =  this.tags[idx];
-    setInterval(() => {
+    this.tag = this.tags[idx];
+    var currHomeTag = this.tag;
+    this.$store.commit({ type: 'setCurrHomeTag', currHomeTag });
+    this.tagInterval = setInterval(() => {
       var idx = Math.floor(Math.random() * 19);
       this.tag = this.tags[idx];
-      console.log(this.tags[idx]);
-    }, 6000);
+      currHomeTag = this.tag;
+      this.$store.commit({ type: 'setCurrHomeTag', currHomeTag });
+    },6000);
   },
   mounted() {
     this.isLoading = false;
@@ -62,6 +66,9 @@ export default {
     //   console.log(this.$store.getters.tags[idx]);
     //   return this.$store.getters.tags[idx];
     // },
+  },
+  destroyed() {
+    clearInterval(this.tagInterval);
   },
   components: {
     playlistsList,
