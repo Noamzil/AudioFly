@@ -36,19 +36,19 @@
 </template>
 
 <script>
-import playlistDescription from '../components/playlist-cmps/playlist-description.cmp.vue';
-import playlistLinear from '../components/playlist-cmps/playlist-linear.cmp.vue';
-import playlistList from '../components/playlist-cmps/song-list.cmp.vue';
-import addSong from '../components/playlist-cmps/add-song.cmp.vue';
-import sharePlaylist from '../components/body-modals/share-playlist-modal.vue';
-import { playlistService } from '../services/playlist.service.js';
-import { eventBus } from '../services/event-bus.cmp.js';
-import { utilService } from '../services/util.service';
-import { uploadImg } from '../services/upload-service.js';
-import { apiService } from '../services/api.service.js';
-import { socketService } from '../services/socket.service.js';
+import playlistDescription from "../components/playlist-cmps/playlist-description.cmp.vue";
+import playlistLinear from "../components/playlist-cmps/playlist-linear.cmp.vue";
+import playlistList from "../components/playlist-cmps/song-list.cmp.vue";
+import addSong from "../components/playlist-cmps/add-song.cmp.vue";
+import sharePlaylist from "../components/body-modals/share-playlist-modal.vue";
+import { playlistService } from "../services/playlist.service.js";
+import { eventBus } from "../services/event-bus.cmp.js";
+import { utilService } from "../services/util.service";
+import { uploadImg } from "../services/upload-service.js";
+import { apiService } from "../services/api.service.js";
+import { socketService } from "../services/socket.service.js";
 export default {
-  name: 'playlist-page',
+  name: "playlist-page",
   data() {
     return {
       currPlaylist: null,
@@ -57,23 +57,23 @@ export default {
       songsToShow: null,
       isAdmin: null,
       songToAdd: {
-        title: '',
-        youtubeId: '',
-        img: '',
-        type: 'song',
-        duration: '',
+        title: "",
+        youtubeId: "",
+        img: "",
+        type: "song",
+        duration: "",
       },
     };
   },
   created() {
     // console.log(this.$socket);
-    eventBus.$on('updateCurrPlaylist', this.updateCurrPlaylist);
+    eventBus.$on("updateCurrPlaylist", this.updateCurrPlaylist);
   },
   watch: {
-    '$route.params.playlistId': {
+    "$route.params.playlistId": {
       async handler() {
         const { playlistId } = this.$route.params;
-        await this.$store.dispatch({ type: 'setCurrPlaylist', playlistId });
+        await this.$store.dispatch({ type: "setCurrPlaylist", playlistId });
         var playlist = JSON.parse(
           JSON.stringify(this.$store.getters.currPlaylist)
         );
@@ -83,7 +83,7 @@ export default {
           this.isAdmin = true;
           // console.log('im admin');
         } else {
-          this.$socket.emit('userJoined');
+          this.$socket.emit("userJoined");
           // console.log(`in else`);
         }
       },
@@ -92,7 +92,7 @@ export default {
   },
   methods: {
     updateCurrPlaylist(playlist) {
-      this.currPlaylist = playlist
+      this.currPlaylist = playlist;
     },
     setFilter(filterBy) {
       var playlist = JSON.parse(
@@ -109,20 +109,20 @@ export default {
       const { _id, type } = this.currPlaylist;
       if (this.isPlaylistLiked) {
         await this.$store.dispatch({
-          type: 'removeLike',
+          type: "removeLike",
           entity: { _id, type },
         });
       } else {
-        await this.$store.dispatch({ type: 'addLike', entity: { _id, type } });
+        await this.$store.dispatch({ type: "addLike", entity: { _id, type } });
       }
     },
     async toggleLikeSong(song) {
-      song.type = 'song';
+      song.type = "song";
       this.songToCheck = song;
       if (this.isSongLiked) {
-        await this.$store.dispatch({ type: 'removeLike', entity: song });
+        await this.$store.dispatch({ type: "removeLike", entity: song });
       } else {
-        await this.$store.dispatch({ type: 'addLike', entity: song });
+        await this.$store.dispatch({ type: "addLike", entity: song });
       }
     },
     async imgUpload(fileUploadEv) {
@@ -131,9 +131,9 @@ export default {
         this.currPlaylist.playlistImg = res.url;
         const playlist = this.currPlaylist;
 
-        this.$store.dispatch({ type: 'updatePlaylist', playlist });
+        this.$store.dispatch({ type: "updatePlaylist", playlist });
       } catch (err) {
-        console.log('Couls not upload image', err);
+        console.log("Couls not upload image", err);
       }
     },
     async search(key) {
@@ -149,11 +149,11 @@ export default {
     playFirstSong() {
       var song = this.currPlaylist.songs[0];
       var currTime = 0;
-      this.$store.commit({ type: 'updateCurrTime', currTime });
-      this.$store.commit({ type: 'playSong', song });
+      this.$store.commit({ type: "updateCurrTime", currTime });
+      this.$store.commit({ type: "playSong", song });
     },
     openModal(type) {
-      eventBus.$emit('openModal', type);
+      eventBus.$emit("openModal", type);
     },
     addSong(song) {
       // console.log('hii');
@@ -161,40 +161,39 @@ export default {
       // console.log(song.addedAt);
       this.currPlaylist.songs.push(song);
       this.$store.dispatch({
-        type: 'updatePlaylist',
+        type: "updatePlaylist",
         playlist: this.currPlaylist,
       });
       // console.log(this.currPlaylist);
-      this.$socket.emit('updatePlaylist', this.currPlaylist.songs);
+      this.$socket.emit("updatePlaylist", this.currPlaylist.songs);
     },
     update(songs) {
       this.currPlaylist.songs = songs;
       this.$store.dispatch({
-        type: 'updatePlaylist',
+        type: "updatePlaylist",
         playlist: this.currPlaylist,
       });
       // console.log(this.$socket);
-      this.$socket.emit('updatePlaylist', songs);
+      this.$socket.emit("updatePlaylist", songs);
     },
     playSong(song) {
-      console.log('im here in play song in playlist page ^^^^^^^^^^^^^');
       var currTime = 0;
       // console.log(currTime);
       // console.log(`play song`);
-      this.$store.commit({ type: 'updateCurrTime', currTime });
-      this.$store.commit({ type: 'playSong', song });
+      this.$store.commit({ type: "updateCurrTime", currTime });
+      this.$store.commit({ type: "playSong", song });
       this.setSong();
     },
     async setSong() {
       const currSong = this.$store.getters.currSong;
-      this.$emit('playNextSong');
+      this.$emit("playNextSong");
     },
     async imgUploadSong(fileUploadEv) {
       try {
         const res = await uploadImg(fileUploadEv);
         this.songToAdd.img = res.url;
       } catch (err) {
-        console.log('Couls not upload image', err);
+        console.log("Couls not upload image", err);
       }
     },
   },
@@ -222,30 +221,24 @@ export default {
     updatePlaylist(songs) {
       // console.log('im here in update');
       this.currPlaylist.songs = songs;
-      this.$store.commit({ type: 'updatePlaylist', updatedPlaylist: songs });
+      this.$store.commit({ type: "updatePlaylist", updatedPlaylist: songs });
     },
     userJoined() {
       // console.log('im here in front end, in user joined');
       if (this.isAdmin) {
-        const { currSong, currTime } = this.$store.getters;
-        // console.log(currSong);
-        // console.log(currTime);
-        this.$socket.emit('setSongState', { currSong, currTime });
+        const { currSong, currTime, user } = this.$store.getters;
+        console.log(user);
+        this.$socket.emit("setSongState", { currSong, currTime, user });
       }
     },
     setSongState(songState) {
-      // console.log(songState);
       const song = songState.currSong;
       const { currTime } = songState;
-
       const { user } = songState;
-
       var currUser = this.$store.getters.user;
-      console.log('currUser', currUser);
-      console.log('user', user);
       if (user._id !== currUser._id) {
-        this.$store.commit({ type: 'updateCurrTime', currTime });
-        this.$store.commit({ type: 'playSong', song });
+        this.$store.commit({ type: "updateCurrTime", currTime });
+        this.$store.commit({ type: "playSong", song });
       }
     },
   },
