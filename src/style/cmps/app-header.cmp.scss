@@ -1,8 +1,6 @@
-
-
 header.main-header {
   height: 65px;
-  background-color: #181818 ;
+  background-color: #181818;
   justify-content: space-between;
   align-items: center;
   grid-column: 2/4;
@@ -71,6 +69,36 @@ header.main-header {
   position: sticky;
   top: 0;
   background-color: #181818 !important;
+}
+
+.notification-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  .notifications-num {
+    background-color: red;
+    height: 15px;
+    width: 15px;
+    font-size: 14px;
+    text-align: center;
+
+  }
+}
+
+.notifications {
+  border-radius: 4px;
+  z-index: 9999;
+  position: absolute;
+  background-color: #282828;
+  margin-top: 30px;
+  margin-right: 20p;
+  li {
+    padding: 15px;
+    border-bottom: 2px solid #3b3b3b;
+    color: #b3b3b3;
+    width: 300px;
+    cursor: pointer;
+  }
 }
 
 @media (max-width: 840px) {
