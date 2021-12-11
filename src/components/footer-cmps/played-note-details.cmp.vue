@@ -1,8 +1,10 @@
 <template>
   <div class="playedNowDetails">
-    <div class="artistImg"><img :src="currSong.img" /></div>
-    <div class="songDescription">
-      <p class="title">{{ currSong.title }}</p>
+    <div class="playedNowDetails-info">
+      <div class="artistImg"><img :src="currSong.img" /></div>
+      <div class="songDescription">
+        <p class="title">{{ currSong.title }}</p>
+      </div>
     </div>
     <template v-if="isLiked">
       <button class="LikeBtn" @click="like">
@@ -23,15 +25,13 @@
         </svg>
       </button>
     </template>
-    <div class="icon">
-      
-    </div>
+    <div class="icon"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'played-note-details',
+  name: "played-note-details",
   data() {
     return {
       pressed: false,
@@ -40,11 +40,11 @@ export default {
   methods: {
     disLike(ev) {
       this.tooglePressed();
-      this.$emit('disLikeSong', ev);
+      this.$emit("disLikeSong", ev);
     },
     like(ev) {
       this.tooglePressed();
-      this.$emit('likeSong', ev);
+      this.$emit("likeSong", ev);
     },
     tooglePressed() {
       this.pressed = !this.pressed;
