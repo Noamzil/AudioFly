@@ -84,6 +84,7 @@ export default {
       progressPercent: 0,
       timeInterval: null,
       isSongLoop: false,
+      isAdmin: false,
     };
   },
   async created() {
@@ -102,11 +103,27 @@ export default {
     changeTime() {
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = (this.currTime / this.songLength) * 100;
-
       const currTime = this.currTime;
       this.$store.commit({ type: "updateCurrTime", currTime });
       this.$emit("startAt", currTime);
+      const user = this.$store.getters.user;
+      const { currPlaylist } = this.$store.getters;
+      if (currPlaylist.createdBy._id === this.$store.getters.user._id) {
+        this.isAdmin = true;
+      }
+      const songState = {
+        user,
+        currTime,
+      };
+      if (this.isAdmin) this.$socket.emit("changeTime", songState);
     },
+    changeTimeSoc(currTime) {
+      this.currTimeStr = this.secToStr(currTime);
+      this.progressPercent = (currTime / this.songLength) * 100;
+      this.$store.commit({ type: "updateCurrTime", currTime });
+      this.$emit("startAt", currTime);
+    },
+
     secToStr(time) {
       return utilService.secToStr(time);
     },
@@ -120,7 +137,14 @@ export default {
         this.createInterval();
       }
       this.$emit("togglePlay");
-      this.$socket.emit("togglePlay");
+      const user = this.$store.getters.user;
+      const { currPlaylist } = this.$store.getters;
+      if (currPlaylist.createdBy._id === this.$store.getters.user._id) {
+        this.isAdmin = true;
+      }
+      if (this.isAdmin) {
+        this.$socket.emit("togglePlay", user);
+      }
     },
     nextSong() {
       const currTime = 0;
@@ -141,6 +165,13 @@ export default {
       this.$store.commit({ type: "playSong", song });
       this.createInterval();
       this.setSong();
+      if (currPlaylist.createdBy._id === this.$store.getters.user._id) {
+        this.isAdmin = true;
+      }
+      if (this.isAdmin) {
+        const user = this.$store.getters.user;
+        this.$socket.emit("nextSong", user);
+      }
     },
     prevSong() {
       const currTime = 0;
@@ -156,6 +187,13 @@ export default {
       this.$store.commit({ type: "playSong", song });
       this.createInterval();
       this.setSong();
+      if (currPlaylist.createdBy._id === this.$store.getters.user._id) {
+        this.isAdmin = true;
+      }
+      if (this.isAdmin) {
+        const user = this.$store.getters.user;
+        this.$socket.emit("prevSong", user);
+      }
     },
     createInterval() {
       this.timeInterval = setInterval(() => {
@@ -224,8 +262,40 @@ export default {
     },
   },
   sockets: {
-    togglePlay() {
-      this.togglePlay();
+    togglePlay(user) {
+      var currUser = this.$store.getters.user;
+      if (user._id !== currUser._id) {
+        this.togglePlay();
+      }
+    },
+    changeTimeSoc(songState) {
+      console.log("im here in the begining of socket");
+      var currUser = this.$store.getters.user;
+      if (songState.user._id === currUser._id) {
+        console.log("im here - socketing");
+        this.$socket.emit("setTimeState", songState);
+      }
+    },
+    setTimeState(timeState) {
+      console.log(timeState);
+      var currUser = this.$store.getters.user;
+      if (timeState.user._id !== currUser._id) {
+        this.changeTimeSoc(timeState.currTime);
+      }
+    },
+    nextSong(user) {
+      console.log("im here in next song");
+      var currUser = this.$store.getters.user;
+      if (user._id !== currUser._id) {
+        this.nextSong();
+      }
+    },
+    prevSong(user) {
+      console.log("im here in next song");
+      var currUser = this.$store.getters.user;
+      if (user._id !== currUser._id) {
+        this.prevSong();
+      }
     },
   },
 };
