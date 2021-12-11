@@ -34,6 +34,8 @@ export const playStore = {
       state.searchedSongs = songs;
     },
     playSong(state, { song }) {
+      console.log('im here in store****************');
+      console.log(song, '&&&&&&&&&&&&&&&');
       state.currSong = song;
       console.log(state.currSong);
     },

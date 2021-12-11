@@ -30,7 +30,9 @@
     <section style="display:flex">
       <div class="notification-container" @click="toggleNotifications">
         <h1 class="bell"><i class="far fa-bell"></i></h1>
-        <h1 class="notifications-num">{{ notification }}</h1>
+        <div class="notifications-num">
+        <h1>{{ notification }}</h1>
+        </div>
       </div>
       <notifications v-if="openNotifi" :invitePlaylist="invitePlaylist" :inviteUser="inviteUser" :invitations="invitations" @toggleNotification="toggleNotifications"/>
       <div class="flex login-container">
