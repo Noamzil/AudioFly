@@ -65,9 +65,9 @@ export default {
       },
     };
   },
-  async created() {
-    // console.log(this.$socket);
-    // eventBus.$on('updateCurrPlaylist', updateCurrPlaylist);
+  created() {
+    console.log(this.$socket);
+    eventBus.$on('updateCurrPlaylist', updateCurrPlaylist);
   },
   watch: {
     '$route.params.playlistId': {
@@ -81,11 +81,9 @@ export default {
         this.currPlaylist = await playlistService.getPlaylistById(playlistId);
         if (this.currPlaylist.createdBy._id === this.$store.getters.user._id) {
           this.isAdmin = true;
-          // console.log('im admin');
-          console.log(this.currPlaylist);
-          this.$socket.emit('userJoined');
+          console.log('im admin');
         } else {
-          console.log(`in else`);
+          this.$socket.emit('userJoined');
         }
       },
       immediate: true,
@@ -184,24 +182,8 @@ export default {
       this.setSong();
     },
     async setSong() {
-      console.log(`socket fun`);
       const currSong = this.$store.getters.currSong;
-      // this.lengthStr = await apiService.getVideoLength(currSong.youtubeId);
-      // this.songLength = this.ISOStringToSec(this.lengthStr);
-      // this.currTimeStr = this.secToStr(this.currTime);
-      // this.songLengthStr = this.secToStr(this.songLength);
-      // console.log(this.$store.getters.isOnStation);
-      // if (!this.$store.getters.isOnStation) {
-      //   console.log('im in song progress');
-      //   this.currTime = 0;
-      //   this.progressPercent = 0;
-      //   this.currTimeStr = this.secToStr(this.currTime);
-      // }
-      // this.currTimeStr = this.secToStr(this.currTime);
-      // this.progressPercent = this.currTime;
-      // console.log(this.currTime);
-      // this.$store.commit({ type: 'notOnStation' });
-      // this.$emit('playNextSong');
+      this.$emit('playNextSong');
     },
     async imgUploadSong(fileUploadEv) {
       try {
@@ -244,17 +226,25 @@ export default {
         const { currSong, currTime } = this.$store.getters;
         console.log(currSong);
         console.log(currTime);
-        this.$socket.emit('setSongState', { currSong, currTime });
+        const user = this.$store.getters.user;
+        this.$socket.emit('setSongState', { currSong, currTime, user });
       }
     },
-setSongState(songState) {
+    setSongState(songState) {
       console.log(songState);
       const song = songState.currSong;
       const { currTime } = songState;
-      this.$store.commit({ type: 'updateCurrTime', currTime });
-      this.$store.commit({ type: 'playSong', song });
-    },
 
+      const { user } = songState;
+
+      var currUser = this.$store.getters.user;
+      console.log('currUser', currUser);
+      console.log('user', user);
+      if (user._id !== currUser._id) {
+        this.$store.commit({ type: 'updateCurrTime', currTime });
+        this.$store.commit({ type: 'playSong', song });
+      }
+    },
   },
   components: {
     playlistDescription,
