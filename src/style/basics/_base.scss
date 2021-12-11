@@ -44,8 +44,19 @@ li {
   margin-bottom: 200px;
 }
 
+.div-for-style {
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.8;
+  left: 260px;
+  top: 35px;
+  height: 440px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6) 0, #121212 100%);
+  transition: 1s;
+}
 
-@media (max-width:840px) {
+@media (max-width: 840px) {
   .main-app-container {
     display: grid;
     grid-template-columns: auto;
