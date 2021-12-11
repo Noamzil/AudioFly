@@ -52,7 +52,7 @@ export const playlistStore = {
     tags({ tags }) {
       return tags;
     },
-    relatedPlaylists({relatedPlaylists}) {return relatedPlaylists}
+    relatedPlaylists({ relatedPlaylists }) { return relatedPlaylists }
   },
   mutations: {
     loadPlaylists(state, { playlists }) {
@@ -93,7 +93,7 @@ export const playlistStore = {
       }
       return songs;
     },
-    searchPlaylists(state, {key}) {
+    searchPlaylists(state, { key }) {
       var playlists = state.playlists
       state.relatedPlaylists = playlistService.searchPlaylists(playlists, key)
     },
@@ -146,6 +146,7 @@ export const playlistStore = {
         const { _id, username } = getters.user;
         newPlaylist.createdBy = { username, _id };
         newPlaylist.name = `New Playlist`;
+        newPlaylist.playlistImg = require('../assets/img/playlist-imgs/panda.jpg')
         newPlaylist = await playlistService.addPlaylist(newPlaylist);
         commit({ type: 'addPlaylist', playlist: newPlaylist });
       } catch (error) {
