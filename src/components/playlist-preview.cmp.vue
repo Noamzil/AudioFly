@@ -44,7 +44,6 @@ export default {
     };
   },
   created() {
-    // console.log(this.currPlaylist);
     this.playlist = JSON.parse(JSON.stringify(this.currPlaylist));
   },
   methods: {

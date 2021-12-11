@@ -65,9 +65,9 @@ export default {
       },
     };
   },
-  created() {
-    console.log(this.$socket);
-    eventBus.$on('updateCurrPlaylist', updateCurrPlaylist);
+  async created() {
+    // console.log(this.$socket);
+    // eventBus.$on('updateCurrPlaylist', updateCurrPlaylist);
   },
   watch: {
     '$route.params.playlistId': {
@@ -81,9 +81,10 @@ export default {
         this.currPlaylist = await playlistService.getPlaylistById(playlistId);
         if (this.currPlaylist.createdBy._id === this.$store.getters.user._id) {
           this.isAdmin = true;
-          console.log('im admin');
-        } else {
+          // console.log('im admin');
+          console.log(this.currPlaylist);
           this.$socket.emit('userJoined');
+        } else {
           console.log(`in else`);
         }
       },
@@ -183,6 +184,7 @@ export default {
       this.setSong();
     },
     async setSong() {
+      console.log(`socket fun`);
       const currSong = this.$store.getters.currSong;
       // this.lengthStr = await apiService.getVideoLength(currSong.youtubeId);
       // this.songLength = this.ISOStringToSec(this.lengthStr);
@@ -199,7 +201,7 @@ export default {
       // this.progressPercent = this.currTime;
       // console.log(this.currTime);
       // this.$store.commit({ type: 'notOnStation' });
-      this.$emit('playNextSong');
+      // this.$emit('playNextSong');
     },
     async imgUploadSong(fileUploadEv) {
       try {
@@ -245,13 +247,14 @@ export default {
         this.$socket.emit('setSongState', { currSong, currTime });
       }
     },
-    setSongState(songState) {
+setSongState(songState) {
       console.log(songState);
       const song = songState.currSong;
       const { currTime } = songState;
       this.$store.commit({ type: 'updateCurrTime', currTime });
       this.$store.commit({ type: 'playSong', song });
     },
+
   },
   components: {
     playlistDescription,

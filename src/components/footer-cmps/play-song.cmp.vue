@@ -16,9 +16,7 @@ export default {
   },
   created() {
     this.openYtPlayer();
-    console.log(`1`);
     var video = document.getElementById('player');
-    console.log(video);
   },
   computed: {},
   methods: {
@@ -56,7 +54,6 @@ export default {
             // onStateChange: onPlayerStateChange,
           },
         });
-        console.log(player);
       };
 
       function onPlayerReady(event) {

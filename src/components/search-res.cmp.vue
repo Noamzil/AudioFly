@@ -68,6 +68,7 @@ export default {
   methods: {
     playSong(song) {
       var currTime = 0;
+      console.log(`in methosss` , song);
       this.$store.commit({ type: 'updateCurrTime', currTime });
       this.$store.commit({ type: "playSong", song });
     },
