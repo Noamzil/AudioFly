@@ -27,7 +27,7 @@
             :class="isSongLikedCheck(song) ? 'fas btn-liked' : 'far'"
           ></button>
         </div>
-        <small v-if="isFetch">{{ song.duration }}</small>
+        <h1 v-if="isFetch" class="songTime">{{ song.duration }}</h1>
       </div>
     </div>
   </section>

@@ -17,7 +17,6 @@
       <img class="song-img" :src="song.img" />
       <p>{{ song.title }}</p>
     </div>
-    <p>Album name</p>
     <p>{{ dateAdded }}</p>
     <div class="song-options">
       <div class="heart-container">

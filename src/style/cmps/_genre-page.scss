@@ -15,3 +15,38 @@
         width: 100%;
     }
 }
+
+.playlist-genre-container {
+    padding: 20px 0;
+    ul {
+        display: flex;
+        width: 100%;
+        gap: 30px;
+        padding: 20px 0;
+        flex-wrap: wrap;
+    }
+    li {
+        border-radius: 4px;
+        background-color: #181818;
+        width: 240px;
+        height: 330px;
+        padding: 15px;
+    }
+}
+.genre-playlists-img {
+    height: 200px;
+    width: 200px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+.playlist-container {
+    padding: 10px;
+    height: 300px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.genre-playlist-list h1 {
+    font-size: 24px;
+}

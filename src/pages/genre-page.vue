@@ -40,40 +40,5 @@ export default {
 </script>
 
 <style>
-.playlist-genre-container {
-  /* background-color: aqua; */
-  padding: 20px 0;
-}
-.playlist-genre-container ul {
-  display: flex;
-  width: 100%;
-  gap: 30px;
-  padding: 20px 0;
-  flex-wrap: wrap;
-}
-.playlist-genre-container li {
-  border-radius: 4px;
-  background-color: #181818;
-  width: 270px;
-  height: 380px;
-  padding: 15px;
-}
-.genre-playlists-img {
-  height: 200px;
-  width: 200px;
-  margin-bottom: 10px;
-  box-shadow: 1px 1px 8px 3px black;
-  object-fit: cover;
-}
-.playlist-container {
-  padding: 10px;
-  height: 300px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.3s;
-}
 
-.genre-playlist-list h1 {
-  font-size: 24px;
-}
 </style>
