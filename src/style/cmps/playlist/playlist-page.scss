@@ -49,8 +49,10 @@
 }
 
 .search-result-container {
+
   .close {
     position: relative;
+    cursor: pointer;
     left: 98%;
     bottom: 15px;
     font-size: 24px;
@@ -75,6 +77,11 @@
     justify-content: space-between;
     .add {
       cursor: pointer;
+      color: #b3b3b3;
+    }
+
+    &:hover .add{
+      color: white;
     }
   }
 }

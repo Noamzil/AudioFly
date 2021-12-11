@@ -25,7 +25,7 @@ export default {
     removePlaylist() {
       var playlistId = this.currPlayList._id.playlistId
       // console.log(this.currPlayList);
-      console.log(playlistId)
+      this.$router.push('/')
       this.$store.dispatch({type:'removePlaylist', playlistId})
     }
   },

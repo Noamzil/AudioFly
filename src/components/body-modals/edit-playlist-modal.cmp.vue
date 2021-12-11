@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { eventBus } from '../../services/event-bus.cmp';
 export default {
   name: 'editPlaylistModal',
   props: ['currPlaylist'],
@@ -56,11 +57,12 @@ export default {
     },
     tagPlaylist() {
       this.currPlaylist.tags = [];
-      this.currPlaylist.tags = [...this.value1]
+      this.currPlaylist.tags = [...this.value1];
       this.value1 = '';
     },
     updatePlaylist() {
       this.tagPlaylist();
+      eventBus.$emit('updateCurrPlaylist', this.currPlaylist);
       this.$emit('updatePlaylist', this.currPlaylist);
     },
   },
