@@ -77,11 +77,23 @@ header.main-header {
   align-items: center;
   .notifications-num {
     background-color: red;
-    height: 15px;
-    width: 15px;
+    height: 18px;
+    width: 18px;
     font-size: 14px;
     text-align: center;
-
+    border-radius: 50%;
+    font-size: 12px;
+    right: 50%;
+    position: relative;
+    bottom: 25%;
+    h1 {
+      margin: auto;
+      text-align: center;
+      position: top;
+      position: relative;
+      top: 15%;
+      right: 4%;
+    }
   }
 }
 

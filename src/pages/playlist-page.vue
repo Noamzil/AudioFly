@@ -177,6 +177,7 @@ export default {
       this.$socket.emit('updatePlaylist', songs);
     },
     playSong(song) {
+      console.log('im here in play song in playlist page ^^^^^^^^^^^^^');
       var currTime = 0;
       // console.log(currTime);
       // console.log(`play song`);
