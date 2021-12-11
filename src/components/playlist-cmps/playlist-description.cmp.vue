@@ -33,7 +33,7 @@
       </label>
       <div class="playlist-edit-container"></div>
       <div class="description-txt">
-        <h2>Playlist</h2>
+        <h2>{{currPlaylist.type}}</h2>
         <h1>{{ currPlaylist.name }}</h1>
         <p>{{ currPlaylist.discription }}</p>
         <div class="playlist-songs-details">
