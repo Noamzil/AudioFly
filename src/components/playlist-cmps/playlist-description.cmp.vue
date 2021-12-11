@@ -33,7 +33,7 @@
       </label>
       <div class="playlist-edit-container"></div>
       <div class="description-txt">
-        <h2>{{currPlaylist.type}}</h2>
+        <h2>{{ currPlaylist.type }}</h2>
         <h1>{{ currPlaylist.name }}</h1>
         <p>{{ currPlaylist.discription }}</p>
         <div class="playlist-songs-details">
@@ -44,6 +44,10 @@
             {{ albumTime }}</span
           >
         </div>
+      </div>
+      <div class="share-btns">
+        <i class="fab fa-whatsapp"><i class="fab fa-facebook"></i> </i>
+        <i class="fas fa-paste"></i>
       </div>
     </div>
   </div>

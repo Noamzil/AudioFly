@@ -2,6 +2,10 @@
   padding: 30px 32px 24px;
   display: flex;
 
+  & .share-btns {
+    align-self: flex-end;
+  }
+
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
   & img {
     height: 232px;
@@ -25,7 +29,7 @@
       opacity: 0.5;
     }
 
-    & .hidden{
+    & .hidden {
       opacity: 0.3;
     }
 
@@ -56,6 +60,7 @@
   flex-flow: column;
   justify-content: flex-end;
   margin-bottom: 14px;
+  flex-grow: 1;
   & h1 {
     font-size: rem(96px);
     line-height: rem(96px);

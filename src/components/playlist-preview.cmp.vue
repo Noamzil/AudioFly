@@ -56,11 +56,18 @@ export default {
       const playlistId = this.playlist._id;
       const { user } = this.$store.getters;
 
-      var idx = user.liked.playlist.findIndex((currPlaylist) => {
+      var idx = user.liked[this.playlist.type].findIndex((currPlaylist) => {
         return currPlaylist._id === playlistId;
       });
 
+      // const playlistId = this.playlist._id;
+
+      //     var idx = user.liked.playlist.findIndex((currPlaylist) => {
+      //   return currPlaylist._id === playlistId;
+      // });
+
       const { _id, type } = this.currPlaylist;
+
       if (idx === -1) {
         this.$store.dispatch({ type: 'addLike', entity: { _id, type } });
         const playlist = this.playlist;
@@ -100,7 +107,16 @@ export default {
       var idx = user.liked.playlist.findIndex((currPlaylist) => {
         return currPlaylist._id === playlistId;
       });
-      if (idx > -1) return true;
+      if (idx > -1) {
+        return true;
+      } else {
+        idx = user.liked.station.findIndex((currStation) => {
+          return currStation._id === playlistId;
+        });
+        if (idx > -1) {
+          return true;
+        }
+      }
       return false;
     },
   },
