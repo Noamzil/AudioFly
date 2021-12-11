@@ -26,6 +26,7 @@ data() {
 methods: {
     async logUser() {
         await this.$store.dispatch({type: 'logIn', user: this.user})
+        this.$router.push('/')
     }
 }
 }

@@ -80,13 +80,13 @@ export default {
       this.isNext = !this.isNext;
       if (this.currPagePath === this.$router.currentRoute.path) return;
       if (this.currPagePath) this.$router.push(this.currPagePath);
-      console.log("Going to the next page on your history");
+      // console.log("Going to the next page on your history");
     },
     prevHistory() {
       this.isPrev = !this.isPrev;
       this.currPagePath = this.$router.history.current.path;
       this.$router.back();
-      console.log("Going to the previous page on your history");
+      // console.log("Going to the previous page on your history");
     },
     search() {
       const key = this.searchTxt;

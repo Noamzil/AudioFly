@@ -75,7 +75,7 @@ export default {
       await this.player.setVolume(ev);
     },
     startAt(ev) {
-      console.log('im at start at', ev);
+      // console.log('im at start at', ev);
       this.player.loadVideoById(this.$store.getters.currSong.youtubeId, ev);
     },
     shufflePlaylist() {

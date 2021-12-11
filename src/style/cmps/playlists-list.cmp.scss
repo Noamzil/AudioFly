@@ -1,24 +1,19 @@
-.playlists-list {
-  padding: 40px 0;
+
   .playlist-category {
     font-size: 24px;
   }
   .playlists-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    overflow: hidden;
+    &.genre {overflow: initial;}
     padding: 15px 0;
     list-style: none;
-    height: 100%;
-    flex-wrap: wrap;
-  }
-  ul {
-    display: flex;
-    gap: 20px;
-  }
-  li {
+    height: 415px;
+    li {
+      margin: 10px;
     border-radius: 4px;
     background-color: #181818;
-    width: 250px;
-    height: 350px;
     box-sizing: content-box;
     padding: 15px;
   }
@@ -30,65 +25,67 @@
     border-radius: 4px;
     transition: background 0.3s;
     padding-top: 7px;
-  }
-  .playlist-img {
-    height: 215px;
-    width: 215px;
-    margin-bottom: 10px;
-    box-shadow: 1px 1px 8px 3px black;
-    object-fit: cover;
-  }
-  .playlist-name {
-    font-size: 24px;
-    padding-bottom: 5px;
-  }
-  p {
-    color: #b3b3b3;
-    font-size: 16px;
-  }
-  .song-name-container {
-    font-size: 16px;
-    color: #b3b3b3;
-  }
-  button {
-    visibility: hidden;
-    height: 40px;
-    width: 40px;
-    opacity: 0;
-    border-radius: 50%;
-    background-color: $clrGreen;
-    transition: opacity 0.4s;
-    position: relative;
-    left: 72%;
-    bottom: 110px;
-    box-shadow: -1px 3px 8px 0px;
-    &.highlight {
-      visibility: visible;
-      opacity: 1;
-    }
-    svg {
-      height: 16px;
-      width: 16px;
-      color: white;
-    }
-  }
-  .playlist-info {
-    height: 40px;
-    padding: 5px 15px;
-  }
-  .likes {
-    position: relative;
-    left: 75%;
-    top: -16%;
     display: flex;
-    gap: 5px;
+    flex-direction: column;
+    .img-div {
+      align-self: center;
+      margin-bottom: 10px;
+    }
+    .playlist-img {
+      height: 215px;
+      width: 215px;
+      box-shadow: 1px 1px 8px 3px black;
+      object-fit: cover;
+    }
+    .playlist-name {
+      font-size: 24px;
+      padding-bottom: 5px;
+    }
+    p {
+      color: #b3b3b3;
+      font-size: 16px;
+    }
+    .song-name-container {
+      font-size: 16px;
+      color: #b3b3b3;
+    }
+    button {
+      visibility: hidden;
+      height: 40px;
+      width: 40px;
+      opacity: 0;
+      border-radius: 50%;
+      background-color: $clrGreen;
+      transition: opacity 0.4s;
+      position: relative;
+      left: 72%;
+      bottom: 110px;
+      box-shadow: -1px 3px 8px 0px;
+      &.highlight {
+        visibility: visible;
+        opacity: 1;
+      }
+      svg {
+        height: 16px;
+        width: 16px;
+        color: white;
+      }
+    }
+    .playlist-info {
+      height: 40px;
+      padding: 5px 15px;
+    }
+    .likes {
+      align-self: flex-end;
+      display: flex;
+      gap: 5px;
+    }
   }
 }
-
-.playlist-prev-container:hover {
-}
-
-// @media (max-width: 1700px) {
+  
+  
+  
+  // @media (max-width: 1700px) {
 //   .playlists-list {
 //     li {
 //       width: 240px;

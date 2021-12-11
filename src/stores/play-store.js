@@ -25,7 +25,7 @@ export const playStore = {
     queueSongs({ queueSongs }) {
       return queueSongs;
     },
-    isOnStation({ isOnStation }){
+    isOnStation({ isOnStation }) {
       return isOnStation;
     }
   },
@@ -35,7 +35,7 @@ export const playStore = {
     },
     playSong(state, { song }) {
       state.currSong = song;
-      console.log(state.currSong);
+      // console.log(state.currSong);
     },
     continueSong(state) {
       state.isSongOn = true;
@@ -48,7 +48,7 @@ export const playStore = {
     },
     currTime(state) {
       state.currTime += 1;
-      console.log(state.currTime);
+      // console.log(state.currTime);
     },
     addToQueue(state, { entity }) {
       state.queueSongs.push(entity);
@@ -57,7 +57,7 @@ export const playStore = {
       state.queueSongs = updatedQueue;
     },
     updateCurrTime(state, { currTime }) {
-      console.log(`store`, currTime);
+      // console.log(`store`, currTime);
       state.currTime = currTime;
     },
     onStation(state) {

@@ -60,7 +60,7 @@ export const playlistStore = {
     },
     addPlaylist(state, { playlist }) {
       state.playlists.push(playlist);
-      console.log(playlist);
+      // console.log(playlist);
       router.push(`/playlist/${playlist._id}`);
     },
     updatePlaylist({ playlists }, { updatedPlaylist }) {
@@ -70,7 +70,7 @@ export const playlistStore = {
       playlists.splice(idx, 1, updatedPlaylist);
     },
     removePlaylist(state, { playlistId }) {
-      console.log(playlistId);
+      // console.log(playlistId);
       const idx = state.playlists.findIndex(
         (currPL) => currPL._id === playlistId
       );

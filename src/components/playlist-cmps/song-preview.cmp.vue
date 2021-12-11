@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     songTime() {
-      console.log(this.song);
+      // console.log(this.song);
       return utilService.writeTime(this.song.duration);
     },
     isSongLiked() {

@@ -81,12 +81,12 @@ export default {
     async toggleLikeSong(song) {
       song.type = "song";
       song.addedAt = "2021-12-06T18:32:22.270Z";
-      console.log(song);
+      // console.log(song);
       const userLiked = this.$store.getters.user.liked.song;
       const isLiked = userLiked.findIndex(
         (currSong) => currSong.youtubeId === song.youtubeId
       );
-      console.log(isLiked);
+      // console.log(isLiked);
 
       if (isLiked > -1) {
         await this.$store.dispatch({ type: "removeLike", entity: song });
@@ -95,7 +95,7 @@ export default {
       }
     },
     toGenrePage(genre) {
-      console.log(genre);
+      // console.log(genre);
       this.$router.push('/genre/'+genre)
     },
   },

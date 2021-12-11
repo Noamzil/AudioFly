@@ -43,6 +43,7 @@ export default {
         );
         this.currPlaylist.tags.splice(idx, 1);
       } else this.currPlaylist.tags.push(tag);
+      // console.log( this.currPlaylist);
       // updatePlaylist();
     },
     updatePlaylist() {

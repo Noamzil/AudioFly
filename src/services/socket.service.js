@@ -16,7 +16,7 @@ socketService.setup()
 
 
 function createSocketService() {
-    console.log(`in fron end socket`);
+    // console.log(`in fron end socket`);
     var socket = null;
     const socketService = {
         async setup() {
