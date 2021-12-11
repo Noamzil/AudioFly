@@ -64,7 +64,7 @@ async function updatePlaylist(playlist) {
 }
 async function removePlaylist(id) {
   try {
-    await httpService.delete(PLAYLIST_URL, id) // Pay attention!!!
+    await httpService.delete(PLAYLIST_URL + id) // Pay attention!!!
     // await storageService.remove(PLAYLIST_KEY, id);
   } catch (err) {
     console.log('Could not remove playlist at playlist service');
@@ -264,11 +264,11 @@ function searchPlaylists(playlists, key) {
   var searchedPlaylists = []
   playlists.forEach(playlist => {
     playlist.songs.forEach(song => {
-      if (song.title.toLowerCase().includes(key.toLowerCase())){
-        if(searchedPlaylists.includes(playlist)) return
+      if (song.title.toLowerCase().includes(key.toLowerCase())) {
+        if (searchedPlaylists.includes(playlist)) return
         searchedPlaylists.push(playlist)
-      } 
+      }
     })
   })
-  return searchedPlaylists.splice(0,5)
+  return searchedPlaylists.splice(0, 5)
 }

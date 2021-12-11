@@ -4,6 +4,16 @@
     .greeting-home-page {
         font-size: 32px;
     }
+    .loading-container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .loading-gif {
+            background-color: transparent;
+            height: 250px;
+        }
+    }
 }
 
 // @media (max-width:1700px) {
