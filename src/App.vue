@@ -18,16 +18,16 @@
 </template>
 
 <script>
-import appHeader from "./components/app-header.cmp.vue";
-import appSideBar from "./components/side-bar.cmp.vue";
-import appFooter from "./components/app-footer.cmp.vue";
-import bodyModal from "./components/body-modal.cmp.vue";
-import msgModal from "./components/msg-modal.cmp.vue";
-import { utilService } from "../src/services/util.service.js";
+import appHeader from './components/app-header.cmp.vue';
+import appSideBar from './components/side-bar.cmp.vue';
+import appFooter from './components/app-footer.cmp.vue';
+import bodyModal from './components/body-modal.cmp.vue';
+import msgModal from './components/msg-modal.cmp.vue';
+import { utilService } from '../src/services/util.service.js';
 export default {
   created() {
-    this.$store.dispatch({ type: "loadPlaylists" });
-    this.$store.commit({ type: "loadUser" });
+    this.$store.dispatch({ type: 'loadPlaylists' });
+    this.$store.commit({ type: 'loadUser' });
   },
   data() {
     return {
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     logOut() {
-      this.$store.dispatch({ type: "logOut" });
+      this.$store.dispatch({ type: 'logOut' });
     },
   },
   computed: {
