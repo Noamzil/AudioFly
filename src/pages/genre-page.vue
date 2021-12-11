@@ -26,13 +26,28 @@ export default {
       return this.$route.params.genreType;
     },
     playlistsByGenre() {
-      // console.log(this.$store.getters.playlists);
+      var playlists = this.$store.getters.playlists
+      if(this.genre === 'Stations') {
+        var stations = playlists.filter(station => station.type === 'station')
+        return stations
+      } else if (this.genre === 'All'){
+        playlists.sort((a, b) => b.likes - a.likes)
+        return playlists
+      } else if (this.genre === 'Liked') {
+        const user = this.$store.getters.user
+        var playlistsToShow = playlists.filter(playlist => user.liked.playlist.find(currPL => 
+        currPL._id === playlist._id))
+        var stations = playlists.filter(playlist => user.liked.station.find(station => 
+        station._id === playlist._id))
+        return [...playlistsToShow,...stations]
+      } else {
       var playlistByGenre = [];
       this.$store.getters.playlists.forEach((playlist) => {
         if (playlist.tags && playlist.tags.includes(this.genre))
           playlistByGenre.push(playlist);
       });
       return playlistByGenre;
+      }
     },
   },
   components: {

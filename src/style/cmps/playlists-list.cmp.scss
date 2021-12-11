@@ -1,21 +1,34 @@
-
-  .playlist-category {
-    font-size: 24px;
+.type-of-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  a {
+    text-decoration: none;
+    color: lightgrey;
+    font-size: 0.8em;
+    &:hover {
+      text-decoration: underline;
+      color: $clrTxt;
+    }
   }
-  .playlists-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    overflow: hidden;
-    &.genre {overflow: initial;}
-    padding: 15px 0;
-    list-style: none;
-    height: 415px;
-    li {
-      margin: 10px;
-    border-radius: 4px;
-    background-color: #181818;
-    box-sizing: content-box;
-    padding: 15px;
+}
+.playlist-category {
+  font-size: 24px;
+}
+.playlists-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  overflow: hidden;
+  &.genre {overflow: initial;}
+  padding: 15px 0;
+  list-style: none;
+  height: 415px;
+  li {
+    margin: 10px;
+  border-radius: 4px;
+  background-color: #181818;
+  box-sizing: content-box;
+  padding: 15px;
   }
   li:hover {
     background-color: rgba(77, 77, 77, 0.63);
