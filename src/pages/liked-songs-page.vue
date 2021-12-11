@@ -50,6 +50,7 @@ export default {
       this.$store.dispatch({ type: 'removeLike', entity: song });
     },
     playSong(song) {
+      console.log(song);
       this.$store.commit({ type: 'playSong', song });
     },
     playFirstSong() {

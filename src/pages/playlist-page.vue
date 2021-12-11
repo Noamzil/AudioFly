@@ -177,6 +177,7 @@ export default {
       this.$socket.emit('updatePlaylist', songs);
     },
     playSong(song) {
+      console.log('im here in play song in playlist page ^^^^^^^^^^^^^');
       var currTime = 0;
       // console.log(currTime);
       // console.log(`play song`);
@@ -186,21 +187,6 @@ export default {
     },
     async setSong() {
       const currSong = this.$store.getters.currSong;
-      // this.lengthStr = await apiService.getVideoLength(currSong.youtubeId);
-      // this.songLength = this.ISOStringToSec(this.lengthStr);
-      // this.currTimeStr = this.secToStr(this.currTime);
-      // this.songLengthStr = this.secToStr(this.songLength);
-      // console.log(this.$store.getters.isOnStation);
-      // if (!this.$store.getters.isOnStation) {
-      //   console.log('im in song progress');
-      //   this.currTime = 0;
-      //   this.progressPercent = 0;
-      //   this.currTimeStr = this.secToStr(this.currTime);
-      // }
-      // this.currTimeStr = this.secToStr(this.currTime);
-      // this.progressPercent = this.currTime;
-      // console.log(this.currTime);
-      // this.$store.commit({ type: 'notOnStation' });
       this.$emit('playNextSong');
     },
     async imgUploadSong(fileUploadEv) {
@@ -251,8 +237,16 @@ export default {
       // console.log(songState);
       const song = songState.currSong;
       const { currTime } = songState;
-      this.$store.commit({ type: 'updateCurrTime', currTime });
-      this.$store.commit({ type: 'playSong', song });
+
+      const { user } = songState;
+
+      var currUser = this.$store.getters.user;
+      console.log('currUser', currUser);
+      console.log('user', user);
+      if (user._id !== currUser._id) {
+        this.$store.commit({ type: 'updateCurrTime', currTime });
+        this.$store.commit({ type: 'playSong', song });
+      }
     },
   },
   components: {

@@ -68,18 +68,18 @@
 </template>
 
 <script>
-import { apiService } from '../../services/api.service.js';
-import { utilService } from '../../services/util.service.js';
+import { apiService } from "../../services/api.service.js";
+import { utilService } from "../../services/util.service.js";
 
 export default {
-  name: 'song-progress',
+  name: "song-progress",
   props: [`currSong`],
   data() {
     return {
       currTime: this.$store.getters.currTime,
       isHover: false,
-      currTimeStr: '',
-      songLengthStr: '',
+      currTimeStr: "",
+      songLengthStr: "",
       songLength: null,
       progressPercent: 0,
       timeInterval: null,
@@ -91,8 +91,8 @@ export default {
     this.songLength = this.ISOStringToSec(lengthStr) - 1;
     this.currTimeStr = this.secToStr(this.currTime);
     this.songLengthStr = this.secToStr(this.songLength);
-    this.$emit('togglePlay');
-    this.$emit('startAt', this.currTime);
+    this.$emit("togglePlay");
+    this.$emit("startAt", this.currTime);
     this.createInterval();
   },
   methods: {
@@ -104,8 +104,8 @@ export default {
       this.progressPercent = (this.currTime / this.songLength) * 100;
 
       const currTime = this.currTime;
-      this.$store.commit({ type: 'updateCurrTime', currTime });
-      this.$emit('startAt', currTime);
+      this.$store.commit({ type: "updateCurrTime", currTime });
+      this.$emit("startAt", currTime);
     },
     secToStr(time) {
       return utilService.secToStr(time);
@@ -119,11 +119,12 @@ export default {
       } else {
         this.createInterval();
       }
-      this.$emit('togglePlay');
+      this.$emit("togglePlay");
+      this.$socket.emit("togglePlay");
     },
     nextSong() {
       const currTime = 0;
-      this.$store.commit({ type: 'updateCurrTime', currTime });
+      this.$store.commit({ type: "updateCurrTime", currTime });
       clearInterval(this.timeInterval);
       var song;
       const currPlaylist = this.$store.getters.currPlaylist;
@@ -132,18 +133,18 @@ export default {
       );
       if (this.isSongLoop) {
         song = currPlaylist.songs[idx];
-        this.$emit('loopSong', song);
+        this.$emit("loopSong", song);
         this.currTime = 0;
       } else if (idx === currPlaylist.songs.length - 1)
         song = currPlaylist.songs[0];
       else song = currPlaylist.songs[idx + 1];
-      this.$store.commit({ type: 'playSong', song });
+      this.$store.commit({ type: "playSong", song });
       this.createInterval();
       this.setSong();
     },
     prevSong() {
       const currTime = 0;
-      this.$store.commit({ type: 'updateCurrTime', currTime });
+      this.$store.commit({ type: "updateCurrTime", currTime });
       clearInterval(this.timeInterval);
       var song;
       const currPlaylist = this.$store.getters.currPlaylist;
@@ -152,7 +153,7 @@ export default {
       );
       if (idx === 0) song = currPlaylist.songs[currPlaylist.songs.length - 1];
       else song = currPlaylist.songs[idx - 1];
-      this.$store.commit({ type: 'playSong', song });
+      this.$store.commit({ type: "playSong", song });
       this.createInterval();
       this.setSong();
     },
@@ -184,7 +185,7 @@ export default {
       }
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = this.currTime;
-      this.$emit('playNextSong');
+      this.$emit("playNextSong");
     },
   },
   computed: {
@@ -219,7 +220,12 @@ export default {
       }
       this.currTimeStr = this.secToStr(this.currTime);
       this.progressPercent = this.currTime;
-      this.$emit('playNextSong');
+      this.$emit("playNextSong");
+    },
+  },
+  sockets: {
+    togglePlay() {
+      this.togglePlay();
     },
   },
 };

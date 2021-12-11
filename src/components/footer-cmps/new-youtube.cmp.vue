@@ -25,6 +25,7 @@ export default {
     async getVolume() {
       var player = await this.player.setVolume(50);
     },
+
     startAt() {
       // console.log(this.player);
       this.player.cueVideoById(this.videoId,10);
