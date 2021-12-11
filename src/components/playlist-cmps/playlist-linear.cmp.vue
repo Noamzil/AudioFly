@@ -104,7 +104,11 @@ export default {
   },
   methods: {
     invite() {
-      this.$socket.emit('invite', this.currPlaylist._id)
+      const invitation ={
+        playlist:this.currPlaylist._id,
+        user: this.$store.getters.user
+      }
+      this.$socket.emit('invite', invitation)
     },
     addMsg(holder) {
       this.$router.push(`/playlist/${holder.station._id}`);

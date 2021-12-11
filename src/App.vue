@@ -5,6 +5,8 @@
       @logOut="logOut"
       :notification="notification"
       :invitePlaylist="invitePlaylist"
+      :inviteUser="inviteUser"
+      :invitations="invitations"
     />
     <div id="app">
       <router-view />
@@ -21,6 +23,7 @@ import appSideBar from "./components/side-bar.cmp.vue";
 import appFooter from "./components/app-footer.cmp.vue";
 import bodyModal from "./components/body-modal.cmp.vue";
 import msgModal from "./components/msg-modal.cmp.vue";
+import { utilService } from "../src/services/util.service.js";
 export default {
   created() {
     this.$store.dispatch({ type: "loadPlaylists" });
@@ -29,7 +32,10 @@ export default {
   data() {
     return {
       notification: 0,
-      invitePlaylist: null,
+      invitePlaylist: [],
+      inviteUser: [],
+      currInvitation: null,
+      invitations: [],
     };
   },
   methods: {
@@ -43,9 +49,16 @@ export default {
     },
   },
   sockets: {
-    invite(playlistId) {
-      this.invitePlaylist = playlistId;
-      console.log(playlistId);
+    invite(invitation) {
+      this.currInvitation = {
+        playlist: invitation.playlist,
+        user: invitation.user,
+        id: utilService.makeId(),
+      };
+      this.invitations.push(this.currInvitation);
+      console.log(this.invitations);
+      this.invitePlaylist.push(invitation.playlist);
+      this.inviteUser.push(invitation.user);
       this.notification++;
     },
   },

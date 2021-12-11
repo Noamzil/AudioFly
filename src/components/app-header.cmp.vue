@@ -28,10 +28,11 @@
       </div>
     </section>
     <section style="display:flex">
-      <div>
-        <h1><i class="far fa-bell"></i></h1>
-        <h1>{{ notification }}</h1>
+      <div class="notification-container" @click="toggleNotifications">
+        <h1 class="bell"><i class="far fa-bell"></i></h1>
+        <h1 class="notifications-num">{{ notification }}</h1>
       </div>
+      <notifications v-if="openNotifi" :invitePlaylist="invitePlaylist" :inviteUser="inviteUser" :invitations="invitations" @toggleNotification="toggleNotifications"/>
       <div class="flex login-container">
         <template v-if="!$store.getters.realUser">
           <button @click="$router.push('/login')" class="login-btn">
@@ -44,14 +45,16 @@
   </header>
 </template>
 
+
 <script>
 import userNav from "./user-nav.cmp.vue";
+import notifications from '../components/notifications.cmp.vue'
 import { eventBus } from "../services/event-bus.cmp.js";
 import { playlistService } from "../services/playlist.service.js";
 
 export default {
   name: "app-header",
-  props: ["notification", "invitePlaylist"],
+  props: ["notification", "invitePlaylist","inviteUser", "invitations"],
   data() {
     return {
       isNext: false,
@@ -62,6 +65,7 @@ export default {
       currPlaylist: null,
       isHome: false,
       tag: "defult",
+      openNotifi: false
     };
   },
   async created() {
@@ -98,6 +102,9 @@ export default {
         this.isTopScreen = true;
       } else this.isTopScreen = false;
     },
+    toggleNotifications() {
+      this.openNotifi = !this.openNotifi
+    }
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -139,6 +146,7 @@ export default {
   },
   components: {
     userNav,
+    notifications
   },
 };
 </script>
