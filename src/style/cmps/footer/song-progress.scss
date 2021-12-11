@@ -58,7 +58,7 @@
   flex: 1;
   gap: 8px;
 
- .green{
+  .green {
     color: $clrGreen;
   }
 }
@@ -66,51 +66,49 @@
   justify-content: flex-end;
 }
 
-.slider-container{
+.slider-container {
   width: 75%;
 }
 
-.slider{
--webkit-appearance: none;
-margin-bottom: 12px;
-width: 100%;
-height: 5px;
-outline: none;
--webkit-transition: 0.2s;
-transition: opcacity 0.2s;
-border-radius: 500px;
-
- &:hover{
-   opacity: 1;
-   background: linear-gradient(90deg, $clrGreen 60% ,#535353 40%);
-  }
-
- &::-webkit-slider-thumb{
+.slider {
   -webkit-appearance: none;
-  appearance: none;
-  height: 20px;
-  width: 20px;
-  background: #b3b3b3;
-  border-radius: 50%;
-  cursor: pointer;
-  &:hover{
-    background:$clrGreen ;
-  }
-  &:active{
-    background:$clrGreen ;
-  }
- }
+  margin-bottom: 12px;
+  width: 100%;
+  height: 5px;
+  outline: none;
+  -webkit-transition: 0.2s;
+  transition: opcacity 0.2s;
+  border-radius: 500px;
 
- //for fire-fox
- &::-moz-range-thumb{
-  -webkit-appearance: none;
-  appearance: none;
-  height: 40px;
-  width: 40px;
-  background: #b3b3b3;
-  border-radius: 50%;
-  cursor: pointer;
- }
+  &:hover {
+    opacity: 1;
+    background: linear-gradient(90deg, $clrGreen 60%, #535353 40%);
+  }
 
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    background: #b3b3b3;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+      background: $clrGreen;
+    }
+    &:active {
+      background: $clrGreen;
+    }
+  }
+
+  //for fire-fox
+  &::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 40px;
+    width: 40px;
+    background: #b3b3b3;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 }
-

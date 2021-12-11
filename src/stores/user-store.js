@@ -72,6 +72,7 @@ export const userStore = {
         },
         async addLike({ commit }, { entity }) {
             try {
+                console.log(entity);
                 const updatedUser = await userService.addLike(entity)
                 commit({ type: 'setCurrUser', user: updatedUser })
                 eventBus.$emit('showMsg', `New ${entity.type} added to your favorites`)
