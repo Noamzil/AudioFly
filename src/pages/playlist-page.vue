@@ -131,6 +131,7 @@ export default {
       eventBus.$emit('openModal', type);
     },
     addSong(song) {
+      console.log('hii');
       song.addedAt = Date.now();
       console.log(song.addedAt);
       this.currPlaylist.songs.push(song);

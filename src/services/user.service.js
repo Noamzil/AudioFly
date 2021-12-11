@@ -2,10 +2,10 @@ import { storageService } from './async-storage.service.js';
 import { httpService } from './http.service.js';
 import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service';
 
-const AUTH_URL =
-  process.env.NODE_ENV !== 'development'
-    ? '/api/auth/'
-    : '//localhost:3030/api/auth/';
+const AUTH_URL = 'auth/';
+// process.env.NODE_ENV !== 'development'
+//   ? '/api/auth/'
+//   : '//localhost:3030/api/auth/';
 const STORAGE_KEY = 'audioFlyLoggedUser';
 
 const USER_URL = 'user/';
@@ -54,17 +54,17 @@ async function update(user) {
 async function logIn(user) {
   try {
     // const users = await storageService.query(USERS_KEY)
-    const users = await query();
-
-    console.log(users);
-    const loggedUser = users.find(
-      (currUser) =>
-        user.username.toLowerCase() === currUser.username.toLowerCase()
-    );
-    if (!loggedUser) return;
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(loggedUser));
-    loggedUser
-    return loggedUser;
+    // const users = await query();
+    const userToLog = await httpService.post(AUTH_URL + `login/${user.username}`)
+    // console.log(users);
+    // const loggedUser = users.find(
+    //   (currUser) =>
+    //     user.username.toLowerCase() === currUser.username.toLowerCase()
+    // );
+    if (!userToLog) return;
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(userToLog));
+    userToLog
+    return userToLog;
   } catch (err) {
     console.log('Could not logIn user in userService');
     throw err;
