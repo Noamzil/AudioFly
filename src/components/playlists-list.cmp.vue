@@ -1,38 +1,56 @@
 <template>
   <section class="playlists-list">
-    <h1 class="playlist-category">Popular</h1>
+    <div class="type-of-list">
+      <h1 class="playlist-category">Popular</h1>
+      <router-link to="/genre/All">SEE ALL</router-link>
+    </div>
     <ul class="playlists-container">
       <li v-for="playlist in populatPlaylists" :key="playlist._id">
         <playlist-preview :currPlaylist="playlist"></playlist-preview>
       </li>
     </ul>
-    <h1 class="playlist-category">Stations</h1>
+    <div class="type-of-list">
+      <h1 class="playlist-category">Stations</h1>
+      <router-link to="/genre/Stations">SEE ALL</router-link>
+    </div>
     <ul class="playlists-container">
       <li v-for="playlist in stations" :key="playlist._id">
         <playlist-preview :currPlaylist="playlist"></playlist-preview>
       </li>
     </ul>
     <div v-if="userPlaylists.length">
-    <h1 class="playlist-category">Liked Playlists</h1>
-    <ul class="playlists-container">
-      <li v-for="playlist in userPlaylists" :key="playlist._id">
-        <playlist-preview :currPlaylist="playlist"></playlist-preview>
-      </li>
-    </ul>
+      <div class="type-of-list">
+        <h1 class="playlist-category">Liked Playlists</h1>
+        <router-link to="/genre/Liked">SEE ALL</router-link>
+      </div>
+      <ul class="playlists-container">
+        <li v-for="playlist in userPlaylists" :key="playlist._id">
+          <playlist-preview :currPlaylist="playlist"></playlist-preview>
+        </li>
+      </ul>
     </div>
-    <h1 class="playlist-category">New</h1>
-    <ul class="playlists-container">
+    <div class="type-of-list">
+      <h1 class="playlist-category">New</h1>
+      <router-link to="/genre/All">SEE ALL</router-link>
+    </div>
+      <ul class="playlists-container">
       <li v-for="playlist in newPlaylists" :key="playlist._id">
         <playlist-preview :currPlaylist="playlist"></playlist-preview>
       </li>
     </ul>
-    <h1 class="playlist-category">New In Rock</h1>
+    <div class="type-of-list">
+      <h1 class="playlist-category">New In Rock</h1>
+      <router-link to="/genre/Rock">SEE ALL</router-link>
+    </div>
     <ul class="playlists-container">
       <li v-for="playlist in rockPlaylists" :key="playlist._id">
         <playlist-preview :currPlaylist="playlist"></playlist-preview>
       </li>
     </ul>
-    <h1 class="playlist-category">New In Pop</h1>
+    <div class="type-of-list">
+      <h1 class="playlist-category">New In Pop</h1>
+      <router-link to="/genre/Pop">SEE ALL</router-link>
+    </div>
     <ul class="playlists-container">
       <li v-for="playlist in popPlaylists" :key="playlist._id">
         <playlist-preview :currPlaylist="playlist"></playlist-preview>
