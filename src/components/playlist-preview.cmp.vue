@@ -11,7 +11,7 @@
       </div>
       <div class="playlist-info">
         <h1 class="playlist-name">{{ playlist.name }}</h1>
-        <p>{{ playlist.discription }}</p>
+        <p>{{ discriptionUnder100 }}</p>
       </div>
       <button
         class="play-top-playlist"
@@ -66,6 +66,11 @@ export default {
         return parseFloat(playlistLikes / 1000).toFixed(1) + "K";
       return this.playlist.likes;
     },
+    discriptionUnder100() {
+      return this.playlist.discription.length > 40 ? 
+      this.playlist.discription.slice(0,40) + '...' :
+      this.playlist.discription 
+    }
   },
 };
 </script>

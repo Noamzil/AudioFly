@@ -45,7 +45,6 @@ export default {
   sockets: {
     invite(playlistId) {
       this.invitePlaylist = playlistId;
-      console.log(playlistId);
       this.notification++;
     },
   },

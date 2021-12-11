@@ -60,7 +60,7 @@ export default {
       var songs = this.$store.getters.user.liked.song;
       var fileterdSongs = playlistService.filterPlaylist(songs, filterBy);
       this.songs = fileterdSongs;
-      console.log(songs);
+      // console.log(songs);
     },
   },
   computed: {

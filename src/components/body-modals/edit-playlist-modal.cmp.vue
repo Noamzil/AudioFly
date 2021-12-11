@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { eventBus } from '../../services/event-bus.cmp';
+import { eventBus} from '../../services/event-bus.cmp.js';
 export default {
   name: 'editPlaylistModal',
   props: ['currPlaylist'],

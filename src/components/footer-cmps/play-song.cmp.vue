@@ -16,9 +16,9 @@ export default {
   },
   created() {
     this.openYtPlayer();
-    console.log(`1`);
+    // console.log(`1`);
     var video = document.getElementById('player');
-    console.log(video);
+    // console.log(video);
   },
   computed: {},
   methods: {
@@ -35,7 +35,7 @@ export default {
       );
     },
     openYtPlayer() {
-      console.log(`in`);
+      // console.log(`in`);
       var songId = this.$store.getters.currSong.youtubeId;
       var tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
@@ -56,7 +56,7 @@ export default {
             // onStateChange: onPlayerStateChange,
           },
         });
-        console.log(player);
+        // console.log(player);
       };
 
       function onPlayerReady(event) {

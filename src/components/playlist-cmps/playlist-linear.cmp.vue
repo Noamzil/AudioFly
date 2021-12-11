@@ -112,7 +112,7 @@ export default {
       const playlist = holder.station;
       const song = holder.song;
       const currTime = holder.currTime;
-      console.log(holder);
+      // console.log(holder);
       this.$store.commit({ type: "onStation" });
       this.$store.commit({ type: "setCurrPlaylist", playlist });
       this.$store.commit({ type: "playSong", song });

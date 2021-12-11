@@ -17,7 +17,7 @@ export default {
     },
     share() {
       this.$emit('closeModal');
-      console.log(`share`);
+      // console.log(`share`);
     },
   },
 };

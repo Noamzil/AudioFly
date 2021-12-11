@@ -15,10 +15,10 @@ export default {
       this.player.playVideo();
     },
     playing() {
-      console.log('\o/ we are watching!!!');
+      // console.log('\o/ we are watching!!!');
     },
     pauseVideo() {
-      console.log(this.player);
+      // console.log(this.player);
       console.log(this.player.getCurrentTime());
       this.player.pauseVideo();
     },
@@ -26,7 +26,7 @@ export default {
       var player = await this.player.setVolume(50);
     },
     startAt() {
-      console.log(this.player);
+      // console.log(this.player);
       this.player.cueVideoById(this.videoId,10);
     },
   },

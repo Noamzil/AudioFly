@@ -49,7 +49,7 @@ export default {
       this.msgs.push(msg)
     },
     sendMsg() {
-      console.log('Sending', this.msg);
+      // console.log('Sending', this.msg);
       socketService.emit('chat newMsg', this.msg)
       // TODO: next line not needed after connecting to backend
       // this.addMsg(this.msg)

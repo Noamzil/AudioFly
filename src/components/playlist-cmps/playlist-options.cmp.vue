@@ -13,7 +13,7 @@ export default {
   name: "playlist-options",
   methods: {
     addToQueue() {
-      console.log(`addToQueue playlist`);
+      // console.log(`addToQueue playlist`);
       this.currPlayList.songs.forEach((song) => {
         var entity = song;
         this.$store.commit({ type: "addToQueue", entity });
