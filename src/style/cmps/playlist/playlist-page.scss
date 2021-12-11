@@ -12,37 +12,40 @@
     font-size: rem(10px);
     margin: 0 4px;
   }
-  .add-song {
-    .search-container {
-      width: 100%;
-      display: flex;
-    }
-    .search-result-container {
-      display: flex;
-      justify-content: space-between;
-
-      ul {
-        width: 60%;
-        li {
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          img {
-            width: 50px;
-          }
-        }
-      }
-      button {
-        align-self: flex-start;
-      }
-    }
-  }
   & .playlist-header-container {
     background-color: rgb(226, 74, 165);
   }
 }
+.add-song-container {
+  padding: 30px;
+}
 
-@import '../playlist/playlist-header.scss';
-@import '../playlist/playlist-linear.scss';
-@import '../playlist/playlist-content.scss';
-@import '../playlist/song-options.scss';
+.add-song {
+  width: 270px;
+  background-color: #404040;
+  border-radius: 4px;
+  .search-container {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  input {
+    background-color: #404040;
+    color: #b6b2aa;
+    height: 40px;
+    opacity: 1;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    border: none;
+    outline: none;
+
+
+  }
+  svg {
+    position: relative;
+    color: #b6b2aa;
+    height: 20px;
+    width: 20px;
+  }
+}

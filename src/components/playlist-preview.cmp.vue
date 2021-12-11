@@ -1,13 +1,14 @@
 <template>
   <article class="playlist-preview">
-    <!-- :class="isHighlight" -->
     <div
       @mouseover="highlight = true"
       @mouseleave="highlight = false"
       @click="goToPlaylist"
       class="playlist-prev-container"
     >
-      <img class="playlist-img" :src="playlist.playlistImg" />
+      <div class="img-div">
+        <img class="playlist-img" :src="playlist.playlistImg" />
+      </div>
       <div class="playlist-info">
         <h1 class="playlist-name">{{ playlist.name }}</h1>
         <p>{{ playlist.discription }}</p>
@@ -61,7 +62,8 @@ export default {
     playlistLikes() {
       const playlistLikes = this.playlist.likes;
       if (playlistLikes > 10000) return parseInt(playlistLikes / 1000) + "K";
-      if (playlistLikes > 1000) return parseFloat(playlistLikes / 1000).toFixed(1) + "K";
+      if (playlistLikes > 1000)
+        return parseFloat(playlistLikes / 1000).toFixed(1) + "K";
       return this.playlist.likes;
     },
   },
