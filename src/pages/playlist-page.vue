@@ -1,5 +1,12 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
+    <form @submit.prevent="addSong(songToAdd)">
+      <input type="text" placeholder="youtubeId" v-model="songToAdd.youtubeId">
+      <input type="text" placeholder="name" v-model="songToAdd.title">
+      <input type="file" placeholder="img" @change="imgUploadSong">
+      <input type="text" placeholder="duration" v-model="songToAdd.duration">
+      <button>add</button>
+    </form>
     <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
     <playlist-linear
       @openModal="openModal"
@@ -45,6 +52,13 @@ export default {
       isSearch: false,
       songsToShow: null,
       isAdmin: null,
+      songToAdd: {
+        title: '',
+        youtubeId: '',
+        img: '',
+        type: 'song',
+        duration: ''
+      }
     };
   },
   created() {
@@ -177,6 +191,14 @@ export default {
       // console.log(this.currTime);
       // this.$store.commit({ type: 'notOnStation' });
       this.$emit('playNextSong');
+    },
+    async imgUploadSong(fileUploadEv) {
+      try {
+        const res = await uploadImg(fileUploadEv);
+        this.songToAdd.img = res.url;
+      } catch (err) {
+        console.log('Couls not upload image', err);
+      }
     },
   },
   computed: {
