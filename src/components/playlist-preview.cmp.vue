@@ -1,17 +1,22 @@
 <template>
   <article class="playlist-preview">
     <!-- :class="isHighlight" -->
-    <div @mouseover="highlight = true"  @mouseleave="highlight = false" @click="goToPlaylist" class="playlist-prev-container">
+    <div
+      @mouseover="highlight = true"
+      @mouseleave="highlight = false"
+      @click="goToPlaylist"
+      class="playlist-prev-container"
+    >
       <img class="playlist-img" :src="playlist.playlistImg" />
-      <h1 class="playlist-name">{{ playlist.name }}</h1>
-      <!-- <div class="song-name-container">
-        <span v-for="song in first2Songs" :key="song.youtubeId">
-          {{ song.title }}|</span>
-      </div> -->
-      <hr>
-      <p>{{playlist.discription}}</p>
-      <button class="play-top-playlist" :class="isHighlight"
-        @click="playSong(topSong)">
+      <div class="playlist-info">
+        <h1 class="playlist-name">{{ playlist.name }}</h1>
+        <p>{{ playlist.discription }}</p>
+      </div>
+      <button
+        class="play-top-playlist"
+        :class="isHighlight"
+        @click="playSong(topSong)"
+      >
         <svg role="img" viewBox="0 0 24 24">
           <polygon
             points="21.57 12 5.98 3 5.98 21 21.57 12"
@@ -19,7 +24,10 @@
           ></polygon>
         </svg>
       </button>
-      <span class="likes">{{playlist.likes}} Likes</span>
+      <div class="likes">
+        <h3>{{ playlistLikes }}</h3>
+        <h3><i class="far fa-thumbs-up"></i></h3>
+      </div>
     </div>
   </article>
 </template>
@@ -49,6 +57,12 @@ export default {
     },
     first2Songs() {
       return this.playlist.songs.slice(0, 2);
+    },
+    playlistLikes() {
+      const playlistLikes = this.playlist.likes;
+      if (playlistLikes > 10000) return parseInt(playlistLikes / 1000) + "K";
+      if (playlistLikes > 1000) return parseFloat(playlistLikes / 1000).toFixed(1) + "K";
+      return this.playlist.likes;
     },
   },
 };

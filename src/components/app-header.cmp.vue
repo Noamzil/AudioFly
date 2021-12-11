@@ -27,16 +27,20 @@
         </form>
       </div>
     </section>
-    <div>
-      <h1><i class="far fa-bell"></i></h1>
-      <h1>{{ notification }}</h1>
-    </div>
-    <div class="flex login-container">
-      <template v-if="!$store.getters.realUser">
-        <button @click="$router.push('/login')" class="login-btn">Login</button>
-      </template>
-      <user-nav @logOut="$emit('logOut')"></user-nav>
-    </div>
+    <section style="display:flex">
+      <div>
+        <h1><i class="far fa-bell"></i></h1>
+        <h1>{{ notification }}</h1>
+      </div>
+      <div class="flex login-container">
+        <template v-if="!$store.getters.realUser">
+          <button @click="$router.push('/login')" class="login-btn">
+            Login
+          </button>
+        </template>
+        <user-nav @logOut="$emit('logOut')"></user-nav>
+      </div>
+    </section>
   </header>
 </template>
 
@@ -47,7 +51,7 @@ import { playlistService } from "../services/playlist.service.js";
 
 export default {
   name: "app-header",
-  props: ['notification', 'invitePlaylist'],
+  props: ["notification", "invitePlaylist"],
   data() {
     return {
       isNext: false,

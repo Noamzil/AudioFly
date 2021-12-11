@@ -3,27 +3,37 @@
     align-items: center;
     justify-content: space-between;
     background-color: black;
-    &.clicked {background-color: #282828;}
+    &.clicked {
+        background-color: #282828;
+    }
     border-radius: 30px;
-    height: 40px;
-    min-width: 150px;
+    height: 33px;
     padding: 2px;
 
     .user-avatar {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: teal;
         font-size: 1.4rem;
-
+        object-fit: cover;
+        span {
+            font-size: 14px;
+            position: relative;
+            top: 2px;
+        }
+    }
+    h3 {
+        position: relative;
+        top: 2px;
     }
 
     path {
         stroke: white;
-        fill: white
+        fill: white;
     }
 
     &:hover {
@@ -31,7 +41,7 @@
         background-color: #282828;
     }
 
-    >* {
+    > * {
         margin-left: 5px;
     }
 }

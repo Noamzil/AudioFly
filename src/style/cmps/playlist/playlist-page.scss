@@ -16,11 +16,11 @@
     .search-container {
       width: 100%;
       display: flex;
-    } 
+    }
     .search-result-container {
       display: flex;
       justify-content: space-between;
-  
+
       ul {
         width: 60%;
         li {
@@ -28,7 +28,7 @@
           align-items: flex-start;
           justify-content: space-between;
           img {
-            width: 50px
+            width: 50px;
           }
         }
       }

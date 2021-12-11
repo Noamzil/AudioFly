@@ -18,15 +18,17 @@
     border-radius: 4px;
     background-color: #181818;
     width: 270px;
-    height: 380px;
-    padding: 15px;
+    height: 360px;
+    // padding: 15px;
+    box-sizing: content-box;
   }
   .playlist-prev-container {
-    padding: 10px;
-    height: 300px;
+    padding: 15px 20px;
+    height: 350px;
     cursor: pointer;
     border-radius: 4px;
     transition: background 0.3s;
+    padding-top: 7px;
   }
   .playlist-img {
     height: 225px;
@@ -37,7 +39,11 @@
   }
   .playlist-name {
     font-size: 20px;
-    padding: 5px 0;
+    padding-bottom: 5px;
+  }
+  p {
+    color: #b3b3b3;
+    font-size: 16px;
   }
   .song-name-container {
     font-size: 16px;
@@ -65,6 +71,16 @@
       color: white;
     }
   }
+  .playlist-info {
+    height: 70px;
+  }
+  .likes {
+    position: relative;
+    left: 75%;
+    top: -12%;
+    display: flex;
+    gap: 5px;
+  }
 }
 
 .playlist-prev-container:hover {
@@ -81,9 +97,6 @@
     .playlist-img {
       height: 200px;
       width: 200px;
-    }
-    .playlist-name {
-      font-size: 16px;
     }
     .song-name-container {
       font-size: 14px;
@@ -113,8 +126,7 @@
     }
     button {
       top: -53%;
-      left: 70%
-
+      left: 70%;
     }
   }
 }
