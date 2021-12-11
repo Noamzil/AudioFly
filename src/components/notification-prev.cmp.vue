@@ -16,10 +16,11 @@ export default {
   },
   computed: {
     invitationMsg() {
-      const userName = this.invitation.user.fullName;
+      const userName = this.invitation.user.username;
       const playlistId = this.invitation.playlist;
       const stationName = this.stationName(playlistId);
       return `${userName} invited you to listen to ${stationName} station`;
+      return userName
     },
   },
 };

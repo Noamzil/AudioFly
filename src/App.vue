@@ -50,6 +50,7 @@ export default {
   },
   sockets: {
     invite(invitation) {
+      console.log('im here in invite');
       this.currInvitation = {
         playlist: invitation.playlist,
         user: invitation.user,
