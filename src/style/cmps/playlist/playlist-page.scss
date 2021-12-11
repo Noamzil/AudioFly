@@ -17,7 +17,7 @@
   }
 }
 .add-song-container {
-  padding: 30px;
+  padding: 70px 30px;
 }
 
 .add-song {
@@ -36,16 +36,45 @@
     height: 40px;
     opacity: 1;
     text-overflow: ellipsis;
-    font-weight: bold;
+    font-weight: 1000;
     border: none;
     outline: none;
-
-
   }
   svg {
     position: relative;
     color: #b6b2aa;
     height: 20px;
     width: 20px;
+  }
+}
+
+.search-result-container {
+  .close {
+    position: relative;
+    left: 98%;
+    bottom: 15px;
+    font-size: 24px;
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  img {
+    height: 60px;
+    width: 95px;
+    object-fit: cover;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  li {
+    display: flex;
+    justify-content: space-between;
+    .add {
+      cursor: pointer;
+    }
   }
 }

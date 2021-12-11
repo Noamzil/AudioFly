@@ -16,21 +16,19 @@
       </div>
     </div>
     <div class="search-result-container" v-if="songs">
-      <div class="first-result">
-        <img :src="songs[0].img" />
-        <h1>{{ songs[0].title }}</h1>
-        <h1>{{ songs[0].duration }}</h1>
-        <button @click="$emit('addSong', songs[0])">add</button>
-      </div>
+      <h1 @click="$emit('close')" class="close"><i class="far fa-times-circle"></i></h1>
       <ul>
-        <li v-for="song in only4Songs" :key="song.youtubeId">
-          <img :src="song.img" />
-          <h1>{{ song.title }}</h1>
-          <h1>{{ song.duration }}</h1>
-          <button @click="$emit('addSong', song)">add</button>
+        <li v-for="song in songs" :key="song.youtubeId">
+          <div>
+            <img :src="song.img" />
+            <h1>{{ song.title }}</h1>
+          </div>
+          <div>
+            <h1>{{ song.duration }}</h1>
+            <h1 @click="$emit('addSong', song)" class="add"><i class="fas fa-plus"></i></h1>
+          </div>
         </li>
       </ul>
-      <button @click="$emit('close')">x</button>
     </div>
   </section>
 </template>

@@ -70,7 +70,6 @@
       <div class="content-header">
         <small class="hashtag">#</small>
         <small class="title">Title</small>
-        <small class="album">Album</small>
         <small class="date">Date added</small>
         <svg role="img" viewBox="0 0 16 16" class="time">
           <path
