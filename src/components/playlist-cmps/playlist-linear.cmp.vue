@@ -100,7 +100,7 @@ export default {
   },
   created() {
     socketService.emit("chat topic", `1`);
-    socketService.on("chat addMsg", this.addMsg);
+    // socketService.on("chat addMsg", this.addMsg);
   },
   methods: {
     invite() {
@@ -116,10 +116,10 @@ export default {
       const playlist = holder.station;
       const song = holder.song;
       const currTime = holder.currTime;
-      console.log(holder);
+      // console.log(holder);
       this.$store.commit({ type: "onStation" });
       this.$store.commit({ type: "setCurrPlaylist", playlist });
-      this.$store.commit({ type: "playSong", song });
+      // this.$store.commit({ type: "playSong", song });
       this.$store.commit({ type: "updateCurrTime", currTime });
     },
     disLikePlaylist() {

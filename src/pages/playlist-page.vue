@@ -66,7 +66,8 @@ export default {
     };
   },
   created() {
-    eventBus.$on('updateCurrPlaylist', updateCurrPlaylist);
+    // console.log(this.$socket);
+    eventBus.$on('updateCurrPlaylist', this.updateCurrPlaylist);
   },
   watch: {
     '$route.params.playlistId': {
@@ -80,17 +81,19 @@ export default {
         this.currPlaylist = await playlistService.getPlaylistById(playlistId);
         if (this.currPlaylist.createdBy._id === this.$store.getters.user._id) {
           this.isAdmin = true;
-          console.log('im admin');
+          // console.log('im admin');
         } else {
           this.$socket.emit('userJoined');
-          console.log(`in else`);
+          // console.log(`in else`);
         }
       },
       immediate: true,
     },
   },
   methods: {
-    updateCurrPlaylist() {},
+    updateCurrPlaylist(playlist) {
+      this.currPlaylist = playlist
+    },
     setFilter(filterBy) {
       var playlist = JSON.parse(
         JSON.stringify(this.$store.getters.currPlaylist)
@@ -153,15 +156,15 @@ export default {
       eventBus.$emit('openModal', type);
     },
     addSong(song) {
-      console.log('hii');
+      // console.log('hii');
       song.addedAt = Date.now();
-      console.log(song.addedAt);
+      // console.log(song.addedAt);
       this.currPlaylist.songs.push(song);
       this.$store.dispatch({
         type: 'updatePlaylist',
         playlist: this.currPlaylist,
       });
-      console.log(this.currPlaylist);
+      // console.log(this.currPlaylist);
       this.$socket.emit('updatePlaylist', this.currPlaylist.songs);
     },
     update(songs) {
@@ -170,35 +173,20 @@ export default {
         type: 'updatePlaylist',
         playlist: this.currPlaylist,
       });
-      console.log(this.$socket);
+      // console.log(this.$socket);
       this.$socket.emit('updatePlaylist', songs);
     },
     playSong(song) {
       console.log('im here in play song in playlist page ^^^^^^^^^^^^^');
       var currTime = 0;
-      console.log(currTime);
-      console.log(`play song`);
+      // console.log(currTime);
+      // console.log(`play song`);
       this.$store.commit({ type: 'updateCurrTime', currTime });
       this.$store.commit({ type: 'playSong', song });
       this.setSong();
     },
     async setSong() {
       const currSong = this.$store.getters.currSong;
-      // this.lengthStr = await apiService.getVideoLength(currSong.youtubeId);
-      // this.songLength = this.ISOStringToSec(this.lengthStr);
-      // this.currTimeStr = this.secToStr(this.currTime);
-      // this.songLengthStr = this.secToStr(this.songLength);
-      // console.log(this.$store.getters.isOnStation);
-      // if (!this.$store.getters.isOnStation) {
-      //   console.log('im in song progress');
-      //   this.currTime = 0;
-      //   this.progressPercent = 0;
-      //   this.currTimeStr = this.secToStr(this.currTime);
-      // }
-      // this.currTimeStr = this.secToStr(this.currTime);
-      // this.progressPercent = this.currTime;
-      // console.log(this.currTime);
-      // this.$store.commit({ type: 'notOnStation' });
       this.$emit('playNextSong');
     },
     async imgUploadSong(fileUploadEv) {
@@ -232,25 +220,33 @@ export default {
   },
   sockets: {
     updatePlaylist(songs) {
-      console.log('im here in update');
+      // console.log('im here in update');
       this.currPlaylist.songs = songs;
       this.$store.commit({ type: 'updatePlaylist', updatedPlaylist: songs });
     },
     userJoined() {
-      console.log('im here in front end, in user joined');
+      // console.log('im here in front end, in user joined');
       if (this.isAdmin) {
         const { currSong, currTime } = this.$store.getters;
-        console.log(currSong);
-        console.log(currTime);
+        // console.log(currSong);
+        // console.log(currTime);
         this.$socket.emit('setSongState', { currSong, currTime });
       }
     },
     setSongState(songState) {
-      console.log(songState);
+      // console.log(songState);
       const song = songState.currSong;
       const { currTime } = songState;
-      this.$store.commit({ type: 'updateCurrTime', currTime });
-      this.$store.commit({ type: 'playSong', song });
+
+      const { user } = songState;
+
+      var currUser = this.$store.getters.user;
+      console.log('currUser', currUser);
+      console.log('user', user);
+      if (user._id !== currUser._id) {
+        this.$store.commit({ type: 'updateCurrTime', currTime });
+        this.$store.commit({ type: 'playSong', song });
+      }
     },
   },
   components: {

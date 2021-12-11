@@ -177,7 +177,7 @@ export default {
       this.songLength = this.ISOStringToSec(this.lengthStr);
       this.currTimeStr = this.secToStr(this.currTime);
       this.songLengthStr = this.secToStr(this.songLength);
-      console.log(this.$store.getters.isOnStation);
+      // console.log(this.$store.getters.isOnStation);
       if (!this.$store.getters.isOnStation) {
         this.currTime = 0;
         this.progressPercent = 0;

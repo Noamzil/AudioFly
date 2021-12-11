@@ -50,6 +50,7 @@ export default {
       this.$store.dispatch({ type: 'removeLike', entity: song });
     },
     playSong(song) {
+      console.log(song);
       this.$store.commit({ type: 'playSong', song });
     },
     playFirstSong() {
@@ -60,7 +61,7 @@ export default {
       var songs = this.$store.getters.user.liked.song;
       var fileterdSongs = playlistService.filterPlaylist(songs, filterBy);
       this.songs = fileterdSongs;
-      console.log(songs);
+      // console.log(songs);
     },
   },
   computed: {
