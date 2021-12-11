@@ -1,10 +1,14 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
     <form @submit.prevent="addSong(songToAdd)">
-      <input type="text" placeholder="youtubeId" v-model="songToAdd.youtubeId">
-      <input type="text" placeholder="name" v-model="songToAdd.title">
-      <input type="file" placeholder="img" @change="imgUploadSong">
-      <input type="text" placeholder="duration" v-model="songToAdd.duration">
+      <input
+        type="text"
+        placeholder="youtubeId"
+        v-model="songToAdd.youtubeId"
+      />
+      <input type="text" placeholder="name" v-model="songToAdd.title" />
+      <input type="file" placeholder="img" @change="imgUploadSong" />
+      <input type="text" placeholder="duration" v-model="songToAdd.duration" />
       <button>add</button>
     </form>
     <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
@@ -57,19 +61,23 @@ export default {
         youtubeId: '',
         img: '',
         type: 'song',
-        duration: ''
-      }
+        duration: '',
+      },
     };
   },
   created() {
     console.log(this.$socket);
+    eventBus.$on('updateCurrPlaylist', updateCurrPlaylist);
   },
   watch: {
     '$route.params.playlistId': {
       async handler() {
         const { playlistId } = this.$route.params;
         await this.$store.dispatch({ type: 'setCurrPlaylist', playlistId });
-        this.currPlaylist = this.$store.getters.currPlaylist;
+        var playlist = JSON.parse(
+          JSON.stringify(this.$store.getters.currPlaylist)
+        );
+        this.currPlaylist = playlist;
         this.currPlaylist = await playlistService.getPlaylistById(playlistId);
         if (this.currPlaylist.createdBy._id === this.$store.getters.user._id) {
           this.isAdmin = true;
@@ -83,6 +91,7 @@ export default {
     },
   },
   methods: {
+    updateCurrPlaylist() {},
     setFilter(filterBy) {
       var playlist = JSON.parse(
         JSON.stringify(this.$store.getters.currPlaylist)
