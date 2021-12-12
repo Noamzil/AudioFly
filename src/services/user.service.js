@@ -55,12 +55,11 @@ async function logIn(user) {
   try {
     // const users = await storageService.query(USERS_KEY)
     // const users = await query();
-    const userToLog = await httpService.post(AUTH_URL + `login/${user.username}`)
-    // console.log(users);
     // const loggedUser = users.find(
     //   (currUser) =>
     //     user.username.toLowerCase() === currUser.username.toLowerCase()
     // );
+    const userToLog = await httpService.post(AUTH_URL + `login/${user.username}`)
     if (!userToLog) return;
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(userToLog));
     userToLog
