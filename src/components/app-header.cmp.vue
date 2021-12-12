@@ -30,8 +30,7 @@
     <section style="display: flex">
       <div class="notification-container" @click="toggleNotifications">
         <h1 class="bell"><i class="far fa-bell"></i></h1>
-        <div class="notifications-num">
-          <h1>{{ notification }}</h1>
+        <div v-if="notification" class="notifications-num">
         </div>
       </div>
       <notifications
