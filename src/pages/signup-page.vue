@@ -1,7 +1,16 @@
 <template>
   <div class="login-page-section">
-    <img class="logo" src="../assets/logo1.png" />
     <form class="auth-page login sign-up" @submit.prevent="signUser">
+      <label for="user-img-select" class="img-select-container">
+        <img :src="user.imgUrl" alt="Choose Image" class="user-avatar" />
+        <input
+          type="file"
+          id="user-img-select"
+          accept="image/png , image/jpeg"
+          @change="loading"
+          hidden
+        />
+      </label>
       <div class="input-container flex">
         <input
           name="username"

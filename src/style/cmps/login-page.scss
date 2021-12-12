@@ -65,8 +65,8 @@
       width: 70px;
       margin-top: 185px;
 
-      &.sign-up{
-        margin-top: 285px;
+      &.sign-up {
+        margin-top: 497px;
       }
     }
 
@@ -79,7 +79,7 @@
       height: 350px;
       justify-content: space-between;
       &.sign-up {
-        height: 440px;
+        height: 650px;
       }
     }
     &.signup {
@@ -93,7 +93,12 @@
       margin-bottom: 25px;
       width: 70px;
       border-radius: 50%;
+      &.user-avatar {
+        margin-bottom: 0;
+        margin-top: 100px;
+      }
     }
+
     input {
       width: 250px;
     }
