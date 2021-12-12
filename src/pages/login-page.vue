@@ -1,15 +1,30 @@
 <template>
   <div class="login-page-section">
-    <!-- <img :src="require('../assets/img/logo1.png')" /> -->
-    <h1>Welcome</h1>
+    <img class="logo" src="../assets/logo1.png" />
+    <h1 class="welcome">Welcome</h1>
     <h2>Login to continue</h2>
     <form class="auth-page login" @submit.prevent="logUser">
-      <h1>Username:</h1>
-      <input type="text" v-model="user.username" />
-      <h1>Password:</h1>
-      <input type="password" v-model="user.password" />
-      <button class="action-btn not-btn">LogIn</button>
-      <hr />
+      <div class="input-container flex">
+        <input
+          name="username"
+          type="text"
+          placeholder="Username"
+          v-model="user.username"
+        />
+        <div class="fas fa-user"></div>
+      </div>
+      <div class="input-container flex">
+        <input
+          name="password"
+          type="Password"
+          placeholder="Password"
+          v-model="user.password"
+        />
+        <div class="far fa-eye-slash"></div>
+      </div>
+      <button class="login-btn">Log in</button>
+      <h4>OR</h4>
+      <hr>
       <p>Not a member?</p>
       <button @click="$router.push('/signup')" class="link-btn not-btn">
         sign here
@@ -37,7 +52,7 @@ export default {
   },
   computed: {
     imgSrc() {
-      return ;
+      return;
     },
   },
 };
