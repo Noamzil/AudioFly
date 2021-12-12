@@ -64,8 +64,8 @@
   }
 
   & .dots {
-    height: 32px;
-    width: 32px;
+    // height: 32px;
+    // width: 32px;
     color: #b3b3b3;
 
     &:hover {
@@ -188,5 +188,59 @@
     border-bottom: 2px solid #3b3b3b;
     color: #b3b3b3;
     width: 170px;
+  }
+}
+
+@media (max-width: 840px) {
+  .playlist-page .linear-container {
+    & .content-header {
+      grid-template-columns: 32px 6fr minmax(120px, 1fr);
+    }
+
+    & .date {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .playlist-page .linear-container {
+    & .btns-container {
+      & .play-btn {
+        height: rem(48px);
+        width: rem(48px);
+
+        & svg {
+          height: 24px;
+          width: 24px;
+        }
+      }
+      & .heart {
+        height: 26px;
+        width: 26px;
+      }
+
+      & .dots {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .playlist-page .linear-container {
+    & .btns-container {
+      & .play-btn {
+        margin-inline-end: 20px;
+
+        & svg {
+          height: 24px;
+          width: 24px;
+        }
+      }
+      & .heart {
+        margin-inline-end: 14px;
+      }
+    }
   }
 }

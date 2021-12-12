@@ -17,7 +17,7 @@
       <img class="song-img" :src="song.img" />
       <p>{{ song.title }}</p>
     </div>
-    <p>{{ dateAdded }}</p>
+    <p class="date-added-song">{{ dateAdded }}</p>
     <div class="song-options">
       <div class="heart-container">
         <section v-if="isHover || isSongLiked">
@@ -28,7 +28,7 @@
           ></button>
         </section>
       </div>
-      <p>{{ song.duration }}</p>
+      <p >{{ song.duration }}</p>
       <div @click="openSongOpts" class="dots-container">
         <div v-if="isHover">• • •</div>
       </div>
