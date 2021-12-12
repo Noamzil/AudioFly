@@ -14,7 +14,7 @@
         <span>{{ firstLetter }}</span>
       </div>
     </div>
-    <nav class="user-nav-modal" v-if="isNav">
+    <nav class="user-nav-modal" v-if="isNav" ref="modal">
       <router-link to="/"
         >Account
         <svg role="img" viewBox="0 0 16 16">
@@ -36,7 +36,15 @@ export default {
     return {
       user: this.$store.getters.user,
       isNav: false,
+      modal: document.querySelector('.user-nav-modal')
     };
+  },
+  created() {
+    window.onclick = ev => {
+      if (this.isNav) return 
+      if(ev.target !== this.modal)
+      this.isNav = false;
+    }
   },
   computed: {
     firstLetter() {

@@ -2,6 +2,7 @@ body {
   color: $clrTxt;
   font-family: CircularSpotify;
   background-color: $clrBgc;
+  height: 100vh;
 }
 
 * {
@@ -59,10 +60,10 @@ li {
 @media (max-width: 840px) {
   .main-app-container {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 5px 1fr 5px;
     grid-template-rows: auto 1fr auto;
   }
   #app {
-    grid-column: 1/2;
+    grid-column: 1/-1;
   }
 }
