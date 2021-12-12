@@ -71,3 +71,46 @@
     margin-bottom: 12px;
   }
 }
+
+@media (max-width: 840px) {
+  .playlist-page .playlist-description {
+    & img {
+      height: 200px;
+      width: 200px;
+    }
+
+    & .img-edit-container {
+      height: 200px;
+      width: 200px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .playlist-page .playlist-description {
+    align-items: center;
+    & img {
+      height: 140px;
+      width: 140px;
+    }
+
+    & .img-edit-container {
+      height: 140px;
+      width: 140px;
+    }
+    & h1 {
+      font-size: rem(48px);
+      line-height: rem(48px);
+      padding: 0.08em 0;
+    }
+
+    & p,span,a {
+      font-size: rem(12px);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .playlist-page .playlist-description {
+  }
+}
