@@ -3,7 +3,7 @@
     v-if="this.$store.getters.songsRes.length"
     class="flex songs-res-container">
     <div class="top-res" v-if="topSong">
-      <img :src="topSong.img" />
+      <img :src="topSong.img" @click="playSong(topSong)"/>
       <h1>{{ topSong.title }}</h1>
         <div class="heart-container">
           <button

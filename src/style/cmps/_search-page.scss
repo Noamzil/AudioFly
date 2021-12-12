@@ -61,6 +61,10 @@
 }
 
 .songs-res-container {
+  img {
+    cursor: pointer;
+  }
+
   gap: 10px;
   margin-bottom: 40px;
   & .like-btn {
@@ -156,7 +160,6 @@
   img {
     height: 55px;
     width: 55px;
-    cursor: pointer;
     object-fit: cover;
   }
   h3 {
