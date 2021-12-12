@@ -79,21 +79,67 @@
   & small {
     width: 40px;
   }
+  @media (max-width: 860px) {
+    flex-direction: column;
+    .top-res {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+      padding: 0;
+      // background-color: transparent;
+      width: 100%;
+      img {
+        height: 50px;
+        width: 60px;
+        padding: 0;
+      }
+      .play-top-song-btn {
+        display: none;
+      }
+      h1 {
+        font-size: 16px;
+        width: 80%;
+      }
+    }
+    .songs-res {
+      width: 100%;
+      padding: 0;
+      img {
+        width: 60px;
+        height: 50px;
+      }
+      h1 {
+        display: none;
+      }
+      h3 {
+        font-size: 16px;
+        width: 80%;
+      }
+    }
+  }
 }
 
 .top-res {
   width: 35%;
   background-color: #181818;
   padding: 20px;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   img {
     height: 120px;
     width: 120px;
     object-fit: cover;
     padding-bottom: 10px;
+    order: 1;
   }
   h1 {
     font-size: 30px;
+    order: 2;
+  }
+  .heart-container {
+    order: 4;
   }
 }
 .songs-res {
@@ -129,6 +175,7 @@
   width: 48px;
   position: relative;
   left: 90%;
+  order:3 ;
 }
 
 .heart-search-res {

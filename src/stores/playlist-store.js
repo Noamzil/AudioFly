@@ -94,8 +94,9 @@ export const playlistStore = {
       return songs;
     },
     searchPlaylists(state, { key }) {
-      var playlists = state.playlists
-      state.relatedPlaylists = playlistService.searchPlaylists(playlists, key)
+      state.relatedPlaylists = state.playlists.filter(playlist =>
+        playlist.name.toLowerCase().includes(key.toLowerCase()) ||
+        playlist.tags.find(tag => tag.toLowerCase() === key.toLowerCase()))
     },
   },
   actions: {

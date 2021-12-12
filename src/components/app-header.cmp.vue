@@ -26,6 +26,7 @@
           <input type="search" v-model="searchTxt" placeholder="Search Songs" />
         </form>
       </div>
+          <span>{{searchTxt}}</span>
     </section>
     <section style="display: flex">
       <div class="notification-container" @click="toggleNotifications">
@@ -155,14 +156,11 @@ export default {
         }
       },
     },
-    // '$store.state.currHomeTag':{
-    //   handler(){
-    //     const tag = this.$store.getters.currHomeTag
-    //     console.log(tag);
-    //     this.tag = tag
-
-    //   }
-    // }
+    searchTxt() {
+      setTimeout(() => {
+        this.search()
+      }, 500)
+    }
   },
   components: {
     userNav,

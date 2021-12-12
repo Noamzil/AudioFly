@@ -1,11 +1,17 @@
 <template>
   <section
     v-if="this.$store.getters.songsRes.length"
-    class="flex songs-res-container"
-  >
+    class="flex songs-res-container">
     <div class="top-res" v-if="topSong">
       <img :src="topSong.img" />
       <h1>{{ topSong.title }}</h1>
+        <div class="heart-container">
+          <button
+            @click="toggleLikeSong(topSong)"
+            class="like-btn fa-heart"
+            :class="isSongLikedCheck(topSong) ? 'fas btn-liked' : 'far'"
+          ></button>
+        </div>
       <button class="play-top-song-btn" @click="playSong(topSong)">
         <svg role="img" viewBox="0 0 24 24">
           <polygon

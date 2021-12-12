@@ -25,7 +25,8 @@
           ></path></svg
       ></router-link>
       <router-link to="/">Profile</router-link>
-      <button class="log-out-btn" @click="$emit('logOut')">Log out</button>
+      <button class="log-out-btn" @click="$emit('logOut')" v-if="$store.getters.realUser">
+        Log out</button>
     </nav>
   </section>
 </template>
