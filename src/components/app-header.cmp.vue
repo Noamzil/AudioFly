@@ -26,7 +26,6 @@
           <input type="search" v-model="searchTxt" placeholder="Search Songs" />
         </form>
       </div>
-          <span>{{searchTxt}}</span>
     </section>
     <section style="display: flex">
       <div class="notification-container" @click="toggleNotifications">
