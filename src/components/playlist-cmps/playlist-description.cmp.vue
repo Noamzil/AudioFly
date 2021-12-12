@@ -53,7 +53,13 @@
         >
           <i class="fab fa-whatsapp"> </i>
         </a>
-        <i class="fab fa-facebook"></i>
+        <a
+          class="btn"
+          :href="`https://www.facebook.com/sharer/sharer.php?u=${playlistUrl}&t=${playlistUrl}`"
+          title="Share on Facebook"
+          target="_blank">
+          <i class="fab fa-facebook"></i>
+        </a>
         <i class="fas fa-paste" @click="copyToClipboard"></i>
       </div>
     </div>

@@ -26,7 +26,7 @@
             </svg>
           </button>
           <div @click="openPlaylistOpts" class="dots-container">
-            <div class="dots">• • •</div>
+            <div class="dots"><p>• • •</p> </div>
             <playlist-options
               v-if="isPlaylistOps"
               @editPlaylist="openModalforEdit"
@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <button v-if="isStation" @click="invite">Invite to station</button>
+        <h1 v-if="isStation" @click="invite" title="invite"><i class="fas fa-user-plus"></i></h1>
 
         <form @submit.prevent class="StationFilter">
           <button
