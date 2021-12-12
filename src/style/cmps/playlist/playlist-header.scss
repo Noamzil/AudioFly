@@ -3,7 +3,11 @@
   display: flex;
 
   & .share-btns {
+    display: flex;
     align-self: flex-end;
+    gap: 10px;
+    font-size: 24px;
+    cursor: pointer;
   }
 
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
