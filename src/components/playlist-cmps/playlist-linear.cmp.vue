@@ -26,7 +26,7 @@
             </svg>
           </button>
           <div @click="openPlaylistOpts" class="dots-container">
-            <div class="dots">• • •</div>
+            <div class="dots"><p>• • •</p> </div>
             <playlist-options
               v-if="isPlaylistOps"
               @editPlaylist="openModalforEdit"
