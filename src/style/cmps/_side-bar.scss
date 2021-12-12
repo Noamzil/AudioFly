@@ -132,15 +132,20 @@ svg {
   }
 }
 
-@media (max-width:840px) {
+@media (max-width: 840px) {
   .side-bar-container {
+    height: 45px;
     grid-column: 1/-1;
     grid-row: 3/4;
     height: auto;
     width: 100vw;
     bottom: 0%;
     flex-direction: row;
-    hr, img, .sidebarPlaylist {
+    justify-content: center;
+    background-color: #000000f0;
+    hr,
+    img,
+    .sidebarPlaylist {
       display: none;
     }
     .pages-btns-container {
@@ -148,6 +153,22 @@ svg {
     }
     .action-btns-container {
       display: flex;
+      width: 300px;
     }
+  }
+}
+
+@media (max-width: 675px) {
+  .side-bar-container {
+    height: 40px;
+    .action-btns-container {
+      width: 0px;
+    }
+    a {
+      padding: 2px 10px;
+    }
+  }
+  .side-bar-icons-container {
+    display: none;
   }
 }

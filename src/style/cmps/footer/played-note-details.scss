@@ -6,6 +6,11 @@
   min-width: 180px;
   width: 30%;
 }
+.footer {
+  .playedNowDetails-info {
+    display: flex;
+  }
+}
 
 .footer .artistImg img {
   height: 56px;

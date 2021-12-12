@@ -14,7 +14,7 @@
     height: 16px;
     width: 16px;
     color: #b3b3b3;
-    &:hover{
+    &:hover {
       color: white;
     }
   }
@@ -23,16 +23,92 @@
     color: #b3b3b3;
     height: 32px;
     width: 32px;
-    &:hover{
+    &:hover {
       color: white;
     }
   }
 }
 
-@import './footer/played-note-details.scss';
-@import './footer/song-progress.scss';
-@import './footer/device-control.scss';
+@import "./footer/played-note-details.scss";
+@import "./footer/song-progress.scss";
+@import "./footer/device-control.scss";
 
-iframe {
-  margin-bottom: 230px;
+@media (max-width: 840px) {
+  .footer {
+    bottom: 45px;
+    height: 60px;
+    background-color: #181818f7;
+    // background-color: salmon;
+    .artistImg img {
+      height: 40px;
+    }
+    .playedNowDetails-info .title {
+      font-size: 14px;
+    }
+    .playback-bar p {
+      font-size: 12px;
+    }
+    .player-control-btns button {
+      height: 26px;
+      width: 26px;
+    }
+    .playback-bar {
+      height: 15px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    bottom: 35px;
+    // background-color: seagreen;
+    .playedNowDetails-info {
+      flex-direction: column;
+      align-items: baseline;
+      .songDescription {
+        margin: 0;
+        .title {
+          width: 120px;
+        }
+      }
+      .artistImg img {
+        display: none;
+      }
+    }
+    .volume-input {
+      display: none;
+    }
+    .device-control {
+      width: auto;
+      min-width: 0;
+    }
+    .song-progress {
+      position: relative;
+      right: 5%;
+    }
+    .playedNowDetails {
+      min-width: 0px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    // background-color: slateblue;
+    bottom: 30px;
+    .shuffle,
+    .loop,
+    .LikeBtn,
+    .queue {
+      display: none;
+    }
+    .song-progress {
+      width: 220px;
+    }
+    .title {
+      font-size: 13px;
+      width: auto;
+    }
+
+  }
 }

@@ -39,7 +39,7 @@
           type="range"
           min="0"
           max="100"
-          class="slider"
+          class="slider volume-input"
         />
       </div>
     </div>
