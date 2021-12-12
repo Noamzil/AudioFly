@@ -46,37 +46,48 @@
         </div>
       </div>
       <div class="share-btns">
-        <i class="fab fa-whatsapp"><i class="fab fa-facebook"></i> </i>
-        <i class="fas fa-paste"></i>
+        <h1></h1>
+        <a
+          :href="'whatsapp://send?text=' + playlistUrl"
+          data-action="share/whatsapp/share"
+        >
+          <i class="fab fa-whatsapp"> </i>
+        </a>
+        <i class="fab fa-facebook"></i>
+        <i class="fas fa-paste" @click="copyToClipboard"></i>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { utilService } from '../../services/util.service.js';
+import { utilService } from "../../services/util.service.js";
 
 export default {
-  name: 'playlist-description',
-  props: ['currPlaylist'],
+  name: "playlist-description",
+  props: ["currPlaylist"],
   data() {
     return {
       playlistEdit: false,
       isHoverImg: false,
+      playlistUrl: window.location.href,
     };
   },
   methods: {
     imgInput(ev) {
-      this.$emit('imgUpload', ev);
+      this.$emit("imgUpload", ev);
+    },
+    copyToClipboard() {
+      navigator.clipboard.writeText(this.playlistUrl);
     },
   },
 
   computed: {
     albumTime() {
-      var albumTime = '';
+      var albumTime = "";
       var seconds = 0;
       this.currPlaylist.songs.forEach((song) => {
-        var a = song.duration.split(':');
+        var a = song.duration.split(":");
         seconds += +a[0] * 60 + +a[1];
       });
       albumTime = utilService.secToStr(seconds);

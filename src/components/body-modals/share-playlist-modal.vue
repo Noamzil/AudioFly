@@ -27,10 +27,7 @@ export default {
     };
   },
   methods: {
-    copyToClipboard() {
-      navigator.clipboard.writeText(this.playlistUrl);
-      // console.log(url);
-    },
+    
   },
 };
 </script>
