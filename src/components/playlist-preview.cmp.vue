@@ -25,11 +25,14 @@
           ></polygon>
         </svg>
       </button>
-      <div class="likes">
+      <div class="playlist-param">
+        <span>by: {{currPlaylist.createdBy.username}}</span>
+        <div class="likes">
         <h3>{{ playlistLikes }}</h3>
         <h3 @click.stop="likePlaylist">
           <i :class="{ green: isLikedByUser }" class="far fa-thumbs-up"></i>
         </h3>
+        </div>
       </div>
     </div>
   </article>

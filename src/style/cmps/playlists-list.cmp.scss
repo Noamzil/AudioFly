@@ -91,6 +91,12 @@
       height: 40px;
       padding: 5px 15px;
     }
+    .playlist-param {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 15px;
+
+    }
     .likes {
       align-self: flex-end;
       display: flex;

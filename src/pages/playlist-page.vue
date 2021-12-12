@@ -1,6 +1,6 @@
 <template>
   <section v-if="currPlaylist" class="playlist-page">
-    <!-- <form @submit.prevent="addSong(songToAdd)">
+    <form @submit.prevent="addSong(songToAdd)">
       <input
         type="text"
         placeholder="youtubeId"
@@ -10,7 +10,7 @@
       <input type="file" placeholder="img" @change="imgUploadSong" />
       <input type="text" placeholder="duration" v-model="songToAdd.duration" />
       <button>add</button>
-    </form> -->
+    </form>
     <playlist-description @imgUpload="imgUpload" :currPlaylist="currPlaylist" />
     <playlist-linear
       @openModal="openModal"
