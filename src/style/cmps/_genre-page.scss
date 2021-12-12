@@ -24,6 +24,7 @@
         gap: 30px;
         padding: 20px 0;
         flex-wrap: wrap;
+        justify-content: center;
     }
     li {
         border-radius: 4px;
@@ -31,6 +32,18 @@
         width: 240px;
         height: 330px;
         padding: 15px;
+    }
+    @media (max-width: 860px) {
+        ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 95px);
+            li{
+                background-color: transparent;
+                width: 80px;
+                height: 130px;
+                
+            }
+        }
     }
 }
 .genre-playlists-img {

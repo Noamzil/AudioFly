@@ -1,7 +1,7 @@
 .home-page {
     padding: 30px 40px;
     margin-bottom: 100px;
-    position: relative;
+    // position: relative;
     .greeting-home-page {
         font-size: 32px;
     }
@@ -17,6 +17,9 @@
     }
     .playlists-list {
         padding: 40px 0;
+    }
+    @media (max-width: 860px) {
+        padding: 5px;
     }
 }
 
