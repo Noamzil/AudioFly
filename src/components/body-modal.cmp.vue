@@ -4,7 +4,7 @@
       <component
         :is="modalType"
         :currPlaylist="currPlaylist"
-        @openModal="openModal"
+        @exitModal="exitModal"
         @updatePlaylist="updatePlaylist"
       >
       </component>
