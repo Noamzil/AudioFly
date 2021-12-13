@@ -134,10 +134,10 @@ svg {
 
 @media (max-width: 840px) {
   .side-bar-container {
-    height: 45px;
+    padding-top: 5px;
+    height: 60px;
     grid-column: 1/-1;
     grid-row: 3/4;
-    height: auto;
     width: 100vw;
     bottom: -0.1%;
     flex-direction: row;
@@ -163,7 +163,7 @@ svg {
 
 @media (max-width: 675px) {
   .side-bar-container {
-    height: 50px;
+    // height: 50px;
 
     .action-btns-container {
       width: 0px;
