@@ -1,9 +1,18 @@
 <template>
   <ul class="playlist-content" v-if="songList">
     <draggable ghost-class="ghost" :v-model="songList" @end="onEnd">
-      <li class="sortable" v-for="(song, index) in songList" :key="song.youtubeId">
-        <song-preview :song="song" :songNum="index + 1"
-        @removeSong="removeSong" @toggleLikeSong="toggleLikeSong" @playSong="playSong">
+      <li
+        class="sortable"
+        v-for="(song, index) in songList"
+        :key="song.youtubeId"
+      >
+        <song-preview
+          :song="song"
+          :songNum="index + 1"
+          @removeSong="removeSong"
+          @toggleLikeSong="toggleLikeSong"
+          @playSong="playSong"
+        >
         </song-preview>
       </li>
     </draggable>
@@ -27,7 +36,7 @@ export default {
   },
   methods: {
     playSong(song) {
-      this.$emit('playSong', song)
+      this.$emit('playSong', song);
     },
     toggleLikeSong(song) {
       this.$emit('toggleLikeSong', song);
@@ -47,24 +56,24 @@ export default {
         0,
         this.songList.splice(this.oldIndex, 1)[0]
       );
-      this.$emit('update', this.songList)
+      this.$emit('update', this.songList);
     },
     removeSong(ev) {
       var idx = this.songList.findIndex((song) => {
         return song.youtubeId === ev.youtubeId;
       });
       this.songList.splice(idx, 1);
-      this.$emit('update', this.songList)
+      this.$emit('update', this.songList);
     },
   },
   watch: {
     songs: {
       handler() {
-        this.songList = JSON.parse(JSON.stringify(this.songs))
+        this.songList = JSON.parse(JSON.stringify(this.songs));
       },
       immediate: true,
       deep: true,
-    }
+    },
   },
   components: {
     songPreview,

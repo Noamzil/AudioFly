@@ -147,7 +147,7 @@ export const playlistStore = {
         const { _id, username } = getters.user;
         newPlaylist.createdBy = { username, _id };
         newPlaylist.name = `New Playlist`;
-        newPlaylist.playlistImg = require('../assets/img/playlist-imgs/panda.jpg')
+        newPlaylist.playlistImg = require('../assets/img/playlist-imgs/patyphone.jpg')
         newPlaylist = await playlistService.addPlaylist(newPlaylist);
         commit({ type: 'addPlaylist', playlist: newPlaylist });
       } catch (error) {

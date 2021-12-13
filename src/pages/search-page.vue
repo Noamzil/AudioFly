@@ -10,8 +10,7 @@
         :key="genre"
         class="top-genre"
         :class="genre"
-        @click="toGenrePage(genre)"
-      >
+        @click="toGenrePage(genre)">
         <h3>{{ genre }}</h3>
         <img
           :src="require('../assets/img/genres-img/' + genre + '.jpg')"

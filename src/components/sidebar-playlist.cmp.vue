@@ -13,7 +13,7 @@ export default {
   name: 'sidebarPlaylist',
   computed: {
     playlists() {
-      return this.$store.getters.playlists
+      return this.$store.getters.playlists.slice(0,10)
     }
   }
 };
