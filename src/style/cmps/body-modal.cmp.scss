@@ -7,6 +7,14 @@
   background-color: rgba(56, 57, 65, 0.493);
   z-index: 100;
 
+  .edit-head-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    .close-btn {
+      background: none; 
+    }
+  }
   .modal-box {
     background-color: #282828;
     width: 700px;
@@ -19,6 +27,10 @@
     font-size: 1.25rem;
     padding: 30px;
     border-radius: 10px;
+    >section {
+      display: flex;
+      flex-direction: column;
+    }
 
     .edit-playlist-modal {
       display: flex;
@@ -29,33 +41,47 @@
       width: 280px;
     }
     .edit-playlist-container {
+      width: 100%;
+      >* {
+        width: 100%;
+      }
       display: flex;
       flex-direction: column;
+      align-items: baseline;
       gap: 20px;
       label {
         display: flex;
         gap: 15px;
       }
-      .playlist-desc {
-        align-items: baseline;
-        textarea {
-          height: 80px;
-          width: 200px;
-        }
+      input, textarea {
+        background-color: lighten(#282828, 20);;
+        border: none;
+        border-radius: 6px;
+        padding: 8px;
+        color: white;
+        font-family: inherit;
+      }
+      input {
+        height: 38px;
+        font-size: 1.2rem;
+      }
+      textarea {
+        font-size: 1rem;
+        resize: none;
+        height: 80px;
       }
     }
-    button {
-      width: 70px;
+
+    .save-btn {
+      font-weight: 800;
       align-self: flex-end;
-      border: none;
       border-radius: 50px;
       padding: 10px;
-      background-color: #fff;
-      color: #282828;
-      font-weight: 800;
-    }
-    button:hover{
-      transform: scale(1.1);
+      // color: #282828;
+      width: 70px;
+      &:hover{
+        transform: scale(1.1);
+      }
     }
   }
 }

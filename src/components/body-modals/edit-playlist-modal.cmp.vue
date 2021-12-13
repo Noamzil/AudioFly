@@ -1,6 +1,9 @@
 <template>
   <section>
-    <h1>Edit Details</h1>
+    <div class="edit-head-container">
+      <h1>Edit Details</h1>
+      <button class="close-btn" @click="$emit('exitModal')">X</button>
+    </div>
     <form class="edit-playlist-modal" @submit.prevent="updatePlaylist">
       <div class="playlist-img-container">
         <label for="playlist-img-edit">
@@ -15,15 +18,9 @@
         </label>
       </div>
       <div class="edit-playlist-container">
-        <label>
-          Playlist Name:
           <input type="text" v-model="currPlaylist.name" />
-        </label>
-        <label class="playlist-desc">
-          Description:
           <textarea type="text" v-model="currPlaylist.discription" />
-        </label>
-        <div>
+        <div class="tags-container">
           <h1>Tags:</h1>
           <el-select v-model="value1" multiple placeholder="Select">
             <el-option
@@ -35,9 +32,9 @@
             </el-option>
           </el-select>
         </div>
-        <button>SAVE</button>
       </div>
     </form>
+        <button @click="updatePlaylist" class="save-btn">SAVE</button>
   </section>
 </template>
 
