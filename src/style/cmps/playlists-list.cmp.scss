@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 10px;
+  padding: 0 10px;
   .playlist-category {
     font-size: 24px;
   }
@@ -17,13 +17,14 @@
   }
 }
 .playlists-container {
+  margin-bottom: 35px;
+  height: 415px;
+  padding: 15px 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   overflow: hidden;
   &.genre {overflow: initial;}
-  padding: 15px 0;
-  list-style: none;
-  height: 415px;
+  // list-style: none;
   li {
   margin: 10px;
   border-radius: 4px;
