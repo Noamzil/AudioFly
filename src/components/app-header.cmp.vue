@@ -39,6 +39,7 @@
         :inviteUser="inviteUser"
         :invitations="invitations"
         @toggleNotification="toggleNotifications"
+        @clickNotification="clickNotification"
       />
       <div class="flex login-container">
         <template v-if="!$store.getters.realUser">
@@ -60,7 +61,7 @@ import { playlistService } from '../services/playlist.service.js';
 
 export default {
   name: 'app-header',
-  props: ['notification', 'invitePlaylist', 'inviteUser', 'invitations'],
+  props: ['notifications', 'invitePlaylist', 'inviteUser', 'invitations'],
   data() {
     return {
       isNext: false,
@@ -113,6 +114,10 @@ export default {
     toggleNotifications() {
       this.openNotifi = !this.openNotifi;
     },
+    clickNotification() {
+      console.log('im here in header');
+      this.$emit('clickNotification')
+    }
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll);
@@ -133,6 +138,9 @@ export default {
         this.tag = 'defult';
       }
     },
+    notification() {
+      return this.notifications
+    }
   },
   watch: {
     '$route.params': {

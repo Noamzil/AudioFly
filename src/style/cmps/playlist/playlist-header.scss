@@ -20,7 +20,6 @@
     width: 232px;
     margin-inline-end: 24px;
     object-fit: cover !important;
-
   }
 
   & .img-edit-container {
@@ -127,7 +126,9 @@
   }
 }
 
-// @media (max-width: 480px) {
-//   .playlist-page .playlist-description {
-//   }
-// }
+@media (max-width: 480px) {
+  .playlist-page .playlist-description .share-btns {
+    right: 25%;
+
+  }
+}

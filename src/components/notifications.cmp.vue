@@ -27,6 +27,11 @@ export default {
       goToStation(stationtId) {
                 this.$router.push("/playlist/" + stationtId);
                 this.$emit('toggleNotification')
+                this.clickNotification()
+      },
+      clickNotification() {
+        console.log('im in notifications');
+        this.$emit('clickNotification')
       }
   },
   components: {
