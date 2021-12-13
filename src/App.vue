@@ -50,16 +50,12 @@ export default {
   },
   sockets: {
     invite(invitation) {
-      console.log('im here in invite');
       this.currInvitation = {
         playlist: invitation.playlist,
         user: invitation.user,
         id: utilService.makeId(),
       };
       this.invitations.push(this.currInvitation);
-      console.log(this.invitations);
-      this.invitePlaylist.push(invitation.playlist);
-      this.inviteUser.push(invitation.user);
       this.notification++;
     },
   },
@@ -72,3 +68,5 @@ export default {
   },
 };
 </script>
+      this.invitePlaylist.push(invitation.playlist);
+      this.inviteUser.push(invitation.user);
